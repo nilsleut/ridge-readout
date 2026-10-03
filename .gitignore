@@ -1,0 +1,12 @@
+data/
+arm_b_out/
+pilot_features/
+*.npz
+*.npy
+*.pt
+*.h5
+__pycache__/
+*.pyc
+.env.local
+.venv/
+.pytest_cache/
