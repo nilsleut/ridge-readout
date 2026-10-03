@@ -1,0 +1,8 @@
+condition,seed,g,fold_scheme,voxel,outer_fold,alpha_min_diagnostic,mse_at_1e_6,mse_min_diagnostic,relative_gain,classification,config_hash,git_head
+Random Weights (BN-calibrated),3,1,random,206,3,1e-06,0.8715696369041404,0.8715696369041404,0.0,Plateau,206fa875cca5,52fb837
+Random Weights (BN-calibrated),3,1,random,934,5,1e-06,0.8212485406845034,0.8212485406845034,0.0,Plateau,206fa875cca5,52fb837
+Random Weights (BN-calibrated),3,1,random,983,5,1e-07,0.8638346025451581,0.8638345644240568,4.413009291748505e-08,Plateau,206fa875cca5,52fb837
+Random Weights,2,1,run,334,3,1e-09,1.0363122975279084,1.036307325885315,4.797436646508367e-06,Plateau,206fa875cca5,52fb837
+Feedback Alignment,3,1,run,755,0,1e-06,0.9551202163512578,0.9551202163512578,0.0,Plateau,206fa875cca5,52fb837
+STDP,2,1,run,992,2,1e-06,0.8638757117635436,0.8638757117635436,0.0,Plateau,206fa875cca5,52fb837
+Random Weights (BN-calibrated),2,1,run,334,3,1e-07,1.0611436335281927,1.0611435857147655,4.505839332844751e-08,Plateau,206fa875cca5,52fb837

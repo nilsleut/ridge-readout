@@ -1,0 +1,149 @@
+kind,rule,seed_idx,grid,fold_scheme,centring,n_voxels,n_pairs,nan_pairs,rho,valid,sd,n_seeds,seeds_positive,config_hash,git_head
+checkpoint,Random Weights,0.0,1.0,random,centred,501.0,210205.0,0.0,0.06376042457000014,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,0.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11469450470418371,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,1.0,1.0,random,centred,501.0,210205.0,0.0,0.07654897377850534,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,1.0,1.0,random,uncentred,501.0,210205.0,0.0,0.1310129813099188,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,2.0,1.0,random,centred,501.0,210205.0,0.0,0.08184251540765178,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,2.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13394611639164147,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,3.0,1.0,random,centred,501.0,210205.0,0.0,0.07800218902147661,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,3.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13214254172992573,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,4.0,1.0,random,centred,501.0,210205.0,0.0,0.07434923750163604,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,4.0,1.0,random,uncentred,501.0,210205.0,0.0,0.12790635157153507,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,0.0,1.0,random,centred,501.0,210205.0,0.0,0.08372158561469166,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,0.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13251121543581967,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,1.0,1.0,random,centred,501.0,210205.0,0.0,0.07713204504792348,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,1.0,1.0,random,uncentred,501.0,210205.0,0.0,0.12840492333743625,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,2.0,1.0,random,centred,501.0,210205.0,0.0,0.0797143676174114,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,2.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13108831840656987,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,3.0,1.0,random,centred,501.0,210205.0,0.0,0.08154534807158377,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,3.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13308510541273394,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,4.0,1.0,random,centred,501.0,210205.0,0.0,0.0715275927416976,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,4.0,1.0,random,uncentred,501.0,210205.0,0.0,0.12204238566742166,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,0.0,1.0,random,centred,501.0,210205.0,0.0,0.0735379900059183,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,0.0,1.0,random,uncentred,501.0,210205.0,0.0,0.1258544070644047,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,1.0,1.0,random,centred,501.0,210205.0,0.0,0.07402633293353568,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,1.0,1.0,random,uncentred,501.0,210205.0,0.0,0.1253057512549416,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,2.0,1.0,random,centred,501.0,210205.0,0.0,0.06784053077269861,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,2.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11927218445044913,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,3.0,1.0,random,centred,501.0,210205.0,0.0,0.06439180078020612,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,3.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11535005047192037,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,4.0,1.0,random,centred,501.0,210205.0,0.0,0.07230621049923983,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,4.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11922361241787786,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,0.0,1.0,random,centred,501.0,210205.0,0.0,0.06519534365020328,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,0.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11549286376552083,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,1.0,1.0,random,centred,501.0,210205.0,0.0,0.07864417365816426,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,1.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13304018009784052,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,2.0,1.0,random,centred,501.0,210205.0,0.0,0.07901790453711131,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,2.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13228039231734398,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,3.0,1.0,random,centred,501.0,210205.0,0.0,0.08149978298339937,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,3.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13131188508924904,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,4.0,1.0,random,centred,501.0,210205.0,0.0,0.06664026827124334,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,4.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11894626858501334,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,0.0,1.0,random,centred,501.0,210205.0,0.0,0.06114209514740088,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,0.0,1.0,random,uncentred,501.0,210205.0,0.0,0.10961243833681308,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,1.0,1.0,random,centred,501.0,210205.0,0.0,0.06714278336312234,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,1.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11954190379336335,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,2.0,1.0,random,centred,501.0,210205.0,0.0,0.06124423309756297,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,2.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11011652636623812,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,3.0,1.0,random,centred,501.0,210205.0,0.0,0.06836738234595127,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,3.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11691781955053225,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,4.0,1.0,random,centred,501.0,210205.0,0.0,0.06488248762885135,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,4.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11865224893278477,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),0.0,1.0,random,centred,501.0,210205.0,0.0,0.0616406276047772,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),0.0,1.0,random,uncentred,501.0,210205.0,0.0,0.11271609364730882,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),1.0,1.0,random,centred,501.0,210205.0,0.0,0.07581334427878243,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),1.0,1.0,random,uncentred,501.0,210205.0,0.0,0.12940975028134355,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),2.0,1.0,random,centred,501.0,210205.0,0.0,0.07740201141219127,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),2.0,1.0,random,uncentred,501.0,210205.0,0.0,0.12865159579969995,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),3.0,1.0,random,centred,501.0,210205.0,0.0,0.07759151733641534,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),3.0,1.0,random,uncentred,501.0,210205.0,0.0,0.13098609041700773,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),4.0,1.0,random,centred,501.0,210205.0,0.0,0.07290016859309274,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),4.0,1.0,random,uncentred,501.0,210205.0,0.0,0.12357944222286182,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,0.0,1.0,run,centred,501.0,210205.0,0.0,0.05836530744733474,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,0.0,1.0,run,uncentred,501.0,210205.0,0.0,0.10463531928215099,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,1.0,1.0,run,centred,501.0,210205.0,0.0,0.07084113852935928,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,1.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12148931271181292,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,2.0,1.0,run,centred,501.0,210205.0,0.0,0.07793408033119152,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,2.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12588716490862034,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,3.0,1.0,run,centred,501.0,210205.0,0.0,0.06913179128573173,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,3.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11866908739134516,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,4.0,1.0,run,centred,501.0,210205.0,0.0,0.06792991816085428,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights,4.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11946297452157999,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,0.0,1.0,run,centred,501.0,210205.0,0.0,0.07929789186452933,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,0.0,1.0,run,uncentred,501.0,210205.0,0.0,0.1254895655740311,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,1.0,1.0,run,centred,501.0,210205.0,0.0,0.07656691082635038,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,1.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12822104512617089,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,2.0,1.0,run,centred,501.0,210205.0,0.0,0.07936399715227985,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,2.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12550678033820764,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,3.0,1.0,run,centred,501.0,210205.0,0.0,0.07876351131611058,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,3.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12798106263148104,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,4.0,1.0,run,centred,501.0,210205.0,0.0,0.06908500306491128,True,,,,206fa875cca5,52fb837
+checkpoint,Backprop,4.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11615283841786977,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,0.0,1.0,run,centred,501.0,210205.0,0.0,0.06792924933943309,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,0.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11238423550333439,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,1.0,1.0,run,centred,501.0,210205.0,0.0,0.06958618929619018,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,1.0,1.0,run,uncentred,501.0,210205.0,0.0,0.1206892478074972,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,2.0,1.0,run,centred,501.0,210205.0,0.0,0.06370174000385904,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,2.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11259473462024037,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,3.0,1.0,run,centred,501.0,210205.0,0.0,0.06091888253959184,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,3.0,1.0,run,uncentred,501.0,210205.0,0.0,0.10695534477069975,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,4.0,1.0,run,centred,501.0,210205.0,0.0,0.06648691253724577,True,,,,206fa875cca5,52fb837
+checkpoint,Feedback Alignment,4.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11084523782868742,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,0.0,1.0,run,centred,501.0,210205.0,0.0,0.0589542865318868,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,0.0,1.0,run,uncentred,501.0,210205.0,0.0,0.10493715719540671,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,1.0,1.0,run,centred,501.0,210205.0,0.0,0.07276242953035736,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,1.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12422118099354294,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,2.0,1.0,run,centred,501.0,210205.0,0.0,0.07610376654225265,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,2.0,1.0,run,uncentred,501.0,210205.0,0.0,0.1248606663420966,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,3.0,1.0,run,centred,501.0,210205.0,0.0,0.0727942012870102,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,3.0,1.0,run,uncentred,501.0,210205.0,0.0,0.12036513383306935,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,4.0,1.0,run,centred,501.0,210205.0,0.0,0.06210883593507811,True,,,,206fa875cca5,52fb837
+checkpoint,Predictive Coding,4.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11161991095257376,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,0.0,1.0,run,centred,501.0,210205.0,0.0,0.05526641712311305,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,0.0,1.0,run,uncentred,501.0,210205.0,0.0,0.09990104868516009,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,1.0,1.0,run,centred,501.0,210205.0,0.0,0.0635074940592551,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,1.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11477365794574726,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,2.0,1.0,run,centred,501.0,210205.0,0.0,0.05853001494486827,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,2.0,1.0,run,uncentred,501.0,210205.0,0.0,0.10278149790322856,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,3.0,1.0,run,centred,501.0,210205.0,0.0,0.06241245186375311,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,3.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11098231770509996,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,4.0,1.0,run,centred,501.0,210205.0,0.0,0.06160532852359867,True,,,,206fa875cca5,52fb837
+checkpoint,STDP,4.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11047315071429087,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),0.0,1.0,run,centred,501.0,210205.0,0.0,0.05692442725222892,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),0.0,1.0,run,uncentred,501.0,210205.0,0.0,0.10335960414086999,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),1.0,1.0,run,centred,501.0,210205.0,0.0,0.06961728535371087,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),1.0,1.0,run,uncentred,501.0,210205.0,0.0,0.1191681800721355,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),2.0,1.0,run,centred,501.0,210205.0,0.0,0.07445047420702829,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),2.0,1.0,run,uncentred,501.0,210205.0,0.0,0.121985411691862,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),3.0,1.0,run,centred,501.0,210205.0,0.0,0.06744490086156436,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),3.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11592150824058499,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),4.0,1.0,run,centred,501.0,210205.0,0.0,0.06576740466664292,True,,,,206fa875cca5,52fb837
+checkpoint,Random Weights (BN-calibrated),4.0,1.0,run,uncentred,501.0,210205.0,0.0,0.11509723955991832,True,,,,206fa875cca5,52fb837
+condition,Backprop,,,random,centred,,,,0.07872818781866157,,0.004696786274743678,5.0,,206fa875cca5,52fb837
+condition,Feedback Alignment,,,random,centred,,,,0.07042057299831969,,0.004161674381737357,5.0,,206fa875cca5,52fb837
+condition,Predictive Coding,,,random,centred,,,,0.07419949462002431,,0.007656420406250982,5.0,,206fa875cca5,52fb837
+condition,Random Weights,,,random,centred,,,,0.07490066805585398,,0.006799534713703174,5.0,,206fa875cca5,52fb837
+condition,Random Weights (BN-calibrated),,,random,centred,,,,0.0730695338450518,,0.006659500257146537,5.0,,206fa875cca5,52fb837
+condition,STDP,,,random,centred,,,,0.06455579631657776,,0.003314635118598691,5.0,,206fa875cca5,52fb837
+difference,Random Weights - Backprop,,,random,centred,,,,-0.003827519762807599,,0.009361931596987168,5.0,2.0,206fa875cca5,52fb837
+condition,Backprop,,,random,uncentred,,,,0.1294263896519963,,0.00450641949322533,5.0,,206fa875cca5,52fb837
+condition,Feedback Alignment,,,random,uncentred,,,,0.12100120113191873,,0.004476817610977095,5.0,,206fa875cca5,52fb837
+condition,Predictive Coding,,,random,uncentred,,,,0.12621431797099353,,0.008323895789118073,5.0,,206fa875cca5,52fb837
+condition,Random Weights,,,random,uncentred,,,,0.12794049914144096,,0.007723701862373711,5.0,,206fa875cca5,52fb837
+condition,Random Weights (BN-calibrated),,,random,uncentred,,,,0.12506859447364435,,0.007441474006868354,5.0,,206fa875cca5,52fb837
+condition,STDP,,,random,uncentred,,,,0.11496818739594632,,0.004756966453555383,5.0,,206fa875cca5,52fb837
+difference,Random Weights - Backprop,,,random,uncentred,,,,-0.0014858905105553182,,0.009442448389851848,5.0,3.0,206fa875cca5,52fb837
+condition,Backprop,,,run,centred,,,,0.07661546284483628,,0.004361025117887902,5.0,,206fa875cca5,52fb837
+condition,Feedback Alignment,,,run,centred,,,,0.06572459474326398,,0.0034474756663345897,5.0,,206fa875cca5,52fb837
+condition,Predictive Coding,,,run,centred,,,,0.06854470396531702,,0.007523020791563628,5.0,,206fa875cca5,52fb837
+condition,Random Weights,,,run,centred,,,,0.0688404471508943,,0.007023877609009216,5.0,,206fa875cca5,52fb837
+condition,Random Weights (BN-calibrated),,,run,centred,,,,0.06684089846823507,,0.006431710042309026,5.0,,206fa875cca5,52fb837
+condition,STDP,,,run,centred,,,,0.06026434130291765,,0.0033510371354195,5.0,,206fa875cca5,52fb837
+difference,Random Weights - Backprop,,,run,centred,,,,-0.007775015693941974,,0.008137139048356641,5.0,0.0,206fa875cca5,52fb837
+condition,Backprop,,,run,uncentred,,,,0.12467025841755208,,0.004936774943838762,5.0,,206fa875cca5,52fb837
+condition,Feedback Alignment,,,run,uncentred,,,,0.11269376010609182,,0.005009488004811671,5.0,,206fa875cca5,52fb837
+condition,Predictive Coding,,,run,uncentred,,,,0.11720080986333788,,0.008653259034581121,5.0,,206fa875cca5,52fb837
+condition,Random Weights,,,run,uncentred,,,,0.11802877176310186,,0.007993453532468395,5.0,,206fa875cca5,52fb837
+condition,Random Weights (BN-calibrated),,,run,uncentred,,,,0.11510638874107418,,0.007114607465000149,5.0,,206fa875cca5,52fb837
+condition,STDP,,,run,uncentred,,,,0.10778233459070537,,0.006194393043266489,5.0,,206fa875cca5,52fb837
+difference,Random Weights - Backprop,,,run,uncentred,,,,-0.00664148665445021,,0.009453619162972843,5.0,2.0,206fa875cca5,52fb837
