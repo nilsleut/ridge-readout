@@ -1,0 +1,37 @@
+check,value,criterion,passed,max_abs_diff,config_hash,git_head
+pairs_all,258840.0,== 258840,True,,206fa875cca5,cdc627c
+pairs_crossrun,210205.0,== 210205,True,,206fa875cca5,cdc627c
+pairs_crossrun_sub01_only,233280.0,reported only,True,,206fa875cca5,cdc627c
+(i) fmri_rdm_V1_sub-01 vs own 1049-voxel RDM,1.0,>= 0.999,True,0.0,206fa875cca5,cdc627c
+(ii) model RDM Random Weights seed_idx 0,0.999999999999997,>= 0.999,True,1.6314687190099875e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights seed_idx 1,0.9999999999999978,>= 0.999,True,1.770986572946498e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights seed_idx 2,0.9999999999999968,>= 0.999,True,1.7265169438562822e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights seed_idx 3,0.9999999999999989,>= 0.999,True,1.5601333924752936e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights seed_idx 4,0.9999999999999976,>= 0.999,True,1.457738587617996e-07,206fa875cca5,cdc627c
+(ii) model RDM Backprop seed_idx 0,0.9999999999999956,>= 0.999,True,3.3609794380939917e-07,206fa875cca5,cdc627c
+(ii) model RDM Backprop seed_idx 1,0.999999999999993,>= 0.999,True,3.7617127879308043e-07,206fa875cca5,cdc627c
+(ii) model RDM Backprop seed_idx 2,0.9999999999999944,>= 0.999,True,3.2782050607416124e-07,206fa875cca5,cdc627c
+(ii) model RDM Backprop seed_idx 3,0.9999999999999933,>= 0.999,True,2.963221468199606e-07,206fa875cca5,cdc627c
+(ii) model RDM Backprop seed_idx 4,0.999999999999995,>= 0.999,True,3.0606644163544416e-07,206fa875cca5,cdc627c
+(ii) model RDM Feedback Alignment seed_idx 0,0.9999999999999969,>= 0.999,True,3.756669268994983e-07,206fa875cca5,cdc627c
+(ii) model RDM Feedback Alignment seed_idx 1,0.9999999999999998,>= 0.999,True,3.27396488808418e-07,206fa875cca5,cdc627c
+(ii) model RDM Feedback Alignment seed_idx 2,0.999999999999999,>= 0.999,True,5.632659609844382e-07,206fa875cca5,cdc627c
+(ii) model RDM Feedback Alignment seed_idx 3,0.9999999999999977,>= 0.999,True,3.8665443280461176e-07,206fa875cca5,cdc627c
+(ii) model RDM Feedback Alignment seed_idx 4,0.9999999999999957,>= 0.999,True,3.390840808137341e-07,206fa875cca5,cdc627c
+(ii) model RDM Predictive Coding seed_idx 0,0.9999999999999962,>= 0.999,True,2.608074050058917e-07,206fa875cca5,cdc627c
+(ii) model RDM Predictive Coding seed_idx 1,0.9999999999999936,>= 0.999,True,4.0959139957497115e-07,206fa875cca5,cdc627c
+(ii) model RDM Predictive Coding seed_idx 2,0.999999999999996,>= 0.999,True,2.884289374005533e-07,206fa875cca5,cdc627c
+(ii) model RDM Predictive Coding seed_idx 3,0.9999999999999978,>= 0.999,True,3.397506538327377e-07,206fa875cca5,cdc627c
+(ii) model RDM Predictive Coding seed_idx 4,0.9999999999999956,>= 0.999,True,3.451602242909857e-07,206fa875cca5,cdc627c
+(ii) model RDM STDP seed_idx 0,0.9999999999999964,>= 0.999,True,2.951332519485206e-07,206fa875cca5,cdc627c
+(ii) model RDM STDP seed_idx 1,0.999999999999997,>= 0.999,True,2.019147323784054e-07,206fa875cca5,cdc627c
+(ii) model RDM STDP seed_idx 2,0.9999999999999983,>= 0.999,True,2.7828124893325423e-07,206fa875cca5,cdc627c
+(ii) model RDM STDP seed_idx 3,0.9999999999999959,>= 0.999,True,2.3445715091607866e-07,206fa875cca5,cdc627c
+(ii) model RDM STDP seed_idx 4,0.9999999999999967,>= 0.999,True,2.5933693481583475e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights (BN-calibrated) seed_idx 0,0.999999999999993,>= 0.999,True,3.5874773263167015e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights (BN-calibrated) seed_idx 1,0.9999999999999928,>= 0.999,True,3.7442037159607366e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights (BN-calibrated) seed_idx 2,0.9999999999999946,>= 0.999,True,4.253781314966787e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights (BN-calibrated) seed_idx 3,0.9999999999999961,>= 0.999,True,4.215461806289511e-07,206fa875cca5,cdc627c
+(ii) model RDM Random Weights (BN-calibrated) seed_idx 4,0.9999999999999953,>= 0.999,True,3.9898049930542356e-07,206fa875cca5,cdc627c
+(iii) RSA 1049 voxels vs stored rho_sub-01 (max |d|),7.222435378928527e-09,<= 1e-4,True,,206fa875cca5,cdc627c
+(iii-diag) stored RDMs through this code vs stored rho_sub-01,9.194034422677078e-17,reported only,True,,206fa875cca5,cdc627c

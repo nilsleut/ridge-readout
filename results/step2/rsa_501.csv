@@ -1,0 +1,91 @@
+subject,roi,layer,grid,arm,resolution,pair_set,n_pairs,voxel_set,n_voxels,rule,seed,seed_idx,rho,config_hash,git_head
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights,42,0,0.06131978279067182,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights,42,0,0.05481022431713066,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights,42,0,0.008668123920577399,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights,123,1,0.043185565038389426,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights,123,1,0.03740055255136446,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights,123,1,0.005812730771041457,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights,456,2,0.05681751675730858,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights,456,2,0.05033629356472471,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights,456,2,0.00743438095269911,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights,789,3,0.05944897285775869,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights,789,3,0.05265985881117093,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights,789,3,0.008809872369402073,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights,1337,4,0.04991865172436755,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights,1337,4,0.0437199010229201,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights,1337,4,0.006973354891933396,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Backprop,42,0,0.016583500518954148,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Backprop,42,0,0.016882558208261265,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Backprop,42,0,0.0005712308155829574,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Backprop,123,1,0.02213963591634116,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Backprop,123,1,0.020897361566353204,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Backprop,123,1,0.001367380549798976,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Backprop,456,2,0.015995869817286696,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Backprop,456,2,0.015668518124256087,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Backprop,456,2,0.0008392544088162727,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Backprop,789,3,0.019982243690825366,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Backprop,789,3,0.01824218186210048,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Backprop,789,3,0.0012831149802525824,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Backprop,1337,4,0.030917762507427143,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Backprop,1337,4,0.028294762050407114,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Backprop,1337,4,0.002590368357578777,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Feedback Alignment,42,0,0.012598229904643633,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Feedback Alignment,42,0,0.01106462580959647,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Feedback Alignment,42,0,0.0006325184090656521,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Feedback Alignment,123,1,0.003287033033739265,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Feedback Alignment,123,1,0.0017819662590866784,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Feedback Alignment,123,1,-0.0002621503356662468,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Feedback Alignment,456,2,0.0008964585608067912,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Feedback Alignment,456,2,0.00015541005042151218,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Feedback Alignment,456,2,-0.0006509933506222143,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Feedback Alignment,789,3,-0.006570405364389176,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Feedback Alignment,789,3,-0.007799094064819518,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Feedback Alignment,789,3,-0.001883875673786652,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Feedback Alignment,1337,4,0.0026910148237538145,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Feedback Alignment,1337,4,0.002101122645075471,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Feedback Alignment,1337,4,-0.00072401240086915,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Predictive Coding,42,0,0.0036204567822703117,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Predictive Coding,42,0,0.003149878677379177,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Predictive Coding,42,0,-0.0004776879041118909,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Predictive Coding,123,1,0.005249715500575808,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Predictive Coding,123,1,0.0033334540370048822,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Predictive Coding,123,1,-0.00015786042789556084,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Predictive Coding,456,2,0.005648779870485413,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Predictive Coding,456,2,0.004806835448747015,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Predictive Coding,456,2,-0.0007367436683792872,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Predictive Coding,789,3,0.006847123508796499,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Predictive Coding,789,3,0.006888253195175284,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Predictive Coding,789,3,-0.0005065963210679954,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Predictive Coding,1337,4,0.013229885511089253,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Predictive Coding,1337,4,0.009368212261043219,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Predictive Coding,1337,4,0.0012180352250812394,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,STDP,42,0,0.02737911797039757,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,STDP,42,0,0.025438493238779027,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,STDP,42,0,0.002371570785651748,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,STDP,123,1,0.023753015957299173,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,STDP,123,1,0.02142013664132998,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,STDP,123,1,0.001318487889659332,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,STDP,456,2,0.02111914475085179,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,STDP,456,2,0.02106823209802684,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,STDP,456,2,0.0011862923867506047,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,STDP,789,3,0.02884415498982466,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,STDP,789,3,0.02783636933906194,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,STDP,789,3,0.00199349333152261,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,STDP,1337,4,0.021215468380397992,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,STDP,1337,4,0.020747630730430205,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,STDP,1337,4,0.00117117701523505,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights (BN-calibrated),42,0,-0.0005373434534516773,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights (BN-calibrated),42,0,-0.00113892169127261,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights (BN-calibrated),42,0,-0.0010052032200631971,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights (BN-calibrated),123,1,-0.0010444875253454197,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights (BN-calibrated),123,1,-0.0026060337056313925,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights (BN-calibrated),123,1,-0.0008849036494338128,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights (BN-calibrated),456,2,0.00572677520244867,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights (BN-calibrated),456,2,0.005125293429921514,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights (BN-calibrated),456,2,-0.0006148549954706207,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights (BN-calibrated),789,3,0.0001786149750669501,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights (BN-calibrated),789,3,-0.0001182802682702881,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights (BN-calibrated),789,3,-0.0011133581456588821,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,all,1049,Random Weights (BN-calibrated),1337,4,0.005215200033806016,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,reliable,501,Random Weights (BN-calibrated),1337,4,0.0026766470689312547,206fa875cca5,cdc627c
+sub-01,V1,Conv1,1,NATIVE,224,crossrun,210205,unreliable,548,Random Weights (BN-calibrated),1337,4,-8.502958240063355e-05,206fa875cca5,cdc627c

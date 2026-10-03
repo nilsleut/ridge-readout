@@ -58,3 +58,14 @@ original file (`old`) and to the file in this repository (`new`). Original line 
 - `scripts/check_csv_reproduction.py` read `REPO_ROOT / "results" / "bnfix_sweep.csv"`
   (repo-relative); since commit 4 it reads `BNFIX_SWEEP_CSV`. `REPO_ROOT` is left as is
   and is no longer used for that path. `PUBLISHED` is resolved at module import.
+
+## Added in commit 5: `src/vendor/common_up_pairs.py`
+
+From `code/upsampling/common_up.py` (sha256 `c20c9d46ee9ae778d566932ed377677d46bfe55b15f6affdec22c320f188419e`),
+verbatim: `SUBJECTS`, `N_STIM`, `TRI`, `ranks`, `stim_order`, `run_labels`, `pair_set`.
+`boot_idx` and the rest of the module are not taken.
+
+| Function | Old | New |
+|---|---|---|
+| `stim_order` | `open(FMRI_DIR / "stim_order_sub-01.txt")` | `open(paths.outputs_720_dir() / "stim_order_sub-01.txt")` |
+| `run_labels` | `pd.read_csv(META_DIR / f"{s}_task-things_stimulus-metadata.csv")` | `pd.read_csv(paths.things_fmri_dir() / f"{s}_task-things_stimulus-metadata.csv")` |
