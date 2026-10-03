@@ -85,6 +85,7 @@ bytes, sha256).
 | D2, selection criterion Pearson r -> MSE (reporting stays Pearson r) | ADOPTED 2026-08-20 |
 | D3, alpha grid 1e-6 .. 1e8, 29 points | ADOPTED 2026-08-20 |
 | Tolerance rule | Decided 2026-10-03: min-MSE stays; see `amendments/2026-10-03_tolerance-rule.md` |
+| D1 abort behaviour | Replaced 2026-10-03 by a logged, post-run plateau gate (diagnostic grid 1e-7..1e-9, invalid if relative gain >= 1e-3); score-neutral; D1 text unchanged; see `amendments/2026-10-03_d1-plateau-gate.md` |
 
 ## Known stale passages in PREREGISTRATION.md / config.yaml
 
