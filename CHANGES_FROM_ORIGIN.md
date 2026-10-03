@@ -69,3 +69,24 @@ verbatim: `SUBJECTS`, `N_STIM`, `TRI`, `ranks`, `stim_order`, `run_labels`, `pai
 |---|---|---|
 | `stim_order` | `open(FMRI_DIR / "stim_order_sub-01.txt")` | `open(paths.outputs_720_dir() / "stim_order_sub-01.txt")` |
 | `run_labels` | `pd.read_csv(META_DIR / f"{s}_task-things_stimulus-metadata.csv")` | `pd.read_csv(paths.things_fmri_dir() / f"{s}_task-things_stimulus-metadata.csv")` |
+
+## Changed in commit 9: `src/ridge/fit.py` (`fit_condition`)
+
+Allowed scope only: (1) extra return values, (2) optional `folds` argument. Previously
+byte-identical to the source; the source's `selected_alpha` (n_outer x n_voxel) was
+already returned and is unchanged.
+
+| Line old -> new | Old | New |
+|---|---|---|
+| 68 -> 68-69 | `context: str = "") -> FitResult:` | `context: str = "",` / `folds: Optional[Sequence] = None) -> FitResult:` |
+| after 78 -> 80-81 | — | docstring: `folds: optional list of (train_idx, test_idx, inner_splits) replacing the default outer_inner_splits(groups, n_outer, n_inner, seed). None = default.` |
+| after 102 -> 106-107 | — | `fold_of = np.full(n, -1)` / `splits = outer_inner_splits(groups, n_outer, n_inner, seed) if folds is None else folds` |
+| 104 -> 109 | `for fi, (tr, te, inner) in enumerate(outer_inner_splits(groups, n_outer, n_inner, seed)):` | `for fi, (tr, te, inner) in enumerate(splits):` |
+| after 133 -> 139 | — | `fold_of[te] = fi` |
+| after 159 -> 166-167 | — | `pred_oof=pred_oof,` / `outer_fold_of_stimulus=fold_of,` (return values) |
+
+Verification (`scripts/step3_verify_fit.py`, g = 1, 30 checkpoints, default folds,
+`assert_low_boundary=False`): median r over 501 reliable voxels equals
+`results/tolerance_all_rungs.csv` to 2.1e-14 (criterion 1e-9); r, r2, r_path, df,
+selected_alpha and the four boundary cells are bit-identical (`np.array_equal`) to
+`fit.py` at `bec73cb` for 30/30; tests 97/97 and 41/41.

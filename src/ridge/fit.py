@@ -65,7 +65,8 @@ def fit_condition(X: np.ndarray,
                   alphas: Optional[np.ndarray] = None,
                   reliable: Optional[np.ndarray] = None,
                   assert_low_boundary: bool = True,
-                  context: str = "") -> FitResult:
+                  context: str = "",
+                  folds: Optional[Sequence] = None) -> FitResult:
     """Nested-CV dual ridge for one condition.
 
     X: (n_stimuli, d) features, already pooled to the grid.
@@ -76,6 +77,8 @@ def fit_condition(X: np.ndarray,
     assert_low_boundary: D1's hard per-voxel low-edge assertion. Set False only
         where the assertion has been MEASURED not to apply; every such use must be
         justified in writing.
+    folds: optional list of (train_idx, test_idx, inner_splits) replacing the
+        default outer_inner_splits(groups, n_outer, n_inner, seed). None = default.
 
     Returns per-voxel test r and R^2 at the selected alpha, plus the full path
     averaged over outer folds, plus df(alpha).
@@ -100,8 +103,10 @@ def fit_condition(X: np.ndarray,
     # function (D1). lo_rel is the only one the assertion acts on.
     cells = {k: np.zeros(n_outer) for k in CELLS}
     n_folds_done = 0
+    fold_of = np.full(n, -1)
+    splits = outer_inner_splits(groups, n_outer, n_inner, seed) if folds is None else folds
 
-    for fi, (tr, te, inner) in enumerate(outer_inner_splits(groups, n_outer, n_inner, seed)):
+    for fi, (tr, te, inner) in enumerate(splits):
         # ── inner CV: alpha selection, on the training set only ──────────────
         # D2: SELECT on MSE (negated, so higher-is-better), not on Pearson r.
         # Pearson r is scale-invariant and alpha controls scale, which makes
@@ -131,6 +136,7 @@ def fit_condition(X: np.ndarray,
 
         # Per-voxel prediction at that voxel's own selected alpha.
         pred_oof[te] = preds[idx, :, np.arange(v)].T
+        fold_of[te] = fi
         n_folds_done += 1
 
     if n_folds_done != n_outer:
@@ -157,4 +163,6 @@ def fit_condition(X: np.ndarray,
         n_stimuli=n,
         n_voxels=v,
         d=X.shape[1],
+        pred_oof=pred_oof,                  # (n_stimuli, n_voxel)
+        outer_fold_of_stimulus=fold_of,     # (n_stimuli,)
     )
