@@ -60,8 +60,8 @@ def main():
     print(summ.to_string(index=False))
     print(f"\nlow-edge hits: {len(gate)}; classes: {gate.classification.value_counts().to_dict() if len(gate) else {}}; "
           f"invalid cells: {sorted(invalid)}")
-    d = summ.set_index(["kind", "metric"]).loc[("difference", "r_perfold"), "mean"]
-    h = summ.set_index(["kind", "metric"]).loc[("difference", "hi_frac"), "mean"]
+    dif = summ[summ.kind == "difference"].set_index("metric")["mean"]
+    d, h = float(dif["r_perfold"]), float(dif["hi_frac"])
     print(f"rule: Random-BP (r_perfold) = {d:+.4f} -> "
           f"{'artefact of the pooled r' if d > 0 else 'sign survives under per-fold r'}")
     print(f"hi_frac Random-BP = {h:+.3f} -> {'COLLAPSE ASYMMETRY' if abs(h) > 0.10 else 'no collapse asymmetry (<= 0.10)'}")
