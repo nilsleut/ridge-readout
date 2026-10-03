@@ -43,7 +43,9 @@ import pandas as pd
 
 _HERE = Path(__file__).resolve().parent
 REPO_ROOT = _HERE.parents[1]
-PUBLISHED = REPO_ROOT / "results" / "bnfix_sweep.csv"
+sys.path.insert(0, str(_HERE.parent / "src" / "ridge"))
+import paths  # noqa: E402
+PUBLISHED = paths.bnfix_sweep_csv()
 
 KEY = ["rule", "seed_idx", "res", "layer", "roi"]
 VALUE_COLS = ["rho", "rho_sub_mean"]

@@ -9,14 +9,14 @@ original file (`old`) and to the file in this repository (`new`). Original line 
 
 `src/ridge/ridge_dual.py`, `src/ridge/fit.py`, `src/ridge/folds.py`,
 `src/ridge/gridpool.py`, `src/ridge/merge.py`, `src/ridge/config_hash.py`,
-`scripts/determinism_gate.py`, `scripts/determinism_probe_modal.py`,
-`scripts/check_csv_reproduction.py`.
+`scripts/determinism_gate.py`, `scripts/determinism_probe_modal.py`.
 
 ## New
 
 `src/ridge/paths.py` resolves `THINGS_FMRI_DIR`, `THINGS_IMAGES_DIR`, `OUTPUTS_720_DIR`,
 `CKPT_DIR`, `CROSSRUN_REPO` and `RIDGE_DATA_DIR` at access time (environment, then
-`.env.local`).
+`.env.local`). Added in commit 4: `CKPT_V12_DIR` (the 30 v12 checkpoints) and
+`BNFIX_SWEEP_CSV` (published `results/bnfix_sweep.csv`).
 
 ## Changed
 
@@ -43,6 +43,7 @@ original file (`old`) and to the file in this repository (`new`). Original line 
 | `tests/test_loader_hardening.py` | 30-33 -> 32 | `DEFAULT_WEIGHTS = Path(r"C:/Users/nilsl/Desktop/Projekte_1/learning-rules-rsa/" r"learning_rules_outputs_bnfix/checkpoints")` | `DEFAULT_WEIGHTS = paths.ckpt_dir()` |
 | `tests/suite_count.py` | 23 -> 23 | `sys.path.insert(0, str(HERE))` | `sys.path.insert(0, str(HERE.parent / "src" / "ridge"))` |
 | `tests/suite_count.py` | 53 -> 53 | `str(HERE / "determinism_gate.py")` | `str(HERE.parent / "scripts" / "determinism_gate.py")` |
+| `scripts/check_csv_reproduction.py` (commit 4) | 46 -> 46-48 | `PUBLISHED = REPO_ROOT / "results" / "bnfix_sweep.csv"` | `sys.path.insert(0, str(_HERE.parent / "src" / "ridge"))` / `import paths  # noqa: E402` / `PUBLISHED = paths.bnfix_sweep_csv()` |
 
 ## Notes
 
@@ -54,7 +55,6 @@ original file (`old`) and to the file in this repository (`new`). Original line 
   default argument), `FEAT`/`ARM` in `pilot_fit.py` and `tolerance_measurement.py`, and
   `DEFAULT_WEIGHTS` in `test_loader_hardening.py`. `paths.py` itself reads nothing on
   import; `models_v2.load_model()` resolves `CKPT_DIR` only when `weights_dir` is None.
-- **Not adapted:** `scripts/check_csv_reproduction.py` reads
-  `REPO_ROOT / "results" / "bnfix_sweep.csv"` (repo-relative, not absolute). That file is
-  in the source repository and not in this one, so the script fails with
-  `FileNotFoundError` until a path for it is decided.
+- `scripts/check_csv_reproduction.py` read `REPO_ROOT / "results" / "bnfix_sweep.csv"`
+  (repo-relative); since commit 4 it reads `BNFIX_SWEEP_CSV`. `REPO_ROOT` is left as is
+  and is no longer used for that path. `PUBLISHED` is resolved at module import.

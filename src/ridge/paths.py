@@ -17,7 +17,8 @@ import os
 from pathlib import Path
 
 __all__ = ["repo_root", "things_fmri_dir", "things_images_dir", "outputs_720_dir",
-           "ckpt_dir", "crossrun_repo", "ridge_data_dir", "get"]
+           "ckpt_dir", "ckpt_v12_dir", "crossrun_repo", "ridge_data_dir",
+           "bnfix_sweep_csv", "get"]
 
 _VARS = {
     "THINGS_FMRI_DIR": "THINGS-fMRI directory with sub-XX_task-things_voxel-wise-responses.h5 "
@@ -25,8 +26,10 @@ _VARS = {
     "THINGS_IMAGES_DIR": "THINGS object_images directory (one folder per concept)",
     "OUTPUTS_720_DIR": "outputs_720 directory with stim_order_sub-XX.txt and fmri_rdm_*.npy",
     "CKPT_DIR": "local checkpoint directory used as the load_model() default",
+    "CKPT_V12_DIR": "directory with the 30 v12 checkpoints (6 conditions x 5 seeds)",
     "CROSSRUN_REPO": "root of the learning-rules-rsa repository",
     "RIDGE_DATA_DIR": "directory containing arm_b_out/ and pilot_features/",
+    "BNFIX_SWEEP_CSV": "published results/bnfix_sweep.csv of evaluation-resolution-rsa",
 }
 
 
@@ -76,9 +79,17 @@ def ckpt_dir() -> Path:
     return get("CKPT_DIR")
 
 
+def ckpt_v12_dir() -> Path:
+    return get("CKPT_V12_DIR")
+
+
 def crossrun_repo() -> Path:
     return get("CROSSRUN_REPO")
 
 
 def ridge_data_dir() -> Path:
     return get("RIDGE_DATA_DIR")
+
+
+def bnfix_sweep_csv() -> Path:
+    return get("BNFIX_SWEEP_CSV")
