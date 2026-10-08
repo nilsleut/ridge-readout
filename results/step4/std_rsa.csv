@@ -1,0 +1,169 @@
+subject,rule,seed_idx,variant,dead_channels,nan_pairs,rho,kind,quantity,mean,sd,n_seeds,seeds_positive,config_hash,git_head
+sub-01,Random Weights,0.0,raw,0.0,0.0,0.05481022431713068,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,0.0,z,0.0,0.0,0.023433905152815418,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,0.0,center,0.0,0.0,0.020734194173699982,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,0.0,scale,0.0,0.0,0.02963744071111828,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,1.0,raw,0.0,0.0,0.037400552551364465,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,1.0,z,0.0,0.0,0.026923924094756416,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,1.0,center,0.0,0.0,0.025687042944502265,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,1.0,scale,0.0,0.0,0.036774805420007474,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,2.0,raw,0.0,0.0,0.05033629356472465,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,2.0,z,0.0,0.0,0.028426554756251585,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,2.0,center,0.0,0.0,0.022168546804626096,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,2.0,scale,0.0,0.0,0.03827385047929165,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,3.0,raw,0.0,0.0,0.05265985881117097,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,3.0,z,0.0,0.0,0.02536558620768785,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,3.0,center,0.0,0.0,0.02269463810283454,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,3.0,scale,0.0,0.0,0.0337696476689457,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,4.0,raw,0.0,0.0,0.04371990102292005,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,4.0,z,0.0,0.0,0.02903151176874688,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,4.0,center,0.0,0.0,0.026278717852215992,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights,4.0,scale,0.0,0.0,0.03745373049362015,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,0.0,raw,0.0,0.0,0.01688255820826126,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,0.0,z,0.0,0.0,0.0388808867798104,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,0.0,center,0.0,0.0,0.024157876036877034,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,0.0,scale,0.0,0.0,0.04573577775424585,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,1.0,raw,0.0,0.0,0.02089736156635321,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,1.0,z,0.0,0.0,0.04562472113962521,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,1.0,center,0.0,0.0,0.023859323857553207,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,1.0,scale,0.0,0.0,0.057755359624644134,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,2.0,raw,0.0,0.0,0.01566851812425609,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,2.0,z,0.0,0.0,0.03968025165100819,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,2.0,center,0.0,0.0,0.019754291890942337,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,2.0,scale,0.0,0.0,0.043585150266210834,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,3.0,raw,0.0,0.0,0.01824218186210045,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,3.0,z,0.0,0.0,0.03932841142653039,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,3.0,center,0.0,0.0,0.0190818989855793,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,3.0,scale,0.0,0.0,0.04286185903784365,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,4.0,raw,0.0,0.0,0.028294762050407124,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,4.0,z,0.0,0.0,0.04502927862877604,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,4.0,center,0.0,0.0,0.02589093713064731,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Backprop,4.0,scale,0.0,0.0,0.058832062193031706,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,0.0,raw,0.0,0.0,0.01106462580959647,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,0.0,z,0.0,0.0,0.02615856390025099,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,0.0,center,0.0,0.0,0.02195401237419249,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,0.0,scale,0.0,0.0,0.02753310736259503,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,1.0,raw,0.0,0.0,0.0017819662590866756,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,1.0,z,0.0,0.0,0.027692418669339112,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,1.0,center,0.0,0.0,0.023980442780223564,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,1.0,scale,0.0,0.0,0.024109337095557726,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,2.0,raw,0.0,0.0,0.00015541005042151026,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,2.0,z,0.0,0.0,0.022213526591186434,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,2.0,center,0.0,0.0,0.023196211413810546,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,2.0,scale,0.0,0.0,0.00819487864847895,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,3.0,raw,0.0,0.0,-0.007799094064819525,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,3.0,z,0.0,0.0,0.022148619206236436,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,3.0,center,0.0,0.0,0.02126498461028457,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,3.0,scale,0.0,0.0,0.013749509133868054,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,4.0,raw,0.0,0.0,0.002101122645075471,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,4.0,z,0.0,0.0,0.019031073282912883,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,4.0,center,0.0,0.0,0.018911493590574785,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Feedback Alignment,4.0,scale,0.0,0.0,0.014397494568576379,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,0.0,raw,0.0,0.0,0.0031498786773791745,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,0.0,z,0.0,0.0,0.023647129125075373,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,0.0,center,0.0,0.0,0.02386530405643185,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,0.0,scale,0.0,0.0,0.021153829856619007,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,1.0,raw,0.0,0.0,0.0033334540370048766,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,1.0,z,0.0,0.0,0.027993917588428806,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,1.0,center,0.0,0.0,0.025564148895152197,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,1.0,scale,0.0,0.0,0.03010977642184299,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,2.0,raw,0.0,0.0,0.004806835448747008,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,2.0,z,0.0,0.0,0.027836397998985137,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,2.0,center,0.0,0.0,0.019280077114932966,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,2.0,scale,0.0,0.0,0.027781069927829458,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,3.0,raw,0.0,0.0,0.0068882531951753,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,3.0,z,0.0,0.0,0.026397523526115144,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,3.0,center,0.0,0.0,0.021363120015703053,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,3.0,scale,0.0,0.0,0.02755842361624826,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,4.0,raw,0.0,0.0,0.009368212261043224,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,4.0,z,0.0,0.0,0.03037440257761923,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,4.0,center,0.0,0.0,0.027241925660888972,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Predictive Coding,4.0,scale,0.0,0.0,0.03319687223551812,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,0.0,raw,0.0,0.0,0.025438493238779003,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,0.0,z,0.0,0.0,0.025143145840404252,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,0.0,center,0.0,0.0,0.024329357806596216,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,0.0,scale,0.0,0.0,0.029074907358177134,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,1.0,raw,0.0,0.0,0.021420136641329964,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,1.0,z,0.0,0.0,0.029659868203948826,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,1.0,center,0.0,0.0,0.025728039096156004,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,1.0,scale,0.0,0.0,0.034592084081100156,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,2.0,raw,0.0,0.0,0.021068232098026853,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,2.0,z,0.0,0.0,0.026082693024023107,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,2.0,center,0.0,0.0,0.022781359638590213,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,2.0,scale,0.0,0.0,0.024811403017573227,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,3.0,raw,0.0,0.0,0.02783636933906198,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,3.0,z,0.0,0.0,0.03468882863561293,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,3.0,center,0.0,0.0,0.01962120610408788,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,3.0,scale,0.0,0.0,0.04315986169556,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,4.0,raw,0.0,0.0,0.020747630730430205,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,4.0,z,0.0,0.0,0.0242653241006356,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,4.0,center,0.0,0.0,0.025618707252008297,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,STDP,4.0,scale,0.0,0.0,0.021480005594955654,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),0.0,raw,0.0,0.0,-0.001138921691272617,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),0.0,z,0.0,0.0,0.021953567262213296,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),0.0,center,0.0,0.0,0.021675296358109157,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),0.0,scale,0.0,0.0,0.014297266469239444,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),1.0,raw,0.0,0.0,-0.0026060337056313964,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),1.0,z,0.0,0.0,0.02492497408063161,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),1.0,center,0.0,0.0,0.023510194071705647,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),1.0,scale,0.0,0.0,0.01843730697769289,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),2.0,raw,0.0,0.0,0.005125293429921506,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),2.0,z,0.0,0.0,0.027023267799704927,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),2.0,center,0.0,0.0,0.019032422758955878,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),2.0,scale,0.0,0.0,0.02180716625525994,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),3.0,raw,0.0,0.0,-0.00011828026827028779,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),3.0,z,0.0,0.0,0.023476871955244148,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),3.0,center,0.0,0.0,0.020380402868309697,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),3.0,scale,0.0,0.0,0.01722216106669427,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),4.0,raw,0.0,0.0,0.0026766470689312443,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),4.0,z,0.0,0.0,0.027523606862267267,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),4.0,center,0.0,0.0,0.02648674229450784,checkpoint,,,,,,206fa875cca5,9b94bf8
+sub-01,Random Weights (BN-calibrated),4.0,scale,0.0,0.0,0.018224077078933067,checkpoint,,,,,,206fa875cca5,9b94bf8
+,,,center,,,,condition,Backprop,0.02254886558031984,0.002970907153867145,5.0,,206fa875cca5,9b94bf8
+,,,center,,,,condition,Feedback Alignment,0.02186142895381719,0.0019582070883831367,5.0,,206fa875cca5,9b94bf8
+,,,center,,,,condition,Predictive Coding,0.023462915148621803,0.003192306930685694,5.0,,206fa875cca5,9b94bf8
+,,,center,,,,condition,Random Weights,0.023512627975575774,0.0023756414754839235,5.0,,206fa875cca5,9b94bf8
+,,,center,,,,condition,Random Weights (BN-calibrated),0.022217011670317643,0.0029030636503472396,5.0,,206fa875cca5,9b94bf8
+,,,center,,,,condition,STDP,0.02361573397948772,0.002531572006236752,5.0,,206fa875cca5,9b94bf8
+,,,center,,,,difference,Random Weights - Backprop,0.000963762395255937,0.0027133397038571656,5.0,4.0,206fa875cca5,9b94bf8
+,,,center,,,,difference,Random Weights (BN-calibrated) - Backprop,-0.00033185391000219443,0.001440195260315605,5.0,2.0,206fa875cca5,9b94bf8
+,,,center,,,,difference,Random Weights - Random Weights (BN-calibrated),0.0012956163052581314,0.001765323568314035,5.0,3.0,206fa875cca5,9b94bf8
+,,,center,,,,difference,Feedback Alignment - Backprop,-0.0006874366265026466,0.004118074314397438,5.0,3.0,206fa875cca5,9b94bf8
+,,,center,,,,difference,Predictive Coding - Backprop,0.0009140495683019695,0.0012317277252816422,5.0,3.0,206fa875cca5,9b94bf8
+,,,center,,,,difference,STDP - Backprop,0.0010668683991678842,0.001356333491288641,5.0,4.0,206fa875cca5,9b94bf8
+,,,raw,,,,condition,Backprop,0.01999707636227563,0.005029373611247732,5.0,,206fa875cca5,9b94bf8
+,,,raw,,,,condition,Feedback Alignment,0.0014608061398721202,0.006711860994701756,5.0,,206fa875cca5,9b94bf8
+,,,raw,,,,condition,Predictive Coding,0.005509326723869917,0.0026261829157272214,5.0,,206fa875cca5,9b94bf8
+,,,raw,,,,condition,Random Weights,0.04778536605346216,0.007141234168986736,5.0,,206fa875cca5,9b94bf8
+,,,raw,,,,condition,Random Weights (BN-calibrated),0.0007877409667356898,0.003099715214203018,5.0,,206fa875cca5,9b94bf8
+,,,raw,,,,condition,STDP,0.0233021724095256,0.0031694258005063574,5.0,,206fa875cca5,9b94bf8
+,,,raw,,,,difference,Random Weights - Backprop,0.02778828969118654,0.010889031203805409,5.0,5.0,206fa875cca5,9b94bf8
+,,,raw,,,,difference,Random Weights (BN-calibrated) - Backprop,-0.019209335395539935,0.005846889497605929,5.0,0.0,206fa875cca5,9b94bf8
+,,,raw,,,,difference,Random Weights - Random Weights (BN-calibrated),0.046997625086726474,0.0070898740654401805,5.0,5.0,206fa875cca5,9b94bf8
+,,,raw,,,,difference,Feedback Alignment - Backprop,-0.018536270222403506,0.008458596598545216,5.0,0.0,206fa875cca5,9b94bf8
+,,,raw,,,,difference,Predictive Coding - Backprop,-0.014487749638405711,0.0036299111737800307,5.0,0.0,206fa875cca5,9b94bf8
+,,,raw,,,,difference,STDP - Backprop,0.003305096047249974,0.007018253951666287,5.0,4.0,206fa875cca5,9b94bf8
+,,,scale,,,,condition,Backprop,0.04975404177519523,0.007876156948526496,5.0,,206fa875cca5,9b94bf8
+,,,scale,,,,condition,Feedback Alignment,0.017596865361815227,0.007977729482063822,5.0,,206fa875cca5,9b94bf8
+,,,scale,,,,condition,Predictive Coding,0.027959994411611566,0.004431805530995842,5.0,,206fa875cca5,9b94bf8
+,,,scale,,,,condition,Random Weights,0.03518189495459665,0.0035353290047650185,5.0,,206fa875cca5,9b94bf8
+,,,scale,,,,condition,Random Weights (BN-calibrated),0.017997595569563922,0.002694958391366562,5.0,,206fa875cca5,9b94bf8
+,,,scale,,,,condition,STDP,0.030623652349473236,0.008554123632686364,5.0,,206fa875cca5,9b94bf8
+,,,scale,,,,difference,Random Weights - Backprop,-0.014572146820598583,0.007167881045604294,5.0,0.0,206fa875cca5,9b94bf8
+,,,scale,,,,difference,Random Weights (BN-calibrated) - Backprop,-0.03175644620563131,0.008255498658015444,5.0,0.0,206fa875cca5,9b94bf8
+,,,scale,,,,difference,Random Weights - Random Weights (BN-calibrated),0.01718429938503273,0.0015680115397824414,5.0,5.0,206fa875cca5,9b94bf8
+,,,scale,,,,difference,Feedback Alignment - Backprop,-0.032157176413380006,0.009583881117393082,5.0,0.0,206fa875cca5,9b94bf8
+,,,scale,,,,difference,Predictive Coding - Backprop,-0.021794047363583667,0.005804631466268103,5.0,0.0,206fa875cca5,9b94bf8
+,,,scale,,,,difference,STDP - Backprop,-0.019130389425722,0.0135275779595561,5.0,1.0,206fa875cca5,9b94bf8
+,,,z,,,,condition,Backprop,0.04170870992515004,0.0033218356371583083,5.0,,206fa875cca5,9b94bf8
+,,,z,,,,condition,Feedback Alignment,0.02344884032998517,0.0034671241553913684,5.0,,206fa875cca5,9b94bf8
+,,,z,,,,condition,Predictive Coding,0.02724987416324474,0.0024681248985492024,5.0,,206fa875cca5,9b94bf8
+,,,z,,,,condition,Random Weights,0.02663629639605163,0.002285542902052551,5.0,,206fa875cca5,9b94bf8
+,,,z,,,,condition,Random Weights (BN-calibrated),0.02498045759201225,0.00234875472384905,5.0,,206fa875cca5,9b94bf8
+,,,z,,,,condition,STDP,0.02796797196092494,0.004280068568296054,5.0,,206fa875cca5,9b94bf8
+,,,z,,,,difference,Random Weights - Backprop,-0.015072413529098416,0.0027374956591835896,5.0,0.0,206fa875cca5,9b94bf8
+,,,z,,,,difference,Random Weights (BN-calibrated) - Backprop,-0.016728252333137798,0.002905194983565089,5.0,0.0,206fa875cca5,9b94bf8
+,,,z,,,,difference,Random Weights - Random Weights (BN-calibrated),0.00165583880403938,0.0002685254742535243,5.0,5.0,206fa875cca5,9b94bf8
+,,,z,,,,difference,Feedback Alignment - Backprop,-0.018259869595164874,0.0048075255961097605,5.0,0.0,206fa875cca5,9b94bf8
+,,,z,,,,difference,Predictive Coding - Backprop,-0.014458835761905306,0.0022289611646310226,5.0,0.0,206fa875cca5,9b94bf8
+,,,z,,,,difference,STDP - Backprop,-0.013740737964225102,0.005854993447974199,5.0,0.0,206fa875cca5,9b94bf8
