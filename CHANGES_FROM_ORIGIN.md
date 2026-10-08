@@ -90,3 +90,25 @@ Verification (`scripts/step3_verify_fit.py`, g = 1, 30 checkpoints, default fold
 `results/tolerance_all_rungs.csv` to 2.1e-14 (criterion 1e-9); r, r2, r_path, df,
 selected_alpha and the four boundary cells are bit-identical (`np.array_equal`) to
 `fit.py` at `bec73cb` for 30/30; tests 97/97 and 41/41.
+
+## Added in step 5: `src/vendor/modal_src/`, `src/vendor/v12_lift.py`
+
+- `src/vendor/modal_src/learning_rules_v12_allseeds_modal.py` (original sha256
+  `bc9ceb7b5e965d237b9ccd60ae3ccdb05bb82eb1384d23ac657c7a0fe1d262a1`) and
+  `learning_rules_v11_upsample_modal.py` (original sha256
+  `4eb61e612e1572008462b17fa277fe665a2c31eb0c32c9e745f1ddb410807e0e`): byte-identical
+  below a 5-line comment header. Never imported; read by AST.
+- `src/vendor/v12_lift.py`: verbatim from `code/upsampling/common_up.py` (constants,
+  `rule_key`, `tri_index`, `load_fmri_tri`, `boot_idx`, `_assigned_names`, `load_defs`,
+  `CachedDS`, `namespaces`, `transform`, `load_v12_model`) and lines 54-59 of
+  `code/upsampling/step3_bootstrap.py` `one()` wrapped as `boot_pairs(b, boot, runs)`.
+
+| Name | Old | New |
+|---|---|---|
+| `V12`, `V11` | `CODE / "learning_rules_v1x_….py"` | `HERE / "modal_src" / "learning_rules_v1x_….py"` |
+| `CODE` (sys.path for bn_guard) | `REPO / "code"` | `HERE` (src/vendor, holds the vendored bn_guard.py) |
+| `load_fmri_tri` | `FMRI_DIR / f"fmri_rdm_{roi}_{s}.npy"` | `paths.outputs_720_dir() / f"fmri_rdm_{roi}_{s}.npy"` |
+| `boot_idx` | `EXT / "results/noise_ceiling_v2/step3c_summary.json"` | `paths.crossrun_repo() / "results/noise_ceiling_v2/step3c_summary.json"` |
+| `namespaces` | `THINGS_DIR=THINGS_DIR, FMRI_DIR=FMRI_DIR` | `THINGS_DIR=paths.things_images_dir(), FMRI_DIR=paths.outputs_720_dir()` |
+| `load_v12_model` | `CKPT_DIR / f"model_weights_…"` | `paths.ckpt_v12_dir() / f"model_weights_…"` |
+| `boot_pairs` | `_W["boot"][b]`, `_W["runs"]` | arguments `boot`, `runs`; returns `idx` |
