@@ -101,3 +101,17 @@ Left unedited on purpose; to be corrected at the next legitimate schema bump.
 ## What the measurement data is, and is not
 
 tolerance_all_rungs.csv is a measurement with the D1 assertion disabled, has no config_hash column, and uses Random Weights without BN calibration; it is not a pilot result. pilot_fit.py aborted under config hash 206fa875cca5 at Random Weights (BN-calibrated) s3 g1, outer fold 3, after 28 of 30 conditions at g=1.
+
+## Amendment dating
+
+Date in the file name and text compared with the timestamp of the commit that added
+the file (`git log --diff-filter=A --format=%cI -- <file>`).
+
+| File | Date in file name | Date in text | Commit | Commit timestamp |
+|---|---|---|---|---|
+| `amendments/2026-10-03_tolerance-rule.md` | 2026-10-03 | 2026-10-03 | `5e968d4` | 2026-10-03T19:07:03+02:00 |
+| `amendments/2026-10-03_d1-plateau-gate.md` | 2026-10-03 | 2026-10-03 (also cites 2026-08-20 for the original D1) | `0c7db7a` | 2026-10-03T20:33:12+02:00 |
+| `amendments/2026-10-03_step4-predictions.md` | 2026-10-03 | none | `f148085` | 2026-10-08T17:29:16+02:00 |
+
+`amendments/2026-10-03_step4-predictions.md`: the file name says 2026-10-03, the commit
+was made on 2026-10-08. The commit timestamp is authoritative; the file is left unchanged so that the committed text stays byte-identical.
