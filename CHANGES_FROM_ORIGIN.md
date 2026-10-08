@@ -112,3 +112,7 @@ selected_alpha and the four boundary cells are bit-identical (`np.array_equal`) 
 | `namespaces` | `THINGS_DIR=THINGS_DIR, FMRI_DIR=FMRI_DIR` | `THINGS_DIR=paths.things_images_dir(), FMRI_DIR=paths.outputs_720_dir()` |
 | `load_v12_model` | `CKPT_DIR / f"model_weights_…"` | `paths.ckpt_v12_dir() / f"model_weights_…"` |
 | `boot_pairs` | `_W["boot"][b]`, `_W["runs"]` | arguments `boot`, `runs`; returns `idx` |
+
+`src/ridge/paths.py` (step 5): new variable `STEP5_GAP_DIR`, the output directory for
+the step 5 GAP features. Added because `RIDGE_DATA_DIR` points into the read-only source
+repository.

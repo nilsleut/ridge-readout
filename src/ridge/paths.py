@@ -18,7 +18,7 @@ from pathlib import Path
 
 __all__ = ["repo_root", "things_fmri_dir", "things_images_dir", "outputs_720_dir",
            "ckpt_dir", "ckpt_v12_dir", "crossrun_repo", "ridge_data_dir",
-           "bnfix_sweep_csv", "get"]
+           "bnfix_sweep_csv", "step5_gap_dir", "get"]
 
 _VARS = {
     "THINGS_FMRI_DIR": "THINGS-fMRI directory with sub-XX_task-things_voxel-wise-responses.h5 "
@@ -30,6 +30,7 @@ _VARS = {
     "CROSSRUN_REPO": "root of the learning-rules-rsa repository",
     "RIDGE_DATA_DIR": "directory containing arm_b_out/ and pilot_features/",
     "BNFIX_SWEEP_CSV": "published results/bnfix_sweep.csv of evaluation-resolution-rsa",
+    "STEP5_GAP_DIR": "output directory for the step 5 GAP features (written, not read-only)",
 }
 
 
@@ -93,3 +94,7 @@ def ridge_data_dir() -> Path:
 
 def bnfix_sweep_csv() -> Path:
     return get("BNFIX_SWEEP_CSV")
+
+
+def step5_gap_dir() -> Path:
+    return get("STEP5_GAP_DIR")
