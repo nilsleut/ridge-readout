@@ -1,0 +1,2 @@
+subject,condition,seed,g,voxel,outer_fold,alpha_min_diagnostic,mse_at_1e_6,mse_min_diagnostic,relative_gain,classification,config_hash,git_head
+sub-02,Feedback Alignment,2,1,867,1,1e-09,1.01725220288233,1.0172216384141977,3.004610660545105e-05,Plateau,206fa875cca5,21243d9
