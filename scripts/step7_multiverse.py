@@ -104,6 +104,24 @@ def _one(b):
     return b, Rm @ Rb.T
 
 
+def _init_pts(keep, brain_rank):
+    _W.update(keep=keep, brain_rank=brain_rank)
+
+
+def _pts_one(job):
+    f, d, arm, px, rule, si, roi = job
+    m = pdist(normalise(feat(arm, px, rule, si, ROIS[roi]), f), d)
+    if not np.isfinite(m).all():
+        raise SystemExit(f"STOP: non-finite model RDM {f} {d} {arm} {px} {rule} {si} {roi}")
+    mv = ranks(m[_W["keep"]])
+    out = []
+    for b in BS:
+        ps = [float(mv @ _W["brain_rank"][brain_key(b, d, roi, s)]) for s in SUBJ]
+        out.append(dict(kind="rho", F=f, D=d, B=b, roi=roi, arm=arm, res=px, rule=rule, seed_idx=si,
+                        rho=float(np.mean(ps)), **{f"rho_{s}": p for s, p in zip(SUBJ, ps)}))
+    return out
+
+
 def ci(x):
     return float(x[0]), float(np.quantile(x[1:], .025)), float(np.quantile(x[1:], .975))
 
@@ -125,24 +143,13 @@ def main():
                     brain_tri[brain_key(b, d, roi, s)] = v
                     brain_rank[brain_key(b, d, roi, s)] = ranks(v[keep])
 
-    # ── point estimates ──
-    t0, rows = time.time(), []
-    for f in FS:
-        for d in DS:
-            for arm, px in CONDS:
-                for rule in RULES:
-                    for si in C.SEED_IDX:
-                        for roi, layer in ROIS.items():
-                            m = pdist(normalise(feat(arm, px, rule, si, layer), f), d)
-                            if not np.isfinite(m).all():
-                                raise SystemExit(f"STOP: non-finite model RDM {f} {d} {arm} {px} {rule} {si} {layer}")
-                            mv = ranks(m[keep])
-                            for b in BS:
-                                ps = [float(mv @ brain_rank[brain_key(b, d, roi, s)]) for s in SUBJ]
-                                rows.append(dict(kind="rho", F=f, D=d, B=b, roi=roi, arm=arm, res=px, rule=rule,
-                                                 seed_idx=si, rho=float(np.mean(ps)),
-                                                 **{f"rho_{s}": p for s, p in zip(SUBJ, ps)}))
-        print(f"  points F={f} done ({time.time() - t0:.0f}s)", flush=True)
+    # ── point estimates (parallel over models; same computation as a serial loop) ──
+    t0 = time.time()
+    jobs = [(f, d, arm, px, rule, si, roi) for f in FS for d in DS for arm, px in CONDS
+            for rule in RULES for si in C.SEED_IDX for roi in ROIS]
+    with ProcessPoolExecutor(max_workers=8, initializer=_init_pts, initargs=(keep, brain_rank)) as ex:
+        rows = [r for chunk in ex.map(_pts_one, jobs, chunksize=16) for r in chunk]
+    print(f"  point estimates done ({time.time() - t0:.0f}s, {len(jobs)} models)", flush=True)
     pts = pd.DataFrame(rows)
 
     # ── bootstrap ──
