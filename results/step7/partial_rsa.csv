@@ -1,0 +1,28 @@
+kind,roi,cond,quantity,value,ci_lo,ci_hi,ci_excludes_0,seeds_positive,passed,note,config_hash,git_head
+plain,V1,NATIVE_32,Random Weights - Backprop,-0.0006896894642351798,-0.010867687028360816,0.009028424719099426,False,3.0,,,206fa875cca5,0c74aeb
+plain_condition,V1,NATIVE_32,Random Weights,0.045237747554622156,,,,,,,206fa875cca5,0c74aeb
+plain_condition,V1,NATIVE_32,Backprop,0.04592743701885733,,,,,,,206fa875cca5,0c74aeb
+plain,V1,NATIVE_224,Random Weights - Backprop,0.03044593798328954,0.01814899493637817,0.04229344150763231,True,5.0,,,206fa875cca5,0c74aeb
+plain_condition,V1,NATIVE_224,Random Weights,0.05317954762490333,,,,,,,206fa875cca5,0c74aeb
+plain_condition,V1,NATIVE_224,Backprop,0.022733609641613788,,,,,,,206fa875cca5,0c74aeb
+plain,V1,UPSAMPLED_224,Random Weights - Backprop,0.03468056701421489,0.02288015148463428,0.04635325165000248,True,5.0,,,206fa875cca5,0c74aeb
+plain_condition,V1,UPSAMPLED_224,Random Weights,0.05045613308526159,,,,,,,206fa875cca5,0c74aeb
+plain_condition,V1,UPSAMPLED_224,Backprop,0.015775566071046708,,,,,,,206fa875cca5,0c74aeb
+plain,LOC,NATIVE_224,Backprop - Random Weights,0.011279681790422574,0.0025018475176324224,0.02100728288815102,True,5.0,,,206fa875cca5,0c74aeb
+plain_condition,LOC,NATIVE_224,Backprop,0.008276735501878645,,,,,,,206fa875cca5,0c74aeb
+plain_condition,LOC,NATIVE_224,Random Weights,-0.00300294628854393,,,,,,,206fa875cca5,0c74aeb
+plain,V1,slope,S = gap NAT224 - gap NAT32,0.031135627447524718,0.023868925822149393,0.03844358103698432,True,,,,206fa875cca5,0c74aeb
+partial,V1,NATIVE_32,Random Weights - Backprop,-0.012221707367278239,-0.01985014881139676,-0.005241454030045831,True,0.0,,,206fa875cca5,0c74aeb
+partial_condition,V1,NATIVE_32,Random Weights,0.014204762934313376,,,,,,,206fa875cca5,0c74aeb
+partial_condition,V1,NATIVE_32,Backprop,0.02642647030159162,,,,,,,206fa875cca5,0c74aeb
+partial,V1,NATIVE_224,Random Weights - Backprop,0.0043967383164041874,-0.004460530352696936,0.013477585401750463,False,4.0,,,206fa875cca5,0c74aeb
+partial_condition,V1,NATIVE_224,Random Weights,0.016492966336884136,,,,,,,206fa875cca5,0c74aeb
+partial_condition,V1,NATIVE_224,Backprop,0.012096228020479948,,,,,,,206fa875cca5,0c74aeb
+partial,V1,UPSAMPLED_224,Random Weights - Backprop,0.00967106296981103,0.0016632243330908143,0.017864092429732685,True,5.0,,,206fa875cca5,0c74aeb
+partial_condition,V1,UPSAMPLED_224,Random Weights,0.01646587207495962,,,,,,,206fa875cca5,0c74aeb
+partial_condition,V1,UPSAMPLED_224,Backprop,0.0067948091051485944,,,,,,,206fa875cca5,0c74aeb
+partial,LOC,NATIVE_224,Backprop - Random Weights,0.010746984022927591,0.0037914535035277206,0.01789707775219137,True,5.0,,,206fa875cca5,0c74aeb
+partial_condition,LOC,NATIVE_224,Backprop,0.007140239647417103,,,,,,,206fa875cca5,0c74aeb
+partial_condition,LOC,NATIVE_224,Random Weights,-0.0036067443755104884,,,,,,,206fa875cca5,0c74aeb
+partial,V1,slope,S = gap NAT224 - gap NAT32,0.016618445683682426,0.010510797854339726,0.022541510132695727,True,,,,206fa875cca5,0c74aeb
+rule,,,G2 partial V1 gap NAT224 upper CI <= 0.010 and S_partial <= 0.5 S_paper,0.0043967383164041874,-0.004460530352696936,0.013477585401750463,,,False,"S_partial +0.0166 [+0.0105, +0.0225] vs 0.5*S_paper +0.0155",206fa875cca5,0c74aeb
