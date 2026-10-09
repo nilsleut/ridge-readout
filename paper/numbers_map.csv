@@ -1,0 +1,84 @@
+macro,source,filter,column,rounding,value
+RsaGapReliableGOne,results/step3/ridge_vs_rsa.csv,kind == 'difference' and metric == 'rsa_501_g1' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,0.028
+RidgeGapGOne,results/step3/ridge_vs_rsa.csv,kind == 'difference' and metric == 'ridge_g1' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.029
+RidgeGapGFour,results/step3/ridge_vs_rsa.csv,kind == 'difference' and metric == 'ridge_g4' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.051
+RidgeGapGEight,results/step3/ridge_vs_rsa.csv,kind == 'difference' and metric == 'ridge_g8' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.058
+POneRidgeRandBncal,results/step3/ridge_vs_rsa.csv,kind == 'P1',mean,3 decimals,0.002
+POneRsaRandBncal,results/step3/ridge_vs_rsa.csv,kind == 'difference' and metric == 'rsa_501_g1' and `quantity` == 'Random Weights - Random Weights (BN-calibrated)',mean,3 decimals,0.047
+ETwoPerFoldGap,results/step3/collapse_rpath_g1.csv,kind == 'difference' and metric == 'r_perfold' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.023
+ETwoHiFracDiff,results/step3/collapse_rpath_g1.csv,kind == 'difference' and metric == 'hi_frac' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,0.055
+EThreeRunFoldGap,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.027
+EFourEncGapRandom,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'centred',rho,3 decimals,-0.004
+EFourEncGapRun,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'centred',rho,3 decimals,-0.008
+SOneStdGap,results/step4/std_rsa.csv,kind == 'difference' and variant == 'z' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.015
+SOneStdRandBncal,results/step4/std_rsa.csv,kind == 'difference' and variant == 'z' and `quantity` == 'Random Weights - Random Weights (BN-calibrated)',mean,3 decimals,0.002
+STwoSubTwoRsa,results/step4/subjects.csv,kind == 'difference' and subject == 'sub-02' and metric == 'rsa_raw' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,0.056
+STwoSubTwoRidge,results/step4/subjects.csv,kind == 'difference' and subject == 'sub-02' and metric == 'ridge' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.023
+STwoSubThreeRsa,results/step4/subjects.csv,kind == 'difference' and subject == 'sub-03' and metric == 'rsa_raw' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,0.008
+STwoSubThreeRidge,results/step4/subjects.csv,kind == 'difference' and subject == 'sub-03' and metric == 'ridge' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.011
+VoneGapRawTwoTwoFour,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 NATIVE 224: Random - BP, Conv1 -> V1'",value,3 decimals,0.030
+VoneGapRawTwoTwoFourLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 NATIVE 224: Random - BP, Conv1 -> V1'",ci_lo,3 decimals,0.018
+VoneGapRawTwoTwoFourHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 NATIVE 224: Random - BP, Conv1 -> V1'",ci_hi,3 decimals,0.042
+VoneGapRawThreeTwo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 NATIVE 32: Random - BP, Conv1 -> V1'",value,3 decimals,-0.001
+VoneGapRawThreeTwoLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 NATIVE 32: Random - BP, Conv1 -> V1'",ci_lo,3 decimals,-0.011
+VoneGapRawThreeTwoHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 NATIVE 32: Random - BP, Conv1 -> V1'",ci_hi,3 decimals,0.009
+VoneGapZTwoTwoFour,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 NATIVE 224: Random - BP, Conv1 -> V1'",value,3 decimals,-0.011
+VoneGapZTwoTwoFourLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 NATIVE 224: Random - BP, Conv1 -> V1'",ci_lo,3 decimals,-0.017
+VoneGapZTwoTwoFourHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 NATIVE 224: Random - BP, Conv1 -> V1'",ci_hi,3 decimals,-0.005
+VoneGapZThreeTwo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 NATIVE 32: Random - BP, Conv1 -> V1'",value,3 decimals,-0.012
+VoneGapZThreeTwoLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 NATIVE 32: Random - BP, Conv1 -> V1'",ci_lo,3 decimals,-0.018
+VoneGapZThreeTwoHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 NATIVE 32: Random - BP, Conv1 -> V1'",ci_hi,3 decimals,-0.007
+VoneGapRawUp,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 UPSAMPLED 224: Random - BP, Conv1 -> V1'",value,3 decimals,0.035
+VoneGapRawUpLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 UPSAMPLED 224: Random - BP, Conv1 -> V1'",ci_lo,3 decimals,0.023
+VoneGapRawUpHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap V1 UPSAMPLED 224: Random - BP, Conv1 -> V1'",ci_hi,3 decimals,0.046
+VoneGapZUp,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 UPSAMPLED 224: Random - BP, Conv1 -> V1'",value,3 decimals,0.002
+VoneGapZUpLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 UPSAMPLED 224: Random - BP, Conv1 -> V1'",ci_lo,3 decimals,-0.001
+VoneGapZUpHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap V1 UPSAMPLED 224: Random - BP, Conv1 -> V1'",ci_hi,3 decimals,0.005
+SlopeRaw,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'comparison' and variant == 'raw' and quantity == 'S V1 = gap NAT224 - gap NAT32',value,3 decimals,0.031
+SlopeRawLo,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'comparison' and variant == 'raw' and quantity == 'S V1 = gap NAT224 - gap NAT32',ci_lo,3 decimals,0.024
+SlopeRawHi,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'comparison' and variant == 'raw' and quantity == 'S V1 = gap NAT224 - gap NAT32',ci_hi,3 decimals,0.038
+SlopeZ,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'comparison' and variant == 'z' and quantity == 'S V1 = gap NAT224 - gap NAT32',value,3 decimals,0.002
+SlopeZLo,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'comparison' and variant == 'z' and quantity == 'S V1 = gap NAT224 - gap NAT32',ci_lo,3 decimals,-0.004
+SlopeZHi,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'comparison' and variant == 'z' and quantity == 'S V1 = gap NAT224 - gap NAT32',ci_hi,3 decimals,0.007
+LocGapRaw,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap LOC NATIVE 224: BP - Random, Conv3 -> LOC'",value,3 decimals,0.011
+LocGapRawLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap LOC NATIVE 224: BP - Random, Conv3 -> LOC'",ci_lo,3 decimals,0.003
+LocGapRawHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'raw' and quantity == 'gap LOC NATIVE 224: BP - Random, Conv3 -> LOC'",ci_hi,3 decimals,0.021
+LocGapZ,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap LOC NATIVE 224: BP - Random, Conv3 -> LOC'",value,3 decimals,0.007
+LocGapZLo,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap LOC NATIVE 224: BP - Random, Conv3 -> LOC'",ci_lo,3 decimals,0.002
+LocGapZHi,results/step5/paper_comparisons_raw_vs_z.csv,"kind == 'comparison' and variant == 'z' and quantity == 'gap LOC NATIVE 224: BP - Random, Conv3 -> LOC'",ci_hi,3 decimals,0.011
+MOneSpearman,results/step5/paper_comparisons_raw_vs_z.csv,kind == 'rule' and quantity.str.startswith('M1 Spearman'),value,2 decimals,0.68
+PRidgeGapThreeTwo,results/step6/ridge_resolution.csv,kind == 'difference' and subject == 'mean sub-01/02' and arm == 'NATIVE' and res == 32 and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.026
+PRidgeGapTwoTwoFour,results/step6/ridge_resolution.csv,kind == 'difference' and subject == 'mean sub-01/02' and arm == 'NATIVE' and res == 224 and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.026
+PRidgeSlope,results/step6/ridge_resolution.csv,kind == 'P_ridge',mean,3 decimals,-0.000
+PMechOneRandRange,results/step6/mechanism_bandpass.csv,kind == 'rule' and quantity == 'P_mech1 Random range < 0.5 x BP range',value,3 decimals,0.068
+PMechOneBpSeeds,results/step6/mechanism_bandpass.csv,"kind == 'rule' and quantity == 'P_mech1 BP m(UP224) < m(NAT224) < m(NAT32), seeds'",value,integer,5
+PMechTwoNotchSeeds,results/step6/mechanism_bandpass.csv,"kind == 'rule' and quantity == 'P_mech2 m_BP(notch) > m_BP(only), seeds'",value,integer,5
+PMechTwoSpearman,results/step6/mechanism_bandpass.csv,"kind == 'rule' and quantity == 'P_mech2 Spearman(m, d), Random+BP x 5 conditions'",value,2 decimals,0.27
+RobustEuclidZTwoTwoFour,results/step6/robustness.csv,roi == 'V1' and res == 224 and feature_norm == 'z' and distance == 'euclidean' and fmri_zscore == 'all-trials',value,3 decimals,0.018
+RobustEuclidZTwoTwoFourLo,results/step6/robustness.csv,roi == 'V1' and res == 224 and feature_norm == 'z' and distance == 'euclidean' and fmri_zscore == 'all-trials',ci_lo,3 decimals,0.009
+RobustEuclidZTwoTwoFourHi,results/step6/robustness.csv,roi == 'V1' and res == 224 and feature_norm == 'z' and distance == 'euclidean' and fmri_zscore == 'all-trials',ci_hi,3 decimals,0.028
+RobustFmriRawTwoTwoFour,results/step6/robustness.csv,roi == 'V1' and res == 224 and feature_norm == 'raw' and distance == 'correlation' and fmri_zscore == '720-stimuli',value,3 decimals,0.005
+RobustFmriRawTwoTwoFourLo,results/step6/robustness.csv,roi == 'V1' and res == 224 and feature_norm == 'raw' and distance == 'correlation' and fmri_zscore == '720-stimuli',ci_lo,3 decimals,-0.003
+RobustFmriRawTwoTwoFourHi,results/step6/robustness.csv,roi == 'V1' and res == 224 and feature_norm == 'raw' and distance == 'correlation' and fmri_zscore == '720-stimuli',ci_hi,3 decimals,0.013
+MultiSlopePaper,results/step7/multiverse.csv,kind == 'cell' and F == 'raw' and D == 'correlation' and B == 'paper' and quantity == 'S = gap NAT224 - gap NAT32',value,3 decimals,0.031
+MultiSlopePaperLo,results/step7/multiverse.csv,kind == 'cell' and F == 'raw' and D == 'correlation' and B == 'paper' and quantity == 'S = gap NAT224 - gap NAT32',ci_lo,3 decimals,0.024
+MultiSlopePaperHi,results/step7/multiverse.csv,kind == 'cell' and F == 'raw' and D == 'correlation' and B == 'paper' and quantity == 'S = gap NAT224 - gap NAT32',ci_hi,3 decimals,0.038
+MultiEuclidGap,results/step7/multiverse.csv,kind == 'cell' and F == 'raw' and D == 'euclidean' and B == 'paper' and roi == 'V1' and quantity == 'gap NATIVE 224: Random Weights - Backprop',value,3 decimals,0.023
+MultiEuclidGapLo,results/step7/multiverse.csv,kind == 'cell' and F == 'raw' and D == 'euclidean' and B == 'paper' and roi == 'V1' and quantity == 'gap NATIVE 224: Random Weights - Backprop',ci_lo,3 decimals,0.004
+MultiEuclidGapHi,results/step7/multiverse.csv,kind == 'cell' and F == 'raw' and D == 'euclidean' and B == 'paper' and roi == 'V1' and quantity == 'gap NATIVE 224: Random Weights - Backprop',ci_hi,3 decimals,0.041
+MultiOTwoViolations,results/step7/multiverse.csv,kind == 'rule' and quantity.str.startswith('O2'),value,integer,0
+MultiLocPositive,results/step7/multiverse.csv,kind == 'cell' and roi == 'LOC' and value > 0,row count,integer,36
+MultiLocCiPositive,results/step7/multiverse.csv,kind == 'cell' and roi == 'LOC' and ci_lo > 0,row count,integer,20
+MultiPosCiCells,results/step7/multiverse_sign_table.csv,value > 0 and ci_excludes_0,row count,integer,13
+MultiNegCiCells,results/step7/multiverse_sign_table.csv,value < 0 and ci_excludes_0,row count,integer,9
+GOneSpearman,results/step7/gain.csv,kind == 'rule' and quantity.str.startswith('G1'),value,2 decimals,0.97
+GTwoPartialGap,results/step7/partial_rsa.csv,kind == 'partial' and roi == 'V1' and cond == 'NATIVE_224',value,3 decimals,0.004
+GTwoPartialGapLo,results/step7/partial_rsa.csv,kind == 'partial' and roi == 'V1' and cond == 'NATIVE_224',ci_lo,3 decimals,-0.004
+GTwoPartialGapHi,results/step7/partial_rsa.csv,kind == 'partial' and roi == 'V1' and cond == 'NATIVE_224',ci_hi,3 decimals,0.013
+GTwoPartialSlope,results/step7/partial_rsa.csv,kind == 'partial' and cond == 'slope',value,3 decimals,0.017
+GTwoPartialSlopeLo,results/step7/partial_rsa.csv,kind == 'partial' and cond == 'slope',ci_lo,3 decimals,0.011
+GTwoPartialSlopeHi,results/step7/partial_rsa.csv,kind == 'partial' and cond == 'slope',ci_hi,3 decimals,0.023
+GenOneSpearman,results/step8/generalization.csv,kind == 'rule' and quantity.str.startswith('GEN1'),value,2 decimals,0.79
+GenTwoModels,results/step8/generalization.csv,kind == 'rule' and quantity.str.startswith('GEN2'),value,integer,4
+GenThreeModels,results/step8/generalization.csv,kind == 'rule' and quantity.str.startswith('GEN3'),value,integer,0
+GenFourQualified,results/step8/generalization.csv,kind == 'rule' and quantity.str.startswith('GEN4'),value,integer,5

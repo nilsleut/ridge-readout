@@ -10,3 +10,7 @@ __pycache__/
 .env.local
 .venv/
 .pytest_cache/
+paper/*.aux
+paper/*.log
+paper/*.pdf
+paper/*.out
