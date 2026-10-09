@@ -52,7 +52,7 @@ def job(j):
                           context=f"{subject} {arm} {px} {rule} s{si}")
     return dict(subject=subject, arm=arm, res=px, rule=rule, seed_idx=si,
                 r_med_reliable=float(np.median(res["r"][rel])),
-                hits=hits_from_fit(res, rel, subject=subject, arm=arm, res=px, condition=rule, seed=si, g=1))
+                hits=hits_from_fit(res, rel, subject=subject, arm=arm, resolution=px, condition=rule, seed=si, g=1))
 
 
 def main():
@@ -85,11 +85,11 @@ def main():
         hs = [h for h in hits if h["subject"] == s]
         if hs:
             Y, _ = load_subject(s)
-            gates.append(gate(hs, load_X=lambda h: load(h["arm"], h["res"], h["condition"], h["seed"]), Y=Y))
+            gates.append(gate(hs, load_X=lambda h: load(h["arm"], h["resolution"], h["condition"], h["seed"]), Y=Y))
     g = pd.concat(gates, ignore_index=True) if gates else pd.DataFrame(columns=["classification"])
     OUT.mkdir(parents=True, exist_ok=True)
     C.stamp(g).to_csv(OUT / "lower_edge_gate_ridge.csv", index=False)
-    invalid = {(r.subject, r.arm, r.res, r.condition, r.seed) for r in g.itertuples() if r.classification == "invalid"}
+    invalid = {(r.subject, r.arm, r.resolution, r.condition, r.seed) for r in g.itertuples() if r.classification == "invalid"}
     per["valid"] = [(r.subject, r.arm, r.res, r.rule, r.seed_idx) not in invalid for r in per.itertuples()]
     v = per[per.valid]
 
