@@ -138,6 +138,41 @@ SPECS += [
      "kind == 'slope' and F == 'center' and component == 'angle' and model != 'own CNN' and ci_lo > 0", None, "int"),
 ]
 
+# ── preregistered primary analysis (results/prereg, results/prereg_gate) ──────
+GRID_NAMES = {1: "One", 2: "Two", 4: "Four", 8: "Eight"}
+CONTRAST_NAMES = {"Random Weights": "RandBp", "Random Weights (BN-calibrated)": "BncalBp",
+                  "Feedback Alignment": "FaBp", "Predictive Coding": "PcBp", "STDP": "StdpBp"}
+RULE_NAMES = {"Random Weights": "Rand", "Backprop": "Bp", "Random Weights (BN-calibrated)": "Bncal",
+              "Feedback Alignment": "Fa", "Predictive Coding": "Pc", "STDP": "Stdp"}
+SUBJ_NAMES = {"sub-01": "SubOne", "sub-02": "SubTwo", "sub-03": "SubThree"}
+for _g, _gn in GRID_NAMES.items():
+    for _r, _cn in CONTRAST_NAMES.items():
+        _q = f"kind == 'contrast' and grid == {_g} and quantity == '{_r} - Backprop'"
+        SPECS += [(f"Prereg{_cn}G{_gn}", "prereg/signflip.csv", _q, "mean", "rsa"),
+                  (f"Prereg{_cn}G{_gn}Sd", "prereg/signflip.csv", _q, "sd", "rsa"),
+                  (f"Prereg{_cn}G{_gn}Pos", "prereg/signflip.csv", _q, "seeds_positive", "int"),
+                  (f"Prereg{_cn}G{_gn}P", "prereg/signflip.csv", _q, "p_one_sided", "rsa"),
+                  (f"Prereg{_cn}G{_gn}Dmin", "prereg/signflip.csv", _q, "delta_min", "rsa")]
+    for _r, _rn in RULE_NAMES.items():
+        SPECS.append((f"PreregCond{_rn}G{_gn}", "prereg/signflip.csv",
+                      f"kind == 'condition' and grid == {_g} and quantity == '{_r}'", "mean", "rsa"))
+    for _s, _sn in SUBJ_NAMES.items():
+        for _c in ("pixels", "lumcontrast", "gabor", "permuted"):
+            SPECS.append((f"PreregCtl{_c.capitalize()}{_sn}G{_gn}", "prereg/instruments_control_band.csv",
+                          f"subject == '{_s}' and grid == {_g} and label == 'control:{_c}'", "r_med_reliable", "rsa"))
+        if _g > 1:
+            for _r, _rn in (("Random Weights", "Rand"), ("Backprop", "Bp")):
+                SPECS.append((f"PreregShuf{_rn}{_sn}G{_gn}", "prereg/instruments_cell_shuffle.csv",
+                              f"subject == '{_s}' and grid == {_g} and label == '{_r} s0 CELL-SHUFFLED'",
+                              "r_med_reliable", "rsa"))
+SPECS += [
+    ("PreregReferenceEffect", "prereg/signflip.csv", "kind == 'verdict'", "reference_effect", "rsa"),
+    ("PreregLowEdgeHits", "count:prereg/lower_edge.csv", "classification == classification", None, "int"),
+    ("PreregLowEdgePlateau", "count:prereg/lower_edge.csv", "classification == 'Plateau'", None, "int"),
+    ("GtwoGateMaxDelta", "prereg_gate/g4_equivalence.csv", "kind == 'gate'", "delta", "sci"),
+    ("GtwoGateContrastDelta", "prereg_gate/g4_equivalence.csv", "kind == 'contrast'", "delta", "sci"),
+]
+
 
 def fmt(v, how):
     if how == "int":

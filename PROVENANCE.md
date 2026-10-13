@@ -115,3 +115,7 @@ the file (`git log --diff-filter=A --format=%cI -- <file>`).
 
 `amendments/2026-10-03_step4-predictions.md`: the file name says 2026-10-03, the commit
 was made on 2026-10-08. The commit timestamp is authoritative; the file is left unchanged so that the committed text stays byte-identical.
+
+## History cleanup
+
+The committer timestamp of `2fd215a` ("Add step 9 report", 2026-10-13) is the time of a history cleanup that merged a follow-up wording fix (one run-note sentence) into that commit; the substance of the report is unchanged.

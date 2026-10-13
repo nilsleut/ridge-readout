@@ -22,11 +22,60 @@ Amendment commits (`git log --diff-filter=A`):
 | `amendments/2026-10-09_step8-generalization-predictions.md` | `10d302b` | 2026-10-09T19:11:05+02:00 | `step8_extract_pretrained.py` `95c364c` 2026-10-09T19:11:45+02:00 |
 | `amendments/2026-10-10_step9-separation-predictions.md` | `6ef68f2` | **2026-10-13T09:40:49+02:00** | `step9_separation.py` `8d17349` 2026-10-13T09:42:21+02:00 |
 
+For C0:
+
+| Document | Commit | Commit timestamp | First analysis script (commit, timestamp) |
+|---|---|---|---|
+| `PREREGISTRATION.md` + `config.yaml` (written 2026-08-18/20; untracked in the source repository) | `7731f58` | 2026-10-03T19:05:47+02:00 | `prereg_primary.py` `02c2fee` 2026-10-13T14:09:26+02:00 |
+| `amendments/2026-10-03_tolerance-rule.md` | `5e968d4` | 2026-10-03T19:07:03+02:00 | same |
+| `amendments/2026-10-03_d1-plateau-gate.md` | `0c7db7a` | 2026-10-03T20:33:12+02:00 | same |
+| `amendments/2026-10-13_g2-local-extraction.md` | `e54fd83` | 2026-10-13T14:03:15+02:00 | `g2_equivalence_gate.py` `b2045d0` 2026-10-13T14:03:35+02:00 |
+
 The step 9 amendment is dated 2026-10-10 in its file name and text but was committed on
 2026-10-13. The commit timestamp is authoritative; it still precedes the analysis
 script.
 
 ---
+
+## C0 (preregistered primary analysis)
+
+**Claim.** Under the preregistered ridge readout (Arm A, Conv1 → V1, 224 px, all three
+subjects), the untrained network does not exceed backprop at any grid rung; the
+contrast is negative at every g, with 0/5 seeds positive. By the frozen decision rule
+(PREREGISTRATION.md §3b) the paper's effect disappears under a fitted readout.
+
+| | |
+|---|---|
+| Rule and threshold | §2: Random − BP, median r over reliable voxels, mean over subjects, paired one-sided sign-flip test over 5 seeds (32 assignments), alternative Random − BP > 0. §3a: survives only if it holds at g ≥ 4 (operationalised: p ≤ 0.05, i.e. p = 1/32, at g = 4 and g = 8). §3b: "the effect disappears" if Δ_min < the paper's effect (`\PreregReferenceEffect`); "the method cannot resolve it" otherwise. |
+| Result | Random − BP = −0.021 (g = 1), −0.035 (g = 2), −0.043 (g = 4), −0.045 (g = 8) (`\PreregRandBpGOne` … `\PreregRandBpGEight`); seeds positive 0 at every g (`\PreregRandBpG<g>Pos`); one-sided p = 1.000 at every g (`\PreregRandBpG<g>P`); Δ_min 0.010 / 0.011 / 0.016 / 0.016 (`\PreregRandBpG<g>Dmin`), below the paper's +0.044 at g ≥ 4 |
+| Verdict | **§3a not met; §3b: "The effect disappears"** (Δ_min at g ≥ 4 below +0.044). The contrast is reversed, not merely absent. |
+| Secondary (same test) | BN-cal − BP, FA − BP, PC − BP, STDP − BP negative at every g, 0/5 seeds positive (`\PreregBncalBpG<g>`, `\PreregFaBpG<g>`, `\PreregPcBpG<g>`, `\PreregStdpBpG<g>`) |
+| Macros | `\PreregRandBpG<g>[Sd/Pos/P/Dmin]`, `\PreregCond<Rule>G<g>`, `\PreregReferenceEffect`, `\PreregLowEdgeHits`, `\PreregLowEdgePlateau`, `\GtwoGateMaxDelta`, `\GtwoGateContrastDelta`; `<g>` ∈ {One, Two, Four, Eight} |
+| Figure | `fig:sign_flip` (ridge line at g = 1); no figure yet for the grid ladder |
+| Documents | `PREREGISTRATION.md` (`7731f58`), tolerance rule (`5e968d4`), D1 plateau gate (`0c7db7a`), g = 2 extraction (`e54fd83`) |
+| Wording | **criterion fixed before the analysis** for the decision rule and test (`7731f58`, 2026-10-03, before `02c2fee`, 2026-10-13). **But not before seeing the data:** sub-01 at g ∈ {1, 4, 8} (`results/tolerance_all_rungs.csv`, steps 3) and sub-02 / sub-03 at g = 1 (step 4) were known before this run. Only g = 2 and sub-02 / sub-03 at g ≥ 4 are new. The preregistration text itself is dated 2026-08-18/20, but the files were untracked until `7731f58`. |
+
+**Deviations from the preregistration** (from `reports/PREREG_COMPLIANCE.md` and this
+run):
+
+1. g = 2 features extracted locally on the CPU instead of on the Modal T4. The original
+   reproduction gate (absolute 1e-6) failed; the downstream equivalence gate of
+   `amendments/2026-10-13_g2-local-extraction.md` passed (max |Δ median r|
+   `\GtwoGateMaxDelta`, |Δ(Random − BP)| `\GtwoGateContrastDelta`).
+2. Resolution sweep for g ≥ 2 not run (224 px only); g = 1 across resolutions comes from
+   the exploratory step 6 with GAP features.
+3. Arm B ridge fits not implemented and not run.
+4. Capacity sweep (§5.2) not implemented and not run.
+5. Brain-Score PLS-25 (§5.6) not implemented and not run.
+6. Leave-one-subject-out inter-subject lower bound (Arm A denominator) not implemented;
+   no r/ceiling reported.
+7. Per-image cell shuffle run only as implemented: seed 0, Random and Backprop, 224 px
+   (preregistered: g = 4 and 8, all resolutions).
+8. D1 abort replaced by the plateau gate (amendment); 26 low-edge hits
+   (`\PreregLowEdgeHits`), all plateau (`\PreregLowEdgePlateau`); no cell excluded.
+9. Exploratory analyses outside §8 (Conv3 → LOC, band-pass inputs, ImageNet models)
+   are reported separately and do not enter C0.
+10. The analysis was run after partial results were known (see Wording).
 
 ## C1
 
@@ -76,9 +125,9 @@ better.
 
 ## C4
 
-**Claim.** The evaluation-resolution slope of our CIFAR-trained models is an offset
-artifact; ImageNet models show a small resolution dependence in the geometry
-component.
+**Claim.** The evaluation-resolution slope of our CIFAR-trained models disappears under
+unit centering or standardization and is absent in the ridge readout; ImageNet models
+show a small resolution dependence in the geometry component.
 
 | | |
 |---|---|
@@ -91,9 +140,9 @@ component.
 | Amendments | step 5: `7b170b1`; step 6: `73c13f8`; step 7: `084b22c`; step 9: `6ef68f2` |
 | Wording | criterion fixed before the analysis for R3 (`7b170b1` before `d8d4c32`), P_ridge (`73c13f8` before `0614450`) and O2 (`084b22c` before `a468946`). The ImageNet geometry slope is a descriptive point fixed in advance (`6ef68f2`) without a decision rule. |
 
-**Note on "artifact".** For the own CNN the slope disappears under channel z-scoring
-(R3), under any centring (O2) and under ridge (P_ridge). "Offset artifact" is the
-reading of these three rules together. It is not a separate test.
+**Note on the basis of C4.** For the own CNN the slope disappears under channel
+z-scoring (R3), under any centring (O2) and under ridge (P_ridge). The claim rests on
+these three rules together; it is not a separate test.
 
 ## C5
 

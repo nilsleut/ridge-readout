@@ -502,3 +502,198 @@ SepThreeModels,results/step9/separation.csv,kind == 'rule' and quantity.str.star
 SepFourModels,results/step9/separation.csv,kind == 'rule' and quantity.str.startswith('SEP4'),value,integer,6
 SepCheckEMaxDev,results/step9/separation.csv,kind == 'check_e',value,1-digit scientific,\ensuremath{1\times 10^{-16}}
 SepSlopeAngleCiPositive,results/step9/separation_slopes.csv,kind == 'slope' and F == 'center' and component == 'angle' and model != 'own CNN' and ci_lo > 0,row count,integer,4
+PreregRandBpGOne,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights - Backprop',mean,3 decimals,-0.021
+PreregRandBpGOneSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights - Backprop',sd,3 decimals,0.006
+PreregRandBpGOnePos,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights - Backprop',seeds_positive,integer,0
+PreregRandBpGOneP,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights - Backprop',p_one_sided,3 decimals,1.000
+PreregRandBpGOneDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights - Backprop',delta_min,3 decimals,0.010
+PreregBncalBpGOne,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights (BN-calibrated) - Backprop',mean,3 decimals,-0.021
+PreregBncalBpGOneSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights (BN-calibrated) - Backprop',sd,3 decimals,0.006
+PreregBncalBpGOnePos,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights (BN-calibrated) - Backprop',seeds_positive,integer,0
+PreregBncalBpGOneP,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights (BN-calibrated) - Backprop',p_one_sided,3 decimals,1.000
+PreregBncalBpGOneDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Random Weights (BN-calibrated) - Backprop',delta_min,3 decimals,0.011
+PreregFaBpGOne,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Feedback Alignment - Backprop',mean,3 decimals,-0.026
+PreregFaBpGOneSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Feedback Alignment - Backprop',sd,3 decimals,0.008
+PreregFaBpGOnePos,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Feedback Alignment - Backprop',seeds_positive,integer,0
+PreregFaBpGOneP,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Feedback Alignment - Backprop',p_one_sided,3 decimals,1.000
+PreregFaBpGOneDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Feedback Alignment - Backprop',delta_min,3 decimals,0.013
+PreregPcBpGOne,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Predictive Coding - Backprop',mean,3 decimals,-0.018
+PreregPcBpGOneSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Predictive Coding - Backprop',sd,3 decimals,0.005
+PreregPcBpGOnePos,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Predictive Coding - Backprop',seeds_positive,integer,0
+PreregPcBpGOneP,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Predictive Coding - Backprop',p_one_sided,3 decimals,1.000
+PreregPcBpGOneDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'Predictive Coding - Backprop',delta_min,3 decimals,0.009
+PreregStdpBpGOne,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'STDP - Backprop',mean,3 decimals,-0.023
+PreregStdpBpGOneSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'STDP - Backprop',sd,3 decimals,0.008
+PreregStdpBpGOnePos,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'STDP - Backprop',seeds_positive,integer,0
+PreregStdpBpGOneP,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'STDP - Backprop',p_one_sided,3 decimals,1.000
+PreregStdpBpGOneDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 1 and quantity == 'STDP - Backprop',delta_min,3 decimals,0.013
+PreregCondRandGOne,results/prereg/signflip.csv,kind == 'condition' and grid == 1 and quantity == 'Random Weights',mean,3 decimals,0.043
+PreregCondBpGOne,results/prereg/signflip.csv,kind == 'condition' and grid == 1 and quantity == 'Backprop',mean,3 decimals,0.064
+PreregCondBncalGOne,results/prereg/signflip.csv,kind == 'condition' and grid == 1 and quantity == 'Random Weights (BN-calibrated)',mean,3 decimals,0.043
+PreregCondFaGOne,results/prereg/signflip.csv,kind == 'condition' and grid == 1 and quantity == 'Feedback Alignment',mean,3 decimals,0.038
+PreregCondPcGOne,results/prereg/signflip.csv,kind == 'condition' and grid == 1 and quantity == 'Predictive Coding',mean,3 decimals,0.046
+PreregCondStdpGOne,results/prereg/signflip.csv,kind == 'condition' and grid == 1 and quantity == 'STDP',mean,3 decimals,0.041
+PreregCtlPixelsSubOneGOne,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 1 and label == 'control:pixels',r_med_reliable,3 decimals,0.023
+PreregCtlLumcontrastSubOneGOne,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 1 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.118
+PreregCtlGaborSubOneGOne,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 1 and label == 'control:gabor',r_med_reliable,3 decimals,0.033
+PreregCtlPermutedSubOneGOne,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 1 and label == 'control:permuted',r_med_reliable,3 decimals,-0.089
+PreregCtlPixelsSubTwoGOne,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 1 and label == 'control:pixels',r_med_reliable,3 decimals,0.019
+PreregCtlLumcontrastSubTwoGOne,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 1 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.102
+PreregCtlGaborSubTwoGOne,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 1 and label == 'control:gabor',r_med_reliable,3 decimals,0.025
+PreregCtlPermutedSubTwoGOne,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 1 and label == 'control:permuted',r_med_reliable,3 decimals,-0.066
+PreregCtlPixelsSubThreeGOne,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 1 and label == 'control:pixels',r_med_reliable,3 decimals,-0.024
+PreregCtlLumcontrastSubThreeGOne,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 1 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.023
+PreregCtlGaborSubThreeGOne,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 1 and label == 'control:gabor',r_med_reliable,3 decimals,-0.029
+PreregCtlPermutedSubThreeGOne,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 1 and label == 'control:permuted',r_med_reliable,3 decimals,-0.080
+PreregRandBpGTwo,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights - Backprop',mean,3 decimals,-0.035
+PreregRandBpGTwoSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights - Backprop',sd,3 decimals,0.006
+PreregRandBpGTwoPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights - Backprop',seeds_positive,integer,0
+PreregRandBpGTwoP,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights - Backprop',p_one_sided,3 decimals,1.000
+PreregRandBpGTwoDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights - Backprop',delta_min,3 decimals,0.011
+PreregBncalBpGTwo,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights (BN-calibrated) - Backprop',mean,3 decimals,-0.035
+PreregBncalBpGTwoSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights (BN-calibrated) - Backprop',sd,3 decimals,0.006
+PreregBncalBpGTwoPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights (BN-calibrated) - Backprop',seeds_positive,integer,0
+PreregBncalBpGTwoP,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights (BN-calibrated) - Backprop',p_one_sided,3 decimals,1.000
+PreregBncalBpGTwoDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Random Weights (BN-calibrated) - Backprop',delta_min,3 decimals,0.011
+PreregFaBpGTwo,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Feedback Alignment - Backprop',mean,3 decimals,-0.042
+PreregFaBpGTwoSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Feedback Alignment - Backprop',sd,3 decimals,0.010
+PreregFaBpGTwoPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Feedback Alignment - Backprop',seeds_positive,integer,0
+PreregFaBpGTwoP,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Feedback Alignment - Backprop',p_one_sided,3 decimals,1.000
+PreregFaBpGTwoDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Feedback Alignment - Backprop',delta_min,3 decimals,0.018
+PreregPcBpGTwo,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Predictive Coding - Backprop',mean,3 decimals,-0.032
+PreregPcBpGTwoSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Predictive Coding - Backprop',sd,3 decimals,0.006
+PreregPcBpGTwoPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Predictive Coding - Backprop',seeds_positive,integer,0
+PreregPcBpGTwoP,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Predictive Coding - Backprop',p_one_sided,3 decimals,1.000
+PreregPcBpGTwoDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'Predictive Coding - Backprop',delta_min,3 decimals,0.010
+PreregStdpBpGTwo,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'STDP - Backprop',mean,3 decimals,-0.035
+PreregStdpBpGTwoSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'STDP - Backprop',sd,3 decimals,0.014
+PreregStdpBpGTwoPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'STDP - Backprop',seeds_positive,integer,0
+PreregStdpBpGTwoP,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'STDP - Backprop',p_one_sided,3 decimals,1.000
+PreregStdpBpGTwoDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 2 and quantity == 'STDP - Backprop',delta_min,3 decimals,0.023
+PreregCondRandGTwo,results/prereg/signflip.csv,kind == 'condition' and grid == 2 and quantity == 'Random Weights',mean,3 decimals,0.035
+PreregCondBpGTwo,results/prereg/signflip.csv,kind == 'condition' and grid == 2 and quantity == 'Backprop',mean,3 decimals,0.070
+PreregCondBncalGTwo,results/prereg/signflip.csv,kind == 'condition' and grid == 2 and quantity == 'Random Weights (BN-calibrated)',mean,3 decimals,0.035
+PreregCondFaGTwo,results/prereg/signflip.csv,kind == 'condition' and grid == 2 and quantity == 'Feedback Alignment',mean,3 decimals,0.028
+PreregCondPcGTwo,results/prereg/signflip.csv,kind == 'condition' and grid == 2 and quantity == 'Predictive Coding',mean,3 decimals,0.038
+PreregCondStdpGTwo,results/prereg/signflip.csv,kind == 'condition' and grid == 2 and quantity == 'STDP',mean,3 decimals,0.035
+PreregCtlPixelsSubOneGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 2 and label == 'control:pixels',r_med_reliable,3 decimals,0.024
+PreregCtlLumcontrastSubOneGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 2 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.129
+PreregCtlGaborSubOneGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 2 and label == 'control:gabor',r_med_reliable,3 decimals,0.015
+PreregCtlPermutedSubOneGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 2 and label == 'control:permuted',r_med_reliable,3 decimals,-0.086
+PreregShufRandSubOneGTwo,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-01' and grid == 2 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.030
+PreregShufBpSubOneGTwo,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-01' and grid == 2 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.089
+PreregCtlPixelsSubTwoGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 2 and label == 'control:pixels',r_med_reliable,3 decimals,0.023
+PreregCtlLumcontrastSubTwoGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 2 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.106
+PreregCtlGaborSubTwoGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 2 and label == 'control:gabor',r_med_reliable,3 decimals,0.010
+PreregCtlPermutedSubTwoGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 2 and label == 'control:permuted',r_med_reliable,3 decimals,-0.056
+PreregShufRandSubTwoGTwo,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-02' and grid == 2 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.054
+PreregShufBpSubTwoGTwo,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-02' and grid == 2 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.095
+PreregCtlPixelsSubThreeGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 2 and label == 'control:pixels',r_med_reliable,3 decimals,-0.032
+PreregCtlLumcontrastSubThreeGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 2 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.027
+PreregCtlGaborSubThreeGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 2 and label == 'control:gabor',r_med_reliable,3 decimals,-0.043
+PreregCtlPermutedSubThreeGTwo,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 2 and label == 'control:permuted',r_med_reliable,3 decimals,-0.084
+PreregShufRandSubThreeGTwo,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-03' and grid == 2 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,-0.009
+PreregShufBpSubThreeGTwo,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-03' and grid == 2 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,-0.007
+PreregRandBpGFour,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights - Backprop',mean,3 decimals,-0.043
+PreregRandBpGFourSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights - Backprop',sd,3 decimals,0.010
+PreregRandBpGFourPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights - Backprop',seeds_positive,integer,0
+PreregRandBpGFourP,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights - Backprop',p_one_sided,3 decimals,1.000
+PreregRandBpGFourDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights - Backprop',delta_min,3 decimals,0.016
+PreregBncalBpGFour,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights (BN-calibrated) - Backprop',mean,3 decimals,-0.045
+PreregBncalBpGFourSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights (BN-calibrated) - Backprop',sd,3 decimals,0.010
+PreregBncalBpGFourPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights (BN-calibrated) - Backprop',seeds_positive,integer,0
+PreregBncalBpGFourP,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights (BN-calibrated) - Backprop',p_one_sided,3 decimals,1.000
+PreregBncalBpGFourDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Random Weights (BN-calibrated) - Backprop',delta_min,3 decimals,0.017
+PreregFaBpGFour,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Feedback Alignment - Backprop',mean,3 decimals,-0.053
+PreregFaBpGFourSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Feedback Alignment - Backprop',sd,3 decimals,0.009
+PreregFaBpGFourPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Feedback Alignment - Backprop',seeds_positive,integer,0
+PreregFaBpGFourP,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Feedback Alignment - Backprop',p_one_sided,3 decimals,1.000
+PreregFaBpGFourDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Feedback Alignment - Backprop',delta_min,3 decimals,0.016
+PreregPcBpGFour,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Predictive Coding - Backprop',mean,3 decimals,-0.041
+PreregPcBpGFourSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Predictive Coding - Backprop',sd,3 decimals,0.009
+PreregPcBpGFourPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Predictive Coding - Backprop',seeds_positive,integer,0
+PreregPcBpGFourP,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Predictive Coding - Backprop',p_one_sided,3 decimals,1.000
+PreregPcBpGFourDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'Predictive Coding - Backprop',delta_min,3 decimals,0.015
+PreregStdpBpGFour,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'STDP - Backprop',mean,3 decimals,-0.044
+PreregStdpBpGFourSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'STDP - Backprop',sd,3 decimals,0.014
+PreregStdpBpGFourPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'STDP - Backprop',seeds_positive,integer,0
+PreregStdpBpGFourP,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'STDP - Backprop',p_one_sided,3 decimals,1.000
+PreregStdpBpGFourDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 4 and quantity == 'STDP - Backprop',delta_min,3 decimals,0.024
+PreregCondRandGFour,results/prereg/signflip.csv,kind == 'condition' and grid == 4 and quantity == 'Random Weights',mean,3 decimals,0.043
+PreregCondBpGFour,results/prereg/signflip.csv,kind == 'condition' and grid == 4 and quantity == 'Backprop',mean,3 decimals,0.086
+PreregCondBncalGFour,results/prereg/signflip.csv,kind == 'condition' and grid == 4 and quantity == 'Random Weights (BN-calibrated)',mean,3 decimals,0.041
+PreregCondFaGFour,results/prereg/signflip.csv,kind == 'condition' and grid == 4 and quantity == 'Feedback Alignment',mean,3 decimals,0.033
+PreregCondPcGFour,results/prereg/signflip.csv,kind == 'condition' and grid == 4 and quantity == 'Predictive Coding',mean,3 decimals,0.045
+PreregCondStdpGFour,results/prereg/signflip.csv,kind == 'condition' and grid == 4 and quantity == 'STDP',mean,3 decimals,0.042
+PreregCtlPixelsSubOneGFour,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 4 and label == 'control:pixels',r_med_reliable,3 decimals,0.045
+PreregCtlLumcontrastSubOneGFour,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 4 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.155
+PreregCtlGaborSubOneGFour,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 4 and label == 'control:gabor',r_med_reliable,3 decimals,0.035
+PreregCtlPermutedSubOneGFour,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 4 and label == 'control:permuted',r_med_reliable,3 decimals,-0.086
+PreregShufRandSubOneGFour,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-01' and grid == 4 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.030
+PreregShufBpSubOneGFour,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-01' and grid == 4 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.091
+PreregCtlPixelsSubTwoGFour,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 4 and label == 'control:pixels',r_med_reliable,3 decimals,0.045
+PreregCtlLumcontrastSubTwoGFour,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 4 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.132
+PreregCtlGaborSubTwoGFour,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 4 and label == 'control:gabor',r_med_reliable,3 decimals,0.012
+PreregCtlPermutedSubTwoGFour,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 4 and label == 'control:permuted',r_med_reliable,3 decimals,-0.056
+PreregShufRandSubTwoGFour,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-02' and grid == 4 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.060
+PreregShufBpSubTwoGFour,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-02' and grid == 4 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.092
+PreregCtlPixelsSubThreeGFour,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 4 and label == 'control:pixels',r_med_reliable,3 decimals,-0.028
+PreregCtlLumcontrastSubThreeGFour,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 4 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.030
+PreregCtlGaborSubThreeGFour,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 4 and label == 'control:gabor',r_med_reliable,3 decimals,-0.052
+PreregCtlPermutedSubThreeGFour,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 4 and label == 'control:permuted',r_med_reliable,3 decimals,-0.082
+PreregShufRandSubThreeGFour,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-03' and grid == 4 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,-0.026
+PreregShufBpSubThreeGFour,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-03' and grid == 4 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,-0.009
+PreregRandBpGEight,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights - Backprop',mean,3 decimals,-0.045
+PreregRandBpGEightSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights - Backprop',sd,3 decimals,0.009
+PreregRandBpGEightPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights - Backprop',seeds_positive,integer,0
+PreregRandBpGEightP,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights - Backprop',p_one_sided,3 decimals,1.000
+PreregRandBpGEightDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights - Backprop',delta_min,3 decimals,0.016
+PreregBncalBpGEight,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights (BN-calibrated) - Backprop',mean,3 decimals,-0.047
+PreregBncalBpGEightSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights (BN-calibrated) - Backprop',sd,3 decimals,0.010
+PreregBncalBpGEightPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights (BN-calibrated) - Backprop',seeds_positive,integer,0
+PreregBncalBpGEightP,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights (BN-calibrated) - Backprop',p_one_sided,3 decimals,1.000
+PreregBncalBpGEightDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Random Weights (BN-calibrated) - Backprop',delta_min,3 decimals,0.016
+PreregFaBpGEight,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Feedback Alignment - Backprop',mean,3 decimals,-0.055
+PreregFaBpGEightSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Feedback Alignment - Backprop',sd,3 decimals,0.010
+PreregFaBpGEightPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Feedback Alignment - Backprop',seeds_positive,integer,0
+PreregFaBpGEightP,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Feedback Alignment - Backprop',p_one_sided,3 decimals,1.000
+PreregFaBpGEightDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Feedback Alignment - Backprop',delta_min,3 decimals,0.018
+PreregPcBpGEight,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Predictive Coding - Backprop',mean,3 decimals,-0.043
+PreregPcBpGEightSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Predictive Coding - Backprop',sd,3 decimals,0.008
+PreregPcBpGEightPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Predictive Coding - Backprop',seeds_positive,integer,0
+PreregPcBpGEightP,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Predictive Coding - Backprop',p_one_sided,3 decimals,1.000
+PreregPcBpGEightDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'Predictive Coding - Backprop',delta_min,3 decimals,0.013
+PreregStdpBpGEight,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'STDP - Backprop',mean,3 decimals,-0.047
+PreregStdpBpGEightSd,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'STDP - Backprop',sd,3 decimals,0.016
+PreregStdpBpGEightPos,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'STDP - Backprop',seeds_positive,integer,0
+PreregStdpBpGEightP,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'STDP - Backprop',p_one_sided,3 decimals,1.000
+PreregStdpBpGEightDmin,results/prereg/signflip.csv,kind == 'contrast' and grid == 8 and quantity == 'STDP - Backprop',delta_min,3 decimals,0.027
+PreregCondRandGEight,results/prereg/signflip.csv,kind == 'condition' and grid == 8 and quantity == 'Random Weights',mean,3 decimals,0.043
+PreregCondBpGEight,results/prereg/signflip.csv,kind == 'condition' and grid == 8 and quantity == 'Backprop',mean,3 decimals,0.088
+PreregCondBncalGEight,results/prereg/signflip.csv,kind == 'condition' and grid == 8 and quantity == 'Random Weights (BN-calibrated)',mean,3 decimals,0.040
+PreregCondFaGEight,results/prereg/signflip.csv,kind == 'condition' and grid == 8 and quantity == 'Feedback Alignment',mean,3 decimals,0.033
+PreregCondPcGEight,results/prereg/signflip.csv,kind == 'condition' and grid == 8 and quantity == 'Predictive Coding',mean,3 decimals,0.044
+PreregCondStdpGEight,results/prereg/signflip.csv,kind == 'condition' and grid == 8 and quantity == 'STDP',mean,3 decimals,0.041
+PreregCtlPixelsSubOneGEight,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 8 and label == 'control:pixels',r_med_reliable,3 decimals,0.039
+PreregCtlLumcontrastSubOneGEight,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 8 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.161
+PreregCtlGaborSubOneGEight,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 8 and label == 'control:gabor',r_med_reliable,3 decimals,0.031
+PreregCtlPermutedSubOneGEight,results/prereg/instruments_control_band.csv,subject == 'sub-01' and grid == 8 and label == 'control:permuted',r_med_reliable,3 decimals,-0.087
+PreregShufRandSubOneGEight,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-01' and grid == 8 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.029
+PreregShufBpSubOneGEight,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-01' and grid == 8 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.085
+PreregCtlPixelsSubTwoGEight,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 8 and label == 'control:pixels',r_med_reliable,3 decimals,0.043
+PreregCtlLumcontrastSubTwoGEight,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 8 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.135
+PreregCtlGaborSubTwoGEight,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 8 and label == 'control:gabor',r_med_reliable,3 decimals,0.011
+PreregCtlPermutedSubTwoGEight,results/prereg/instruments_control_band.csv,subject == 'sub-02' and grid == 8 and label == 'control:permuted',r_med_reliable,3 decimals,-0.054
+PreregShufRandSubTwoGEight,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-02' and grid == 8 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.052
+PreregShufBpSubTwoGEight,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-02' and grid == 8 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,0.096
+PreregCtlPixelsSubThreeGEight,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 8 and label == 'control:pixels',r_med_reliable,3 decimals,-0.028
+PreregCtlLumcontrastSubThreeGEight,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 8 and label == 'control:lumcontrast',r_med_reliable,3 decimals,0.035
+PreregCtlGaborSubThreeGEight,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 8 and label == 'control:gabor',r_med_reliable,3 decimals,-0.042
+PreregCtlPermutedSubThreeGEight,results/prereg/instruments_control_band.csv,subject == 'sub-03' and grid == 8 and label == 'control:permuted',r_med_reliable,3 decimals,-0.083
+PreregShufRandSubThreeGEight,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-03' and grid == 8 and label == 'Random Weights s0 CELL-SHUFFLED',r_med_reliable,3 decimals,-0.027
+PreregShufBpSubThreeGEight,results/prereg/instruments_cell_shuffle.csv,subject == 'sub-03' and grid == 8 and label == 'Backprop s0 CELL-SHUFFLED',r_med_reliable,3 decimals,-0.010
+PreregReferenceEffect,results/prereg/signflip.csv,kind == 'verdict',reference_effect,3 decimals,0.044
+PreregLowEdgeHits,results/prereg/lower_edge.csv,classification == classification,row count,integer,26
+PreregLowEdgePlateau,results/prereg/lower_edge.csv,classification == 'Plateau',row count,integer,26
+GtwoGateMaxDelta,results/prereg_gate/g4_equivalence.csv,kind == 'gate',delta,1-digit scientific,\ensuremath{1\times 10^{-8}}
+GtwoGateContrastDelta,results/prereg_gate/g4_equivalence.csv,kind == 'contrast',delta,1-digit scientific,\ensuremath{3\times 10^{-9}}
