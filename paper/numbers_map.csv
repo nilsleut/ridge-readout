@@ -501,3 +501,4 @@ SepTwoModels,results/step9/separation.csv,kind == 'rule' and quantity.str.starts
 SepThreeModels,results/step9/separation.csv,kind == 'rule' and quantity.str.startswith('SEP3'),value,integer,5
 SepFourModels,results/step9/separation.csv,kind == 'rule' and quantity.str.startswith('SEP4'),value,integer,6
 SepCheckEMaxDev,results/step9/separation.csv,kind == 'check_e',value,1-digit scientific,\ensuremath{1\times 10^{-16}}
+SepSlopeAngleCiPositive,results/step9/separation_slopes.csv,kind == 'slope' and F == 'center' and component == 'angle' and model != 'own CNN' and ci_lo > 0,row count,integer,4

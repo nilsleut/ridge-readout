@@ -134,6 +134,8 @@ SPECS += [
     ("SepThreeModels", "step9/separation.csv", "kind == 'rule' and quantity.str.startswith('SEP3')", "value", "int"),
     ("SepFourModels", "step9/separation.csv", "kind == 'rule' and quantity.str.startswith('SEP4')", "value", "int"),
     ("SepCheckEMaxDev", "step9/separation.csv", "kind == 'check_e'", "value", "sci"),
+    ("SepSlopeAngleCiPositive", "count:step9/separation_slopes.csv",
+     "kind == 'slope' and F == 'center' and component == 'angle' and model != 'own CNN' and ci_lo > 0", None, "int"),
 ]
 
 
