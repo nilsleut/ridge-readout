@@ -1,7 +1,7 @@
 """
 make_figures.py
 ===============
-Figures 1-5 for paper/main.tex, read only from results/ (no data values in this file).
+Figures 1-6 for paper/main.tex, read only from results/ (no data values in this file).
 Deterministic vector PDFs in paper/figures/, each with <name>_sources.txt listing the
 source files and row filters.
 
@@ -249,8 +249,41 @@ def fig5():
     save(fig, n)
 
 
+# ── Fig 6: preregistered ladder ───────────────────────────────────────────────
+CTL = [("control:lumcontrast", "Control: luminance + contrast", "0.25", 1.4, "--"),
+       ("control:pixels", "Control: pixels", "0.6", 0.9, "--"), ("control:gabor", "Control: Gabor", "0.6", 0.9, ":")]
+
+
+def fig6():
+    n = "prereg_ladder"
+    mod = read("prereg/primary.csv", "kind == 'model' and valid == True", n)
+    ctl = read("prereg/instruments_control_band.csv", "label in ('control:lumcontrast', 'control:pixels', 'control:gabor')", n)
+    grids = sorted(mod.grid.unique())
+    for d, what in ((mod, ["rule", "seed_idx"]), (ctl, ["label"])):
+        if (d.groupby(what + ["grid"]).subject.nunique() != 3).any():
+            raise SystemExit(f"{n}: not every cell has three subjects")
+    seed = mod.groupby(["rule", "seed_idx", "grid"]).r_med_reliable.mean().reset_index()
+    agg = seed.groupby(["rule", "grid"]).r_med_reliable.agg(["mean", "std"]).reset_index()
+    fig, ax = plt.subplots(figsize=(ONE, 3.6))
+    for lab, name, col, lw, ls in CTL:
+        c = ctl[ctl.label == lab].groupby("grid").r_med_reliable.mean().reindex(grids)
+        ax.plot(grids, c.values, color=col, ls=ls, lw=lw, label=name)
+    for rule in (R_, BN, BP, "Feedback Alignment", "Predictive Coding", "STDP"):
+        a = agg[agg.rule == rule].set_index("grid").reindex(grids)
+        ax.errorbar(grids, a["mean"], yerr=a["std"], color=RULE_COL[rule], marker="o", ms=3, lw=1.1, capsize=2,
+                    label=rule.replace("Random Weights", "Random"))
+    ax.set_xscale("log", base=2)
+    ax.set_xticks(grids, [str(int(g)) for g in grids])
+    ax.minorticks_off()
+    ax.set_xlabel("Grid g (Conv1, native 224 px)")
+    ax.set_ylabel("Median r, reliable V1 voxels")
+    ax.legend(frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.45, -0.17), ncol=2)
+    fig.subplots_adjust(left=0.17, right=0.97, top=0.97, bottom=0.40)
+    save(fig, n)
+
+
 def main():
-    for f in (fig1, fig2, fig3, fig4, fig5):
+    for f in (fig1, fig2, fig3, fig4, fig5, fig6):
         f()
     print(f"wrote {len(SOURCES)} figures to {OUT.relative_to(REPO)}")
 
