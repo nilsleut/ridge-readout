@@ -9,6 +9,7 @@ Each spec is (macro, source CSV, pandas query, column, format):
   format "rsa"   RSA values, ridge r and CIs, 3 decimals
          "corr"  correlations (Spearman / Pearson), 2 decimals
          "int"   integers
+         "sci"   numerical-check magnitudes (e.g. relative errors), 1-digit scientific
 A value spec fails unless its query matches exactly one row. A "count" spec counts the
 rows its query matches (used for cell counts); it fails if the source is missing or the
 query matches no row at all. Macro names contain letters only.
@@ -101,9 +102,47 @@ SPECS = [
 ]
 
 
+# ── step 8 per model and step 9 contrasts / slopes, generated from name tables ──
+MODEL_NAMES = {"alexnet": "Alexnet", "vgg11_bn": "Vggeleven", "resnet18": "Resneteighteen",
+               "resnet50": "Resnetfifty", "convnext_tiny": "Convnexttiny", "vit_b_16": "Vitbsixteen"}
+CELL_NAMES = {("raw", "correlation", "paper"): "RawCorr", ("z", "correlation", "paper"): "ZCorr",
+              ("raw", "euclidean", "paper"): "RawEucl", ("center", "correlation", "center720"): "CentCorr"}
+for _m, _mn in MODEL_NAMES.items():
+    for (_f, _d, _b), _cn in CELL_NAMES.items():
+        _base = f"kind == 'boot' and F == '{_f}' and D == '{_d}' and B == '{_b}' and model == '{_m}'"
+        SPECS += ci3(f"Gen{_mn}Vone{_cn}", "step8/generalization.csv",
+                     f"{_base} and roi == 'V1' and R == '224' and quantity == 'untrained - trained'")
+        SPECS += ci3(f"Gen{_mn}Loc{_cn}", "step8/generalization.csv",
+                     f"{_base} and roi == 'LOC' and R == '224' and quantity == 'trained - untrained'")
+        if _m != "vit_b_16" and _cn in ("RawCorr", "ZCorr"):
+            SPECS += ci3(f"Gen{_mn}Slope{_cn}", "step8/generalization.csv",
+                         f"{_base} and quantity == 'S_gen'")
+
+SEP_MODELS = {"own CNN": "Own", **MODEL_NAMES}
+for _m, _mn in SEP_MODELS.items():
+    for _f, _fn in (("center", "Center"), ("z", "Zscore")):
+        for _k, _kn in (("norm", "Norm"), ("angle", "Angle")):
+            for _roi, _rn in (("V1", "Vone"), ("LOC", "Loc")):
+                SPECS += ci3(f"Sep{_mn}{_rn}{_kn}{_fn}", "step9/separation.csv",
+                             f"kind == 'contrast' and model == '{_m}' and roi == '{_roi}' and F == '{_f}' and component == '{_k}'")
+            if _m != "vit_b_16":
+                SPECS += ci3(f"SepSlope{_mn}{_kn}{_fn}", "step9/separation_slopes.csv",
+                             f"kind == 'slope' and model == '{_m}' and F == '{_f}' and component == '{_k}'")
+SPECS += [
+    ("SepOneMaxRelError", "step9/separation.csv", "kind == 'rule' and quantity == 'SEP1 identity max relative error'", "value", "sci"),
+    ("SepTwoModels", "step9/separation.csv", "kind == 'rule' and quantity.str.startswith('SEP2')", "value", "int"),
+    ("SepThreeModels", "step9/separation.csv", "kind == 'rule' and quantity.str.startswith('SEP3')", "value", "int"),
+    ("SepFourModels", "step9/separation.csv", "kind == 'rule' and quantity.str.startswith('SEP4')", "value", "int"),
+    ("SepCheckEMaxDev", "step9/separation.csv", "kind == 'check_e'", "value", "sci"),
+]
+
+
 def fmt(v, how):
     if how == "int":
         return str(int(round(float(v))))
+    if how == "sci":
+        m, e = f"{float(v):.0e}".split("e")
+        return "\\ensuremath{" + f"{m}" + "\\times 10^{" + f"{int(e)}" + "}}"
     return f"{float(v):.{3 if how == 'rsa' else 2}f}"
 
 
@@ -128,7 +167,7 @@ def main():
                 raise SystemExit(f"{name}: filter matches {len(hit)} rows, expected 1: {q}")
             val, colname = hit.iloc[0][col], col
         text = fmt(val, how)
-        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer"}[how]
+        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific"}[how]
         lines.append(f"% {name}: {path.relative_to(REPO).as_posix()} | {q} | {colname} | {rounding}")
         lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
         rows.append(dict(macro=name, source=path.relative_to(REPO).as_posix(), filter=q, column=colname,
