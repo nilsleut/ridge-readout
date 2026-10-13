@@ -153,28 +153,45 @@
 
 % TO VERIFY: arXiv:2608.12408 (the paper itself has no self-entry). Title and author from
 %   evaluation-resolution-rsa tag arxiv-v3, Evaluation_Resolution_Confounds_paper_v3.tex lines 13-16;
-%   year and DOI (arXiv DOI scheme) not taken from a source.
+%   year, DOI, eprint and archivePrefix as specified by the author on 2026-10-13.
 @misc{evalres,
-  author       = {Leutenegger, Nils},
-  title        = {Evaluation Resolution Confounds Learning-Rule Comparisons in Model--Brain {RSA} of Early Visual Cortex},
-  howpublished = {arXiv:2608.12408},
-  year         = {2026},
-  doi          = {10.48550/arXiv.2608.12408}
+  author        = {Leutenegger, Nils},
+  title         = {Evaluation Resolution Confounds Learning-Rule Comparisons in Model--Brain {RSA} of Early Visual Cortex},
+  howpublished  = {arXiv:2608.12408},
+  year          = {2026},
+  doi           = {10.48550/arXiv.2608.12408},
+  eprint        = {2608.12408},
+  archivePrefix = {arXiv}
 }
 
-% TO VERIFY: incomplete (CIFAR-10; technical report, no DOI)
-@misc{krizhevsky2009,
-  author = {Krizhevsky, Alex},
-  title  = {Learning Multiple Layers of Features from Tiny Images},
-  year   = {2009}
+% TO VERIFY: no DOI exists (CIFAR-10)
+@techreport{krizhevsky2009,
+  author      = {Krizhevsky, Alex},
+  title       = {Learning Multiple Layers of Features from Tiny Images},
+  institution = {University of Toronto},
+  year        = {2009}
 }
 
 % TO VERIFY: ridge regression
-@misc{hoerl1970,
-  author = {Hoerl, Arthur E. and Kennard, Robert W.},
-  title  = {Ridge Regression: Biased Estimation for Nonorthogonal Problems},
-  year   = {1970},
-  doi    = {10.1080/00401706.1970.10488634}
+@article{hoerl1970,
+  author  = {Hoerl, Arthur E. and Kennard, Robert W.},
+  title   = {Ridge Regression: Biased Estimation for Nonorthogonal Problems},
+  journal = {Technometrics},
+  volume  = {12},
+  number  = {1},
+  pages   = {55--67},
+  year    = {1970},
+  doi     = {10.1080/00401706.1970.10488634}
+}
+
+% TO VERIFY: torchvision
+@inproceedings{marcel2010,
+  author    = {Marcel, S{\'e}bastien and Rodriguez, Yann},
+  title     = {Torchvision the Machine-Vision Package of Torch},
+  booktitle = {Proceedings of the 18th ACM International Conference on Multimedia},
+  pages     = {1485--1488},
+  year      = {2010},
+  doi       = {10.1145/1873951.1874254}
 }
 
 % TO VERIFY: PyTorch (cited for torchvision); DOI is the arXiv DOI of the paper

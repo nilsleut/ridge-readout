@@ -62,7 +62,7 @@ to $p \in \{32, 64, 96, 128, 160, 224\}$\,px. UPSAMPLED: the image is resized an
 cropped to 32\,px and then resized to $p$, so its content is limited to 32\,px; we used
 it at $p = 224$. Both arms apply the CIFAR channel normalisation.
 
-\paragraph{ImageNet models.} Six torchvision models \citep{paszke2019}: alexnet,
+\paragraph{ImageNet models.} Six torchvision models \citep{paszke2019, marcel2010}: alexnet,
 vgg11\_bn, resnet18, resnet50, convnext\_tiny and vit\_b\_16, in eval mode. Trained
 models use the IMAGENET1K\_V1 weights. Untrained models were built without weights after
 \texttt{torch.manual\_seed($s$)}, $s \in \{0, 1, 2\}$, with BatchNorm running statistics
