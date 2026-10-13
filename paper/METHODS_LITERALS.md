@@ -33,7 +33,7 @@ column `n_reliable`).
 |---|---|
 | 30 checkpoints, 6 conditions × 5 seeds | `config.yaml:58-60` |
 | seeds 42, 123, 456, 789, 1337 | `config.yaml:57` |
-| trained on CIFAR at 32 px, the training resolution | `PREREGISTRATION.md:20`; `src/vendor/modal_src/learning_rules_v12_allseeds_modal.py:402-404` |
+| trained on CIFAR-10 at 32 px, the training resolution | `PREREGISTRATION.md:20`; `src/vendor/modal_src/learning_rules_v12_allseeds_modal.py:402-404`; "CIFAR-10": evaluation-resolution-rsa tag `arxiv-v3`, `paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex:57`, learning-rules-rsa tag `arxiv-v4`, `paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex:128` |
 | condition names (Backprop, FA, PC, STDP, two untrained) | `config.yaml:50-56` |
 | BN-calibrated: 50 forward-only CIFAR batches at 32 px, weights unchanged | `reports/STEP2_RANDOM_VARIANT.md:28-31`; `config.yaml:58-59` |
 | "untrained" alone = uncalibrated variant, as in the published headline | `reports/STEP2_RANDOM_VARIANT.md:33-47` |
