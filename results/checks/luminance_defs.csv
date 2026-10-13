@@ -1,0 +1,6 @@
+quantity,value,n_stimuli,rec709_source,rec601_source,config_hash,git_head
+pearson,0.9969785459700653,720,pilot_features/control_lumcontrast_g1.npy channel 0 (scripts/pilot_features_modal.py:187),scripts/step7_gain.py stimulus_stats()[224][0],206fa875cca5,4a8d82b
+spearman,0.9957900188850674,720,pilot_features/control_lumcontrast_g1.npy channel 0 (scripts/pilot_features_modal.py:187),scripts/step7_gain.py stimulus_stats()[224][0],206fa875cca5,4a8d82b
+mean_rec709,0.4812241252925661,720,pilot_features/control_lumcontrast_g1.npy channel 0 (scripts/pilot_features_modal.py:187),scripts/step7_gain.py stimulus_stats()[224][0],206fa875cca5,4a8d82b
+mean_rec601,0.482570380265541,720,pilot_features/control_lumcontrast_g1.npy channel 0 (scripts/pilot_features_modal.py:187),scripts/step7_gain.py stimulus_stats()[224][0],206fa875cca5,4a8d82b
+max_abs_diff,0.07146512016926748,720,pilot_features/control_lumcontrast_g1.npy channel 0 (scripts/pilot_features_modal.py:187),scripts/step7_gain.py stimulus_stats()[224][0],206fa875cca5,4a8d82b

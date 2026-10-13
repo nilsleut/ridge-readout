@@ -143,8 +143,8 @@ subject to a downstream equivalence gate (amendment of 2026-10-13). An explorato
 at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
 
 Two controls used the identical readout. The control band consists of low-level banks
-pooled to the same grid: pixels; Rec.\,709 luminance with local RMS contrast
-($9 \times 9$ window); absolute responses of a Gabor bank (4 orientations $\times$
+pooled to the same grid: pixels; Rec.\,709 luminance
+($Y = 0.2126R + 0.7152G + 0.0722B$) with local RMS contrast ($9 \times 9$ window); absolute responses of a Gabor bank (4 orientations $\times$
 3 spatial frequencies); and, as negative test, Backprop seed-0 features with permuted
 stimulus assignment. The spatial-correspondence control permutes the $g \times g$ cells
 differently for every image (seed 20260820), keeping dimensionality and per-channel
@@ -161,7 +161,11 @@ The gain of stimulus $i$ is the cosine between its response profile and the mean
 \end{equation}
 Model gain was computed on raw features, voxel gain on all ROI voxels under $B$ = paper.
 $c_{\mathrm{gain}}$ is the Pearson correlation over the 720 stimuli between model gain
-and V1 voxel gain, averaged over subjects. The gain RDM is
+and V1 voxel gain, averaged over subjects. Gains were described against stimulus mean
+luminance and RMS contrast, the per-image mean and SD of Rec.\,601 luminance
+($Y = 0.299R + 0.587G + 0.114B$). Over the 720 stimuli at 224\,px, the image means of
+the two luminance definitions correlate at Pearson \LumDefPearson{} (Spearman
+\LumDefSpearman). The gain RDM is
 $\lvert \mathrm{gain}_i - \mathrm{gain}_j \rvert$. Partial RSA regresses the ranks of the
 model and of the fMRI RDM, per subject and draw, on an intercept and the ranks of their
 own gain RDM and correlates the residuals (Pearson).

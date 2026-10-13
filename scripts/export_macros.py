@@ -190,6 +190,9 @@ SPECS += [
      "n_reliable", "int"),
     ("NReliableSubThree", "prereg/primary.csv", "subject == 'sub-03' and grid == 1 and label == 'Backprop s0'",
      "n_reliable", "int"),
+    # Rec. 709 (control band) vs Rec. 601 (stimulus statistics) image-mean luminance, 720 stimuli at 224 px
+    ("LumDefPearson", "checks/luminance_defs.csv", "quantity == 'pearson'", "value", "rsa"),
+    ("LumDefSpearman", "checks/luminance_defs.csv", "quantity == 'spearman'", "value", "rsa"),
 ]
 for _g, _gn in GRID_NAMES.items():
     SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),

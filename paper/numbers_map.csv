@@ -705,6 +705,8 @@ PreregShuffleWinSubjects,results/prereg/instruments_cell_shuffle.csv,"g in (4, 8
 NReliableSubOne,results/prereg/primary.csv,subject == 'sub-01' and grid == 1 and label == 'Backprop s0',n_reliable,integer,501
 NReliableSubTwo,results/prereg/primary.csv,subject == 'sub-02' and grid == 1 and label == 'Backprop s0',n_reliable,integer,518
 NReliableSubThree,results/prereg/primary.csv,subject == 'sub-03' and grid == 1 and label == 'Backprop s0',n_reliable,integer,286
+LumDefPearson,results/checks/luminance_defs.csv,quantity == 'pearson',value,3 decimals,0.997
+LumDefSpearman,results/checks/luminance_defs.csv,quantity == 'spearman',value,3 decimals,0.996
 PreregDminGOneSim,results/prereg/delta_min_prereg.csv,g == 1,delta_min_sim,3 decimals,0.014
 PreregDminGOneClosed,results/prereg/delta_min_prereg.csv,g == 1,delta_min_closed,3 decimals,0.014
 PreregDminGOneParam,results/prereg/delta_min_prereg.csv,g == 1,delta_min_param,3 decimals,0.014

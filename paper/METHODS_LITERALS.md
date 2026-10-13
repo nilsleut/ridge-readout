@@ -99,7 +99,7 @@ column `n_reliable`).
 | preregistered run: 720 single-trial betas, NATIVE 224 px, 30 checkpoints, 3 subjects, all g | `reports/PREREG_PRIMARY.md:20-24` |
 | g = 2 on CPU, downstream equivalence gate | `amendments/2026-10-13_g2-local-extraction.md:8-14`, `:27-36` |
 | exploratory g = 1 fit at all NATIVE resolutions and UPSAMPLED 224 | `amendments/2026-10-09_step6-predictions.md:10-12`; `reports/STEP6_RIDGE_MECHANISM_ROBUSTNESS.md:14-17` |
-| pixels; Rec. 709 luminance with local RMS contrast, 9 × 9 window | `scripts/pilot_features_modal.py:11-12`, `:187-190` |
+| pixels; Rec. 709 luminance Y = 0.2126 R + 0.7152 G + 0.0722 B with local RMS contrast, 9 × 9 window | `scripts/pilot_features_modal.py:11-12`, `:187-190` |
 | Gabor bank, absolute responses, 4 orientations × 3 spatial frequencies | `config.yaml:365-366`; `scripts/pilot_features_modal.py:13`, `:171-172`, `:191` |
 | negative test: Backprop seed-0 features, permuted assignment | `config.yaml:367-371`; `scripts/pilot_fit.py:152-155` |
 | cell shuffle per image, seed 20260820 | `PREREGISTRATION.md:161-166`; `scripts/pilot_fit.py:154`, `:161` |
@@ -112,6 +112,8 @@ column `n_reliable`).
 | gain_i, μ_c, x̃_i, gain RDM | `amendments/2026-10-09_step7-offset-predictions.md:24-30` |
 | model gain on raw features; voxel gain on all ROI voxels under B = paper | same file `:30`, `:87-88` |
 | c_gain, Pearson over the 720, mean over subjects | same file `:55-56` |
+| stimulus mean luminance and RMS contrast = per-image mean and SD of Rec. 601 Y = 0.299 R + 0.587 G + 0.114 B | same file `:89-92`; `scripts/step7_gain.py:110-125` |
+| 720 stimuli at 224 px for the luminance comparison; correlations as macros `\LumDefPearson`, `\LumDefSpearman` | `scripts/check_luminance_defs.py`; `results/checks/luminance_defs.csv` |
 | partial RSA | same file `:60-63`, `:83-86` |
 | X_c, n_i, cos θ_ij, identity | `amendments/2026-10-10_step9-separation-predictions.md:11-18` |
 | norm RDM, angle RDM | same file `:20-22` |
@@ -126,7 +128,12 @@ column `n_reliable`).
 2. **Two luminance definitions.** The control band uses Rec. 709 weights
    (`scripts/pilot_features_modal.py:187`); the descriptive stimulus statistics of steps
    7-9 use Rec. 601 weights (`amendments/2026-10-09_step7-offset-predictions.md:90`).
-   Both are as implemented; only the control band appears in 2.1-2.6.
+   Both are as implemented and both are now named in 2.5 and 2.6. Their image means
+   over the 720 stimuli at 224 px correlate at Pearson 0.997 / Spearman 0.996
+   (`results/checks/luminance_defs.csv`, `\LumDefPearson`, `\LumDefSpearman`). The
+   Rec. 709 values are the stored control-band features (channel 0 of
+   `control_lumcontrast_g1.npy`), because the Rec. 709 expression is inline in the
+   Modal function `extract_pilot` and cannot be imported.
 3. **Cell-shuffle grids.** Preregistered for g = 4 and 8 at all resolutions
    (`PREREGISTRATION.md:166`, `config.yaml:388-389`); run at g ∈ {2, 4, 8}, 224 px only,
    seed 0 (`scripts/pilot_fit.py:158`). The draft describes what was run.
@@ -181,6 +188,6 @@ counts as one word, citations as none.
 | 2.2 Models | 281 |
 | 2.3 RSA convention | 147 |
 | 2.4 Analysis multiverse | 155 |
-| 2.5 Ridge readout | 378 |
-| 2.6 Gain axis and decomposition | 227 |
-| Total | 1418 |
+| 2.5 Ridge readout | 379 |
+| 2.6 Gain axis and decomposition | 268 |
+| Total | 1460 |
