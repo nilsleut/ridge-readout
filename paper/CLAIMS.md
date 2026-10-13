@@ -47,8 +47,8 @@ contrast is negative at every g, with 0/5 seeds positive. By the frozen decision
 | | |
 |---|---|
 | Rule and threshold | §2: Random − BP, median r over reliable voxels, mean over subjects, paired one-sided sign-flip test over 5 seeds (32 assignments), alternative Random − BP > 0. §3a: survives only if it holds at g ≥ 4 (operationalised: p ≤ 0.05, i.e. p = 1/32, at g = 4 and g = 8). §3b: "the effect disappears" if Δ_min < the paper's effect (`\PreregReferenceEffect`); "the method cannot resolve it" otherwise. |
-| Result | Random − BP = −0.021 (g = 1), −0.035 (g = 2), −0.043 (g = 4), −0.045 (g = 8) (`\PreregRandBpGOne` … `\PreregRandBpGEight`); seeds positive 0 at every g (`\PreregRandBpG<g>Pos`); one-sided p = 1.000 at every g (`\PreregRandBpG<g>P`); Δ_min 0.010 / 0.011 / 0.016 / 0.016 (`\PreregRandBpG<g>Dmin`), below the paper's +0.044 at g ≥ 4 |
-| Verdict | **§3a not met; §3b: "The effect disappears"** (Δ_min at g ≥ 4 below +0.044). The contrast is reversed, not merely absent. |
+| Result | Random − BP = −0.021 (g = 1), −0.035 (g = 2), −0.043 (g = 4), −0.045 (g = 8) (`\PreregRandBpGOne` … `\PreregRandBpGEight`); seeds positive 0 at every g (`\PreregRandBpG<g>Pos`); one-sided p = 1.000 at every g (`\PreregRandBpG<g>P`); **preregistered Δ_min = 0.014** at every g (pilot seed SD 0.0082; `\PreregDminSim`, `\PreregDminClosed`, `\PreregDminParam`, `\PreregPilotSd`), below the paper's +0.044; supplementary Δ_min from the analysis's own seed SD 0.010 / 0.011 / 0.016 / 0.016 (`\PreregRandBpG<g>Dmin`) |
+| Verdict | **§3a not met; §3b: "The effect disappears"** (preregistered Δ_min 0.014 < +0.044; also with the supplementary Δ_min). The contrast is reversed, not merely absent. |
 | Secondary (same test) | BN-cal − BP, FA − BP, PC − BP, STDP − BP negative at every g, 0/5 seeds positive (`\PreregBncalBpG<g>`, `\PreregFaBpG<g>`, `\PreregPcBpG<g>`, `\PreregStdpBpG<g>`) |
 | Macros | `\PreregRandBpG<g>[Sd/Pos/P/Dmin]`, `\PreregCond<Rule>G<g>`, `\PreregReferenceEffect`, `\PreregLowEdgeHits`, `\PreregLowEdgePlateau`, `\GtwoGateMaxDelta`, `\GtwoGateContrastDelta`; `<g>` ∈ {One, Two, Four, Eight} |
 | Figure | `fig:sign_flip` (ridge line at g = 1); no figure yet for the grid ladder |
@@ -75,7 +75,30 @@ run):
    (`\PreregLowEdgeHits`), all plateau (`\PreregLowEdgePlateau`); no cell excluded.
 9. Exploratory analyses outside §8 (Conv3 → LOC, band-pass inputs, ImageNet models)
    are reported separately and do not enter C0.
-10. The analysis was run after partial results were known (see Wording).
+10. The analysis was not blind. Known before the run:
+    - sub-01 at g ∈ {1, 4, 8}: `results/tolerance_all_rungs.csv`, `results/step3/`;
+    - sub-02 / sub-03 at g = 1: `results/step4/subjects.csv`;
+    - g = 1 for all subjects at all resolutions with GAP features (step 6).
+
+    New in this run: g = 2 for all subjects, and g ∈ {4, 8} for sub-02 / sub-03.
+11. Operationalisations not stated verbatim in the preregistration, all fixed in
+    `scripts/prereg_aggregate.py` (commit `02c2fee`, 2026-10-13T14:09:26+02:00) before
+    the run:
+    - (a) "holds at g ≥ 4" = one-sided p ≤ 0.05 at g = 4 and g = 8;
+    - (b) α = 0.05;
+    - (c) §3b decided on the maximum Δ_min over g ≥ 4 (no effect with the
+      g-independent preregistered Δ_min);
+    - (d) subject means only for complete cells (not active: no cell excluded).
+12. Implementation error, corrected: `scripts/prereg_aggregate.py` computed Δ_min from
+    the primary analysis's own seed SD instead of the pilot SD prescribed in §3b.
+    Corrected in `scripts/prereg_delta_min.py` (`15d8d9b`) and
+    `results/prereg/delta_min_prereg.csv` (`74e71e4`); the verdict is unchanged.
+13. No SD transfer between rungs was needed: `reports/PILOT_REPORT.md` gives a single
+    pilot SD (g = 1), applied to every g, as §3b refers to one pilot SD.
+14. Reference effect: +0.044 ± 0.006 (`\PreregReferenceEffect`, config.yaml) is the v1
+    value of arXiv:2608.12408; the current headline is +0.030 [0.018, 0.042]. The
+    verdict is unchanged under the current headline because all contrasts are
+    negative.
 
 ## C1
 

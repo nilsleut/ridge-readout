@@ -74,10 +74,13 @@ sub-01 at g ∈ {1, 4, 8} reproduces `results/tolerance_all_rungs.csv` (−0.028
 ## Sign-flip tests (mean over subjects; `results/prereg/signflip.csv`)
 
 Paired one-sided exact sign-flip over 5 seeds (32 assignments), alternative "contrast
-> 0". Δ_min = minimum detectable difference at 80% power (simulated), from the
-seed-level SD.
+> 0". The preregistered Δ_min is **0.014 for every g** (pilot seed SD 0.0082, see
+"Criterion definitions and operationalization"; `results/prereg/delta_min_prereg.csv`).
 
-| g | Random − BP (primary) | SD | seeds > 0 | p (one-sided) | Δ_min |
+The last column is **supplementary**: Δ_min from the primary analysis's own seed SD
+(`results/prereg/signflip.csv`). It is not the preregistered quantity.
+
+| g | Random − BP (primary) | SD | seeds > 0 | p (one-sided) | Δ_min, own SD (suppl.) |
 |---|---|---|---|---|---|
 | 1 | −0.021 | 0.006 | 0/5 | 1.000 | 0.010 |
 | 2 | −0.035 | 0.006 | 0/5 | 1.000 | 0.011 |
@@ -100,13 +103,82 @@ p = 1.000:
   (aggregation script docstring) as one-sided p ≤ 0.05 at g = 4 and g = 8. The result is
   p = 1.000 at both: **not met**.
 - **§3b** — "'The effect disappears' requires Δ_min to be smaller than the effect size
-  the paper reports." Δ_min at g ≥ 4 is at most 0.016, below the reference effect
-  +0.044 (config.yaml): **"The effect disappears."**
+  the paper reports."
+  - The preregistered Δ_min (pilot SD) is 0.014, below the reference effect +0.044
+    (config.yaml): **"The effect disappears."**
+  - The supplementary Δ_min from the primary analysis's own SD (at most 0.016 at g ≥ 4)
+    gives the same verdict.
 - The contrast is not merely absent but reversed. Backprop exceeds the untrained
   network at every rung, in every subject, in every seed.
 - §3c (saturation) does not apply in its stated form: the six rules do not fall inside
   a band narrower than their distance to the pixel baseline (Backprop lies clearly above
   the rest).
+
+## Criterion definitions and operationalization
+
+### Preregistered definitions (verbatim)
+
+- **PREREGISTRATION.md §1, line 21** (the effect at issue): "+0.044 ± 0.006 at 224 px, 5 seeds, Conv1 → V1."
+- **§3b, line 85:** "**"The method cannot resolve it"** is the outcome if Δ_min is comparable to or larger
+  than +0.044."
+- **§3b, lines 88–90:** "Δ_min is derived from the pilot's seed-level SD by simulating the sign-flip test
+  above, with the parametric `(t₀.₉₇₅,₄ + t₀.₈₀,₄) · SD/√5` approximation as a cross-check. **The number
+  goes in the paper regardless of outcome**".
+- **§5.5, line 177:** "**5.5 Δ_min a priori.** As in §3b. Reported regardless of outcome."
+- **config.yaml, `provenance.reference_effect`:** "quantity: Random minus Backprop, Conv1 -> V1,
+  Spearman rho, RDM-averaged", `at_32px: -0.001`, `at_224px: +0.044`, `sem_at_224px: 0.006`,
+  `source: results/bnfix_sweep.csv`.
+  - This is the v1 value of arXiv:2608.12408.
+  - The current (v3) headline is +0.030 [0.018, 0.042] (per subject, cross-run pairs).
+  - The verdict is unchanged under the current headline because all contrasts are negative.
+
+### Implementation and the corrected error
+
+- **Implementation:** `scripts/prereg_aggregate.py`, lines 80–81, computes
+  `sd = float(d.std(ddof=1))` and `dm = delta_min_signflip(sd)`. Here `d` is the
+  per-seed Random − BP contrast of **the primary analysis itself**, per g.
+  `delta_min_signflip` (`scripts/pilot_fit.py`, lines 71–92) implements the method
+  exactly as preregistered: simulation of the sign-flip test at 80% power, the closed
+  form Φ⁻¹(0.8^{1/5}) · SD, and the parametric cross-check.
+- **Error:** the SD source. §3b prescribes the **pilot's** seed-level SD, not the SD of
+  the analysis being tested.
+- **Correction** (`scripts/prereg_delta_min.py`, commit `15d8d9b`; result
+  `results/prereg/delta_min_prereg.csv`, commit `74e71e4`):
+  - **Pilot SD source:** read only from `reports/PILOT_REPORT.md` §3, table "Paired
+    seed-level contrasts against Backprop", row Random − Backprop. On this table §4
+    bases its Δ_min.
+  - **Pilot SD:** SD = **0.0082**, for sub-01, V1, 224 px, g = 1, 501 reliable voxels.
+    Recomputed from the per-seed values listed in the same report: 0.00817.
+  - **One SD for all g:** the pilot ran g = 1 only and gives a single SD for the
+    primary contrast. Hence one Δ_min applies to every g, and no SD is transferred
+    between rungs.
+  - **Result:** Δ_min = **0.0140** (simulated), 0.0140 (closed form), 0.0136
+    (parametric).
+  - **Verdict:** §3b re-applied gives "The effect disappears" (0.014 < 0.044).
+    `signflip.csv` is unchanged; its Δ_min values are kept as supplementary.
+
+### Hand calculation, g = 4 (from `results/prereg/primary.csv`)
+
+- **Inputs:** mean over the three subjects of the median r over reliable voxels; per-seed
+  Random − BP = −0.0454, −0.0514, −0.0269, −0.0483, −0.0406.
+- **Own SD:** 0.00958.
+- **Supplementary Δ_min (own SD):** closed form 1.7098 × 0.00958 = 0.0164, simulated
+  0.0164, parametric 0.0159. This matches `signflip.csv` exactly.
+- **Preregistered Δ_min (pilot SD 0.0082):** 0.0140.
+
+### Operationalisations not stated verbatim in the preregistration
+
+Fixed in the docstring of `scripts/prereg_aggregate.py`, commit `02c2fee`
+(2026-10-13T14:09:26+02:00), before the primary analysis ran:
+
+1. "the claim requires it to hold at g ≥ 4" → one-sided sign-flip p ≤ 0.05 (i.e.
+   p = 1/32) at g = 4 **and** g = 8.
+2. α = 0.05. The preregistration states the test and the smallest attainable p (1/32),
+   but no α.
+3. The §3b decision uses the **maximum** Δ_min over g ≥ 4. With the corrected,
+   g-independent Δ_min this rule has no effect.
+4. Subject means only for complete cells (all three subjects valid). No cell was
+   excluded by the plateau gate, so this rule was not active.
 
 ## Instruments (as implemented)
 
@@ -181,7 +253,12 @@ not the selected-alpha score.
 9. The analysis was **not blind**. sub-01 at g ∈ {1, 4, 8} and sub-02 / sub-03 at g = 1
    were known from earlier exploratory steps. New in this run: g = 2 for all subjects
    and g ≥ 4 for sub-02 / sub-03.
-10. Exploratory analyses outside §8 (Conv3 → LOC, band-pass, ImageNet models) exist in
+10. Δ_min first computed from the primary analysis's own seed SD instead of the
+    pilot SD (implementation error). It was corrected by `scripts/prereg_delta_min.py`;
+    the verdict is unchanged.
+11. Four operationalisations not stated verbatim (see "Criterion definitions and
+    operationalization").
+12. Exploratory analyses outside §8 (Conv3 → LOC, band-pass, ImageNet models) exist in
     this repository. They are reported separately and do not enter this analysis.
 
 ## Limits

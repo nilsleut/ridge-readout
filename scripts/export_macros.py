@@ -10,9 +10,15 @@ Each spec is (macro, source CSV, pandas query, column, format):
          "corr"  correlations (Spearman / Pearson), 2 decimals
          "int"   integers
          "sci"   numerical-check magnitudes (e.g. relative errors), 1-digit scientific
+         "sd"    the pilot seed SD, 4 decimals (as reported in PILOT_REPORT.md)
 A value spec fails unless its query matches exactly one row. A "count" spec counts the
 rows its query matches (used for cell counts); it fails if the source is missing or the
-query matches no row at all. Macro names contain letters only.
+query matches no row at all. A "mean3" spec averages a column over exactly three rows
+(one per subject; fails otherwise). A "shufflewin" spec counts subjects in which, at every
+listed g, the intact grid beats its per-image cell shuffle for both Random Weights s0 and
+Backprop s0 (intact from prereg/primary.csv, shuffled from
+prereg/instruments_cell_shuffle.csv; fails unless every needed row exists exactly once).
+Macro names contain letters only.
 
 Run:  python scripts/export_macros.py
 """
@@ -171,7 +177,21 @@ SPECS += [
     ("PreregLowEdgePlateau", "count:prereg/lower_edge.csv", "classification == 'Plateau'", None, "int"),
     ("GtwoGateMaxDelta", "prereg_gate/g4_equivalence.csv", "kind == 'gate'", "delta", "sci"),
     ("GtwoGateContrastDelta", "prereg_gate/g4_equivalence.csv", "kind == 'contrast'", "delta", "sci"),
+    # preregistered Delta_min (pilot SD; identical for every g, taken from the g = 1 row)
+    ("PreregPilotSd", "prereg/delta_min_prereg.csv", "g == 1", "sd_value", "sd"),
+    ("PreregDminSim", "prereg/delta_min_prereg.csv", "g == 1", "delta_min_sim", "rsa"),
+    ("PreregDminClosed", "prereg/delta_min_prereg.csv", "g == 1", "delta_min_closed", "rsa"),
+    ("PreregDminParam", "prereg/delta_min_prereg.csv", "g == 1", "delta_min_param", "rsa"),
+    ("PreregShuffleWinSubjects", "shufflewin:prereg/instruments_cell_shuffle.csv", "(4, 8)", None, "int"),
 ]
+for _g, _gn in GRID_NAMES.items():
+    SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),
+              (f"PreregDminG{_gn}Closed", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_closed", "rsa"),
+              (f"PreregDminG{_gn}Param", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_param", "rsa"),
+              (f"PreregDminG{_gn}Sd", "prereg/delta_min_prereg.csv", f"g == {_g}", "sd_value", "sd")]
+    for _c in ("lumcontrast", "pixels", "gabor"):
+        SPECS.append((f"PreregCtl{_c.capitalize()}MeanG{_gn}", "mean3:prereg/instruments_control_band.csv",
+                      f"grid == {_g} and label == 'control:{_c}'", "r_med_reliable", "rsa"))
 
 
 def fmt(v, how):
@@ -180,7 +200,29 @@ def fmt(v, how):
     if how == "sci":
         m, e = f"{float(v):.0e}".split("e")
         return "\\ensuremath{" + f"{m}" + "\\times 10^{" + f"{int(e)}" + "}}"
+    if how == "sd":
+        return f"{float(v):.4f}"
     return f"{float(v):.{3 if how == 'rsa' else 2}f}"
+
+
+def shuffle_wins(grids):
+    """Subjects in which intact > shuffled for Random Weights s0 and Backprop s0 at every g in grids."""
+    prim = pd.read_csv(RES / "prereg" / "primary.csv")
+    shuf = pd.read_csv(RES / "prereg" / "instruments_cell_shuffle.csv")
+    if not grids:
+        raise SystemExit("shuffle_wins: empty grid list")
+    n = 0
+    for s in sorted(prim.subject.unique()):
+        ok = True
+        for g in grids:
+            for lab in ("Random Weights s0", "Backprop s0"):
+                a = prim[(prim.subject == s) & (prim.grid == g) & (prim.label == lab)]
+                b = shuf[(shuf.subject == s) & (shuf.grid == g) & (shuf.label == lab + " CELL-SHUFFLED")]
+                if len(a) != 1 or len(b) != 1:
+                    raise SystemExit(f"shuffle_wins: missing row for {s} g={g} {lab}")
+                ok &= bool(a.r_med_reliable.iloc[0] > b.r_med_reliable.iloc[0])
+        n += int(ok)
+    return n
 
 
 def main():
@@ -188,14 +230,27 @@ def main():
     for name, src, q, col, how in SPECS:
         if not re.fullmatch(r"[A-Za-z]+", name):
             raise SystemExit(f"invalid macro name {name}")
-        count = src.startswith("count:")
+        kind = src.split(":", 1)[0] if ":" in src else "value"
         path = RES / src.split(":", 1)[-1]
         if not path.exists():
             raise SystemExit(f"missing source {path}")
         if path not in cache:
             cache[path] = pd.read_csv(path, low_memory=False)
+        if kind == "shufflewin":
+            val, colname = shuffle_wins([int(x) for x in re.findall(r"\d+", q)]), "subjects (derived)"
+            text = fmt(val, how)
+            lines.append(f"% {name}: results/prereg/primary.csv + {path.relative_to(REPO).as_posix()} | g in {q} | "
+                         f"{colname} | integer")
+            lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+            rows.append(dict(macro=name, source=path.relative_to(REPO).as_posix(), filter=f"g in {q}",
+                             column=colname, rounding="integer", value=text))
+            continue
         hit = cache[path].query(q, engine="python")
-        if count:
+        if kind == "mean3":
+            if len(hit) != 3 or hit.subject.nunique() != 3:
+                raise SystemExit(f"{name}: mean3 filter matches {len(hit)} rows, expected 3 subjects: {q}")
+            val, colname = hit[col].mean(), f"mean of {col} over 3 subjects"
+        elif kind == "count":
             if len(hit) == 0:
                 raise SystemExit(f"{name}: count filter matches no row: {q}")
             val, colname = len(hit), "row count"
@@ -204,7 +259,8 @@ def main():
                 raise SystemExit(f"{name}: filter matches {len(hit)} rows, expected 1: {q}")
             val, colname = hit.iloc[0][col], col
         text = fmt(val, how)
-        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific"}[how]
+        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific",
+                    "sd": "4 decimals"}[how]
         lines.append(f"% {name}: {path.relative_to(REPO).as_posix()} | {q} | {colname} | {rounding}")
         lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
         rows.append(dict(macro=name, source=path.relative_to(REPO).as_posix(), filter=q, column=colname,
