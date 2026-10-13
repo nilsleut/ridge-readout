@@ -237,7 +237,7 @@ def main():
             arm, px = r.res.rsplit("_", 1)
             ref = s7[(r.roi, arm, float(px), r.cond, float(r.seed_idx))]
         else:
-            ref = s8[(r.model, r.cond, float(r.res[1:]), r.roi)]
+            ref = s8[(r.model, r.cond, str(int(r.res[1:])), r.roi)]   # R is a string column in step 8
         devs.append(abs(r.rho - float(ref)))
     dev_e = max(devs)
     print(f"(e) full euclidean on Xc vs stored center/euclidean/center720: max |d| {dev_e:.2e} over {len(devs)}", flush=True)
