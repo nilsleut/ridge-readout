@@ -16,7 +16,9 @@ column `n_reliable`).
 | 720 stimuli, one exemplar of each of 720 distinct concepts | `config.yaml:82`; `reports/PHASE0_RECONNAISSANCE.md:107-108` |
 | same stimulus order in all subjects | `reports/PHASE0_RECONNAISSANCE.md:108-109`; `reports/STEP4_SCALE_SUBJECTS.md:59` |
 | single-presentation `train` trials | `reports/PHASE0_RECONNAISSANCE.md:51`; `PREREGISTRATION.md:108-109` |
-| one session per subject | `src/vendor/common_up_pairs.py:49` (assertion) |
+| one session per subject | `reports/SESSIONS_CHECK.md` (sessions 3 / 2 / 5 for sub-01 / sub-02 / sub-03); `src/vendor/common_up_pairs.py:49` (assertion) |
+| 10 runs of 72 stimuli in every subject | `reports/SESSIONS_CHECK.md` |
+| sub-01 and sub-02 identical run order; same-run pairs share a run component | `evaluation-resolution-rsa` @ `arxiv-v3`, `paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex:31`, `:67`; `learning-rules-rsa` @ `arxiv-v4`, `paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex:211`; run assignment checked in `reports/SESSIONS_CHECK.md` |
 | 100 `test` images, 12 repetitions, identical across subjects, disjoint from the 720 | `config.yaml:104-107`; `PREREGISTRATION.md:108-110` |
 | halves of 6 repetitions, all 462 balanced splits, mean over splits, Spearman-Brown 2r/(1+r) | `config.yaml:117-120`; `src/ridge/arm_b_betas.py:27-33` |
 | threshold r_SB > 0.2, fixed in advance, identical for all conditions | `config.yaml:156`; `PREREGISTRATION.md:133-135`; `reports/PREREG_PRIMARY.md:22` |
@@ -119,10 +121,8 @@ column `n_reliable`).
 
 ## Points where the sources are unclear
 
-1. **Rationale for the cross-run restriction.** The sources define the pair set
-   (`src/vendor/common_up_pairs.py:9`) and attribute it to the convention of
-   arXiv:2608.12408 v3, but none states why it is used. The draft gives the definition
-   and the attribution only; a comment in `main.tex` marks the gap.
+1. **Rationale for the cross-run restriction.** Resolved: see "Cross-run rationale
+   (verbatim)" below; 2.1 now states it with `\cite{evalres}`.
 2. **Two luminance definitions.** The control band uses Rec. 709 weights
    (`scripts/pilot_features_modal.py:187`); the descriptive stimulus statistics of steps
    7-9 use Rec. 601 weights (`amendments/2026-10-09_step7-offset-predictions.md:90`).
@@ -130,20 +130,57 @@ column `n_reliable`).
 3. **Cell-shuffle grids.** Preregistered for g = 4 and 8 at all resolutions
    (`PREREGISTRATION.md:166`, `config.yaml:388-389`); run at g ∈ {2, 4, 8}, 224 px only,
    seed 0 (`scripts/pilot_fit.py:158`). The draft describes what was run.
-4. **"One session".** Supported only by an assertion in code
-   (`src/vendor/common_up_pairs.py:49`), not by a report.
+4. **"One session".** Resolved: `reports/SESSIONS_CHECK.md` (`scripts/check_sessions.py`)
+   shows exactly one session per subject (IDs 3 / 2 / 5), 10 runs of 72 stimuli each.
 
-## Word counts (draft of 2026-10-13)
+## Cross-run rationale (verbatim)
+
+Read with `git show <tag>:<path>`; line numbers refer to the file at the tag.
+
+`evaluation-resolution-rsa`, tag `arxiv-v3`,
+`paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex`, line 67 (Methods,
+"RSA"):
+
+> using only the $210{,}205$ of $258{,}840$ stimulus pairs whose two stimuli lie in
+> different fMRI runs for all three subjects (two subjects saw the stimuli in identical
+> run order, so same-run pairs share a run component).
+
+Same file, line 31 (note on version 3):
+
+> on the $210{,}205$ of $258{,}840$ stimulus pairs whose two stimuli lie in different fMRI
+> runs for all three subjects. Two subjects saw the stimuli in identical run order, and
+> same-run pairs carry a run component they share (see the revised endpoint study,
+> \citealt{leutenegger2026}).
+
+`learning-rules-rsa`, tag `arxiv-v4`,
+`paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex`, line 211
+(Methods, "Stimulus pairs (cross-run)"):
+
+> Each subject saw the 720 stimuli in ten runs, and sub-01 and sub-02 saw them in
+> identical order. Responses within a run can share run-specific components (baseline
+> drifts, run-wise noise), so for two subjects with the same order the dissimilarities of
+> same-run pairs share a component that has nothing to do with the stimuli. This inflated
+> the agreement between sub-01 and sub-02 (at LOC $\NV{agree.0102.LOC.all}$ on all pairs
+> vs.\ $\NV{agree.0102.LOC.cr}$ on cross-run pairs, while sub-01 vs.\ sub-03 is
+> $\NV{agree.0103.LOC.all}$ and $\NV{agree.0103.LOC.cr}$) and thereby the lower bound at
+> LOC and IT (appendix, Table~\ref{tab:sens}). We therefore use only stimulus pairs that
+> lie in different runs for all three subjects: $\NV{pairs.cr}$ of $\NV{pairs.total}$
+> pairs; $\NV{pairs.excl.pct}\,\%$ are excluded.
+
+The identical run order of sub-01 and sub-02 (and the different order of sub-03) is
+confirmed from the stimulus metadata in `reports/SESSIONS_CHECK.md`.
+
+## Word counts (current draft)
 
 Counted on the LaTeX source without comments; each inline formula, equation and macro
 counts as one word, citations as none.
 
 | Subsection | Words |
 |---|---|
-| 2.1 Data | 203 |
+| 2.1 Data | 230 |
 | 2.2 Models | 281 |
 | 2.3 RSA convention | 147 |
 | 2.4 Analysis multiverse | 155 |
 | 2.5 Ridge readout | 378 |
 | 2.6 Gain axis and decomposition | 227 |
-| Total | 1391 |
+| Total | 1418 |
