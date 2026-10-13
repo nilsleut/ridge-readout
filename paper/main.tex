@@ -18,12 +18,169 @@
 
 \section{Methods}
 \subsection{Data}
+\label{sec:data}
+
+We used the THINGS-fMRI data set \cite{TODO-thingsfmri} of 3 subjects. Single-trial
+betas were taken from the ROI masks of the voxel metadata (V1; LOC as the union of lLOC
+and rLOC) and z-scored per voxel across all 9{,}840 trials of the subject before stimulus
+selection. The 720 evaluation stimuli are one exemplar each of 720 distinct concepts,
+in the same order for all subjects; all are single-presentation \texttt{train} trials
+from one session per subject.
+
+Voxel reliability was measured on the 100 \texttt{test} images, shown 12 times each,
+identical across subjects and disjoint from the 720. Per voxel, the Pearson
+correlation between the means of two halves of 6 repetitions was averaged over all 462
+balanced splits and Spearman--Brown corrected, $r_{\mathrm{SB}} = 2r/(1+r)$. A voxel is
+reliable if $r_{\mathrm{SB}} > 0.2$, a threshold fixed in advance for all conditions;
+measured on other images, selection cannot leak into fits on the 720. V1 contained \NReliableSubOne,
+\NReliableSubTwo{} and \NReliableSubThree{} reliable voxels in sub-01, sub-02 and
+sub-03. Ridge scores use reliable V1 voxels; RSA uses all voxels of the ROI.
+
+RDMs were compared on cross-run pairs only: pairs of distinct stimuli shown in different
+runs in every subject, 210{,}205 of the 258{,}840 pairs of the full set. This follows
+the convention of \cite{TODO-evalres}.
+% Rationale for the cross-run restriction: not stated in the sources (see paper/METHODS_LITERALS.md).
+
 \subsection{Models}
+
+\paragraph{CIFAR-trained CNNs.} We evaluated the 30 checkpoints of \cite{TODO-evalres}:
+6 conditions $\times$ 5 seeds (42, 123, 456, 789, 1337) of one convolutional
+architecture, trained on CIFAR \cite{TODO-cifar} at 32\,px, the training resolution. The
+conditions are Backprop, Feedback Alignment (FA), Predictive Coding (PC), STDP
+\cite{TODO-learningrules} and two untrained networks: untrained (uncalibrated BN
+statistics), with BatchNorm running statistics left at initialisation, and untrained
+(BN-calibrated), with running statistics set by 50 forward-only passes of CIFAR batches
+at 32\,px. ``Untrained'' alone means the uncalibrated variant, as in the published
+headline.
+
+The V1 layer is Conv1, the output of the whole first block (convolution, BatchNorm, ReLU,
+$2 \times 2$ max pooling; 32 channels, map side half the input size); LOC is mapped to
+Conv3. Features were extracted in eval mode with the original code, in two
+input arms. NATIVE: the image is resized and centre-cropped
+to $p \in \{32, 64, 96, 128, 160, 224\}$\,px. UPSAMPLED: the image is resized and
+cropped to 32\,px and then resized to $p$, so its content is limited to 32\,px; we used
+it at $p = 224$. Both arms apply the CIFAR channel normalisation.
+
+\paragraph{ImageNet models.} Six torchvision models \cite{TODO-torchvision}: alexnet,
+vgg11\_bn, resnet18, resnet50, convnext\_tiny and vit\_b\_16, in eval mode. Trained
+models use the IMAGENET1K\_V1 weights. Untrained models were built without weights after
+\texttt{torch.manual\_seed($s$)}, $s \in \{0, 1, 2\}$, with BatchNorm running statistics
+at their defaults (mean 0, variance 1); convnext\_tiny and vit\_b\_16 use LayerNorm. RGB images
+were resized (shorter side) and centre-cropped to $R \in \{112, 224, 448\}$ (training
+resolution 224) and ImageNet-normalised; vit\_b\_16 accepts only 224. Layers (V1 / LOC),
+fixed before the run: alexnet
+\texttt{features[1]} / \texttt{features[12]}; vgg11\_bn \texttt{features[2]} / last max
+pooling of \texttt{features}; resnet18 and resnet50 \texttt{maxpool} / \texttt{layer4};
+convnext\_tiny \texttt{features[0]} / \texttt{features[7]}; vit\_b\_16
+\texttt{encoder.layers[0]} / \texttt{encoder.layers[-1]}. Outputs were averaged over
+space, or over tokens without the class token.
+
 \subsection{RSA convention}
+
+Unless stated otherwise, RSA follows \cite{TODO-evalres}. The model RDM is the
+correlation distance ($1 -$ Pearson $r$ across units) between the globally average-pooled
+(GAP) features of two stimuli; the fMRI RDM is the correlation distance between their
+beta patterns over all ROI voxels. RSA is the Spearman correlation between the two RDMs
+over the cross-run pairs, per subject, then averaged. A
+contrast is the mean over seeds of the per-seed difference between two conditions; for
+ImageNet models it is untrained (mean over the 3 initialisation seeds) minus trained.
+
+Uncertainty is over stimuli: the 1000 bootstrap resamples of \cite{TODO-evalres} (720
+stimuli drawn with replacement, seed 20261002). Each draw recomputes the cross-run pair
+set on the resampled stimuli, dropping pairs of a stimulus with itself, and every
+difference, slope and ratio is formed within the draw (paired). Intervals are 95\%
+percentile intervals. They describe stimulus variation in 3 subjects, not the
+population.
+
 \subsection{Analysis multiverse}
+
+Three factors were crossed. Feature normalisation $F$, per unit over the 720 stimuli:
+raw; center (mean subtracted); scale (divided by the SD, not centred); z (both). Units
+with SD below $10^{-8}$ are set to 0. Distance $D$: correlation, cosine or euclidean,
+applied to features and betas alike. fMRI normalisation $B$: paper (betas
+as in Section~\ref{sec:data}), center720 (centred per voxel over the 720 stimuli) and
+z720 (z-scored per voxel over the 720). The cell (raw, correlation, paper) is the
+convention of \cite{TODO-evalres}. All $4 \times 3 \times 3 = 36$ cells were computed for
+the V1 contrast (Conv1, untrained $-$ Backprop) and the LOC contrast (Conv3, Backprop
+$-$ untrained). The resolution slope is
+$S = \mathrm{Gap}(\text{NATIVE } 224) - \mathrm{Gap}(\text{NATIVE } 32)$, with Gap the V1
+contrast. As a check, euclidean RDMs under $F$ = raw and center must coincide. For
+ImageNet models, all 36 cells were computed as point estimates and four were
+bootstrapped: (raw, correlation, paper), (z, correlation, paper), (raw, euclidean,
+paper) and (center, correlation, center720); their slope is
+$S_{\mathrm{gen}} = \mathrm{Gap}(448) - \mathrm{Gap}(224)$.
+
 \subsection{Ridge readout}
-\subsection{Gain axis}
+
+Encoding models used dual ridge regression \cite{TODO-ridge}, with the kernel
+$K = XX^{\top}$ eigendecomposed once per split. The Conv1 maps were
+pooled to a $g \times g$ grid by adaptive average pooling, $g \in \{1, 2, 4, 8\}$, giving
+$32g^2$ features independent of resolution; $g = 1$ is GAP, and larger $g$ retains
+spatial structure. Features were standardised with statistics of the training rows of
+each split only.
+
+Cross-validation is nested: 8 outer folds and 5 inner folds within each outer training
+set, from a fixed partition (seed 20260818); with one exemplar per concept, folds are
+concept-grouped. Per voxel and outer fold, $\alpha$ was
+chosen from 29 log-spaced values between $10^{-6}$ and $10^{8}$ by the minimum mean
+squared error over the inner folds, and the model was refit on the outer training set.
+Selection and reporting differ deliberately: $\alpha$ mainly sets the scale of the
+prediction, so selecting on the scale-invariant Pearson $r$ is degenerate; reported $r$
+therefore lies slightly below its attainable maximum, equally for every condition.
+Out-of-fold predictions were pooled over the outer folds and scored by one Pearson $r$
+per voxel over all 720 stimuli. The score is the median $r$ over reliable V1 voxels,
+averaged over subjects, with contrasts formed within seed.
+
+A low-edge selection at a reliable voxel is logged, not fatal (amendment of 2026-10-03).
+With diagnostic values $10^{-7}$, $10^{-8}$ and $10^{-9}$
+added, it is a valid plateau if the inner-fold MSE improves by less than a relative
+$10^{-3}$ on its value at $10^{-6}$; otherwise the cell is excluded. The gate never
+changes a score.
+
+The preregistered analysis used the 720 single-trial betas at NATIVE 224\,px, all
+checkpoints and subjects, and all four $g$; the $g = 2$ features were extracted on a CPU,
+subject to a downstream equivalence gate (amendment of 2026-10-13). An exploratory fit
+at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
+
+Two controls used the identical readout. The control band consists of low-level banks
+pooled to the same grid: pixels; Rec.\,709 luminance with local RMS contrast
+($9 \times 9$ window); absolute responses of a Gabor bank (4 orientations $\times$
+3 spatial frequencies); and, as negative test, Backprop seed-0 features with permuted
+stimulus assignment. The spatial-correspondence control permutes the $g \times g$ cells
+differently for every image (seed 20260820), keeping dimensionality and per-channel
+distributions; it was run for the seed-0 untrained and Backprop checkpoints at
+$g \in \{2, 4, 8\}$.
+
+\subsection{Gain axis and decomposition}
+
+For a stimulus $\times$ unit matrix $X$, let $\mu$ be the unit means over the 720
+stimuli, $\mu_c = \mu - \overline{\mu}$, and $\tilde{x}_i$ row $i$ centred across units.
+The gain of stimulus $i$ is the cosine between its response profile and the mean profile,
+\begin{equation}
+  \mathrm{gain}_i = \frac{\langle \tilde{x}_i, \mu_c \rangle}{\lVert \tilde{x}_i \rVert \, \lVert \mu_c \rVert}.
+\end{equation}
+Model gain was computed on raw features, voxel gain on all ROI voxels under $B$ = paper.
+$c_{\mathrm{gain}}$ is the Pearson correlation over the 720 stimuli between model gain
+and V1 voxel gain, averaged over subjects. The gain RDM is
+$\lvert \mathrm{gain}_i - \mathrm{gain}_j \rvert$. Partial RSA regresses the ranks of the
+model and of the fMRI RDM, per subject and draw, on an intercept and the ranks of their
+own gain RDM and correlates the residuals (Pearson).
+
+The decomposition starts from $X_c$, $X$ with every unit centred over the 720 stimuli
+($F$ = center; for $F$ = z, units are also scaled to SD 1). With
+$n_i = \lVert X_{c,i} \rVert$ and $\cos\theta_{ij}$ the cosine between rows $i$ and $j$,
+\begin{equation}
+  \lVert X_{c,i} - X_{c,j} \rVert^2 = (n_i - n_j)^2 + 2\, n_i n_j \,(1 - \cos\theta_{ij}).
+\end{equation}
+The euclidean RDM on $X_c$ is thus an exact function of the norm RDM
+$N_{ij} = \lvert n_i - n_j \rvert$ and the angle RDM $A_{ij} = 1 - \cos\theta_{ij}$. The
+betas are decomposed in the same way, and the RSA of a component compares the model and
+fMRI RDMs of that component. The identity was checked numerically. We call the norm
+component ``gain magnitude'' and the angle component ``geometry''; both labels define the
+two terms of this identity and are not biological concepts.
+
 \subsection{Inference and criteria}
+% 2.7 written by author
 
 \section{Results}
 \subsection{Sign flip between RSA and ridge (including the preregistered primary analysis)}

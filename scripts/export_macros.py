@@ -183,6 +183,13 @@ SPECS += [
     ("PreregDminClosed", "prereg/delta_min_prereg.csv", "g == 1", "delta_min_closed", "rsa"),
     ("PreregDminParam", "prereg/delta_min_prereg.csv", "g == 1", "delta_min_param", "rsa"),
     ("PreregShuffleWinSubjects", "shufflewin:prereg/instruments_cell_shuffle.csv", "(4, 8)", None, "int"),
+    # reliable V1 voxels per subject (split-half > 0.2), as used by the preregistered fits
+    ("NReliableSubOne", "prereg/primary.csv", "subject == 'sub-01' and grid == 1 and label == 'Backprop s0'",
+     "n_reliable", "int"),
+    ("NReliableSubTwo", "prereg/primary.csv", "subject == 'sub-02' and grid == 1 and label == 'Backprop s0'",
+     "n_reliable", "int"),
+    ("NReliableSubThree", "prereg/primary.csv", "subject == 'sub-03' and grid == 1 and label == 'Backprop s0'",
+     "n_reliable", "int"),
 ]
 for _g, _gn in GRID_NAMES.items():
     SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),
