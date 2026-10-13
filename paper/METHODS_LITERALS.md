@@ -121,6 +121,46 @@ column `n_reliable`).
 | identity checked numerically (SEP1) | same file `:37-38` |
 | "gain"/"geometry" are definitions, not biological claims | same file `:69-70`; `reports/STEP9_GAIN_GEOMETRY.md:11-12` |
 
+## 2.7 Analysis plan, amendments and inference (`paper/drafts/sec_2_7.tex`)
+
+Result numbers are macros: `\PreregReferenceEffect`, `\PreregReferenceSem` (new; reads
+`provenance.reference_effect.sem_at_224px` of `config.yaml`, as no CSV carries it),
+`\VoneGapRawTwoTwoFour[Lo/Hi]`, `\GtwoGateMaxDelta` (renders 1-digit scientific,
+1 × 10⁻⁸; the value is 1.3 × 10⁻⁸), `\FailedPredictions` (new; distinct predictions with
+a rule row `passed == False` in `results/`: G2, GEN3, GEN4, P_mech2, SEP2).
+
+| Literal | Source |
+|---|---|
+| schema version 2, configuration hash 206fa875cca5 | `config.yaml:21`; `PREREGISTRATION.md:258` |
+| plan dated 20 August 2026 | `PREREGISTRATION.md:248`, `:258`; `config.yaml:16`; written 2026-08-18/20 per `paper/CLAIMS.md:29` |
+| not publicly registered; dating by in-text stamps and hash | `PROVENANCE.md:16` |
+| under version control on 3 October 2026 | `paper/CLAIMS.md:29` (`7731f58`, 2026-10-03T19:05:47+02:00); `PROVENANCE.md:11` |
+| voxel selection split-half reliability above 0.2 | `config.yaml:155-156` |
+| g ∈ {1, 2, 4, 8} | `config.yaml:87` |
+| median over voxels, mean over subjects | `config.yaml:199-201` |
+| seed as unit, n = 5; one-sided exact sign-flip, 32 assignments | `config.yaml:300-306`; `PREREGISTRATION.md:40-43` |
+| surviving only if it holds at g ≥ 4 | `PREREGISTRATION.md:63-65` |
+| Δ_min from pilot seed-level SD by simulating the test | `PREREGISTRATION.md:88-89` |
+| reference effect is the version-1 value, at 224 px | `config.yaml:28-33`; `PROVENANCE.md:98-99` |
+| all observed contrasts negative | `paper/CLAIMS.md:50-52` |
+| three amendments (D1-D3) adopted before the real-data pilot | `PREREGISTRATION.md:248`, `:258-259`; `reports/PHASE2B_REPORT.md:3-10`; `reports/PILOT_REPORT.md:3-6` |
+| (i) min-MSE kept, no tolerance rule, after the tolerance measurement | `amendments/2026-10-03_tolerance-rule.md:5-16` |
+| (ii) abort replaced by plateau gate, after the diagnosis; score-neutral | `amendments/2026-10-03_d1-plateau-gate.md:5-21`, `:26-29` |
+| no cell excluded in any analysis | `reports/STEP3_SIGNFLIP.md:134`; `reports/STEP4_SCALE_SUBJECTS.md:102`; `reports/STEP5_RESOLUTION_MOMENTS.md:123`; `reports/STEP6_RIDGE_MECHANISM_ROBUSTNESS.md:61`; `reports/PREREG_PRIMARY.md:238` |
+| (iii) g = 2 on CPU, others from GPU (Modal T4) | `amendments/2026-10-13_g2-local-extraction.md:8-14` |
+| reproduction gate absolute tolerance 1e-6, failed | same file `:16-25` |
+| downstream-equivalence gate at g = 4, passed | same file `:27-39`; `reports/PREREG_PRIMARY.md:40-48` |
+| four operationalisations (α = 0.05; p ≤ 0.05 at g = 4 and 8; max Δ_min at g ≥ 4; complete cells), committed before the run | `paper/CLAIMS.md:84-91`; `reports/PREREG_PRIMARY.md:169-181` |
+| Δ_min implementation error, corrected; verdict unchanged | `paper/CLAIMS.md:92-95` |
+| not blind; subject 1 at g ∈ {1, 4, 8}, subjects 2 and 3 at g = 1 known | `paper/CLAIMS.md:78-83` |
+| capacity sweep, PLS with 25 components, Arm B ridge, leave-one-subject-out bound not implemented | `paper/CLAIMS.md:66-71`; 25 components `config.yaml:401` |
+| cell shuffle one seed at 224 px; grid ladder only at 224 px | `paper/CLAIMS.md:65-66`, `:72-73` |
+| exploratory analyses outside the plan (other layers, band-pass) | `PREREGISTRATION.md:237-239`; `paper/CLAIMS.md:76-77` |
+| predictions committed before the scripts; commit timestamps authoritative | `paper/CLAIMS.md:10-36` |
+| run-grouped folds as sensitivity analysis | `reports/STEP3_SIGNFLIP.md:78-94` |
+| 1000 bootstrap resamples, seed 20261002; 95% percentile intervals | `src/vendor/v12_lift.py:53`; `amendments/2026-10-08_step5-resolution-predictions.md:17-19` |
+| three subjects | `config.yaml:136` |
+
 ## Points where the sources are unclear
 
 1. **Rationale for the cross-run restriction.** Resolved: see "Cross-run rationale
@@ -139,6 +179,9 @@ column `n_reliable`).
    seed 0 (`scripts/pilot_fit.py:158`). The draft describes what was run.
 4. **"One session".** Resolved: `reports/SESSIONS_CHECK.md` (`scripts/check_sessions.py`)
    shows exactly one session per subject (IDs 3 / 2 / 5), 10 runs of 72 stimuli each.
+
+5. **Appendix D title.** `app:failed` sits on "Failed predictions: P_mech2, G2", while
+   2.7 refers to five failed predictions (also GEN3, GEN4, SEP2, per `paper/CLAIMS.md`).
 
 ## Cross-run rationale (verbatim)
 
@@ -190,4 +233,5 @@ counts as one word, citations as none.
 | 2.4 Analysis multiverse | 155 |
 | 2.5 Ridge readout | 379 |
 | 2.6 Gain axis and decomposition | 268 |
-| Total | 1460 |
+| Total 2.1-2.6 | 1460 |
+| 2.7 Analysis plan, amendments and inference | 742 |

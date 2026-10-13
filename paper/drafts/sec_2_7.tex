@@ -1,0 +1,75 @@
+\subsection{Analysis plan, amendments and inference}
+\label{sec:inference}
+
+\paragraph{Pre-specified primary analysis.}
+The ridge-readout analysis (Section~\ref{sec:ridge}) followed a written analysis plan
+with a frozen configuration (schema version~2, configuration hash \texttt{206fa875cca5}),
+dated 20~August~2026. The plan was not publicly registered; its dating rests on in-text
+date stamps and the configuration hash, and the files were placed under version control
+on 3~October~2026. We therefore describe its criteria as fixed before the analysis rather
+than as preregistered. The plan asked whether the untrained-minus-backpropagation
+difference at V1 reported in \citet{evalres} survives a fitted readout on the full Conv1
+feature map. It fixed the layer, the voxel selection (split-half reliability above~0.2),
+the grid ladder $g \in \{1, 2, 4, 8\}$, the cross-validation scheme and seed, the
+regularisation grid and the aggregation (median over voxels, mean over subjects). The
+unit of inference was the training seed ($n = 5$), tested with a one-sided exact
+sign-flip test over all 32 sign assignments. The effect was to count as surviving only
+if it held at $g \geq 4$. The minimal detectable effect $\Delta_{\min}$ was derived from
+the pilot's seed-level standard deviation by simulating this test. The reference effect
+was the value reported in version~1 of \citet{evalres}
+($+\PreregReferenceEffect \pm \PreregReferenceSem$ at 224\,px); the current value is
+$+\VoneGapRawTwoTwoFour$ [$\VoneGapRawTwoTwoFourLo$, $\VoneGapRawTwoTwoFourHi$], and the verdict does not depend on this choice because all
+observed contrasts were negative (Section~\ref{sec:signflip}).
+
+\paragraph{Amendments.}
+Three amendments were adopted before the pilot on real data
+% VERIFY: confirm in PHASE2_REPORT / PILOT_REPORT that D1-D3 preceded the real-data pilot
+: a hard assertion against selecting the lowest regularisation value for reliable
+voxels, selection of the regularisation by mean squared error with Pearson~$r$ reported,
+and a widening of the regularisation grid. Three further decisions were taken after data
+had been seen, and we list them as such. (i) The regularisation was kept at
+minimum-MSE selection rather than a tolerance rule, after a tolerance measurement was
+known; this adds no degree of freedom. (ii) The assertion's abort was replaced by a
+post-hoc gate that classifies each lower-boundary selection as a plateau or a true
+optimum below the grid; only the latter would invalidate a cell. This was decided after
+a diagnosis showed that all observed boundary selections were plateaus, and it leaves all
+scores unchanged. No cell was excluded in any analysis. (iii) Features for $g = 2$ were
+extracted on CPU, whereas all other features came from a GPU extraction. The
+pre-specified reproduction gate (absolute tolerance $10^{-6}$) failed because of
+floating-point differences; we replaced it by a downstream-equivalence gate, which
+passed (maximum absolute difference in median $r$ of \GtwoGateMaxDelta{} at $g = 4$).
+Four operational details not stated in the plan (significance level $0.05$; ``holds at
+$g \geq 4$'' as $p \leq 0.05$ at both $g = 4$ and $g = 8$; the decision based on the
+largest $\Delta_{\min}$ at $g \geq 4$; averaging over subjects only for complete cells)
+were committed before the primary run. An implementation error initially derived
+$\Delta_{\min}$ from the primary analysis's own seed variability instead of the pilot's;
+we report the pre-specified value and the original value as supplementary. The verdict
+is the same under both.
+
+\paragraph{Blinding and deviations.}
+The primary analysis was not blind. Results for subject~1 at $g \in \{1, 4, 8\}$ and for
+subjects~2 and~3 at $g = 1$ were known from earlier steps; only $g = 2$ and subjects~2
+and~3 at $g \geq 4$ were new. Several pre-specified instruments were not implemented:
+a capacity sweep, a PLS readout with 25 components, a ridge fit on the repeated-image
+test set, and a leave-one-subject-out bound for the ridge scores. The image-wise cell
+shuffle was run for one seed at 224\,px only, and the grid ladder only at 224\,px.
+
+\paragraph{Exploratory analyses.}
+All analyses in Sections~\ref{sec:standardization}--\ref{sec:gaingeometry} lie outside
+the pre-specified plan, which excluded, among others, other layers and band-pass
+decompositions. They were developed sequentially. For each step, predictions and
+decision rules were written down and committed to version control before the step's
+scripts were run; the commit timestamps, not the dates in file names, are authoritative
+and are listed in the repository. We report every pre-stated prediction, including the
+\FailedPredictions{} that were not met (Appendix~\ref{app:failed}). Run-grouped cross-validation
+folds were an additional sensitivity analysis and were not part of the plan.
+
+\paragraph{Inference and its limits.}
+For RSA, we resampled stimuli (1000 bootstrap resamples, seed 20261002) and computed
+differences between conditions from the same resamples; intervals are 95\% percentile
+intervals. For ridge scores, seeds were the unit of inference. Intervals across the
+exploratory analyses are not corrected for multiple comparisons. With three subjects,
+all statements concern variation over stimuli and seeds and do not generalise to a
+population of observers. Code, configuration, amendments and the full commit history
+are available in the accompanying repository.
+% TODO: repository URL after release

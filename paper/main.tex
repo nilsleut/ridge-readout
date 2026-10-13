@@ -112,6 +112,7 @@ paper) and (center, correlation, center720); their slope is
 $S_{\mathrm{gen}} = \mathrm{Gap}(448) - \mathrm{Gap}(224)$.
 
 \subsection{Ridge readout}
+\label{sec:ridge}
 
 Encoding models used dual ridge regression \citep{hoerl1970}, with the kernel
 $K = XX^{\top}$ eigendecomposed once per split. The Conv1 maps were
@@ -138,7 +139,7 @@ added, it is a valid plateau if the inner-fold MSE improves by less than a relat
 $10^{-3}$ on its value at $10^{-6}$; otherwise the cell is excluded. The gate never
 changes a score.
 
-The preregistered analysis used the 720 single-trial betas at NATIVE 224\,px, all
+The pre-specified analysis used the 720 single-trial betas at NATIVE 224\,px, all
 checkpoints and subjects, and all four $g$; the $g = 2$ features were extracted on a CPU,
 subject to a downstream equivalence gate (amendment of 2026-10-13). An exploratory fit
 at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
@@ -184,11 +185,11 @@ fMRI RDMs of that component. The identity was checked numerically. We call the n
 component ``gain magnitude'' and the angle component ``geometry''; both labels define the
 two terms of this identity and are not biological concepts.
 
-\subsection{Inference and criteria}
-% 2.7 written by author
+\input{drafts/sec_2_7}
 
 \section{Results}
-\subsection{Sign flip between RSA and ridge (including the preregistered primary analysis)}
+\subsection{Sign flip between RSA and ridge (including the pre-specified primary analysis)}
+\label{sec:signflip}
 
 \begin{figure}[t]
 \centering
@@ -205,6 +206,7 @@ two terms of this identity and are not biological concepts.
 \end{figure}
 
 \subsection{Channel standardization removes gap and slope}
+\label{sec:standardization}
 \subsection{Analysis multiverse}
 
 \begin{figure}[t]
@@ -231,6 +233,7 @@ two terms of this identity and are not biological concepts.
 \end{figure}
 
 \subsection{Gain versus geometry}
+\label{sec:gaingeometry}
 
 \begin{figure}[t]
 \centering
@@ -252,5 +255,6 @@ two terms of this identity and are not biological concepts.
 \section{Run-grouped folds}
 \section{Bandpass}
 \section{Failed predictions: P\_mech2, G2}
+\label{app:failed}
 
 \end{document}

@@ -707,6 +707,8 @@ NReliableSubTwo,results/prereg/primary.csv,subject == 'sub-02' and grid == 1 and
 NReliableSubThree,results/prereg/primary.csv,subject == 'sub-03' and grid == 1 and label == 'Backprop s0',n_reliable,integer,286
 LumDefPearson,results/checks/luminance_defs.csv,quantity == 'pearson',value,3 decimals,0.997
 LumDefSpearman,results/checks/luminance_defs.csv,quantity == 'spearman',value,3 decimals,0.996
+PreregReferenceSem,config.yaml,provenance.reference_effect.sem_at_224px,config value,3 decimals,0.006
+FailedPredictions,results/**/*.csv,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, P_mech2, SEP2)",integer,5
 PreregDminGOneSim,results/prereg/delta_min_prereg.csv,g == 1,delta_min_sim,3 decimals,0.014
 PreregDminGOneClosed,results/prereg/delta_min_prereg.csv,g == 1,delta_min_closed,3 decimals,0.014
 PreregDminGOneParam,results/prereg/delta_min_prereg.csv,g == 1,delta_min_param,3 decimals,0.014

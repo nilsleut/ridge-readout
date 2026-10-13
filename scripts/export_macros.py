@@ -18,6 +18,10 @@ query matches no row at all. A "mean3" spec averages a column over exactly three
 listed g, the intact grid beats its per-image cell shuffle for both Random Weights s0 and
 Backprop s0 (intact from prereg/primary.csv, shuffled from
 prereg/instruments_cell_shuffle.csv; fails unless every needed row exists exactly once).
+A "config" spec reads one value of the frozen config.yaml by dotted key (used only for
+the reference effect's SEM, which no CSV carries). A "failedrules" spec counts the
+distinct pre-stated predictions with a rule row (kind == 'rule') whose passed is False,
+over all CSVs in results/.
 Macro names contain letters only.
 
 Run:  python scripts/export_macros.py
@@ -193,6 +197,9 @@ SPECS += [
     # Rec. 709 (control band) vs Rec. 601 (stimulus statistics) image-mean luminance, 720 stimuli at 224 px
     ("LumDefPearson", "checks/luminance_defs.csv", "quantity == 'pearson'", "value", "rsa"),
     ("LumDefSpearman", "checks/luminance_defs.csv", "quantity == 'spearman'", "value", "rsa"),
+    # reference effect SEM (paper v1) from the frozen config; number of failed pre-stated predictions
+    ("PreregReferenceSem", "config:config.yaml", "provenance.reference_effect.sem_at_224px", None, "rsa"),
+    ("FailedPredictions", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
 ]
 for _g, _gn in GRID_NAMES.items():
     SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),
@@ -235,12 +242,48 @@ def shuffle_wins(grids):
     return n
 
 
+def config_value(key):
+    """A value of the frozen config.yaml, addressed by a dotted key."""
+    import yaml
+    node = yaml.safe_load((REPO / "config.yaml").read_text(encoding="utf-8"))
+    for k in key.split("."):
+        if not isinstance(node, dict) or k not in node:
+            raise SystemExit(f"config_value: missing key {key}")
+        node = node[k]
+    return float(node), "config.yaml", "config value"
+
+
+def failed_rules():
+    """Number of distinct pre-stated predictions with a failed rule row in results/.
+
+    A prediction is the first token of `quantity` in rows with kind == 'rule'; it counts
+    as failed if any of its rule rows has passed == False."""
+    failed = set()
+    for f in sorted(RES.rglob("*.csv")):
+        d = pd.read_csv(f, low_memory=False)
+        if not {"kind", "passed", "quantity"} <= set(d.columns):
+            continue
+        r = d[d.kind == "rule"]
+        failed |= set(r[r.passed.astype(str) == "False"].quantity.str.split().str[0])
+    if not failed:
+        raise SystemExit("failed_rules: no failed rule row found")
+    return len(failed), "results/**/*.csv", f"distinct predictions with passed == False ({', '.join(sorted(failed))})"
+
+
 def main():
     cache, lines, rows = {}, [], []
     for name, src, q, col, how in SPECS:
         if not re.fullmatch(r"[A-Za-z]+", name):
             raise SystemExit(f"invalid macro name {name}")
         kind = src.split(":", 1)[0] if ":" in src else "value"
+        if kind in ("config", "failedrules"):
+            val, source, colname = config_value(q) if kind == "config" else failed_rules()
+            text = fmt(val, how)
+            rounding = {"rsa": "3 decimals", "int": "integer"}[how]
+            lines.append(f"% {name}: {source} | {q} | {colname} | {rounding}")
+            lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+            rows.append(dict(macro=name, source=source, filter=q, column=colname, rounding=rounding, value=text))
+            continue
         path = RES / src.split(":", 1)[-1]
         if not path.exists():
             raise SystemExit(f"missing source {path}")
