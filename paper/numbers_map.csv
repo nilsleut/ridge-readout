@@ -10,6 +10,7 @@ ETwoHiFracDiff,results/step3/collapse_rpath_g1.csv,kind == 'difference' and metr
 EThreeRunFoldGap,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.027
 EFourEncGapRandom,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'centred',rho,3 decimals,-0.004
 EFourEncGapRun,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'centred',rho,3 decimals,-0.008
+EFourEncPosSeedsRandom,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'centred',seeds_positive,integer,2
 SOneStdGap,results/step4/std_rsa.csv,kind == 'difference' and variant == 'z' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,-0.015
 SOneStdRandBncal,results/step4/std_rsa.csv,kind == 'difference' and variant == 'z' and `quantity` == 'Random Weights - Random Weights (BN-calibrated)',mean,3 decimals,0.002
 STwoSubTwoRsa,results/step4/subjects.csv,kind == 'difference' and subject == 'sub-02' and metric == 'rsa_raw' and `quantity` == 'Random Weights - Backprop',mean,3 decimals,0.056

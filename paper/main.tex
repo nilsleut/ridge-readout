@@ -132,7 +132,9 @@ Selection and reporting differ deliberately: $\alpha$ mainly sets the scale of t
 prediction, so selecting on the scale-invariant Pearson $r$ is degenerate; reported $r$
 therefore lies slightly below its attainable maximum, equally for every condition.
 Out-of-fold predictions were pooled over the outer folds and scored by one Pearson $r$
-per voxel over all 720 stimuli. The score is the median $r$ over reliable V1 voxels,
+per voxel over all 720 stimuli. When the selected regularisation shrinks the predictions
+of a voxel towards the training mean, this pooled correlation is negative in
+expectation, so features without signal yield negative rather than zero scores. The score is the median $r$ over reliable V1 voxels,
 averaged over subjects, with contrasts formed within seed.
 
 A low-edge selection at a reliable voxel is logged, not fatal (amendment of 2026-10-03).

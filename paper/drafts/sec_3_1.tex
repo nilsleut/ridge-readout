@@ -22,14 +22,16 @@ Among the control banks, the luminance and contrast bank reached
 \PreregCtlLumcontrastMeanGFour{} and \PreregCtlLumcontrastMeanGEight{} at
 $g = 1, 2, 4, 8$, above the mean of every network condition at every $g$, including
 Backprop (\PreregCondBpGOne, \PreregCondBpGTwo, \PreregCondBpGFour, \PreregCondBpGEight).
-The pixel and Gabor banks lay between \PreregCtlGaborMeanGTwo{} and
+The pixel and Gabor banks ranged from \PreregCtlGaborMeanGTwo{} to
 \PreregCtlPixelsMeanGFour. At $g = 4$ and $g = 8$ the intact grid exceeded its
 image-wise cell shuffle for both the untrained and the Backprop seed-0 network in
 \PreregShuffleWinSubjects{} of 3 subjects; this instrument covers one seed per condition
 and is descriptive. The permuted-assignment control, the pipeline's negative test, for
 which the plan expected a value near zero, gave \PreregCtlPermutedMeanGOne,
 \PreregCtlPermutedMeanGTwo, \PreregCtlPermutedMeanGFour{} and
-\PreregCtlPermutedMeanGEight; it is not shown in Fig.~\ref{fig:prereg_ladder}. All
+\PreregCtlPermutedMeanGEight; negative values are expected for features without
+signal under the pooled out-of-fold correlation (Section~\ref{sec:ridge}), and the
+control is not shown in Fig.~\ref{fig:prereg_ladder}. All
 \PreregLowEdgeHits{} lower-boundary selections at reliable voxels were classified as
 plateaus (\PreregLowEdgePlateau), and no cell was excluded.
 
@@ -46,8 +48,11 @@ of selections at the largest $\alpha$, below the threshold of 0.10 for a collaps
 asymmetry. The fold convention: with run-grouped folds the contrast was
 $\EThreeRunFoldGap$ (a positive value would have implicated leakage within runs). The
 score: correlating RDMs built from the ridge predictions with the fMRI RDM gave
-$\EFourEncGapRandom$ with random and $\EFourEncGapRun$ with run-grouped folds, so by the
-rule ($\leq 0$) the sign change arises in the readout, not in the scoring statistic. In
+$\EFourEncGapRandom$ with random folds (\EFourEncPosSeedsRandom{} of 5 seeds
+positive) and $\EFourEncGapRun$ with run-grouped folds. This meets the pre-stated rule
+($\leq 0$), but the random-fold value is close to zero: the analysis shows that the RSA
+advantage of the untrained network does not carry over to RDMs of ridge predictions, not
+that it reverses there. In
 the same subject, ridge did not separate the two untrained networks
 ($\POneRidgeRandBncal$; rule $\leq 0.010$: met), whereas RSA separated them by
 $\POneRsaRandBncal$. In sub-02 and sub-03 the predicted pattern held: RSA

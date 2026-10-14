@@ -66,6 +66,8 @@ SPECS = [
     ("EThreeRunFoldGap", "step3/runfolds.csv", f"kind == 'difference' and grid == 1 and metric == 'r_pooled' and {RB}", "mean", "rsa"),
     ("EFourEncGapRandom", "step3/encoding_rsa.csv", "kind == 'difference' and fold_scheme == 'random' and centring == 'centred'", "rho", "rsa"),
     ("EFourEncGapRun", "step3/encoding_rsa.csv", "kind == 'difference' and fold_scheme == 'run' and centring == 'centred'", "rho", "rsa"),
+    ("EFourEncPosSeedsRandom", "step3/encoding_rsa.csv",
+     "kind == 'difference' and fold_scheme == 'random' and centring == 'centred'", "seeds_positive", "int"),
     # step 4
     ("SOneStdGap", "step4/std_rsa.csv", f"kind == 'difference' and variant == 'z' and {RB}", "mean", "rsa"),
     ("SOneStdRandBncal", "step4/std_rsa.csv", f"kind == 'difference' and variant == 'z' and {RN}", "mean", "rsa"),
