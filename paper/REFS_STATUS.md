@@ -27,7 +27,12 @@ tag and are marked `% TO VERIFY` in `refs.bib`.
 | `diedrichsen2017` | representational models | **new, to verify** (with DOI) | 1 |
 | `steegen2016` | multiverse analysis | **new, to verify** (with DOI) | 1 |
 | `carandini2012` | normalisation | **new, to verify** (with DOI) | 4 |
-| `truzzi2025` | untrained CNNs and early visual cortex, bioRxiv | **new, placeholder**: title, DOI and authors to be filled by the author (also an inline `\bibitem` in both tags) | abstract, 1 |
+| `truzzi2020` | untrained CNNs and human object representations, CogSci 2020 | **new, to verify** (URL, no DOI) | abstract, 1 |
+| `kazemian2024` | convolutional architectures cortex-aligned de novo, bioRxiv | **new, placeholder**: authors to be filled by the author (DOI given) | abstract, 1 |
+| `liu2022` | ConvNeXt, CVPR 2022 | **new, to verify** (no DOI given) | 4 |
+
+`truzzi2025` (placeholder) was removed on 2026-10-14 and replaced by `truzzi2020` and
+`kazemian2024`.
 
 The learning-rule references are the ones the two tags cite for the rules:
 evaluation-resolution-rsa `arxiv-v3` line 43 (FA: `lillicrap2016`; PC: `rao1999`,
