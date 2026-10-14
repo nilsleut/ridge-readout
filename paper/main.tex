@@ -77,6 +77,7 @@ convnext\_tiny \texttt{features[0]} / \texttt{features[7]}; vit\_b\_16
 space, or over tokens without the class token.
 
 \subsection{RSA convention}
+\label{sec:rsa}
 
 Unless stated otherwise, RSA follows \citet{evalres}. The model RDM is the
 correlation distance ($1 -$ Pearson $r$ across units) between the globally average-pooled
@@ -94,6 +95,7 @@ percentile intervals. They describe stimulus variation in 3 subjects, not the
 population.
 
 \subsection{Analysis multiverse}
+\label{sec:mvmethods}
 
 Three factors were crossed. Feature normalisation $F$, per unit over the 720 stimuli:
 raw; center (mean subtracted); scale (divided by the SD, not centred); z (both). Units
@@ -154,6 +156,7 @@ distributions; it was run for the seed-0 untrained and Backprop checkpoints at
 $g \in \{2, 4, 8\}$.
 
 \subsection{Gain axis and decomposition}
+\label{sec:gainmethods}
 
 For a stimulus $\times$ unit matrix $X$, let $\mu$ be the unit means over the 720
 stimuli, $\mu_c = \mu - \overline{\mu}$, and $\tilde{x}_i$ row $i$ centred across units.
@@ -190,6 +193,7 @@ two terms of this identity and are not biological concepts.
 \section{Results}
 \subsection{Sign flip between RSA and ridge (including the pre-specified primary analysis)}
 \label{sec:signflip}
+\input{drafts/sec_3_1}
 
 \begin{figure}[t]
 \centering
@@ -207,8 +211,10 @@ two terms of this identity and are not biological concepts.
 
 \subsection{Channel standardization removes gap and slope}
 \label{sec:standardization}
+\input{drafts/sec_3_2}
 \subsection{Analysis multiverse}
 \label{sec:multiverse}
+\input{drafts/sec_3_3}
 
 \begin{figure}[t]
 \centering
@@ -226,6 +232,7 @@ two terms of this identity and are not biological concepts.
 
 \subsection{Gain axis}
 \label{sec:gainaxis}
+\input{drafts/sec_3_4}
 
 \begin{figure}[t]
 \centering
@@ -236,6 +243,7 @@ two terms of this identity and are not biological concepts.
 
 \subsection{Gain versus geometry}
 \label{sec:gaingeometry}
+\input{drafts/sec_3_5}
 
 \begin{figure}[t]
 \centering

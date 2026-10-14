@@ -1,0 +1,33 @@
+In an exploratory analysis, the V1 contrast between the untrained (uncalibrated BN
+statistics) network and Backprop was computed in all 36 cells of the multiverse
+(Section~\ref{sec:mvmethods}; Fig.~\ref{fig:multiverse_v1}). The mathematical control O1 was met:
+euclidean RDMs under raw and centred features, and under paper and center720 betas,
+agreed to within \MultiOOneMaxDelta. O2 was met: the only cell with a strong resolution
+slope (CI above 0 and $S \geq 0.5\,S_{\mathrm{paper}}$) was the convention of
+\citet{evalres}, raw/correlation/paper, with $S = +\MultiSlopePaper$
+[$\MultiSlopePaperLo$, $\MultiSlopePaperHi$]; \MultiOTwoViolations{} of 36 cells violated
+the prediction (at most 2 allowed). At NATIVE 224\,px the V1 gap had
+\MultiSignPositive{} positive and \MultiSignNegative{} negative point estimates. Its CI
+excluded 0 in \MultiPosCiCells{} positive cells, the paper's cell and the 12 euclidean
+cells, and in \MultiNegCiCells{} negative cells. Examples are $+\VoneGapRawTwoTwoFour$
+[$\VoneGapRawTwoTwoFourLo$, $\VoneGapRawTwoTwoFourHi$] in the paper's cell,
+$\VoneGapZTwoTwoFour$ [$\VoneGapZTwoTwoFourLo$, $\VoneGapZTwoTwoFourHi$] with z-scored
+features and correlation distance, and $+\MultiEuclidGap$ [$\MultiEuclidGapLo$,
+$\MultiEuclidGapHi$] with raw features and euclidean distance. At LOC
+(Fig.~\ref{fig:multiverse_loc}), Backprop minus untrained was positive in
+\MultiLocPositive{} of 36 cells and had a CI above 0 in \MultiLocCiPositive{} (O3,
+thresholds 30 and 18: met); the CI included 0 in all euclidean cells.
+
+For the six ImageNet models (contrast: untrained minus trained at V1, trained minus
+untrained at LOC), GEN2 was met: in \GenTwoModels{} of 6 models two of the four bootstrap
+cells gave V1 gaps at 224\,px whose CIs excluded 0 in opposite directions. GEN3 was not
+met: the LOC contrast had a CI above 0 in all four cells for \GenThreeModels{} models
+(at least 5 required). The raw/euclidean cell included 0 for every model, for example
+$+\GenAlexnetLocRawEucl$ [$\GenAlexnetLocRawEuclLo$, $\GenAlexnetLocRawEuclHi$] for
+alexnet and $\GenConvnexttinyLocRawEucl$ [$\GenConvnexttinyLocRawEuclLo$,
+$\GenConvnexttinyLocRawEuclHi$] for convnext\_tiny. GEN4 was not met: \GenFourQualified{}
+models had a raw/correlation slope $S_{\mathrm{gen}}$ (448 minus 224\,px) with a CI
+excluding 0, and in none of them did channel z-scoring halve its magnitude. A slope
+remained under z-scoring, for example $+\GenAlexnetSlopeRawCorr$ raw versus
+$+\GenAlexnetSlopeZCorr$ z-scored for alexnet and $+\GenVggelevenSlopeRawCorr$ versus
+$+\GenVggelevenSlopeZCorr$ for vgg11\_bn.
