@@ -6,14 +6,14 @@ system by the dissimilarities between its responses to a set of stimuli and comp
 these summaries directly, without fitting a mapping \citep{kriegeskorte2008}. A
 recurring and surprising result is that networks with random, untrained weights can
 match early visual cortex as well as or better than trained networks
-\citep{TODO-untrained}. If true, such results bear on how much of early visual
+\citep{truzzi2025}. If true, such results bear on how much of early visual
 representation follows from architecture alone and how much from learning.
 
-We reported a result of this kind ourselves. In THINGS fMRI \citep{TODO-thingsfmri},
+We reported a result of this kind ourselves. In THINGS fMRI \citep{hebart2023},
 an untrained network with uncalibrated batch-normalisation statistics exceeded a
 backpropagation-trained network at V1 when images were evaluated at 224\,px, but not at
 32\,px, the resolution at which the networks had been trained \citep{evalres}; a related
-claim appears in \citet{TODO-learningrules}. Both analyses used a single convention:
+claim appears in \citet{leutenegger2026}. Both analyses used a single convention:
 globally pooled features, correlation distance between units, and voxel responses
 normalised over all trials of the experiment.
 
@@ -25,8 +25,8 @@ per-stimulus gain. Euclidean distance is invariant to such offsets but not to th
 each stimulus's response vector. Different distance measures and normalisations
 therefore weight a gain-like quantity and the direction of the response pattern
 differently. The role of centring is explicit in related similarity measures
-\citep{TODO-kornblith2019}, and the choice of dissimilarity measure is known to affect
-the reliability of RSA \citep{TODO-walther2016, TODO-diedrichsen2017}, but its effect on
+\citep{kornblith2019}, and the choice of dissimilarity measure is known to affect
+the reliability of RSA \citep{walther2016, diedrichsen2017}, but its effect on
 the ranking of candidate models has rarely been examined.
 
 Here we test our earlier result in four ways. First, a pre-specified analysis replaces
@@ -34,7 +34,7 @@ RSA by a fitted ridge readout on the full feature map. Second, a sequence of exp
 analyses, each with predictions and decision rules committed before it was run, asks
 where the discrepancy between RSA and ridge arises. Third, a multiverse of 36
 combinations of unit normalisation, distance measure and voxel normalisation
-\citep{TODO-steegen2016} tests which conclusions survive defensible analysis choices,
+\citep{steegen2016} tests which conclusions survive defensible analysis choices,
 and six ImageNet architectures test whether they generalise beyond our networks.
 Fourth, an exact decomposition of Euclidean distances separates a norm component from an
 angular component, which we refer to as geometry.
