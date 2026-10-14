@@ -198,14 +198,14 @@ two terms of this identity and are not biological concepts.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/sign_flip.pdf}
-\caption{} % caption TBD
+\caption{Untrained (uncalibrated BN statistics) minus Backprop at V1 (Conv1) against evaluation resolution; NATIVE inputs left of the dotted line, UPSAMPLED 224\,px (open markers) right. RSA with raw features (circles) and channel-z-scored features (squares): per subject on cross-run pairs, averaged over subjects and 5 seeds; bars are 95\% stimulus-bootstrap CIs where computed. Ridge (triangles): median $r$ over reliable voxels, mean over sub-01 and sub-02, error bars SD over seeds.}
 \label{fig:sign_flip}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.5in]{figures/prereg_ladder.pdf}
-\caption{} % caption TBD
+\caption{Pre-specified primary analysis. Median $r$ over reliable V1 voxels (Conv1, NATIVE 224\,px), averaged over the three subjects, against grid size $g$ (logarithmic axis). Coloured lines: the six conditions, mean over 5 seeds, error bars SD over seeds. Grey dashed and dotted lines: control banks (luminance and contrast, darker; pixels; Gabor). The permuted-assignment control is not shown (Section~\ref{sec:signflip}).}
 \label{fig:prereg_ladder}
 \end{figure}
 
@@ -219,14 +219,14 @@ two terms of this identity and are not biological concepts.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/multiverse_v1.pdf}
-\caption{} % caption TBD
+\caption{Untrained minus Backprop at V1 in the 36 cells of the analysis multiverse. Left: gap at NATIVE 224\,px; right: resolution slope $S$ (224 minus 32\,px). Rows: feature normalisation $F$; columns: distance $D$ within fMRI normalisation $B$. Colour: value on a diverging scale centred at 0. Dots: 95\% stimulus-bootstrap CI excludes 0. Black frame: the convention of \citet{evalres}. Mean over 5 seeds and 3 subjects.}
 \label{fig:multiverse_v1}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=3.5in]{figures/multiverse_loc.pdf}
-\caption{} % caption TBD
+\caption{Backprop minus untrained at LOC (Conv3), NATIVE 224\,px, in the 36 cells of the analysis multiverse. Layout, colour scale, dots and frame as in Fig.~\ref{fig:multiverse_v1}.}
 \label{fig:multiverse_loc}
 \end{figure}
 
@@ -237,7 +237,7 @@ two terms of this identity and are not biological concepts.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/gain.pdf}
-\caption{} % caption TBD
+\caption{(a)~Own CNN: raw-feature RSA at V1 against $c_{\mathrm{gain}}$ for the untrained (vermillion) and Backprop (blue) checkpoints; markers code the input condition. (b)~ImageNet models: the same for trained (blue) and untrained (vermillion) networks; markers code the model. (c)~Pearson correlation over stimuli between the gain axis and stimulus mean luminance (orange) or RMS contrast (light blue), for V1 voxels per subject, the own CNN's conditions and the ImageNet models.}
 \label{fig:gain}
 \end{figure}
 
@@ -248,7 +248,7 @@ two terms of this identity and are not biological concepts.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/separation.pdf}
-\caption{} % caption TBD
+\caption{Component RSA contrasts with $F$ = center and 95\% stimulus-bootstrap CIs, for the own CNN (vermillion) and six ImageNet models (blue). Panels from left: V1 norm (gain magnitude) component, V1 angular (geometry) component, LOC angular component, and the slope of the V1 angular contrast from 224 to 448\,px for the ImageNet models (green; none for vit\_b\_16). V1: untrained minus trained; LOC: trained minus untrained.}
 \label{fig:separation}
 \end{figure}
 
