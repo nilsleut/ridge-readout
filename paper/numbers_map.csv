@@ -695,7 +695,7 @@ PreregShufBpSubThreeGEight,results/prereg/instruments_cell_shuffle.csv,subject =
 PreregReferenceEffect,results/prereg/signflip.csv,kind == 'verdict',reference_effect,3 decimals,0.044
 PreregLowEdgeHits,results/prereg/lower_edge.csv,classification == classification,row count,integer,26
 PreregLowEdgePlateau,results/prereg/lower_edge.csv,classification == 'Plateau',row count,integer,26
-GtwoGateMaxDelta,results/prereg_gate/g4_equivalence.csv,kind == 'gate',delta,1-digit scientific,\ensuremath{1\times 10^{-8}}
+GtwoGateMaxDelta,results/prereg_gate/g4_equivalence.csv,kind == 'gate',delta,2-digit scientific,\ensuremath{1.3\times 10^{-8}}
 GtwoGateContrastDelta,results/prereg_gate/g4_equivalence.csv,kind == 'contrast',delta,1-digit scientific,\ensuremath{3\times 10^{-9}}
 PreregPilotSd,results/prereg/delta_min_prereg.csv,g == 1,sd_value,4 decimals,0.0082
 PreregDminSim,results/prereg/delta_min_prereg.csv,g == 1,delta_min_sim,3 decimals,0.014
@@ -709,6 +709,21 @@ LumDefPearson,results/checks/luminance_defs.csv,quantity == 'pearson',value,3 de
 LumDefSpearman,results/checks/luminance_defs.csv,quantity == 'spearman',value,3 decimals,0.996
 PreregReferenceSem,config.yaml,provenance.reference_effect.sem_at_224px,config value,3 decimals,0.006
 FailedPredictions,results/**/*.csv,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, P_mech2, SEP2)",integer,5
+PreregSecondaryMaxMean,results/prereg/signflip.csv,kind == 'contrast' and role == 'secondary',max of mean over 16 rows,3 decimals,-0.018
+PreregSecondaryMaxPos,results/prereg/signflip.csv,kind == 'contrast' and role == 'secondary',max of seeds_positive over 16 rows,integer,0
+MultiOOneMaxDelta,results/step7/multiverse.csv,kind == 'rule' and quantity.str.startswith('O1'),value,1-digit scientific,\ensuremath{4\times 10^{-14}}
+MultiSignPositive,results/step7/multiverse_sign_table.csv,sign == '+',row count,integer,21
+MultiSignNegative,results/step7/multiverse_sign_table.csv,sign == '-',row count,integer,15
+VoxGainLumSubOne,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'voxel gain V1 sub-01' and stat == 'mean luminance',pearson,2 decimals,-0.28
+VoxGainConSubOne,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'voxel gain V1 sub-01' and stat == 'RMS contrast',pearson,2 decimals,0.13
+VoxGainLumSubTwo,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'voxel gain V1 sub-02' and stat == 'mean luminance',pearson,2 decimals,-0.27
+VoxGainConSubTwo,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'voxel gain V1 sub-02' and stat == 'RMS contrast',pearson,2 decimals,0.20
+VoxGainLumSubThree,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'voxel gain V1 sub-03' and stat == 'mean luminance',pearson,2 decimals,-0.23
+VoxGainConSubThree,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'voxel gain V1 sub-03' and stat == 'RMS contrast',pearson,2 decimals,0.13
+ModelGainRandLum,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Random Weights' and stat == 'mean luminance',pearson,2 decimals,-0.44
+ModelGainRandCon,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Random Weights' and stat == 'RMS contrast',pearson,2 decimals,0.45
+ModelGainBpLum,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Backprop' and stat == 'mean luminance',pearson,2 decimals,0.40
+ModelGainBpCon,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Backprop' and stat == 'RMS contrast',pearson,2 decimals,0.00
 PreregDminGOneSim,results/prereg/delta_min_prereg.csv,g == 1,delta_min_sim,3 decimals,0.014
 PreregDminGOneClosed,results/prereg/delta_min_prereg.csv,g == 1,delta_min_closed,3 decimals,0.014
 PreregDminGOneParam,results/prereg/delta_min_prereg.csv,g == 1,delta_min_param,3 decimals,0.014
@@ -716,6 +731,7 @@ PreregDminGOneSd,results/prereg/delta_min_prereg.csv,g == 1,sd_value,4 decimals,
 PreregCtlLumcontrastMeanGOne,results/prereg/instruments_control_band.csv,grid == 1 and label == 'control:lumcontrast',mean of r_med_reliable over 3 subjects,3 decimals,0.081
 PreregCtlPixelsMeanGOne,results/prereg/instruments_control_band.csv,grid == 1 and label == 'control:pixels',mean of r_med_reliable over 3 subjects,3 decimals,0.006
 PreregCtlGaborMeanGOne,results/prereg/instruments_control_band.csv,grid == 1 and label == 'control:gabor',mean of r_med_reliable over 3 subjects,3 decimals,0.010
+PreregCtlPermutedMeanGOne,results/prereg/instruments_control_band.csv,grid == 1 and label == 'control:permuted',mean of r_med_reliable over 3 subjects,3 decimals,-0.078
 PreregDminGTwoSim,results/prereg/delta_min_prereg.csv,g == 2,delta_min_sim,3 decimals,0.014
 PreregDminGTwoClosed,results/prereg/delta_min_prereg.csv,g == 2,delta_min_closed,3 decimals,0.014
 PreregDminGTwoParam,results/prereg/delta_min_prereg.csv,g == 2,delta_min_param,3 decimals,0.014
@@ -723,6 +739,7 @@ PreregDminGTwoSd,results/prereg/delta_min_prereg.csv,g == 2,sd_value,4 decimals,
 PreregCtlLumcontrastMeanGTwo,results/prereg/instruments_control_band.csv,grid == 2 and label == 'control:lumcontrast',mean of r_med_reliable over 3 subjects,3 decimals,0.087
 PreregCtlPixelsMeanGTwo,results/prereg/instruments_control_band.csv,grid == 2 and label == 'control:pixels',mean of r_med_reliable over 3 subjects,3 decimals,0.005
 PreregCtlGaborMeanGTwo,results/prereg/instruments_control_band.csv,grid == 2 and label == 'control:gabor',mean of r_med_reliable over 3 subjects,3 decimals,-0.006
+PreregCtlPermutedMeanGTwo,results/prereg/instruments_control_band.csv,grid == 2 and label == 'control:permuted',mean of r_med_reliable over 3 subjects,3 decimals,-0.075
 PreregDminGFourSim,results/prereg/delta_min_prereg.csv,g == 4,delta_min_sim,3 decimals,0.014
 PreregDminGFourClosed,results/prereg/delta_min_prereg.csv,g == 4,delta_min_closed,3 decimals,0.014
 PreregDminGFourParam,results/prereg/delta_min_prereg.csv,g == 4,delta_min_param,3 decimals,0.014
@@ -730,6 +747,7 @@ PreregDminGFourSd,results/prereg/delta_min_prereg.csv,g == 4,sd_value,4 decimals
 PreregCtlLumcontrastMeanGFour,results/prereg/instruments_control_band.csv,grid == 4 and label == 'control:lumcontrast',mean of r_med_reliable over 3 subjects,3 decimals,0.106
 PreregCtlPixelsMeanGFour,results/prereg/instruments_control_band.csv,grid == 4 and label == 'control:pixels',mean of r_med_reliable over 3 subjects,3 decimals,0.021
 PreregCtlGaborMeanGFour,results/prereg/instruments_control_band.csv,grid == 4 and label == 'control:gabor',mean of r_med_reliable over 3 subjects,3 decimals,-0.002
+PreregCtlPermutedMeanGFour,results/prereg/instruments_control_band.csv,grid == 4 and label == 'control:permuted',mean of r_med_reliable over 3 subjects,3 decimals,-0.074
 PreregDminGEightSim,results/prereg/delta_min_prereg.csv,g == 8,delta_min_sim,3 decimals,0.014
 PreregDminGEightClosed,results/prereg/delta_min_prereg.csv,g == 8,delta_min_closed,3 decimals,0.014
 PreregDminGEightParam,results/prereg/delta_min_prereg.csv,g == 8,delta_min_param,3 decimals,0.014
@@ -737,3 +755,4 @@ PreregDminGEightSd,results/prereg/delta_min_prereg.csv,g == 8,sd_value,4 decimal
 PreregCtlLumcontrastMeanGEight,results/prereg/instruments_control_band.csv,grid == 8 and label == 'control:lumcontrast',mean of r_med_reliable over 3 subjects,3 decimals,0.111
 PreregCtlPixelsMeanGEight,results/prereg/instruments_control_band.csv,grid == 8 and label == 'control:pixels',mean of r_med_reliable over 3 subjects,3 decimals,0.018
 PreregCtlGaborMeanGEight,results/prereg/instruments_control_band.csv,grid == 8 and label == 'control:gabor',mean of r_med_reliable over 3 subjects,3 decimals,-0.000
+PreregCtlPermutedMeanGEight,results/prereg/instruments_control_band.csv,grid == 8 and label == 'control:permuted',mean of r_med_reliable over 3 subjects,3 decimals,-0.075

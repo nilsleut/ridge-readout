@@ -1,0 +1,39 @@
+Table~\ref{tab:failed} lists the \FailedPredictions{} pre-stated predictions of the
+exploratory analyses that were not met. Each rule was committed before the scripts of its
+step were run (Section~\ref{sec:inference}).
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}p{0.11\textwidth}p{0.37\textwidth}p{0.36\textwidth}p{0.07\textwidth}@{}}
+\toprule
+Prediction & Rule and threshold & Result & Section \\
+\midrule
+P\_mech2 & $m_{\mathrm{BP}}(\text{notch}) > m_{\mathrm{BP}}(\text{only})$ in 5 of 5 seeds,
+  and Spearman$(m, d) \geq 0.6$ over 50 cells
+  & \PMechTwoNotchSeeds{} of 5 seeds; Spearman \PMechTwoSpearman
+  & \ref{sec:standardization} \\
+G2 & partial V1 gap at NATIVE 224\,px with upper CI bound $\leq 0.010$, and
+  $S_{\mathrm{partial}} \leq 0.5\,S_{\mathrm{paper}}$
+  & gap $+\GTwoPartialGap$ [$\GTwoPartialGapLo$, $\GTwoPartialGapHi$];
+  $S_{\mathrm{partial}} = +\GTwoPartialSlope$ [$\GTwoPartialSlopeLo$, $\GTwoPartialSlopeHi$]
+  & \ref{sec:gainaxis} \\
+GEN3 & LOC trained $-$ untrained at 224\,px with CI above 0 in all 4 bootstrap cells,
+  for $\geq 5$ of 6 models
+  & \GenThreeModels{} models; the raw/euclidean cell includes 0 for every model
+  & \ref{sec:multiverse} \\
+GEN4 & for every model whose $S_{\mathrm{gen}}$ (raw, correlation) has a CI excluding 0:
+  $|S_{\mathrm{gen}}(z)| \leq 0.5\,|S_{\mathrm{gen}}(\text{raw})|$
+  & \GenFourQualified{} qualifying models, none within the bound
+  & \ref{sec:multiverse} \\
+SEP2 & V1 norm contrast ($F$ = center) $> 0$ with CI above 0 in the own CNN and in
+  $\geq 4$ of 6 ImageNet models
+  & own CNN $+\SepOwnVoneNormCenter$ [$\SepOwnVoneNormCenterLo$, $\SepOwnVoneNormCenterHi$];
+  ImageNet \SepTwoModels{} of 6
+  & \ref{sec:gaingeometry} \\
+\bottomrule
+\end{tabular}
+\caption{Pre-stated predictions that were not met. Intervals are 95\% stimulus-bootstrap
+percentile intervals.}
+\label{tab:failed}
+\end{table}

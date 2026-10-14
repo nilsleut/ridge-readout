@@ -22,18 +22,19 @@ $+\VoneGapRawTwoTwoFour$ [$\VoneGapRawTwoTwoFourLo$, $\VoneGapRawTwoTwoFourHi$],
 observed contrasts were negative (Section~\ref{sec:signflip}).
 
 \paragraph{Amendments.}
-Three amendments were adopted before the pilot on real data
-% VERIFY: confirm in PHASE2_REPORT / PILOT_REPORT that D1-D3 preceded the real-data pilot
-: a hard assertion against selecting the lowest regularisation value for reliable
-voxels, selection of the regularisation by mean squared error with Pearson~$r$ reported,
-and a widening of the regularisation grid. Three further decisions were taken after data
-had been seen, and we list them as such. (i) The regularisation was kept at
-minimum-MSE selection rather than a tolerance rule, after a tolerance measurement was
-known; this adds no degree of freedom. (ii) The assertion's abort was replaced by a
-post-hoc gate that classifies each lower-boundary selection as a plateau or a true
-optimum below the grid; only the latter would invalidate a cell. This was decided after
-a diagnosis showed that all observed boundary selections were plateaus, and it leaves all
-scores unchanged. No cell was excluded in any analysis. (iii) Features for $g = 2$ were
+Three amendments were adopted before any fit to THINGS data, on the basis of
+simulations in the actual geometry of the primary data set: a hard assertion against
+selecting the lowest regularisation value for reliable voxels, selection of the
+regularisation by mean squared error with Pearson~$r$ reported, and a widening of the
+regularisation grid. Four further decisions were taken after data had been seen, and we
+list them as such. (i) The regularisation was kept at minimum-MSE selection rather than
+a tolerance rule, after a tolerance measurement was known; this adds no degree of
+freedom. (ii) After the pilot aborted on the assertion, its remedy clause was amended
+to require a diagnosis before any change, and the abort was then replaced by a post-hoc
+gate that classifies each lower-boundary selection as a plateau or a true optimum below
+the grid; only the latter would invalidate a cell. This was decided after a diagnosis
+showed that all observed boundary selections were plateaus, and it leaves all scores
+unchanged. No cell was excluded in any analysis. (iii) Features for $g = 2$ were
 extracted on CPU, whereas all other features came from a GPU extraction. The
 pre-specified reproduction gate (absolute tolerance $10^{-6}$) failed because of
 floating-point differences; we replaced it by a downstream-equivalence gate, which

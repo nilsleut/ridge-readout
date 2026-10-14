@@ -10,6 +10,7 @@ Each spec is (macro, source CSV, pandas query, column, format):
          "corr"  correlations (Spearman / Pearson), 2 decimals
          "int"   integers
          "sci"   numerical-check magnitudes (e.g. relative errors), 1-digit scientific
+         "sci2"  the same with 2 significant digits
          "sd"    the pilot seed SD, 4 decimals (as reported in PILOT_REPORT.md)
 A value spec fails unless its query matches exactly one row. A "count" spec counts the
 rows its query matches (used for cell counts); it fails if the source is missing or the
@@ -21,7 +22,8 @@ prereg/instruments_cell_shuffle.csv; fails unless every needed row exists exactl
 A "config" spec reads one value of the frozen config.yaml by dotted key (used only for
 the reference effect's SEM, which no CSV carries). A "failedrules" spec counts the
 distinct pre-stated predictions with a rule row (kind == 'rule') whose passed is False,
-over all CSVs in results/.
+over all CSVs in results/. A "max" spec takes the maximum of a column over the rows its
+query matches (fails if none match).
 Macro names contain letters only.
 
 Run:  python scripts/export_macros.py
@@ -179,7 +181,7 @@ SPECS += [
     ("PreregReferenceEffect", "prereg/signflip.csv", "kind == 'verdict'", "reference_effect", "rsa"),
     ("PreregLowEdgeHits", "count:prereg/lower_edge.csv", "classification == classification", None, "int"),
     ("PreregLowEdgePlateau", "count:prereg/lower_edge.csv", "classification == 'Plateau'", None, "int"),
-    ("GtwoGateMaxDelta", "prereg_gate/g4_equivalence.csv", "kind == 'gate'", "delta", "sci"),
+    ("GtwoGateMaxDelta", "prereg_gate/g4_equivalence.csv", "kind == 'gate'", "delta", "sci2"),
     ("GtwoGateContrastDelta", "prereg_gate/g4_equivalence.csv", "kind == 'contrast'", "delta", "sci"),
     # preregistered Delta_min (pilot SD; identical for every g, taken from the g = 1 row)
     ("PreregPilotSd", "prereg/delta_min_prereg.csv", "g == 1", "sd_value", "sd"),
@@ -200,13 +202,32 @@ SPECS += [
     # reference effect SEM (paper v1) from the frozen config; number of failed pre-stated predictions
     ("PreregReferenceSem", "config:config.yaml", "provenance.reference_effect.sem_at_224px", None, "rsa"),
     ("FailedPredictions", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
+    # secondary pre-specified contrasts (BN-cal, FA, PC, STDP minus Backprop), all g: largest mean and seeds positive
+    ("PreregSecondaryMaxMean", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'", "mean", "rsa"),
+    ("PreregSecondaryMaxPos", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'",
+     "seeds_positive", "int"),
+    # step 7 multiverse: O1 check and sign counts of the V1 gap at NATIVE 224 over the 36 cells
+    ("MultiOOneMaxDelta", "step7/multiverse.csv", "kind == 'rule' and quantity.str.startswith('O1')", "value", "sci"),
+    ("MultiSignPositive", "count:step7/multiverse_sign_table.csv", "sign == '+'", None, "int"),
+    ("MultiSignNegative", "count:step7/multiverse_sign_table.csv", "sign == '-'", None, "int"),
 ]
+_SC = "kind == 'stimulus_corr' and res == 224 and "
+for _s, _sn in (("sub-01", "SubOne"), ("sub-02", "SubTwo"), ("sub-03", "SubThree")):
+    SPECS += [(f"VoxGainLum{_sn}", "step7/gain.csv", _SC + f"what == 'voxel gain V1 {_s}' and stat == 'mean luminance'",
+               "pearson", "corr"),
+              (f"VoxGainCon{_sn}", "step7/gain.csv", _SC + f"what == 'voxel gain V1 {_s}' and stat == 'RMS contrast'",
+               "pearson", "corr")]
+for _r, _rn in (("Random Weights", "Rand"), ("Backprop", "Bp")):
+    SPECS += [(f"ModelGain{_rn}Lum", "step7/gain.csv", _SC + f"what == 'model gain Conv1 {_r}' and stat == 'mean luminance'",
+               "pearson", "corr"),
+              (f"ModelGain{_rn}Con", "step7/gain.csv", _SC + f"what == 'model gain Conv1 {_r}' and stat == 'RMS contrast'",
+               "pearson", "corr")]
 for _g, _gn in GRID_NAMES.items():
     SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),
               (f"PreregDminG{_gn}Closed", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_closed", "rsa"),
               (f"PreregDminG{_gn}Param", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_param", "rsa"),
               (f"PreregDminG{_gn}Sd", "prereg/delta_min_prereg.csv", f"g == {_g}", "sd_value", "sd")]
-    for _c in ("lumcontrast", "pixels", "gabor"):
+    for _c in ("lumcontrast", "pixels", "gabor", "permuted"):
         SPECS.append((f"PreregCtl{_c.capitalize()}MeanG{_gn}", "mean3:prereg/instruments_control_band.csv",
                       f"grid == {_g} and label == 'control:{_c}'", "r_med_reliable", "rsa"))
 
@@ -214,6 +235,9 @@ for _g, _gn in GRID_NAMES.items():
 def fmt(v, how):
     if how == "int":
         return str(int(round(float(v))))
+    if how == "sci2":
+        m, e = f"{float(v):.1e}".split("e")
+        return "\\ensuremath{" + f"{m}" + "\\times 10^{" + f"{int(e)}" + "}}"
     if how == "sci":
         m, e = f"{float(v):.0e}".split("e")
         return "\\ensuremath{" + f"{m}" + "\\times 10^{" + f"{int(e)}" + "}}"
@@ -303,6 +327,10 @@ def main():
             if len(hit) != 3 or hit.subject.nunique() != 3:
                 raise SystemExit(f"{name}: mean3 filter matches {len(hit)} rows, expected 3 subjects: {q}")
             val, colname = hit[col].mean(), f"mean of {col} over 3 subjects"
+        elif kind == "max":
+            if len(hit) == 0:
+                raise SystemExit(f"{name}: max filter matches no row: {q}")
+            val, colname = hit[col].max(), f"max of {col} over {len(hit)} rows"
         elif kind == "count":
             if len(hit) == 0:
                 raise SystemExit(f"{name}: count filter matches no row: {q}")
@@ -312,7 +340,7 @@ def main():
                 raise SystemExit(f"{name}: filter matches {len(hit)} rows, expected 1: {q}")
             val, colname = hit.iloc[0][col], col
         text = fmt(val, how)
-        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific",
+        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific", "sci2": "2-digit scientific",
                     "sd": "4 decimals"}[how]
         lines.append(f"% {name}: {path.relative_to(REPO).as_posix()} | {q} | {colname} | {rounding}")
         lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
