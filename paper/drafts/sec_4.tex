@@ -14,12 +14,13 @@ the gain axis by rank regression left part of the resolution slope (G2), and the
 component did not favour the untrained network with a resolved interval in our own
 network (SEP2). Under our pre-stated rule, the overall V1 ranking remains unattributed.
 
-\paragraph{A trivial baseline exceeds every network at V1.}
+\paragraph{A two-feature baseline exceeds every network at V1 in these data.}
 Under the ridge readout, a bank of two features, mean luminance and contrast, predicted
 V1 better than every network condition at every pooling grid, including the
-backpropagation-trained network. In this data set and at this layer, V1 responses are
-thus dominated by low-level stimulus statistics that no network captured better than the
-statistics themselves. This is consistent with the gain account: the voxel gain axis
+backpropagation-trained network. In this data set, and for the Conv1 features tested here, the variance in V1
+responses that a linear readout captures is thus largely shared with low-level stimulus
+statistics, and no network captured it better than the statistics themselves. This
+limits what V1 comparisons in these data can reveal about learning rules. This is consistent with the gain account: the voxel gain axis
 correlated with luminance and contrast, and the untrained network's gain axis shared
 these signs. Whether this gain reflects neural mechanisms such as contrast normalisation
 \citep{carandini2012} or properties of the BOLD measurement cannot be decided with
@@ -32,8 +33,8 @@ In our CIFAR-trained networks, the dependence of the V1 gap on evaluation resolu
 vanished under unit centring and standardisation and was absent in the ridge readout.
 In the ImageNet models, a small dependence on resolution above the training resolution
 remained under standardisation and resided in the angular component. Evaluation
-resolution can therefore change model--brain similarity, but in our earlier work its
-apparent size depended on uncentred units. The two model families differ in the ratio
+resolution can therefore affect the angular component of model--brain similarity, but
+in our earlier work the size of the effect depended on uncentred units. The two model families differ in the ratio
 of evaluation to training resolution (up to sevenfold versus twofold), and we do not
 claim that the results transfer between these regimes.
 
