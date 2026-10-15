@@ -20,7 +20,7 @@ tag and are marked `% TO VERIFY` in `refs.bib`.
 | `bi1998` | STDP | converted: learning-rules-rsa `arxiv-v4` (evaluation-resolution-rsa `arxiv-v3` has the short title) | 2.2 |
 | `masquelier2007` | STDP, visual features | converted: evaluation-resolution-rsa `arxiv-v3` | 2.2 |
 | `hoerl1970` | Ridge regression | **new, to verify** (Technometrics 12(1):55-67, with DOI) | 2.5 |
-| `paszke2019` | PyTorch (cited for torchvision) | **new, to verify** (arXiv DOI) | 2.2 |
+| `paszke2019` | PyTorch (cited for torchvision) | **new, to verify** (NeurIPS 2019 proceedings; no DOI) | 2.2 |
 | `marcel2010` | torchvision, ACM Multimedia 2010 | **new, to verify** (with DOI) | 2.2 |
 | `kornblith2019` | CKA, similarity of representations | **new, to verify** (no DOI given) | 1 |
 | `walther2016` | reliability of dissimilarity measures | **new, to verify** (with DOI; also an inline `\bibitem` in learning-rules-rsa `arxiv-v4`) | 1 |
@@ -28,7 +28,7 @@ tag and are marked `% TO VERIFY` in `refs.bib`.
 | `steegen2016` | multiverse analysis | **new, to verify** (with DOI) | 1 |
 | `carandini2012` | normalisation | **new, to verify** (with DOI) | 4 |
 | `truzzi2020` | untrained CNNs and human object representations, CogSci 2020 | **new, to verify** (URL, no DOI) | abstract, 1 |
-| `kazemian2025` | convolutional architectures cortex-aligned de novo, Nature Machine Intelligence 2025 | **new, to verify** (metadata from publisher page and news coverage; check issue number) | abstract, 1 |
+| `kazemian2025` | convolutional architectures cortex-aligned de novo, Nature Machine Intelligence 2025 | **new, verified 2026-10-15** against the publisher page | abstract, 1 |
 | `liu2022` | ConvNeXt, CVPR 2022 | **new, to verify** (no DOI given) | 4 |
 
 `truzzi2025` (placeholder) was removed on 2026-10-14 and replaced by `truzzi2020` and
