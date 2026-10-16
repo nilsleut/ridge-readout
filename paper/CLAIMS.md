@@ -37,9 +37,9 @@ script.
 
 ---
 
-## C0 (preregistered primary analysis)
+## C0 (pre-specified primary analysis)
 
-**Claim.** Under the preregistered ridge readout (Arm A, Conv1 → V1, 224 px, all three
+**Claim.** Under the pre-specified ridge readout (Arm A, Conv1 → V1, 224 px, all three
 subjects), the untrained network does not exceed backprop at any grid rung; the
 contrast is negative at every g, with 0/5 seeds positive. By the frozen decision rule
 (PREREGISTRATION.md §3b) the paper's effect disappears under a fitted readout.
@@ -48,7 +48,7 @@ contrast is negative at every g, with 0/5 seeds positive. By the frozen decision
 |---|---|
 | Rule and threshold | §2: Random − BP, median r over reliable voxels, mean over subjects, paired one-sided sign-flip test over 5 seeds (32 assignments), alternative Random − BP > 0. §3a: survives only if it holds at g ≥ 4 (operationalised: p ≤ 0.05, i.e. p = 1/32, at g = 4 and g = 8). §3b: "the effect disappears" if Δ_min < the paper's effect (`\PreregReferenceEffect`); "the method cannot resolve it" otherwise. |
 | Result | Random − BP = −0.021 (g = 1), −0.035 (g = 2), −0.043 (g = 4), −0.045 (g = 8) (`\PreregRandBpGOne` … `\PreregRandBpGEight`); seeds positive 0 at every g (`\PreregRandBpG<g>Pos`); one-sided p = 1.000 at every g (`\PreregRandBpG<g>P`); **preregistered Δ_min = 0.014** at every g (pilot seed SD 0.0082; `\PreregDminSim`, `\PreregDminClosed`, `\PreregDminParam`, `\PreregPilotSd`), below the paper's +0.044; supplementary Δ_min from the analysis's own seed SD 0.010 / 0.011 / 0.016 / 0.016 (`\PreregRandBpG<g>Dmin`) |
-| Verdict | **§3a not met; §3b: "The effect disappears"** (preregistered Δ_min 0.014 < +0.044; also with the supplementary Δ_min). The contrast is reversed, not merely absent. |
+| Verdict | **§3a not met; §3b: "The effect disappears"** (preregistered Δ_min 0.014 < +0.044; also with the supplementary Δ_min). The contrast is negative in every seed at every g; the sign-flip test addresses only the positive direction (smallest attainable one-sided p with 5 seeds: 1/32). |
 | Secondary (same test) | BN-cal − BP, FA − BP, PC − BP, STDP − BP negative at every g, 0/5 seeds positive (`\PreregBncalBpG<g>`, `\PreregFaBpG<g>`, `\PreregPcBpG<g>`, `\PreregStdpBpG<g>`) |
 | Macros | `\PreregRandBpG<g>[Sd/Pos/P/Dmin]`, `\PreregCond<Rule>G<g>`, `\PreregReferenceEffect`, `\PreregLowEdgeHits`, `\PreregLowEdgePlateau`, `\GtwoGateMaxDelta`, `\GtwoGateContrastDelta`; `<g>` ∈ {One, Two, Four, Eight} |
 | Figure | `fig:sign_flip` (ridge line at g = 1); no figure yet for the grid ladder |

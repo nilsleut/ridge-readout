@@ -22,11 +22,11 @@ Abstract prefix:
 > paper, that the untrained network exceeds backpropagation in V1 alignment at 224 px,
 > depends on the analysis convention used here (globally pooled features, correlation
 > distance, voxels normalised over all trials). When model units are standardised over
-> the evaluated stimuli, the V1 difference reverses (untrained minus backpropagation
+> the evaluated stimuli, the V1 difference reverses with correlation distance (under Euclidean distance it remains positive) (untrained minus backpropagation
 > -0.011 [-0.017, -0.005]), and a pre-specified ridge readout on the full Conv1 feature
 > map also places backpropagation above the untrained network. The claim in the title,
 > the V1 and V2 rankings and the conclusion that early visual alignment is driven more
-> by architecture than by the learning rule are therefore not supported. The advantage
+> by architecture than by the learning rule are therefore not robust to this choice. The advantage
 > of backpropagation at LOC survives. The text below is unchanged.
 
 Comments field:
@@ -42,7 +42,7 @@ Abstract prefix:
 > dependence of the untrained-minus-backpropagation difference at V1 reported here is
 > specific to raw correlation-distance RSA. When model units are standardised over the
 > evaluated stimuli, the slope from 32 to 224 px is +0.002 [-0.004, +0.007] instead of
-> +0.031 [0.024, 0.038], and the difference is negative at every resolution. The V1
+> +0.031 [0.024, 0.038], and, with correlation distance, the difference is negative at every resolution. The V1
 > headline (+0.030 at 224 px) and the content-limited ratio R therefore do not hold
 > under this analysis. The advantage of backpropagation at LOC, its loss under
 > upsampling, and the widening of the V1 gap when content is limited survive.
