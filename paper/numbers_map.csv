@@ -725,6 +725,158 @@ ModelGainRandLum,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 a
 ModelGainRandCon,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Random Weights' and stat == 'RMS contrast',pearson,2 decimals,0.45
 ModelGainBpLum,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Backprop' and stat == 'mean luminance',pearson,2 decimals,0.40
 ModelGainBpCon,results/step7/gain.csv,kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Backprop' and stat == 'RMS contrast',pearson,2 decimals,0.00
+LowEdgePilotHits,results/step2/lower_edge_diagnosis.csv,relative_gain == relative_gain,row count,integer,4
+LowEdgePilotPlateau,results/step2/lower_edge_diagnosis.csv,relative_gain < 0.001,row count,integer,4
+LowEdgePilotExcluded,results/step2/lower_edge_diagnosis.csv,relative_gain >= 0.001,row count (zero allowed),integer,0
+LowEdgePilotMaxGain,results/step2/lower_edge_diagnosis.csv,relative_gain == relative_gain,max of relative_gain over 4 rows,2-digit scientific,\ensuremath{1.6\times 10^{-4}}
+LowEdgeEtwoHits,results/step3/lower_edge_gate_e2.csv,classification == classification,row count,integer,3
+LowEdgeEtwoPlateau,results/step3/lower_edge_gate_e2.csv,classification == 'Plateau',row count,integer,3
+LowEdgeEtwoExcluded,results/step3/lower_edge_gate_e2.csv,classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeEtwoMaxGain,results/step3/lower_edge_gate_e2.csv,classification == classification,max of relative_gain over 3 rows,2-digit scientific,\ensuremath{4.4\times 10^{-8}}
+LowEdgeEthreeHits,results/step3/lower_edge_gate_e3.csv,classification == classification,row count,integer,4
+LowEdgeEthreePlateau,results/step3/lower_edge_gate_e3.csv,classification == 'Plateau',row count,integer,4
+LowEdgeEthreeExcluded,results/step3/lower_edge_gate_e3.csv,classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeEthreeMaxGain,results/step3/lower_edge_gate_e3.csv,classification == classification,max of relative_gain over 4 rows,2-digit scientific,\ensuremath{4.8\times 10^{-6}}
+LowEdgeEfourHits,results/step3/lower_edge_gate_e4.csv,classification == classification,row count,integer,7
+LowEdgeEfourPlateau,results/step3/lower_edge_gate_e4.csv,classification == 'Plateau',row count,integer,7
+LowEdgeEfourExcluded,results/step3/lower_edge_gate_e4.csv,classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeEfourMaxGain,results/step3/lower_edge_gate_e4.csv,classification == classification,max of relative_gain over 7 rows,2-digit scientific,\ensuremath{4.8\times 10^{-6}}
+LowEdgeSubjectsHits,results/step4/lower_edge_gate_subjects.csv,classification == classification,row count,integer,1
+LowEdgeSubjectsPlateau,results/step4/lower_edge_gate_subjects.csv,classification == 'Plateau',row count,integer,1
+LowEdgeSubjectsExcluded,results/step4/lower_edge_gate_subjects.csv,classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeSubjectsMaxGain,results/step4/lower_edge_gate_subjects.csv,classification == classification,max of relative_gain over 1 rows,2-digit scientific,\ensuremath{3.0\times 10^{-5}}
+LowEdgeSubThreeHits,results/step5/sub03_diagnosis.csv,classification == classification,row count,integer,3
+LowEdgeSubThreePlateau,results/step5/sub03_diagnosis.csv,classification == 'Plateau',row count,integer,3
+LowEdgeSubThreeExcluded,results/step5/sub03_diagnosis.csv,classification != 'Plateau' and classification == classification,row count (zero allowed),integer,0
+LowEdgeSubThreeMaxGain,results/step5/sub03_diagnosis.csv,classification == classification,max of relative_gain over 3 rows,2-digit scientific,\ensuremath{1.3\times 10^{-5}}
+LowEdgeRidgeHits,results/step6/lower_edge_gate_ridge.csv,classification == classification,row count,integer,20
+LowEdgeRidgePlateau,results/step6/lower_edge_gate_ridge.csv,classification == 'Plateau',row count,integer,20
+LowEdgeRidgeExcluded,results/step6/lower_edge_gate_ridge.csv,classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeRidgeMaxGain,results/step6/lower_edge_gate_ridge.csv,classification == classification,max of relative_gain over 20 rows,2-digit scientific,\ensuremath{4.6\times 10^{-5}}
+LowEdgePrimaryHits,results/prereg/lower_edge.csv,classification == classification,row count,integer,26
+LowEdgePrimaryPlateau,results/prereg/lower_edge.csv,classification == 'Plateau',row count,integer,26
+LowEdgePrimaryExcluded,results/prereg/lower_edge.csv,classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgePrimaryMaxGain,results/prereg/lower_edge.csv,classification == classification,max of relative_gain over 26 rows,2-digit scientific,\ensuremath{5.8\times 10^{-5}}
+RunFoldPooledGOneMean,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled',mean,3 decimals,-0.027
+RunFoldPooledGOneSd,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled',sd,3 decimals,0.010
+RunFoldPooledGOnePos,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled',seeds_positive,integer,0
+RunFoldPerfoldGOneMean,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_perfold',mean,3 decimals,-0.026
+RunFoldPerfoldGOneSd,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_perfold',sd,3 decimals,0.008
+RunFoldPerfoldGOnePos,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_perfold',seeds_positive,integer,0
+RunFoldPooledRandGOneMean,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled_randomfolds',mean,3 decimals,-0.029
+RunFoldPooledRandGOneSd,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled_randomfolds',sd,3 decimals,0.008
+RunFoldPooledRandGOnePos,results/step3/runfolds.csv,kind == 'difference' and grid == 1 and metric == 'r_pooled_randomfolds',seeds_positive,integer,0
+RunFoldLevelGOne,results/step3/runfolds.csv,kind == 'level_change' and grid == 1,mean,3 decimals,-0.046
+RunFoldPooledGFourMean,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_pooled',mean,3 decimals,-0.048
+RunFoldPooledGFourSd,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_pooled',sd,3 decimals,0.011
+RunFoldPooledGFourPos,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_pooled',seeds_positive,integer,0
+RunFoldPerfoldGFourMean,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_perfold',mean,3 decimals,-0.044
+RunFoldPerfoldGFourSd,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_perfold',sd,3 decimals,0.006
+RunFoldPerfoldGFourPos,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_perfold',seeds_positive,integer,0
+RunFoldPooledRandGFourMean,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_pooled_randomfolds',mean,3 decimals,-0.051
+RunFoldPooledRandGFourSd,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_pooled_randomfolds',sd,3 decimals,0.011
+RunFoldPooledRandGFourPos,results/step3/runfolds.csv,kind == 'difference' and grid == 4 and metric == 'r_pooled_randomfolds',seeds_positive,integer,0
+RunFoldLevelGFour,results/step3/runfolds.csv,kind == 'level_change' and grid == 4,mean,3 decimals,-0.051
+RunFoldPooledGEightMean,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_pooled',mean,3 decimals,-0.058
+RunFoldPooledGEightSd,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_pooled',sd,3 decimals,0.008
+RunFoldPooledGEightPos,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_pooled',seeds_positive,integer,0
+RunFoldPerfoldGEightMean,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_perfold',mean,3 decimals,-0.048
+RunFoldPerfoldGEightSd,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_perfold',sd,3 decimals,0.006
+RunFoldPerfoldGEightPos,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_perfold',seeds_positive,integer,0
+RunFoldPooledRandGEightMean,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_pooled_randomfolds',mean,3 decimals,-0.058
+RunFoldPooledRandGEightSd,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_pooled_randomfolds',sd,3 decimals,0.010
+RunFoldPooledRandGEightPos,results/step3/runfolds.csv,kind == 'difference' and grid == 8 and metric == 'r_pooled_randomfolds',seeds_positive,integer,0
+RunFoldLevelGEight,results/step3/runfolds.csv,kind == 'level_change' and grid == 8,mean,3 decimals,-0.050
+EncRsaRandomCentredMean,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'centred',rho,3 decimals,-0.004
+EncRsaRandomCentredSd,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'centred',sd,3 decimals,0.009
+EncRsaRandomCentredPos,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'centred',seeds_positive,integer,2
+EncRsaRandomUncentredMean,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'uncentred',rho,3 decimals,-0.001
+EncRsaRandomUncentredSd,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'uncentred',sd,3 decimals,0.009
+EncRsaRandomUncentredPos,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'random' and centring == 'uncentred',seeds_positive,integer,3
+EncRsaRunCentredMean,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'centred',rho,3 decimals,-0.008
+EncRsaRunCentredSd,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'centred',sd,3 decimals,0.008
+EncRsaRunCentredPos,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'centred',seeds_positive,integer,0
+EncRsaRunUncentredMean,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'uncentred',rho,3 decimals,-0.007
+EncRsaRunUncentredSd,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'uncentred',sd,3 decimals,0.009
+EncRsaRunUncentredPos,results/step3/encoding_rsa.csv,kind == 'difference' and fold_scheme == 'run' and centring == 'uncentred',seeds_positive,integer,2
+BandOnlyVoneRaw,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'raw',value,3 decimals,0.033
+BandOnlyVoneRawLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'raw',ci_lo,3 decimals,0.021
+BandOnlyVoneRawHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'raw',ci_hi,3 decimals,0.044
+BandOnlyVoneZ,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'z',value,3 decimals,0.004
+BandOnlyVoneZLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'z',ci_lo,3 decimals,0.001
+BandOnlyVoneZHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'z',ci_hi,3 decimals,0.007
+BandOnlyLocRaw,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'raw',value,3 decimals,0.002
+BandOnlyLocRawLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'raw',ci_lo,3 decimals,-0.004
+BandOnlyLocRawHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'raw',ci_hi,3 decimals,0.009
+BandOnlyLocZ,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'z',value,3 decimals,0.002
+BandOnlyLocZLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'z',ci_lo,3 decimals,-0.002
+BandOnlyLocZHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'z',ci_hi,3 decimals,0.006
+BandNotchVoneRaw,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'raw',value,3 decimals,-0.021
+BandNotchVoneRawLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'raw',ci_lo,3 decimals,-0.035
+BandNotchVoneRawHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'raw',ci_hi,3 decimals,-0.007
+BandNotchVoneZ,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'z',value,3 decimals,-0.010
+BandNotchVoneZLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'z',ci_lo,3 decimals,-0.018
+BandNotchVoneZHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'z',ci_hi,3 decimals,-0.003
+BandNotchLocRaw,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'raw',value,3 decimals,0.004
+BandNotchLocRawLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'raw',ci_lo,3 decimals,-0.005
+BandNotchLocRawHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'raw',ci_hi,3 decimals,0.013
+BandNotchLocZ,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'z',value,3 decimals,0.003
+BandNotchLocZLo,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'z',ci_lo,3 decimals,-0.001
+BandNotchLocZHi,results/step6/mechanism_bandpass.csv,kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'z',ci_hi,3 decimals,0.006
+BandMOnlyRand,results/step6/moment_ratio_bandpass.csv,kind == 'condition_summary' and cond == 'only_0-14' and rule == 'Random Weights',m_mean,3 decimals,0.619
+BandMOnlyBp,results/step6/moment_ratio_bandpass.csv,kind == 'condition_summary' and cond == 'only_0-14' and rule == 'Backprop',m_mean,3 decimals,0.484
+BandMNotchRand,results/step6/moment_ratio_bandpass.csv,kind == 'condition_summary' and cond == 'notch_0-14' and rule == 'Random Weights',m_mean,3 decimals,0.832
+BandMNotchBp,results/step6/moment_ratio_bandpass.csv,kind == 'condition_summary' and cond == 'notch_0-14' and rule == 'Backprop',m_mean,3 decimals,0.830
+BandMNativeRand,results/step6/moment_ratio_bandpass.csv,kind == 'condition_summary' and cond == 'NATIVE_224' and rule == 'Random Weights',m_mean,3 decimals,0.707
+BandMNativeBp,results/step6/moment_ratio_bandpass.csv,kind == 'condition_summary' and cond == 'NATIVE_224' and rule == 'Backprop',m_mean,3 decimals,0.638
+PerSubDiffSubOneGOneMean,results/prereg/primary.csv,subject == 'sub-01' and grid == 1,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.029
+PerSubDiffSubOneGOneSd,results/prereg/primary.csv,subject == 'sub-01' and grid == 1,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.008
+PerSubDiffSubOneGOnePos,results/prereg/primary.csv,subject == 'sub-01' and grid == 1,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubOneGOne,results/prereg/primary.csv,subject == 'sub-01' and grid == 1 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.094
+PerSubDiffSubOneGTwoMean,results/prereg/primary.csv,subject == 'sub-01' and grid == 2,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.049
+PerSubDiffSubOneGTwoSd,results/prereg/primary.csv,subject == 'sub-01' and grid == 2,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.011
+PerSubDiffSubOneGTwoPos,results/prereg/primary.csv,subject == 'sub-01' and grid == 2,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubOneGTwo,results/prereg/primary.csv,subject == 'sub-01' and grid == 2 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.104
+PerSubDiffSubOneGFourMean,results/prereg/primary.csv,subject == 'sub-01' and grid == 4,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.051
+PerSubDiffSubOneGFourSd,results/prereg/primary.csv,subject == 'sub-01' and grid == 4,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.011
+PerSubDiffSubOneGFourPos,results/prereg/primary.csv,subject == 'sub-01' and grid == 4,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubOneGFour,results/prereg/primary.csv,subject == 'sub-01' and grid == 4 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.123
+PerSubDiffSubOneGEightMean,results/prereg/primary.csv,subject == 'sub-01' and grid == 8,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.058
+PerSubDiffSubOneGEightSd,results/prereg/primary.csv,subject == 'sub-01' and grid == 8,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.010
+PerSubDiffSubOneGEightPos,results/prereg/primary.csv,subject == 'sub-01' and grid == 8,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubOneGEight,results/prereg/primary.csv,subject == 'sub-01' and grid == 8 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.126
+PerSubDiffSubTwoGOneMean,results/prereg/primary.csv,subject == 'sub-02' and grid == 1,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.023
+PerSubDiffSubTwoGOneSd,results/prereg/primary.csv,subject == 'sub-02' and grid == 1,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.004
+PerSubDiffSubTwoGOnePos,results/prereg/primary.csv,subject == 'sub-02' and grid == 1,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubTwoGOne,results/prereg/primary.csv,subject == 'sub-02' and grid == 1 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.096
+PerSubDiffSubTwoGTwoMean,results/prereg/primary.csv,subject == 'sub-02' and grid == 2,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.034
+PerSubDiffSubTwoGTwoSd,results/prereg/primary.csv,subject == 'sub-02' and grid == 2,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.006
+PerSubDiffSubTwoGTwoPos,results/prereg/primary.csv,subject == 'sub-02' and grid == 2,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubTwoGTwo,results/prereg/primary.csv,subject == 'sub-02' and grid == 2 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.104
+PerSubDiffSubTwoGFourMean,results/prereg/primary.csv,subject == 'sub-02' and grid == 4,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.045
+PerSubDiffSubTwoGFourSd,results/prereg/primary.csv,subject == 'sub-02' and grid == 4,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.011
+PerSubDiffSubTwoGFourPos,results/prereg/primary.csv,subject == 'sub-02' and grid == 4,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubTwoGFour,results/prereg/primary.csv,subject == 'sub-02' and grid == 4 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.122
+PerSubDiffSubTwoGEightMean,results/prereg/primary.csv,subject == 'sub-02' and grid == 8,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.047
+PerSubDiffSubTwoGEightSd,results/prereg/primary.csv,subject == 'sub-02' and grid == 8,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.011
+PerSubDiffSubTwoGEightPos,results/prereg/primary.csv,subject == 'sub-02' and grid == 8,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubTwoGEight,results/prereg/primary.csv,subject == 'sub-02' and grid == 8 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.122
+PerSubDiffSubThreeGOneMean,results/prereg/primary.csv,subject == 'sub-03' and grid == 1,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.011
+PerSubDiffSubThreeGOneSd,results/prereg/primary.csv,subject == 'sub-03' and grid == 1,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.006
+PerSubDiffSubThreeGOnePos,results/prereg/primary.csv,subject == 'sub-03' and grid == 1,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubThreeGOne,results/prereg/primary.csv,subject == 'sub-03' and grid == 1 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.002
+PerSubDiffSubThreeGTwoMean,results/prereg/primary.csv,subject == 'sub-03' and grid == 2,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.021
+PerSubDiffSubThreeGTwoSd,results/prereg/primary.csv,subject == 'sub-03' and grid == 2,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.006
+PerSubDiffSubThreeGTwoPos,results/prereg/primary.csv,subject == 'sub-03' and grid == 2,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubThreeGTwo,results/prereg/primary.csv,subject == 'sub-03' and grid == 2 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.002
+PerSubDiffSubThreeGFourMean,results/prereg/primary.csv,subject == 'sub-03' and grid == 4,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.032
+PerSubDiffSubThreeGFourSd,results/prereg/primary.csv,subject == 'sub-03' and grid == 4,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.009
+PerSubDiffSubThreeGFourPos,results/prereg/primary.csv,subject == 'sub-03' and grid == 4,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubThreeGFour,results/prereg/primary.csv,subject == 'sub-03' and grid == 4 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.013
+PerSubDiffSubThreeGEightMean,results/prereg/primary.csv,subject == 'sub-03' and grid == 8,mean over 5 seeds of Random Weights - Backprop (median r),3 decimals,-0.030
+PerSubDiffSubThreeGEightSd,results/prereg/primary.csv,subject == 'sub-03' and grid == 8,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.009
+PerSubDiffSubThreeGEightPos,results/prereg/primary.csv,subject == 'sub-03' and grid == 8,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
+PerSubBpSubThreeGEight,results/prereg/primary.csv,subject == 'sub-03' and grid == 8 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.014
 PreregDminGOneSim,results/prereg/delta_min_prereg.csv,g == 1,delta_min_sim,3 decimals,0.014
 PreregDminGOneClosed,results/prereg/delta_min_prereg.csv,g == 1,delta_min_closed,3 decimals,0.014
 PreregDminGOneParam,results/prereg/delta_min_prereg.csv,g == 1,delta_min_param,3 decimals,0.014

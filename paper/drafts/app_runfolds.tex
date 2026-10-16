@@ -1,0 +1,52 @@
+Run-grouped cross-validation was an exploratory sensitivity analysis of sub-01
+(\NReliableSubOne{} reliable V1 voxels). It was not part of the pre-specified plan, which fixes
+random folds. The 720 stimuli come from 10 runs of 72. The 10 runs were permuted (seed 20260818)
+and consecutive pairs of runs formed the 5 outer test folds. Within each outer training set, the
+8 remaining runs were permuted (seed $20260818 + 1000\,(k + 1)$ for outer fold $k$) and
+consecutive pairs formed the 4 inner folds. Standardisation on training rows, the regularisation
+grid, the selection rule and the gate were unchanged. All 30 checkpoints were fitted at
+$g \in \{1, 4, 8\}$.
+
+Table~\ref{tab:runfolds} gives the untrained (uncalibrated BN statistics) minus Backprop
+contrast, mean $\pm$ SD over the 5 seeds with the number of positive seeds. The contrast was
+negative in every seed under both fold schemes. Run-grouped folds lowered the pooled $r$ of all 30
+checkpoints by $\RunFoldLevelGOne$, $\RunFoldLevelGFour$ and $\RunFoldLevelGEight$ at
+$g = 1, 4, 8$. Table~\ref{tab:encrsa} gives the contrast of encoding-RSA, in which the
+out-of-fold predictions of the 501 voxels form a model RDM that is compared with the fMRI RDM by
+the RSA statistic of Section~\ref{sec:rsa}; ``centred'' denotes predictions centred within each
+outer fold.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$g$ & Pooled $r$, random folds & Pooled $r$, run folds & Per-fold $r$, run folds \\
+\midrule
+1 & $\RunFoldPooledRandGOneMean \pm \RunFoldPooledRandGOneSd$ (\RunFoldPooledRandGOnePos/5) & $\RunFoldPooledGOneMean \pm \RunFoldPooledGOneSd$ (\RunFoldPooledGOnePos/5) & $\RunFoldPerfoldGOneMean \pm \RunFoldPerfoldGOneSd$ (\RunFoldPerfoldGOnePos/5) \\
+4 & $\RunFoldPooledRandGFourMean \pm \RunFoldPooledRandGFourSd$ (\RunFoldPooledRandGFourPos/5) & $\RunFoldPooledGFourMean \pm \RunFoldPooledGFourSd$ (\RunFoldPooledGFourPos/5) & $\RunFoldPerfoldGFourMean \pm \RunFoldPerfoldGFourSd$ (\RunFoldPerfoldGFourPos/5) \\
+8 & $\RunFoldPooledRandGEightMean \pm \RunFoldPooledRandGEightSd$ (\RunFoldPooledRandGEightPos/5) & $\RunFoldPooledGEightMean \pm \RunFoldPooledGEightSd$ (\RunFoldPooledGEightPos/5) & $\RunFoldPerfoldGEightMean \pm \RunFoldPerfoldGEightSd$ (\RunFoldPerfoldGEightPos/5) \\
+\bottomrule
+\end{tabular}
+\caption{Untrained minus Backprop, median $r$ over reliable voxels of sub-01 (mean $\pm$ SD
+over 5 seeds; positive seeds of 5).}
+\label{tab:runfolds}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Folds ($g = 1$) & Centred & Uncentred \\
+\midrule
+Random folds & $\EncRsaRandomCentredMean \pm \EncRsaRandomCentredSd$ (\EncRsaRandomCentredPos/5) & $\EncRsaRandomUncentredMean \pm \EncRsaRandomUncentredSd$ (\EncRsaRandomUncentredPos/5) \\
+Run-grouped folds & $\EncRsaRunCentredMean \pm \EncRsaRunCentredSd$ (\EncRsaRunCentredPos/5) & $\EncRsaRunUncentredMean \pm \EncRsaRunUncentredSd$ (\EncRsaRunUncentredPos/5) \\
+\bottomrule
+\end{tabular}
+\caption{Untrained minus Backprop, encoding-RSA of sub-01 (mean $\pm$ SD over 5 seeds;
+positive seeds of 5).}
+\label{tab:encrsa}
+\end{table}

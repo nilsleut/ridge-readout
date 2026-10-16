@@ -23,7 +23,11 @@ A "config" spec reads one value of the frozen config.yaml by dotted key (used on
 the reference effect's SEM, which no CSV carries). A "failedrules" spec counts the
 distinct pre-stated predictions with a rule row (kind == 'rule') whose passed is False,
 over all CSVs in results/. A "max" spec takes the maximum of a column over the rows its
-query matches (fails if none match).
+query matches (fails if none match). A "count0" spec is a "count" that allows zero rows.
+A "mean5" spec averages a column over exactly 5 rows. A "seeddiff" spec reads
+prereg/primary.csv, pairs Random Weights and Backprop by seed (exactly 5 pairs) and
+returns the mean, SD (ddof = 1) or number of positive seeds ("mean", "sd", "pos" as the
+column) of the paired difference in median r.
 Macro names contain letters only.
 
 Run:  python scripts/export_macros.py
@@ -224,6 +228,55 @@ for _r, _rn in (("Random Weights", "Rand"), ("Backprop", "Bp")):
                "pearson", "corr"),
               (f"ModelGain{_rn}Con", "step7/gain.csv", _SC + f"what == 'model gain Conv1 {_r}' and stat == 'RMS contrast'",
                "pearson", "corr")]
+# ── appendices ───────────────────────────────────────────────────────────────
+# lower-edge gate per analysis (hits, plateaus, excluded cells, largest relative gain)
+for _tag, _f, _all, _plat, _exc in (
+        ("Pilot", "step2/lower_edge_diagnosis.csv", "relative_gain == relative_gain", "relative_gain < 0.001", "relative_gain >= 0.001"),
+        ("Etwo", "step3/lower_edge_gate_e2.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau'"),
+        ("Ethree", "step3/lower_edge_gate_e3.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau'"),
+        ("Efour", "step3/lower_edge_gate_e4.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau'"),
+        ("Subjects", "step4/lower_edge_gate_subjects.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau'"),
+        ("SubThree", "step5/sub03_diagnosis.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau' and classification == classification"),
+        ("Ridge", "step6/lower_edge_gate_ridge.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau'"),
+        ("Primary", "prereg/lower_edge.csv", "classification == classification", "classification == 'Plateau'", "classification != 'Plateau'")):
+    SPECS += [(f"LowEdge{_tag}Hits", f"count:{_f}", _all, None, "int"),
+              (f"LowEdge{_tag}Plateau", f"count:{_f}", _plat, None, "int"),
+              (f"LowEdge{_tag}Excluded", f"count0:{_f}", _exc, None, "int"),
+              (f"LowEdge{_tag}MaxGain", f"max:{_f}", _all, "relative_gain", "sci2")]
+# run-grouped folds (sub-01): Random - BP, mean / SD over 5 seeds, seeds positive
+for _g, _gn in ((1, "One"), (4, "Four"), (8, "Eight")):
+    for _m, _mn in (("r_pooled", "Pooled"), ("r_perfold", "Perfold"), ("r_pooled_randomfolds", "PooledRand")):
+        _q = f"kind == 'difference' and grid == {_g} and metric == '{_m}'"
+        SPECS += [(f"RunFold{_mn}G{_gn}Mean", "step3/runfolds.csv", _q, "mean", "rsa"),
+                  (f"RunFold{_mn}G{_gn}Sd", "step3/runfolds.csv", _q, "sd", "rsa"),
+                  (f"RunFold{_mn}G{_gn}Pos", "step3/runfolds.csv", _q, "seeds_positive", "int")]
+    SPECS.append((f"RunFoldLevelG{_gn}", "step3/runfolds.csv", f"kind == 'level_change' and grid == {_g}", "mean", "rsa"))
+for _fs, _fn in (("random", "Random"), ("run", "Run")):
+    for _cs, _cn in (("centred", "Centred"), ("uncentred", "Uncentred")):
+        _q = f"kind == 'difference' and fold_scheme == '{_fs}' and centring == '{_cs}'"
+        SPECS += [(f"EncRsa{_fn}{_cn}Mean", "step3/encoding_rsa.csv", _q, "rho", "rsa"),
+                  (f"EncRsa{_fn}{_cn}Sd", "step3/encoding_rsa.csv", _q, "sd", "rsa"),
+                  (f"EncRsa{_fn}{_cn}Pos", "step3/encoding_rsa.csv", _q, "seeds_positive", "int")]
+# band-pass inputs (NATIVE 224): gaps with CI, moment ratio m
+for _c, _cn in (("only_0-14", "Only"), ("notch_0-14", "Notch")):
+    for _roi, _rn in (("V1", "Vone"), ("LOC", "Loc")):
+        for _v, _vn in (("raw", "Raw"), ("z", "Z")):
+            _q = f"kind == 'gap' and cond == '{_c}' and roi == '{_roi}' and variant == '{_v}'"
+            SPECS += [(f"Band{_cn}{_rn}{_vn}", "step6/mechanism_bandpass.csv", _q, "value", "rsa"),
+                      (f"Band{_cn}{_rn}{_vn}Lo", "step6/mechanism_bandpass.csv", _q, "ci_lo", "rsa"),
+                      (f"Band{_cn}{_rn}{_vn}Hi", "step6/mechanism_bandpass.csv", _q, "ci_hi", "rsa")]
+for _c, _cn in (("only_0-14", "Only"), ("notch_0-14", "Notch"), ("NATIVE_224", "Native")):
+    for _r, _rn in (("Random Weights", "Rand"), ("Backprop", "Bp")):
+        SPECS.append((f"BandM{_cn}{_rn}", "step6/moment_ratio_bandpass.csv",
+                      f"kind == 'condition_summary' and cond == '{_c}' and rule == '{_r}'", "m_mean", "rsa"))
+# per-subject results of the primary analysis
+for _s, _sn in SUBJ_NAMES.items():
+    for _g, _gn in GRID_NAMES.items():
+        _q = f"subject == '{_s}' and grid == {_g}"
+        SPECS += [(f"PerSubDiff{_sn}G{_gn}Mean", "seeddiff:prereg/primary.csv", _q, "mean", "rsa"),
+                  (f"PerSubDiff{_sn}G{_gn}Sd", "seeddiff:prereg/primary.csv", _q, "sd", "rsa"),
+                  (f"PerSubDiff{_sn}G{_gn}Pos", "seeddiff:prereg/primary.csv", _q, "pos", "int"),
+                  (f"PerSubBp{_sn}G{_gn}", "mean5:prereg/primary.csv", _q + " and rule == 'Backprop'", "r_med_reliable", "rsa")]
 for _g, _gn in GRID_NAMES.items():
     SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),
               (f"PreregDminG{_gn}Closed", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_closed", "rsa"),
@@ -329,6 +382,20 @@ def main():
             if len(hit) != 3 or hit.subject.nunique() != 3:
                 raise SystemExit(f"{name}: mean3 filter matches {len(hit)} rows, expected 3 subjects: {q}")
             val, colname = hit[col].mean(), f"mean of {col} over 3 subjects"
+        elif kind == "seeddiff":
+            a = hit[hit.rule == "Random Weights"].set_index("seed_idx")["r_med_reliable"]
+            b = hit[hit.rule == "Backprop"].set_index("seed_idx")["r_med_reliable"]
+            if len(a) != 5 or len(b) != 5 or set(a.index) != set(b.index):
+                raise SystemExit(f"{name}: seeddiff needs 5 paired seeds, got {len(a)} and {len(b)}: {q}")
+            d = a - b
+            val = {"mean": d.mean(), "sd": d.std(ddof=1), "pos": int((d > 0).sum())}[col]
+            colname = f"{col} over 5 seeds of Random Weights - Backprop (median r)"
+        elif kind == "mean5":
+            if len(hit) != 5:
+                raise SystemExit(f"{name}: mean5 filter matches {len(hit)} rows, expected 5: {q}")
+            val, colname = hit[col].mean(), f"mean of {col} over 5 rows"
+        elif kind == "count0":
+            val, colname = len(hit), "row count (zero allowed)"
         elif kind == "max":
             if len(hit) == 0:
                 raise SystemExit(f"{name}: max filter matches no row: {q}")

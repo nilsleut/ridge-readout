@@ -1451,6 +1451,310 @@
 \newcommand{\ModelGainBpLum}{0.40}
 % ModelGainBpCon: results/step7/gain.csv | kind == 'stimulus_corr' and res == 224 and what == 'model gain Conv1 Backprop' and stat == 'RMS contrast' | pearson | 2 decimals
 \newcommand{\ModelGainBpCon}{0.00}
+% LowEdgePilotHits: results/step2/lower_edge_diagnosis.csv | relative_gain == relative_gain | row count | integer
+\newcommand{\LowEdgePilotHits}{4}
+% LowEdgePilotPlateau: results/step2/lower_edge_diagnosis.csv | relative_gain < 0.001 | row count | integer
+\newcommand{\LowEdgePilotPlateau}{4}
+% LowEdgePilotExcluded: results/step2/lower_edge_diagnosis.csv | relative_gain >= 0.001 | row count (zero allowed) | integer
+\newcommand{\LowEdgePilotExcluded}{0}
+% LowEdgePilotMaxGain: results/step2/lower_edge_diagnosis.csv | relative_gain == relative_gain | max of relative_gain over 4 rows | 2-digit scientific
+\newcommand{\LowEdgePilotMaxGain}{\ensuremath{1.6\times 10^{-4}}}
+% LowEdgeEtwoHits: results/step3/lower_edge_gate_e2.csv | classification == classification | row count | integer
+\newcommand{\LowEdgeEtwoHits}{3}
+% LowEdgeEtwoPlateau: results/step3/lower_edge_gate_e2.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeEtwoPlateau}{3}
+% LowEdgeEtwoExcluded: results/step3/lower_edge_gate_e2.csv | classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeEtwoExcluded}{0}
+% LowEdgeEtwoMaxGain: results/step3/lower_edge_gate_e2.csv | classification == classification | max of relative_gain over 3 rows | 2-digit scientific
+\newcommand{\LowEdgeEtwoMaxGain}{\ensuremath{4.4\times 10^{-8}}}
+% LowEdgeEthreeHits: results/step3/lower_edge_gate_e3.csv | classification == classification | row count | integer
+\newcommand{\LowEdgeEthreeHits}{4}
+% LowEdgeEthreePlateau: results/step3/lower_edge_gate_e3.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeEthreePlateau}{4}
+% LowEdgeEthreeExcluded: results/step3/lower_edge_gate_e3.csv | classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeEthreeExcluded}{0}
+% LowEdgeEthreeMaxGain: results/step3/lower_edge_gate_e3.csv | classification == classification | max of relative_gain over 4 rows | 2-digit scientific
+\newcommand{\LowEdgeEthreeMaxGain}{\ensuremath{4.8\times 10^{-6}}}
+% LowEdgeEfourHits: results/step3/lower_edge_gate_e4.csv | classification == classification | row count | integer
+\newcommand{\LowEdgeEfourHits}{7}
+% LowEdgeEfourPlateau: results/step3/lower_edge_gate_e4.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeEfourPlateau}{7}
+% LowEdgeEfourExcluded: results/step3/lower_edge_gate_e4.csv | classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeEfourExcluded}{0}
+% LowEdgeEfourMaxGain: results/step3/lower_edge_gate_e4.csv | classification == classification | max of relative_gain over 7 rows | 2-digit scientific
+\newcommand{\LowEdgeEfourMaxGain}{\ensuremath{4.8\times 10^{-6}}}
+% LowEdgeSubjectsHits: results/step4/lower_edge_gate_subjects.csv | classification == classification | row count | integer
+\newcommand{\LowEdgeSubjectsHits}{1}
+% LowEdgeSubjectsPlateau: results/step4/lower_edge_gate_subjects.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeSubjectsPlateau}{1}
+% LowEdgeSubjectsExcluded: results/step4/lower_edge_gate_subjects.csv | classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeSubjectsExcluded}{0}
+% LowEdgeSubjectsMaxGain: results/step4/lower_edge_gate_subjects.csv | classification == classification | max of relative_gain over 1 rows | 2-digit scientific
+\newcommand{\LowEdgeSubjectsMaxGain}{\ensuremath{3.0\times 10^{-5}}}
+% LowEdgeSubThreeHits: results/step5/sub03_diagnosis.csv | classification == classification | row count | integer
+\newcommand{\LowEdgeSubThreeHits}{3}
+% LowEdgeSubThreePlateau: results/step5/sub03_diagnosis.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeSubThreePlateau}{3}
+% LowEdgeSubThreeExcluded: results/step5/sub03_diagnosis.csv | classification != 'Plateau' and classification == classification | row count (zero allowed) | integer
+\newcommand{\LowEdgeSubThreeExcluded}{0}
+% LowEdgeSubThreeMaxGain: results/step5/sub03_diagnosis.csv | classification == classification | max of relative_gain over 3 rows | 2-digit scientific
+\newcommand{\LowEdgeSubThreeMaxGain}{\ensuremath{1.3\times 10^{-5}}}
+% LowEdgeRidgeHits: results/step6/lower_edge_gate_ridge.csv | classification == classification | row count | integer
+\newcommand{\LowEdgeRidgeHits}{20}
+% LowEdgeRidgePlateau: results/step6/lower_edge_gate_ridge.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeRidgePlateau}{20}
+% LowEdgeRidgeExcluded: results/step6/lower_edge_gate_ridge.csv | classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeRidgeExcluded}{0}
+% LowEdgeRidgeMaxGain: results/step6/lower_edge_gate_ridge.csv | classification == classification | max of relative_gain over 20 rows | 2-digit scientific
+\newcommand{\LowEdgeRidgeMaxGain}{\ensuremath{4.6\times 10^{-5}}}
+% LowEdgePrimaryHits: results/prereg/lower_edge.csv | classification == classification | row count | integer
+\newcommand{\LowEdgePrimaryHits}{26}
+% LowEdgePrimaryPlateau: results/prereg/lower_edge.csv | classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgePrimaryPlateau}{26}
+% LowEdgePrimaryExcluded: results/prereg/lower_edge.csv | classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgePrimaryExcluded}{0}
+% LowEdgePrimaryMaxGain: results/prereg/lower_edge.csv | classification == classification | max of relative_gain over 26 rows | 2-digit scientific
+\newcommand{\LowEdgePrimaryMaxGain}{\ensuremath{5.8\times 10^{-5}}}
+% RunFoldPooledGOneMean: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_pooled' | mean | 3 decimals
+\newcommand{\RunFoldPooledGOneMean}{-0.027}
+% RunFoldPooledGOneSd: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_pooled' | sd | 3 decimals
+\newcommand{\RunFoldPooledGOneSd}{0.010}
+% RunFoldPooledGOnePos: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_pooled' | seeds_positive | integer
+\newcommand{\RunFoldPooledGOnePos}{0}
+% RunFoldPerfoldGOneMean: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_perfold' | mean | 3 decimals
+\newcommand{\RunFoldPerfoldGOneMean}{-0.026}
+% RunFoldPerfoldGOneSd: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_perfold' | sd | 3 decimals
+\newcommand{\RunFoldPerfoldGOneSd}{0.008}
+% RunFoldPerfoldGOnePos: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_perfold' | seeds_positive | integer
+\newcommand{\RunFoldPerfoldGOnePos}{0}
+% RunFoldPooledRandGOneMean: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_pooled_randomfolds' | mean | 3 decimals
+\newcommand{\RunFoldPooledRandGOneMean}{-0.029}
+% RunFoldPooledRandGOneSd: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_pooled_randomfolds' | sd | 3 decimals
+\newcommand{\RunFoldPooledRandGOneSd}{0.008}
+% RunFoldPooledRandGOnePos: results/step3/runfolds.csv | kind == 'difference' and grid == 1 and metric == 'r_pooled_randomfolds' | seeds_positive | integer
+\newcommand{\RunFoldPooledRandGOnePos}{0}
+% RunFoldLevelGOne: results/step3/runfolds.csv | kind == 'level_change' and grid == 1 | mean | 3 decimals
+\newcommand{\RunFoldLevelGOne}{-0.046}
+% RunFoldPooledGFourMean: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_pooled' | mean | 3 decimals
+\newcommand{\RunFoldPooledGFourMean}{-0.048}
+% RunFoldPooledGFourSd: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_pooled' | sd | 3 decimals
+\newcommand{\RunFoldPooledGFourSd}{0.011}
+% RunFoldPooledGFourPos: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_pooled' | seeds_positive | integer
+\newcommand{\RunFoldPooledGFourPos}{0}
+% RunFoldPerfoldGFourMean: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_perfold' | mean | 3 decimals
+\newcommand{\RunFoldPerfoldGFourMean}{-0.044}
+% RunFoldPerfoldGFourSd: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_perfold' | sd | 3 decimals
+\newcommand{\RunFoldPerfoldGFourSd}{0.006}
+% RunFoldPerfoldGFourPos: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_perfold' | seeds_positive | integer
+\newcommand{\RunFoldPerfoldGFourPos}{0}
+% RunFoldPooledRandGFourMean: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_pooled_randomfolds' | mean | 3 decimals
+\newcommand{\RunFoldPooledRandGFourMean}{-0.051}
+% RunFoldPooledRandGFourSd: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_pooled_randomfolds' | sd | 3 decimals
+\newcommand{\RunFoldPooledRandGFourSd}{0.011}
+% RunFoldPooledRandGFourPos: results/step3/runfolds.csv | kind == 'difference' and grid == 4 and metric == 'r_pooled_randomfolds' | seeds_positive | integer
+\newcommand{\RunFoldPooledRandGFourPos}{0}
+% RunFoldLevelGFour: results/step3/runfolds.csv | kind == 'level_change' and grid == 4 | mean | 3 decimals
+\newcommand{\RunFoldLevelGFour}{-0.051}
+% RunFoldPooledGEightMean: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_pooled' | mean | 3 decimals
+\newcommand{\RunFoldPooledGEightMean}{-0.058}
+% RunFoldPooledGEightSd: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_pooled' | sd | 3 decimals
+\newcommand{\RunFoldPooledGEightSd}{0.008}
+% RunFoldPooledGEightPos: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_pooled' | seeds_positive | integer
+\newcommand{\RunFoldPooledGEightPos}{0}
+% RunFoldPerfoldGEightMean: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_perfold' | mean | 3 decimals
+\newcommand{\RunFoldPerfoldGEightMean}{-0.048}
+% RunFoldPerfoldGEightSd: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_perfold' | sd | 3 decimals
+\newcommand{\RunFoldPerfoldGEightSd}{0.006}
+% RunFoldPerfoldGEightPos: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_perfold' | seeds_positive | integer
+\newcommand{\RunFoldPerfoldGEightPos}{0}
+% RunFoldPooledRandGEightMean: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_pooled_randomfolds' | mean | 3 decimals
+\newcommand{\RunFoldPooledRandGEightMean}{-0.058}
+% RunFoldPooledRandGEightSd: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_pooled_randomfolds' | sd | 3 decimals
+\newcommand{\RunFoldPooledRandGEightSd}{0.010}
+% RunFoldPooledRandGEightPos: results/step3/runfolds.csv | kind == 'difference' and grid == 8 and metric == 'r_pooled_randomfolds' | seeds_positive | integer
+\newcommand{\RunFoldPooledRandGEightPos}{0}
+% RunFoldLevelGEight: results/step3/runfolds.csv | kind == 'level_change' and grid == 8 | mean | 3 decimals
+\newcommand{\RunFoldLevelGEight}{-0.050}
+% EncRsaRandomCentredMean: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'random' and centring == 'centred' | rho | 3 decimals
+\newcommand{\EncRsaRandomCentredMean}{-0.004}
+% EncRsaRandomCentredSd: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'random' and centring == 'centred' | sd | 3 decimals
+\newcommand{\EncRsaRandomCentredSd}{0.009}
+% EncRsaRandomCentredPos: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'random' and centring == 'centred' | seeds_positive | integer
+\newcommand{\EncRsaRandomCentredPos}{2}
+% EncRsaRandomUncentredMean: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'random' and centring == 'uncentred' | rho | 3 decimals
+\newcommand{\EncRsaRandomUncentredMean}{-0.001}
+% EncRsaRandomUncentredSd: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'random' and centring == 'uncentred' | sd | 3 decimals
+\newcommand{\EncRsaRandomUncentredSd}{0.009}
+% EncRsaRandomUncentredPos: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'random' and centring == 'uncentred' | seeds_positive | integer
+\newcommand{\EncRsaRandomUncentredPos}{3}
+% EncRsaRunCentredMean: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'run' and centring == 'centred' | rho | 3 decimals
+\newcommand{\EncRsaRunCentredMean}{-0.008}
+% EncRsaRunCentredSd: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'run' and centring == 'centred' | sd | 3 decimals
+\newcommand{\EncRsaRunCentredSd}{0.008}
+% EncRsaRunCentredPos: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'run' and centring == 'centred' | seeds_positive | integer
+\newcommand{\EncRsaRunCentredPos}{0}
+% EncRsaRunUncentredMean: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'run' and centring == 'uncentred' | rho | 3 decimals
+\newcommand{\EncRsaRunUncentredMean}{-0.007}
+% EncRsaRunUncentredSd: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'run' and centring == 'uncentred' | sd | 3 decimals
+\newcommand{\EncRsaRunUncentredSd}{0.009}
+% EncRsaRunUncentredPos: results/step3/encoding_rsa.csv | kind == 'difference' and fold_scheme == 'run' and centring == 'uncentred' | seeds_positive | integer
+\newcommand{\EncRsaRunUncentredPos}{2}
+% BandOnlyVoneRaw: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'raw' | value | 3 decimals
+\newcommand{\BandOnlyVoneRaw}{0.033}
+% BandOnlyVoneRawLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'raw' | ci_lo | 3 decimals
+\newcommand{\BandOnlyVoneRawLo}{0.021}
+% BandOnlyVoneRawHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'raw' | ci_hi | 3 decimals
+\newcommand{\BandOnlyVoneRawHi}{0.044}
+% BandOnlyVoneZ: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'z' | value | 3 decimals
+\newcommand{\BandOnlyVoneZ}{0.004}
+% BandOnlyVoneZLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'z' | ci_lo | 3 decimals
+\newcommand{\BandOnlyVoneZLo}{0.001}
+% BandOnlyVoneZHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'V1' and variant == 'z' | ci_hi | 3 decimals
+\newcommand{\BandOnlyVoneZHi}{0.007}
+% BandOnlyLocRaw: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'raw' | value | 3 decimals
+\newcommand{\BandOnlyLocRaw}{0.002}
+% BandOnlyLocRawLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'raw' | ci_lo | 3 decimals
+\newcommand{\BandOnlyLocRawLo}{-0.004}
+% BandOnlyLocRawHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'raw' | ci_hi | 3 decimals
+\newcommand{\BandOnlyLocRawHi}{0.009}
+% BandOnlyLocZ: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'z' | value | 3 decimals
+\newcommand{\BandOnlyLocZ}{0.002}
+% BandOnlyLocZLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'z' | ci_lo | 3 decimals
+\newcommand{\BandOnlyLocZLo}{-0.002}
+% BandOnlyLocZHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'only_0-14' and roi == 'LOC' and variant == 'z' | ci_hi | 3 decimals
+\newcommand{\BandOnlyLocZHi}{0.006}
+% BandNotchVoneRaw: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'raw' | value | 3 decimals
+\newcommand{\BandNotchVoneRaw}{-0.021}
+% BandNotchVoneRawLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'raw' | ci_lo | 3 decimals
+\newcommand{\BandNotchVoneRawLo}{-0.035}
+% BandNotchVoneRawHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'raw' | ci_hi | 3 decimals
+\newcommand{\BandNotchVoneRawHi}{-0.007}
+% BandNotchVoneZ: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'z' | value | 3 decimals
+\newcommand{\BandNotchVoneZ}{-0.010}
+% BandNotchVoneZLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'z' | ci_lo | 3 decimals
+\newcommand{\BandNotchVoneZLo}{-0.018}
+% BandNotchVoneZHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'V1' and variant == 'z' | ci_hi | 3 decimals
+\newcommand{\BandNotchVoneZHi}{-0.003}
+% BandNotchLocRaw: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'raw' | value | 3 decimals
+\newcommand{\BandNotchLocRaw}{0.004}
+% BandNotchLocRawLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'raw' | ci_lo | 3 decimals
+\newcommand{\BandNotchLocRawLo}{-0.005}
+% BandNotchLocRawHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'raw' | ci_hi | 3 decimals
+\newcommand{\BandNotchLocRawHi}{0.013}
+% BandNotchLocZ: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'z' | value | 3 decimals
+\newcommand{\BandNotchLocZ}{0.003}
+% BandNotchLocZLo: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'z' | ci_lo | 3 decimals
+\newcommand{\BandNotchLocZLo}{-0.001}
+% BandNotchLocZHi: results/step6/mechanism_bandpass.csv | kind == 'gap' and cond == 'notch_0-14' and roi == 'LOC' and variant == 'z' | ci_hi | 3 decimals
+\newcommand{\BandNotchLocZHi}{0.006}
+% BandMOnlyRand: results/step6/moment_ratio_bandpass.csv | kind == 'condition_summary' and cond == 'only_0-14' and rule == 'Random Weights' | m_mean | 3 decimals
+\newcommand{\BandMOnlyRand}{0.619}
+% BandMOnlyBp: results/step6/moment_ratio_bandpass.csv | kind == 'condition_summary' and cond == 'only_0-14' and rule == 'Backprop' | m_mean | 3 decimals
+\newcommand{\BandMOnlyBp}{0.484}
+% BandMNotchRand: results/step6/moment_ratio_bandpass.csv | kind == 'condition_summary' and cond == 'notch_0-14' and rule == 'Random Weights' | m_mean | 3 decimals
+\newcommand{\BandMNotchRand}{0.832}
+% BandMNotchBp: results/step6/moment_ratio_bandpass.csv | kind == 'condition_summary' and cond == 'notch_0-14' and rule == 'Backprop' | m_mean | 3 decimals
+\newcommand{\BandMNotchBp}{0.830}
+% BandMNativeRand: results/step6/moment_ratio_bandpass.csv | kind == 'condition_summary' and cond == 'NATIVE_224' and rule == 'Random Weights' | m_mean | 3 decimals
+\newcommand{\BandMNativeRand}{0.707}
+% BandMNativeBp: results/step6/moment_ratio_bandpass.csv | kind == 'condition_summary' and cond == 'NATIVE_224' and rule == 'Backprop' | m_mean | 3 decimals
+\newcommand{\BandMNativeBp}{0.638}
+% PerSubDiffSubOneGOneMean: results/prereg/primary.csv | subject == 'sub-01' and grid == 1 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGOneMean}{-0.029}
+% PerSubDiffSubOneGOneSd: results/prereg/primary.csv | subject == 'sub-01' and grid == 1 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGOneSd}{0.008}
+% PerSubDiffSubOneGOnePos: results/prereg/primary.csv | subject == 'sub-01' and grid == 1 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubOneGOnePos}{0}
+% PerSubBpSubOneGOne: results/prereg/primary.csv | subject == 'sub-01' and grid == 1 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubOneGOne}{0.094}
+% PerSubDiffSubOneGTwoMean: results/prereg/primary.csv | subject == 'sub-01' and grid == 2 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGTwoMean}{-0.049}
+% PerSubDiffSubOneGTwoSd: results/prereg/primary.csv | subject == 'sub-01' and grid == 2 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGTwoSd}{0.011}
+% PerSubDiffSubOneGTwoPos: results/prereg/primary.csv | subject == 'sub-01' and grid == 2 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubOneGTwoPos}{0}
+% PerSubBpSubOneGTwo: results/prereg/primary.csv | subject == 'sub-01' and grid == 2 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubOneGTwo}{0.104}
+% PerSubDiffSubOneGFourMean: results/prereg/primary.csv | subject == 'sub-01' and grid == 4 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGFourMean}{-0.051}
+% PerSubDiffSubOneGFourSd: results/prereg/primary.csv | subject == 'sub-01' and grid == 4 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGFourSd}{0.011}
+% PerSubDiffSubOneGFourPos: results/prereg/primary.csv | subject == 'sub-01' and grid == 4 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubOneGFourPos}{0}
+% PerSubBpSubOneGFour: results/prereg/primary.csv | subject == 'sub-01' and grid == 4 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubOneGFour}{0.123}
+% PerSubDiffSubOneGEightMean: results/prereg/primary.csv | subject == 'sub-01' and grid == 8 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGEightMean}{-0.058}
+% PerSubDiffSubOneGEightSd: results/prereg/primary.csv | subject == 'sub-01' and grid == 8 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubOneGEightSd}{0.010}
+% PerSubDiffSubOneGEightPos: results/prereg/primary.csv | subject == 'sub-01' and grid == 8 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubOneGEightPos}{0}
+% PerSubBpSubOneGEight: results/prereg/primary.csv | subject == 'sub-01' and grid == 8 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubOneGEight}{0.126}
+% PerSubDiffSubTwoGOneMean: results/prereg/primary.csv | subject == 'sub-02' and grid == 1 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGOneMean}{-0.023}
+% PerSubDiffSubTwoGOneSd: results/prereg/primary.csv | subject == 'sub-02' and grid == 1 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGOneSd}{0.004}
+% PerSubDiffSubTwoGOnePos: results/prereg/primary.csv | subject == 'sub-02' and grid == 1 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubTwoGOnePos}{0}
+% PerSubBpSubTwoGOne: results/prereg/primary.csv | subject == 'sub-02' and grid == 1 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubTwoGOne}{0.096}
+% PerSubDiffSubTwoGTwoMean: results/prereg/primary.csv | subject == 'sub-02' and grid == 2 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGTwoMean}{-0.034}
+% PerSubDiffSubTwoGTwoSd: results/prereg/primary.csv | subject == 'sub-02' and grid == 2 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGTwoSd}{0.006}
+% PerSubDiffSubTwoGTwoPos: results/prereg/primary.csv | subject == 'sub-02' and grid == 2 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubTwoGTwoPos}{0}
+% PerSubBpSubTwoGTwo: results/prereg/primary.csv | subject == 'sub-02' and grid == 2 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubTwoGTwo}{0.104}
+% PerSubDiffSubTwoGFourMean: results/prereg/primary.csv | subject == 'sub-02' and grid == 4 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGFourMean}{-0.045}
+% PerSubDiffSubTwoGFourSd: results/prereg/primary.csv | subject == 'sub-02' and grid == 4 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGFourSd}{0.011}
+% PerSubDiffSubTwoGFourPos: results/prereg/primary.csv | subject == 'sub-02' and grid == 4 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubTwoGFourPos}{0}
+% PerSubBpSubTwoGFour: results/prereg/primary.csv | subject == 'sub-02' and grid == 4 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubTwoGFour}{0.122}
+% PerSubDiffSubTwoGEightMean: results/prereg/primary.csv | subject == 'sub-02' and grid == 8 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGEightMean}{-0.047}
+% PerSubDiffSubTwoGEightSd: results/prereg/primary.csv | subject == 'sub-02' and grid == 8 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubTwoGEightSd}{0.011}
+% PerSubDiffSubTwoGEightPos: results/prereg/primary.csv | subject == 'sub-02' and grid == 8 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubTwoGEightPos}{0}
+% PerSubBpSubTwoGEight: results/prereg/primary.csv | subject == 'sub-02' and grid == 8 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubTwoGEight}{0.122}
+% PerSubDiffSubThreeGOneMean: results/prereg/primary.csv | subject == 'sub-03' and grid == 1 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGOneMean}{-0.011}
+% PerSubDiffSubThreeGOneSd: results/prereg/primary.csv | subject == 'sub-03' and grid == 1 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGOneSd}{0.006}
+% PerSubDiffSubThreeGOnePos: results/prereg/primary.csv | subject == 'sub-03' and grid == 1 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubThreeGOnePos}{0}
+% PerSubBpSubThreeGOne: results/prereg/primary.csv | subject == 'sub-03' and grid == 1 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubThreeGOne}{0.002}
+% PerSubDiffSubThreeGTwoMean: results/prereg/primary.csv | subject == 'sub-03' and grid == 2 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGTwoMean}{-0.021}
+% PerSubDiffSubThreeGTwoSd: results/prereg/primary.csv | subject == 'sub-03' and grid == 2 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGTwoSd}{0.006}
+% PerSubDiffSubThreeGTwoPos: results/prereg/primary.csv | subject == 'sub-03' and grid == 2 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubThreeGTwoPos}{0}
+% PerSubBpSubThreeGTwo: results/prereg/primary.csv | subject == 'sub-03' and grid == 2 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubThreeGTwo}{0.002}
+% PerSubDiffSubThreeGFourMean: results/prereg/primary.csv | subject == 'sub-03' and grid == 4 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGFourMean}{-0.032}
+% PerSubDiffSubThreeGFourSd: results/prereg/primary.csv | subject == 'sub-03' and grid == 4 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGFourSd}{0.009}
+% PerSubDiffSubThreeGFourPos: results/prereg/primary.csv | subject == 'sub-03' and grid == 4 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubThreeGFourPos}{0}
+% PerSubBpSubThreeGFour: results/prereg/primary.csv | subject == 'sub-03' and grid == 4 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubThreeGFour}{0.013}
+% PerSubDiffSubThreeGEightMean: results/prereg/primary.csv | subject == 'sub-03' and grid == 8 | mean over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGEightMean}{-0.030}
+% PerSubDiffSubThreeGEightSd: results/prereg/primary.csv | subject == 'sub-03' and grid == 8 | sd over 5 seeds of Random Weights - Backprop (median r) | 3 decimals
+\newcommand{\PerSubDiffSubThreeGEightSd}{0.009}
+% PerSubDiffSubThreeGEightPos: results/prereg/primary.csv | subject == 'sub-03' and grid == 8 | pos over 5 seeds of Random Weights - Backprop (median r) | integer
+\newcommand{\PerSubDiffSubThreeGEightPos}{0}
+% PerSubBpSubThreeGEight: results/prereg/primary.csv | subject == 'sub-03' and grid == 8 and rule == 'Backprop' | mean of r_med_reliable over 5 rows | 3 decimals
+\newcommand{\PerSubBpSubThreeGEight}{0.014}
 % PreregDminGOneSim: results/prereg/delta_min_prereg.csv | g == 1 | delta_min_sim | 3 decimals
 \newcommand{\PreregDminGOneSim}{0.014}
 % PreregDminGOneClosed: results/prereg/delta_min_prereg.csv | g == 1 | delta_min_closed | 3 decimals

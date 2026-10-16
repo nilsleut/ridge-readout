@@ -1,0 +1,41 @@
+The ridge fits select the regularisation $\alpha$ per voxel and outer fold from a grid whose
+lowest value is $10^{-6}$. Following the amendment of 2026-10-03 (Section~\ref{sec:inference}),
+the selection of the lowest value at a reliable voxel does not abort the run. It is logged
+and, after the run, classified on the mean inner-fold MSE curve of that voxel in that outer
+fold. The curve is extended by the diagnostic values $10^{-7}$, $10^{-8}$ and $10^{-9}$, and
+the relative gain is $(\mathrm{MSE}(10^{-6}) - \mathrm{MSE}_{\min}) / \mathrm{MSE}(10^{-6})$,
+with $\mathrm{MSE}_{\min}$ the minimum over the extended grid. A relative gain below $10^{-3}$
+is a plateau and the selection is valid; otherwise the cell would be excluded from every
+result. Smaller values of $\alpha$ are not used, because there the solution is dominated by
+eigenvalues of the dual kernel at rounding level ($|\lambda| \leq 1.9 \times 10^{-12}$ in the
+diagnosed cases). The gate decides whether a cell is kept and never changes a score.
+
+The first cell with such selections was a condition of the pilot (untrained network with
+calibrated BN statistics, one seed, $g = 1$, sub-01). There the standardised training design had full column rank
+and no dead features (step report in the repository); the pilot diagnosis used a wider
+diagnostic grid than the gate. Table~\ref{tab:lowedge} lists every analysis with such
+selections. Steps~7 to~9 involve no ridge fits.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.40\textwidth}rrrr@{}}
+\toprule
+Analysis & Hits & Plateau & Excluded & Max.\ gain \\
+\midrule
+Pilot diagnosis (sub-01, $g = 1$) & \LowEdgePilotHits & \LowEdgePilotPlateau & \LowEdgePilotExcluded & \LowEdgePilotMaxGain \\
+RSA versus ridge: collapse, random folds (sub-01) & \LowEdgeEtwoHits & \LowEdgeEtwoPlateau & \LowEdgeEtwoExcluded & \LowEdgeEtwoMaxGain \\
+RSA versus ridge: run-grouped folds (sub-01) & \LowEdgeEthreeHits & \LowEdgeEthreePlateau & \LowEdgeEthreeExcluded & \LowEdgeEthreeMaxGain \\
+RSA versus ridge: encoding-RSA (sub-01; repeats the hits above) & \LowEdgeEfourHits & \LowEdgeEfourPlateau & \LowEdgeEfourExcluded & \LowEdgeEfourMaxGain \\
+Other subjects, $g = 1$ (sub-02, sub-03) & \LowEdgeSubjectsHits & \LowEdgeSubjectsPlateau & \LowEdgeSubjectsExcluded & \LowEdgeSubjectsMaxGain \\
+Diagnosis of sub-03 (controls, $g \in \{1, 4, 8\}$) & \LowEdgeSubThreeHits & \LowEdgeSubThreePlateau & \LowEdgeSubThreeExcluded & \LowEdgeSubThreeMaxGain \\
+Ridge across resolutions (sub-01, sub-02, $g = 1$) & \LowEdgeRidgeHits & \LowEdgeRidgePlateau & \LowEdgeRidgeExcluded & \LowEdgeRidgeMaxGain \\
+Pre-specified primary analysis (3 subjects) & \LowEdgePrimaryHits & \LowEdgePrimaryPlateau & \LowEdgePrimaryExcluded & \LowEdgePrimaryMaxGain \\
+\bottomrule
+\end{tabular}
+\caption{Selections of the lowest regularisation value at reliable voxels, classified by the
+plateau gate. In the pilot diagnosis the plateau criterion was applied to the relative gain
+of the wider diagnostic grid. All hits were plateaus, and no cell was excluded.}
+\label{tab:lowedge}
+\end{table}

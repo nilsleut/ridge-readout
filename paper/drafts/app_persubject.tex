@@ -1,0 +1,43 @@
+Table~\ref{tab:persubdiff} gives the untrained (uncalibrated BN statistics) minus Backprop contrast
+of the pre-specified primary analysis for each subject (median $r$ over reliable V1 voxels; mean
+$\pm$ SD over the 5 seeds; positive seeds of 5). The main text reports the mean over the three
+subjects. Table~\ref{tab:persubbank} gives the median $r$ of the luminance and contrast bank and
+of the Backprop condition (mean over seeds) for each subject. In each subject and at each $g$ the
+bank scored above the Backprop condition. Sub-03 has \NReliableSubThree{} reliable voxels. All values are point estimates per
+subject, without an interval over stimuli or voxels.
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+$g$ & sub-01 & sub-02 & sub-03 \\
+\midrule
+1 & $\PerSubDiffSubOneGOneMean \pm \PerSubDiffSubOneGOneSd$ (\PerSubDiffSubOneGOnePos/5) & $\PerSubDiffSubTwoGOneMean \pm \PerSubDiffSubTwoGOneSd$ (\PerSubDiffSubTwoGOnePos/5) & $\PerSubDiffSubThreeGOneMean \pm \PerSubDiffSubThreeGOneSd$ (\PerSubDiffSubThreeGOnePos/5) \\
+2 & $\PerSubDiffSubOneGTwoMean \pm \PerSubDiffSubOneGTwoSd$ (\PerSubDiffSubOneGTwoPos/5) & $\PerSubDiffSubTwoGTwoMean \pm \PerSubDiffSubTwoGTwoSd$ (\PerSubDiffSubTwoGTwoPos/5) & $\PerSubDiffSubThreeGTwoMean \pm \PerSubDiffSubThreeGTwoSd$ (\PerSubDiffSubThreeGTwoPos/5) \\
+4 & $\PerSubDiffSubOneGFourMean \pm \PerSubDiffSubOneGFourSd$ (\PerSubDiffSubOneGFourPos/5) & $\PerSubDiffSubTwoGFourMean \pm \PerSubDiffSubTwoGFourSd$ (\PerSubDiffSubTwoGFourPos/5) & $\PerSubDiffSubThreeGFourMean \pm \PerSubDiffSubThreeGFourSd$ (\PerSubDiffSubThreeGFourPos/5) \\
+8 & $\PerSubDiffSubOneGEightMean \pm \PerSubDiffSubOneGEightSd$ (\PerSubDiffSubOneGEightPos/5) & $\PerSubDiffSubTwoGEightMean \pm \PerSubDiffSubTwoGEightSd$ (\PerSubDiffSubTwoGEightPos/5) & $\PerSubDiffSubThreeGEightMean \pm \PerSubDiffSubThreeGEightSd$ (\PerSubDiffSubThreeGEightPos/5) \\
+\bottomrule
+\end{tabular}
+\caption{Untrained minus Backprop per subject.}
+\label{tab:persubdiff}
+\end{table}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+$g$ & sub-01 & sub-02 & sub-03 \\
+\midrule
+1 & \PreregCtlLumcontrastSubOneGOne / \PerSubBpSubOneGOne & \PreregCtlLumcontrastSubTwoGOne / \PerSubBpSubTwoGOne & \PreregCtlLumcontrastSubThreeGOne / \PerSubBpSubThreeGOne \\
+2 & \PreregCtlLumcontrastSubOneGTwo / \PerSubBpSubOneGTwo & \PreregCtlLumcontrastSubTwoGTwo / \PerSubBpSubTwoGTwo & \PreregCtlLumcontrastSubThreeGTwo / \PerSubBpSubThreeGTwo \\
+4 & \PreregCtlLumcontrastSubOneGFour / \PerSubBpSubOneGFour & \PreregCtlLumcontrastSubTwoGFour / \PerSubBpSubTwoGFour & \PreregCtlLumcontrastSubThreeGFour / \PerSubBpSubThreeGFour \\
+8 & \PreregCtlLumcontrastSubOneGEight / \PerSubBpSubOneGEight & \PreregCtlLumcontrastSubTwoGEight / \PerSubBpSubTwoGEight & \PreregCtlLumcontrastSubThreeGEight / \PerSubBpSubThreeGEight \\
+\bottomrule
+\end{tabular}
+\caption{Median $r$ of the luminance and contrast bank / of Backprop, per subject.}
+\label{tab:persubbank}
+\end{table}
