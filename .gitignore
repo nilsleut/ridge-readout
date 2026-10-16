@@ -16,3 +16,4 @@ paper/*.pdf
 paper/*.out
 paper/*.bbl
 paper/*.blg
+paper/build/
