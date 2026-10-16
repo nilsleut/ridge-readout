@@ -26,7 +26,7 @@ z-scored RSA: over 60 checkpoint-by-resolution cells of the untrained network an
 Backprop, Spearman$(m, d) = \MOneSpearman$ (M1, threshold 0.6: met). For Backprop, $m$ was
 ordered UPSAMPLED 224 $<$ NATIVE 224 $<$ NATIVE 32 in \PMechOneBpSeeds{} of 5 seeds, and
 the untrained network's range of $m$ (\PMechOneRandRange) was below half of Backprop's
-(P\_mech1, met). P\_mech2 was not met: Backprop's $m$ was higher for band-pass inputs
+(P\_mech1, met). P\_mech2 was not met (Appendix~\ref{app:bandpass}): Backprop's $m$ was higher for band-pass inputs
 without the coarse band than for the coarse band alone in \PMechTwoNotchSeeds{} of 5
 seeds, but Spearman$(m, d)$ over all 50 cells including the band-pass inputs was
 \PMechTwoSpearman, below 0.6.

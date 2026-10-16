@@ -14,7 +14,7 @@ $g = 8$), below the reference effect of $+\PreregReferenceEffect$. The criterion
 survival at $g \geq 4$ was not met. Because $\Delta_{\min}$ was smaller than the
 reference effect, absence is informative under the plan, and the pre-specified rule
 classifies this outcome as ``The effect disappears'' rather than ``The method cannot
-resolve it''. The contrast was negative rather than zero. The four
+resolve it''. In every seed the contrast was negative. With five seeds the smallest attainable one-sided $p$ is $1/32$ and the test addresses only the positive direction, so the negative direction is an observation, not a tested effect. Per-subject values are given in Appendix~\ref{app:persubject}; the mean over subjects includes sub-03, where ridge scores were close to zero. The four
 secondary contrasts against Backprop (untrained BN-calibrated, FA, PC, STDP) were also
 negative at every $g$; the largest was $\PreregSecondaryMaxMean$, and at most
 \PreregSecondaryMaxPos{} of 5 seeds were positive in any of them.
@@ -34,7 +34,7 @@ which the plan expected a value near zero, gave \PreregCtlPermutedMeanGOne,
 \PreregCtlPermutedMeanGEight; negative values are expected for features without
 signal under the pooled out-of-fold correlation (Section~\ref{sec:ridge}), and the
 control is not shown in Fig.~\ref{fig:prereg_ladder}. All
-\PreregLowEdgeHits{} lower-boundary selections at reliable voxels were classified as
+\PreregLowEdgeHits{} lower-boundary selections at reliable voxels (Appendix~\ref{app:lowedge}) were classified as
 plateaus (\PreregLowEdgePlateau), and no cell was excluded.
 
 In an exploratory analysis of sub-01 (\NReliableSubOne{} reliable V1 voxels, $g = 1$,
@@ -47,7 +47,7 @@ difference stays positive on the voxels the ridge readout uses. The pooled out-o
 score: with per-fold $r$ the ridge contrast was $\ETwoPerFoldGap$ (a positive value would
 have implicated pooling), and the two networks differed by \ETwoHiFracDiff{} in the share
 of selections at the largest $\alpha$, below the threshold of 0.10 for a collapse
-asymmetry. The fold convention: with run-grouped folds the contrast was
+asymmetry. The fold convention: with run-grouped folds (Appendix~\ref{app:runfolds}) the contrast was
 $\EThreeRunFoldGap$ (a positive value would have implicated leakage within runs). The
 score: correlating RDMs built from the ridge predictions with the fMRI RDM gave
 $\EFourEncGapRandom$ with random folds (\EFourEncPosSeedsRandom{} of 5 seeds
@@ -57,7 +57,6 @@ advantage of the untrained network does not carry over to RDMs of ridge predicti
 that it reverses there. In
 the same subject, ridge did not separate the two untrained networks
 ($\POneRidgeRandBncal$; rule $\leq 0.010$: met), whereas RSA separated them by
-$\POneRsaRandBncal$. In sub-02 and sub-03 the predicted pattern held: RSA
+$\POneRsaRandBncal$. In sub-02 and sub-03 the signs of the predicted pattern held: RSA
 $+\STwoSubTwoRsa$ and $+\STwoSubThreeRsa$, ridge $\STwoSubTwoRidge$ and
-$\STwoSubThreeRidge$. Sub-03 has \NReliableSubThree{} reliable voxels and ridge scores
-near zero in every condition.
+$\STwoSubThreeRidge$. Sub-03 has \NReliableSubThree{} reliable voxels, ridge scores near zero in every condition and RSA and ridge differences close to zero; it contributes little to the pattern.

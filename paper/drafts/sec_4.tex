@@ -1,10 +1,6 @@
 % Draft discussion.
 \paragraph{What the V1 advantage measured.}
-The advantage of the untrained network at V1 that we reported earlier \citep{evalres}
-was specific to one analysis convention. It reversed under a pre-specified ridge readout,
-disappeared when model units were standardised over the stimulus set, was absent in the
-angular component of Euclidean distances, and was not shared by the untrained network
-with calibrated batch-normalisation statistics. Raw correlation-distance RSA, the
+The advantage of the untrained network at V1 that we reported earlier \citep{evalres} was not robust to the analysis choices examined here. Under correlation distance it disappeared when model units were standardised over the stimulus set, and a pre-specified ridge readout placed the untrained network below the trained one. Under Euclidean distance it persisted, with a resolution slope that was not resolved, but the angular component of the Euclidean distance favoured the trained networks. It was also not shared by the untrained network with calibrated batch-normalisation statistics. Raw correlation-distance RSA, the
 convention of the earlier work, tracked how strongly a model's per-stimulus gain axis
 covaried with that of the voxels, both across our networks and across six ImageNet
 architectures. The earlier result is therefore not a statement about representational
@@ -19,7 +15,7 @@ Under the ridge readout, a bank of two features, mean luminance and contrast, pr
 V1 better than every network condition at every pooling grid, including the
 backpropagation-trained network. In this data set, and for the Conv1 features tested here, the variance in V1
 responses that a linear readout captures is thus largely shared with low-level stimulus
-statistics, and no network captured it better than the statistics themselves. This
+statistics, and no network captured it better than the statistics themselves. This comparison rests on point estimates (mean over three subjects, five seeds per network condition) without an interval for the baseline; per-subject values are in Appendix~\ref{app:persubject}. This
 limits what V1 comparisons in these data can reveal about learning rules. This is consistent with the gain account: the voxel gain axis
 correlated with luminance and contrast, and the untrained network's gain axis shared
 these signs. Whether this gain reflects neural mechanisms such as contrast normalisation
@@ -51,15 +47,13 @@ networks were set, since calibrated and uncalibrated variants behaved differentl
 \paragraph{Consequences for our earlier work.}
 The headline of \citet{evalres}, that untrained networks exceed backpropagation at V1
 at 224\,px and that this gap depends on evaluation resolution, and the corresponding
-claim in \citet{leutenegger2026} do not survive the analyses reported here. An audit
+claim in \citet{leutenegger2026} are not robust to the analysis choices examined here. An audit
 of our earlier preprints identified the affected statements; revised versions refer to
 this work.
 % TODO: confirm once the revised versions are posted; list them if needed.
 
 \paragraph{Limitations.}
-The data comprise three subjects from a single data set, and all inference concerns
-variation over stimuli and seeds. Ridge scores in one subject were close to zero in
-every condition. The primary analysis was not blind, several pre-specified instruments
+The data comprise three subjects from a single data set, and the intervals reported here describe different sources of variation (Section~\ref{sec:inference}): stimulus resampling for RSA and training seeds for ridge. Neither includes variation across subjects, and for each ImageNet model we used one set of trained weights. Ridge scores in one subject were close to zero in every condition, and the primary ridge result is a mean over all three subjects (Appendix~\ref{app:persubject}). The primary analysis was not blind, several pre-specified instruments
 were not implemented, and the exploratory analyses were developed sequentially, with
 intervals not corrected for multiple comparisons. Five pre-stated predictions failed
 (Appendix~\ref{app:failed}); among them, the LOC ranking was not resolved under
