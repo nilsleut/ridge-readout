@@ -1,0 +1,18 @@
+kind,quantity,value,passed,config_hash,git_head
+summary,cells,36.0,,206fa875cca5,1da7462
+summary,distinct analyses,28.0,,206fa875cca5,1da7462
+summary,"distinct analyses, CI above 0",5.0,,206fa875cca5,1da7462
+summary,"distinct analyses, CI below 0",9.0,,206fa875cca5,1da7462
+summary,"distinct analyses, CI includes 0",14.0,,206fa875cca5,1da7462
+summary,"cells, CI above 0",13.0,,206fa875cca5,1da7462
+summary,"cells, CI below 0",9.0,,206fa875cca5,1da7462
+summary,"cells, CI includes 0",14.0,,206fa875cca5,1da7462
+summary,"distinct analyses, euclidean cells",4.0,,206fa875cca5,1da7462
+summary,"distinct analyses, correlation and cosine cells",24.0,,206fa875cca5,1da7462
+check,expectation: 12 euclidean cells comprise 4 classes,4.0,True,206fa875cca5,1da7462
+check,expectation: 24 correlation and cosine cells distinct,24.0,True,206fa875cca5,1da7462
+check,recomputed vs results/step7 max |d|,9.974659986866641e-17,,206fa875cca5,1da7462
+check,max |d| within classes,0.0,,206fa875cca5,1da7462
+check,min max|d| between classes,0.00038373139176817866,,206fa875cca5,1da7462
+check,max spread of gap and CI within classes,0.0,,206fa875cca5,1da7462
+check,values compared per cell,270.0,,206fa875cca5,1da7462

@@ -1,0 +1,26 @@
+kind,model,model_side,brain_side,res,quantity,value,ci_lo,ci_hi,seeds_positive,passed,note,config_hash,git_head
+cell,own CNN,full,full,NATIVE_224,Random Weights - Backprop,0.03044593798328954,0.01814899493637817,0.04229344150763231,5.0,,,206fa875cca5,1da7462
+cell,own CNN,full,ortho,NATIVE_224,Random Weights - Backprop,0.005718068625798314,-0.0005638261353825211,0.011915838429855882,5.0,,,206fa875cca5,1da7462
+cell,own CNN,ortho,full,NATIVE_224,Random Weights - Backprop,-0.0005385787542577763,-0.007226226945705797,0.006392553071789701,2.0,,,206fa875cca5,1da7462
+cell,own CNN,ortho,ortho,NATIVE_224,Random Weights - Backprop,-0.001878309852705124,-0.0071241188034608886,0.0031359072386788005,1.0,,,206fa875cca5,1da7462
+cell,alexnet,ortho,full,R224,untrained - trained,-0.0022718390743438274,-0.012474919545191272,0.007574014863840988,,,,206fa875cca5,1da7462
+cell,vgg11_bn,ortho,full,R224,untrained - trained,-0.0034102403676151,-0.014669967321037043,0.007761884220790645,,,,206fa875cca5,1da7462
+cell,resnet18,ortho,full,R224,untrained - trained,-0.011247966779434574,-0.018074504592058095,-0.004203375340076855,,,,206fa875cca5,1da7462
+cell,resnet50,ortho,full,R224,untrained - trained,-0.012485585053535937,-0.020106210528796267,-0.005091646010579202,,,,206fa875cca5,1da7462
+cell,convnext_tiny,ortho,full,R224,untrained - trained,0.004998305767356097,-0.0020475679912949902,0.011594606392435852,,,,206fa875cca5,1da7462
+cell,vit_b_16,ortho,full,R224,untrained - trained,-0.02415746792940559,-0.04114916482473748,-0.007934986241951,,,,206fa875cca5,1da7462
+cell,alexnet,full,ortho,R224,untrained - trained,-0.0009641948960506762,-0.00741623052791821,0.005247661565951625,,,,206fa875cca5,1da7462
+cell,vgg11_bn,full,ortho,R224,untrained - trained,0.0054718009202050985,-0.0014835443149676239,0.013111255106491864,,,,206fa875cca5,1da7462
+cell,resnet18,full,ortho,R224,untrained - trained,-0.0026948583935599325,-0.007985323467136677,0.003308063185704957,,,,206fa875cca5,1da7462
+cell,resnet50,full,ortho,R224,untrained - trained,-0.0026926015999816054,-0.008033656089339902,0.0031821160926239563,,,,206fa875cca5,1da7462
+cell,convnext_tiny,full,ortho,R224,untrained - trained,0.0030501636461601825,-0.0017136187317325126,0.007737857377072957,,,,206fa875cca5,1da7462
+cell,vit_b_16,full,ortho,R224,untrained - trained,-0.01842796800293643,-0.029108603365973724,-0.00844352502830089,,,,206fa875cca5,1da7462
+contrast,own CNN,,,NATIVE_224,"gap[full, full] - gap[ortho, ortho]",0.03232424783599466,0.021864136858943235,0.041850156650153535,,,,206fa875cca5,1da7462
+count,ImageNet,ortho,full,R224,models with CI above 0,0.0,,,,,,206fa875cca5,1da7462
+count,ImageNet,ortho,full,R224,models with CI below 0,3.0,,,,,,206fa875cca5,1da7462
+count,ImageNet,full,ortho,R224,models with CI above 0,0.0,,,,,,206fa875cca5,1da7462
+count,ImageNet,full,ortho,R224,models with CI below 0,1.0,,,,,,206fa875cca5,1da7462
+rule,,,,,"X1 gap[full, full] - gap[ortho, ortho] CI above 0",0.021864136858943235,,,,True,,206fa875cca5,1da7462
+interpretation,,,,,interpretation rule X,,,,,,"no attribution to a side; mixed cells CI above 0 with value >= 0.5 gap[full, full]: model ortho / brain full: False, model full / brain ortho: False; CI includes 0: model ortho / brain full: True, model full / brain ortho: True",206fa875cca5,1da7462
+check,,,,,"gate [full, full] vs results/step7 max |d|",1.1102230246251565e-16,,,,,,206fa875cca5,1da7462
+check,,,,,"gate [ortho, ortho] vs results/step25 max |d|",8.847089727481716e-17,,,,,,206fa875cca5,1da7462
