@@ -31,15 +31,20 @@ the ranking of candidate models has rarely been examined.
 Here we test our earlier result in four ways. First, a pre-specified analysis replaces
 RSA by a fitted ridge readout on the full feature map. Second, a sequence of exploratory
 analyses, each with predictions and decision rules committed before it was run, asks
-where the discrepancy between RSA and ridge arises. Third, a multiverse of 36
-combinations of unit normalisation, distance measure and voxel normalisation
-\citep{steegen2016} tests which conclusions survive defensible analysis choices,
-and six ImageNet architectures test whether they generalise beyond our networks.
+where the discrepancy between RSA and ridge arises; among them, we test whether the
+advantage is carried by the component along the mean profile of the units. Third, a
+multiverse of 36 combinations of unit normalisation, distance measure and voxel
+normalisation \citep{steegen2016} tests which conclusions hold across defensible analysis
+choices, and six ImageNet architectures test whether they generalise beyond our networks.
 Fourth, an exact decomposition of Euclidean distances separates a norm component from an
 angular component.
 
-We find that the V1 advantage of the untrained network does not survive the fitted
-readout, disappears under correlation distance when model units are standardised, and is not present in the angular
-component, whereas raw correlation-distance RSA closely tracks the mean-profile alignment of model and voxels. The ranking at V1 depends on the analysis across the multiverse; the ranking at LOC does not. A luminance-and-contrast bank outperforms every network
-under the ridge readout at V1. We report all pre-stated predictions, including those that
-failed, and we revise the corresponding claims of our earlier work.
+We find that whether the untrained network beats the trained one at V1 depends on the
+analysis. The advantage is not reproduced by the fitted readout, disappears under
+correlation distance when model units are standardised, and is absent from the angular
+component and from the component orthogonal to the mean profile, whereas raw
+correlation-distance RSA closely tracks the mean-profile alignment of model and voxels.
+The ranking at LOC favours the trained networks wherever it is resolved. A
+luminance-and-contrast bank outperforms every network under the ridge readout at V1. We
+report all pre-stated predictions, including those that failed, and we revise the
+corresponding claims of our earlier work.

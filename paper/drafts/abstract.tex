@@ -1,19 +1,23 @@
 % Draft abstract. All numbers via macros from numbers.tex.
-Untrained convolutional networks have been reported to rival trained networks as
-models of visual cortex~\citep{truzzi2020, kazemian2025}. In previous work we reported such an advantage at V1 in
-the THINGS fMRI data, together with a dependence on evaluation resolution
-\citep{evalres}. Here we test this result. In a pre-specified analysis, a fitted ridge
-readout did not reproduce it: the untrained network scored below a backpropagation-trained
-network at every pooling grid (untrained minus trained median $r$ of
-$\PreregRandBpGFour$ at $g = 4$, \PreregRandBpGFourPos{} of 5 seeds positive). In exploratory analyses with
-criteria fixed before each step, the representational similarity analysis (RSA)
-advantage ($+\VoneGapRawTwoTwoFour$ [$\VoneGapRawTwoTwoFourLo$, $\VoneGapRawTwoTwoFourHi$]) and its
-resolution dependence disappeared under correlation distance when model units were standardised over the stimulus set ($\VoneGapZTwoTwoFour$ [$\VoneGapZTwoTwoFourLo$, $\VoneGapZTwoTwoFourHi$]). Raw correlation-distance RSA tracked how a model's mean-profile alignment covaried with that of the voxels (Spearman \GOneSpearman{} across
-our networks, \GenOneSpearman{} across six ImageNet architectures). Across 36
-combinations of unit normalisation, distance measure and voxel normalisation, the sign of the V1 ranking depended on the analysis, whereas the LOC ranking favoured trained
-networks wherever it was resolved. Decomposing Euclidean distances into a norm and an
-angular component, trained networks were ahead on the angular component at
-V1 in our network and in \SepThreeModels{} of 6 ImageNet models, and at LOC in all
-seven. A luminance-and-contrast bank scored above every network under the ridge readout at V1 (point estimates for three subjects). Intervals are stimulus-bootstrap intervals for three subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend centring units over the evaluated stimuli on both
-model and brain side, reporting norm and angular components separately, and including
-trivial baselines.
+Untrained convolutional networks have been reported to rival trained networks as models of
+visual cortex~\citep{truzzi2020, kazemian2025}, and we had reported an advantage of an
+untrained network over a backpropagation-trained one at V1 in the THINGS fMRI data,
+together with a dependence on evaluation resolution~\citep{evalres}. Under a pre-specified
+ridge readout, the untrained network scored below the trained one at every pooling grid
+(median $r$ difference $\PreregRandBpGFour$ at $g = 4$, \PreregRandBpGFourPos{} of 5 seeds
+positive), and also in MSE skill and per-fold $r$. Across 36 combinations of unit
+normalisation, distance measure and voxel normalisation, the sign of the V1 contrast
+depended on the analysis (\MultiPosCiCells{} cells with intervals above 0,
+\MultiNegCiCells{} below 0), and the resolution dependence of the original convention
+appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model
+and voxel patterns with the unit-mean profile (Spearman \GOneSpearman{} across our networks,
+\GenOneSpearman{} across six ImageNet architectures); the advantage was absent from the
+component orthogonal to the mean profile, and the parallel component alone did not resolve
+it. On the unweighted angular component of centred patterns, trained networks were ahead at
+V1 (our network and \SepThreeModels{} of 6 ImageNet models) and at LOC (all seven); the
+norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above
+every network under ridge (point estimates, three subjects), and adding network features
+to it did not improve prediction. Intervals are stimulus-bootstrap intervals for three
+subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend
+centring units over the evaluated stimuli on both model and brain side, reporting
+components separately together with a small multiverse, and including simple baselines.
