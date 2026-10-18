@@ -7,6 +7,9 @@ percentile intervals (1000 paired resamples). Sign conventions:
 - own CNN: V1 = Random − Backprop, LOC = Backprop − Random;
 - ImageNet models: V1 = untrained − trained, LOC = trained − untrained.
 
+Rule labels: the step 5 moment-ratio rule (Spearman(m, d) ≥ 0.6) is called M1 in its
+amendment and MR1 in the paper; M1 to M4 denote the step 25 ablation rules (C6).
+
 **"Criterion fixed before the analysis"** means, in every row below, that the commit
 adding the amendment with the criterion precedes the commit adding the first script
 that computes it. The commit hashes and timestamps are given as evidence. There is no

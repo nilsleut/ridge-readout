@@ -29,6 +29,7 @@ OI = {"black": "#000000", "orange": "#E69F00", "skyblue": "#56B4E9", "green": "#
 DIVERGE = LinearSegmentedColormap.from_list("oi_div", [OI["blue"], "#FFFFFF", OI["vermillion"]])
 ONE, TWO = 3.5, 7.0
 R_, BP, BN = "Random Weights", "Backprop", "Random Weights (BN-calibrated)"
+RULE_LABEL = {R_: "Untrained (uncalibrated BN)", BN: "Untrained (BN-calibrated)"}
 RULE_COL = {R_: OI["vermillion"], BP: OI["blue"], "Feedback Alignment": OI["green"],
             "Predictive Coding": OI["purple"], "STDP": OI["orange"], BN: OI["skyblue"]}
 IMN = ["alexnet", "vgg11_bn", "resnet18", "resnet50", "convnext_tiny", "vit_b_16"]
@@ -97,7 +98,7 @@ def fig1():
     ax.set_xticks([xpos[("NATIVE", r)] for r in nat] + [xpos[("UPSAMPLED", 224)]])
     ax.set_xticklabels([str(int(r)) for r in nat] + ["224\n(upsampled)"])
     ax.set_xlabel("Evaluation resolution (px)")
-    ax.set_ylabel("Random $-$ Backprop, V1")
+    ax.set_ylabel("Untrained $-$ Backprop, V1")
     ax.legend(frameon=False, loc="upper left")
     fig.tight_layout()
     save(fig, n)
@@ -153,7 +154,7 @@ def fig3():
     n = "multiverse_loc"
     g = read("step7/multiverse.csv", "kind == 'cell' and roi == 'LOC' and quantity == 'gap NATIVE 224: Backprop - Random Weights'", n)
     fig, ax = plt.subplots(figsize=(ONE, 2.9))
-    im = grid(ax, g, "LOC, Backprop $-$ Random", float(np.nanmax(np.abs(g.value))))
+    im = grid(ax, g, "LOC, Backprop $-$ untrained", float(np.nanmax(np.abs(g.value))))
     cb = fig.colorbar(im, ax=ax, shrink=0.8)
     cb.ax.tick_params(labelsize=7)
     ax.set_xlabel("Distance D within B")
@@ -177,10 +178,10 @@ def fig4():
     ax[0].set_xlabel("$c_{align}$")
     ax[0].set_ylabel("RSA, raw features (V1)")
     ax[0].set_title("(a) CIFAR CNN", loc="left")
-    h = [plt.Line2D([], [], color=RULE_COL[k], marker="o", ls="none", ms=4, label=k.replace("Random Weights", "Random"))
+    h = [plt.Line2D([], [], color=RULE_COL[k], marker="o", ls="none", ms=4, label=RULE_LABEL.get(k, k))
          for k in (R_, BP)]
     h += [plt.Line2D([], [], color="0.4", marker=marks[c], ls="none", ms=4, label=c.replace("_", " ").title()) for c in conds]
-    ax[0].legend(handles=h, frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=2)
+    ax[0].legend(handles=h, frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.62, -0.2), ncol=2)
     for r in imn.itertuples():
         col = OI["blue"] if r.cond == "trained" else OI["vermillion"]
         ax[1].scatter(r.c_gain, r.rsa_raw_V1, color=col, marker=IMN_MARK[r.model], s=12, lw=0)
@@ -194,7 +195,7 @@ def fig4():
     for r in vox.itertuples():
         rows.append((f"V1 voxels {r.what.split()[-1]}", r.stat, r.pearson))
     for r in mod.itertuples():
-        rows.append((r.what.replace("model gain Conv1 ", "CNN ").replace("Random Weights", "Random"), r.stat, r.pearson))
+        rows.append((r.what.replace("model gain Conv1 ", "CNN ").replace("Random Weights", "untrained"), r.stat, r.pearson))
     gm = gg.assign(group=np.where(gg.cond == "trained", "trained", "untrained")).groupby(["model", "group"])[
         ["corr_luminance", "corr_rms_contrast"]].mean().reset_index()
     for r in gm.itertuples():
@@ -209,7 +210,7 @@ def fig4():
     ax[2].set_yticks(y, labels, fontsize=6)
     ax[2].invert_yaxis()
     ax[2].axvline(0, color=OI["black"], lw=0.6)
-    ax[2].set_xlabel("Pearson r with mean-profile alignment")
+    ax[2].set_xlabel("r with mean-profile alignment", fontsize=8)
     ax[2].set_title("(c) Alignment vs stimulus", loc="left")
     ax[2].legend(frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.35, -0.16), ncol=1)
     fig.subplots_adjust(left=0.08, right=0.98, top=0.92, bottom=0.36, wspace=0.75)
@@ -222,7 +223,7 @@ def fig5():
     con = read("step9/separation.csv", "kind == 'contrast' and F == 'center'", n)
     slo = read("step9/separation_slopes.csv", "kind == 'slope' and F == 'center' and component == 'angle' and model != 'own CNN'", n)
     models = ["own CNN"] + IMN
-    cols = [("V1", "norm", "V1, norm component"), ("V1", "angle", "V1, angular component"), ("LOC", "angle", "LOC, angular component")]
+    cols = [("V1", "norm", "V1 norm"), ("V1", "angle", "V1 angular"), ("LOC", "angle", "LOC angular")]
     fig, ax = plt.subplots(1, 4, figsize=(TWO, 2.6), sharey=True, gridspec_kw={"width_ratios": [1, 1, 1, 1]})
     y = np.arange(len(models))
     for a, (roi, comp, title) in zip(ax[:3], cols):
@@ -233,7 +234,7 @@ def fig5():
             a.plot([r.ci_lo, r.ci_hi], [i, i], color=col, lw=1.2)
             a.plot(r.value, i, marker="o", color=col, ms=3.5)
         a.axvline(0, color=OI["black"], lw=0.6)
-        a.set_title(title)
+        a.set_title(title, fontsize=7)
     ax[0].set_yticks(y, models)
     ax[0].invert_yaxis()
     q = slo.set_index("model")
@@ -243,7 +244,7 @@ def fig5():
             ax[3].plot([r.ci_lo, r.ci_hi], [i, i], color=OI["green"], lw=1.2)
             ax[3].plot(r.value, i, marker="s", color=OI["green"], ms=3.5)
     ax[3].axvline(0, color=OI["black"], lw=0.6)
-    ax[3].set_title("V1 angle, 224 to 448 px")
+    ax[3].set_title("V1 angle slope,\n224 to 448 px", fontsize=7)
     fig.supxlabel("Contrast (V1: untrained $-$ trained; LOC: trained $-$ untrained), 95% CI", fontsize=9)
     fig.tight_layout()
     save(fig, n)
@@ -271,7 +272,7 @@ def fig6():
     for rule in (R_, BN, BP, "Feedback Alignment", "Predictive Coding", "STDP"):
         a = agg[agg.rule == rule].set_index("grid").reindex(grids)
         ax.errorbar(grids, a["mean"], yerr=a["std"], color=RULE_COL[rule], marker="o", ms=3, lw=1.1, capsize=2,
-                    label=rule.replace("Random Weights", "Random"))
+                    label=RULE_LABEL.get(rule, rule))
     ax.set_xscale("log", base=2)
     ax.set_xticks(grids, [str(int(g)) for g in grids])
     ax.minorticks_off()
