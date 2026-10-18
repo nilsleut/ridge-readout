@@ -15,7 +15,19 @@ ImageNet models. SEP4 was met: the LOC angle contrast was $+\SepOwnLocAngleCente
 in \SepFourModels{} of 6 ImageNet models. Because SEP2 and SEP3 were not both met, the
 pre-stated interpretation rule applies: the V1 ranking is not attributed to the norm or the angular component. On the angular component alone, the trained
 networks were ahead at V1 in the own CNN and in \SepThreeModels{} ImageNet models, and
-at LOC in the own CNN and in \SepFourModels{} ImageNet models.
+at LOC in the own CNN and in \SepFourModels{} ImageNet models. The norm-weighted angular
+term $W$ gave a V1 contrast of $+\WAngOwnVone$ [$\WAngOwnVoneLo$, $\WAngOwnVoneHi$] in the own
+CNN, and its interval excluded 0 in \WAngImnPosModels{} of 6 ImageNet models (vgg11\_bn,
+$+\WAngVggelevenVone$ [$\WAngVggelevenVoneLo$, $\WAngVggelevenVoneHi$]). The angular result
+thus concerns the unweighted angular dissimilarity $A$; the norm-weighted term $W$ pointed in
+the direction of the norm component and was not resolved. Over the cross-run pairs, $N$ and $A$
+were nearly uncorrelated (Spearman \WRankNAOwn{} in the own CNN, mean over checkpoints;
+\WRankNASubOne, \WRankNASubTwo{} and \WRankNASubThree{} in the fMRI of the three subjects),
+whereas $A$ and $W$ were correlated (\WRankAWOwn; \WRankAWSubOne, \WRankAWSubTwo{} and
+\WRankAWSubThree). In a regression of the ranks of the fMRI RDM on the ranks of $N$, $A$ or
+both (own CNN, V1, NATIVE 224\,px), each component accounted for about 0.1\% of the rank
+variance of the fMRI RDM ($R^2$ for $N$ and $A$ together: \WRtwoNARand{} for the untrained
+network, \WRtwoNABp{} for Backprop), and no contrast of $R^2$ was resolved.
 
 The resolution slope of the contrasts was a descriptive point fixed in advance without a
 decision rule. For the ImageNet models, the V1 angle contrast grew from 224 to 448\,px

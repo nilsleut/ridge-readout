@@ -1,0 +1,27 @@
+In an exploratory analysis prompted by an external critique (Section~\ref{sec:inference}),
+each raw GAP pattern and each beta pattern was split into its projection on the mean profile
+and the remainder orthogonal to it (Section~\ref{sec:gainmethods}); each model component was
+compared with the same component of the brain, with the RSA convention and bootstrap of
+Section~\ref{sec:rsa}. The full variant reproduced the stored paper cell of the own CNN and
+of the ImageNet models to within \MpGateMaxDelta{} (reproduction gate: met).
+
+M1 was met: in the orthogonal remainder, the V1 contrast of the untrained (uncalibrated BN
+statistics) network minus Backprop at NATIVE 224\,px was $\MpOrthoOwnVoneNatTwoTwoFour$
+[$\MpOrthoOwnVoneNatTwoTwoFourLo$, $\MpOrthoOwnVoneNatTwoTwoFourHi$], with an upper bound of
+at most 0.010, against $+\MpFullOwnVoneNatTwoTwoFour$ [$\MpFullOwnVoneNatTwoTwoFourLo$,
+$\MpFullOwnVoneNatTwoTwoFourHi$] in the full variant. M2 was met: the resolution slope of
+the orthogonal remainder was $\MpOrthoOwnSlope$ [$\MpOrthoOwnSlopeLo$, $\MpOrthoOwnSlopeHi$],
+below half of $S_{\mathrm{paper}}$. M4 was met: for the ImageNet models at 224\,px, the upper
+bound of the orthogonal V1 contrast was at most 0.010 in \MpMFourModels{} of 6 models. M3 was
+not met: the parallel component gave $+\MpParOwnVoneNatTwoTwoFour$
+[$\MpParOwnVoneNatTwoTwoFourLo$, $\MpParOwnVoneNatTwoTwoFourHi$] at NATIVE 224\,px and a
+slope of $+\MpParOwnSlope$ [$\MpParOwnSlopeLo$, $\MpParOwnSlopeHi$]. The interval of the
+parallel gap includes both 0 and the raw gap, so these data do not decide whether the
+parallel component alone suffices. At LOC, described without a rule, Backprop minus
+untrained was $+\MpFullOwnLoc$ [$\MpFullOwnLocLo$, $\MpFullOwnLocHi$] in the full variant,
+$+\MpOrthoOwnLoc$ [$\MpOrthoOwnLocLo$, $\MpOrthoOwnLocHi$] in the orthogonal remainder and
+$\MpParOwnLoc$ [$\MpParOwnLocLo$, $\MpParOwnLocHi$] in the parallel component.
+
+The pre-stated interpretation rule applies as written: ``M3 not met: it is not sufficient.''
+The advantage is absent from the orthogonal remainder, and the parallel component alone did
+not resolve it. No physiological claim follows.

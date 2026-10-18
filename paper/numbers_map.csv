@@ -1120,6 +1120,7 @@ WAngConvnexttinyLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and m
 WAngVitbsixteenLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'LOC',value,3 decimals,0.006
 WAngVitbsixteenLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'LOC',ci_lo,3 decimals,-0.022
 WAngVitbsixteenLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'LOC',ci_hi,3 decimals,0.036
+WAngImnPosModels,results/step25/weighted_angle.csv,kind == 'contrast' and roi == 'V1' and model != 'own CNN' and ci_lo > 0,row count (zero allowed),integer,1
 WRankNAOwn,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'own CNN' and quantity == 'Spearman N-A',value,2 decimals,0.09
 WRankNASubOne,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-01' and quantity == 'Spearman N-A',value,2 decimals,0.00
 WRankNASubTwo,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-02' and quantity == 'Spearman N-A',value,2 decimals,0.01

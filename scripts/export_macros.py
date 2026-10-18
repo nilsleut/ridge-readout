@@ -311,6 +311,8 @@ for _roi, _rn in (("V1", "Vone"), ("LOC", "Loc")):
     SPECS += _ci(f"WAngOwn{_rn}", _WA, f"kind == 'contrast' and model == 'own CNN' and roi == '{_roi}'")
     for _m, _mn in _IMN.items():
         SPECS += _ci(f"WAng{_mn}{_rn}", _WA, f"kind == 'contrast' and model == '{_m}' and roi == '{_roi}'")
+SPECS.append(("WAngImnPosModels", f"count0:{_WA}",
+              "kind == 'contrast' and roi == 'V1' and model != 'own CNN' and ci_lo > 0", None, "int"))
 for _p, _pn in (("N-A", "NA"), ("N-W", "NW"), ("A-W", "AW")):
     SPECS.append((f"WRank{_pn}Own", _WA, f"kind == 'rankcorr' and model == 'own CNN' and quantity == 'Spearman {_p}'",
                   "value", "corr"))
