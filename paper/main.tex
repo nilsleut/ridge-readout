@@ -13,7 +13,7 @@
 
 \input{numbers}
 
-\title{The untrained-network advantage at V1 is not geometric: separating gain from geometry in model--brain RSA}
+\title{Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model--brain RSA}
 \author{Nils Leutenegger\\Independent researcher, Zug, Switzerland\\\texttt{nils.leutenegger@gmail.com}}
 \date{Draft of 16 October 2026}% TODO: remove before the arXiv submission
 
@@ -159,33 +159,30 @@ subject to a downstream equivalence gate (amendment of 2026-10-13). An explorato
 at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
 
 Two controls used the identical readout. The control band consists of low-level banks
-pooled to the same grid: pixels; Rec.\,709 luminance
-($Y = 0.2126R + 0.7152G + 0.0722B$) with local RMS contrast ($9 \times 9$ window); absolute responses of a Gabor bank (4 orientations $\times$
+pooled to the same grid: pixels; the luminance-and-contrast bank, two feature maps (luminance, Rec.\,709, $Y = 0.2126R + 0.7152G + 0.0722B$, and local RMS contrast in a $9 \times 9$ window) pooled to the $g \times g$ grid, i.e.\ $2g^2$ features (2 at $g = 1$, 128 at $g = 8$); absolute responses of a Gabor bank (4 orientations $\times$
 3 spatial frequencies); and, as negative test, Backprop seed-0 features with permuted
 stimulus assignment. The spatial-correspondence control permutes the $g \times g$ cells
 differently for every image (seed 20260820), keeping dimensionality and per-channel
 distributions; it was run for the seed-0 untrained and Backprop checkpoints at
 $g \in \{2, 4, 8\}$.
 
-\subsection{Gain axis and decomposition}
+\subsection{Mean-profile alignment and decomposition}
 \label{sec:gainmethods}
 
 For a stimulus $\times$ unit matrix $X$, let $\mu$ be the unit means over the 720
 stimuli, $\mu_c = \mu - \overline{\mu}$, and $\tilde{x}_i$ row $i$ centred across units.
-The gain of stimulus $i$ is the cosine between its response profile and the mean profile,
+The mean-profile alignment of stimulus $i$ is the cosine between its response profile and the mean profile,
 \begin{equation}
-  \mathrm{gain}_i = \frac{\langle \tilde{x}_i, \mu_c \rangle}{\lVert \tilde{x}_i \rVert \, \lVert \mu_c \rVert}.
+  a_i = \frac{\langle \tilde{x}_i, \mu_c \rangle}{\lVert \tilde{x}_i \rVert \, \lVert \mu_c \rVert}.
 \end{equation}
-Model gain was computed on raw features, voxel gain on all ROI voxels under $B$ = paper.
-$c_{\mathrm{gain}}$ is the Pearson correlation over the 720 stimuli between model gain
-and V1 voxel gain, averaged over subjects. Gains were described against stimulus mean
+Model alignment was computed on raw features, voxel alignment on all ROI voxels under $B$ = paper.
+$c_{\mathrm{align}}$ is the Pearson correlation over the 720 stimuli between model alignment and V1 voxel alignment, averaged over subjects. Alignments were described against stimulus mean
 luminance and RMS contrast, the per-image mean and SD of Rec.\,601 luminance
 ($Y = 0.299R + 0.587G + 0.114B$). Over the 720 stimuli at 224\,px, the image means of
 the two luminance definitions correlate at Pearson \LumDefPearson{} (Spearman
-\LumDefSpearman). The gain RDM is
-$\lvert \mathrm{gain}_i - \mathrm{gain}_j \rvert$. Partial RSA regresses the ranks of the
+\LumDefSpearman). The alignment RDM is $\lvert a_i - a_j \rvert$. Partial RSA regresses the ranks of the
 model and of the fMRI RDM, per subject and draw, on an intercept and the ranks of their
-own gain RDM and correlates the residuals (Pearson).
+own alignment RDM and correlates the residuals (Pearson).
 
 The decomposition starts from $X_c$, $X$ with every unit centred over the 720 stimuli
 ($F$ = center; for $F$ = z, units are also scaled to SD 1). With
@@ -196,9 +193,7 @@ $n_i = \lVert X_{c,i} \rVert$ and $\cos\theta_{ij}$ the cosine between rows $i$ 
 The euclidean RDM on $X_c$ is thus an exact function of the norm RDM
 $N_{ij} = \lvert n_i - n_j \rvert$ and the angle RDM $A_{ij} = 1 - \cos\theta_{ij}$. The
 betas are decomposed in the same way, and the RSA of a component compares the model and
-fMRI RDMs of that component. The identity was checked numerically. We call the norm
-component ``gain magnitude'' and the angle component ``geometry''; both labels define the
-two terms of this identity and are not biological concepts.
+fMRI RDMs of that component. The identity was checked numerically. We call these the norm component and the angular component; both labels define the two terms of this identity and are not biological concepts.
 
 \input{drafts/sec_2_7}
 
@@ -242,25 +237,25 @@ two terms of this identity and are not biological concepts.
 \label{fig:multiverse_loc}
 \end{figure}
 
-\subsection{Gain axis}
+\subsection{Mean-profile alignment}
 \label{sec:gainaxis}
 \input{drafts/sec_3_4}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/gain.pdf}
-\caption{(a)~Own CNN: raw-feature RSA at V1 against $c_{\mathrm{gain}}$ for the untrained (vermillion) and Backprop (blue) checkpoints; markers code the input condition. (b)~ImageNet models: the same for trained (blue) and untrained (vermillion) networks; markers code the model. (c)~Pearson correlation over stimuli between the gain axis and stimulus mean luminance (orange) or RMS contrast (light blue), for V1 voxels per subject, the own CNN's conditions and the ImageNet models.}
+\caption{(a)~Own CNN: raw-feature RSA at V1 against $c_{\mathrm{align}}$ for the untrained (vermillion) and Backprop (blue) checkpoints; markers code the input condition. (b)~ImageNet models: the same for trained (blue) and untrained (vermillion) networks; markers code the model. (c)~Pearson correlation over stimuli between mean-profile alignment and stimulus mean luminance (orange) or RMS contrast (light blue), for V1 voxels per subject, the own CNN's conditions and the ImageNet models.}
 \label{fig:gain}
 \end{figure}
 
-\subsection{Gain versus geometry}
+\subsection{Norm and angular components}
 \label{sec:gaingeometry}
 \input{drafts/sec_3_5}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/separation.pdf}
-\caption{Component RSA contrasts with $F$ = center and 95\% stimulus-bootstrap CIs, for the own CNN (vermillion) and six ImageNet models (blue). Panels from left: V1 norm (gain magnitude) component, V1 angular (geometry) component, LOC angular component, and the slope of the V1 angular contrast from 224 to 448\,px for the ImageNet models (green; none for vit\_b\_16). V1: untrained minus trained; LOC: trained minus untrained.}
+\caption{Component RSA contrasts with $F$ = center and 95\% stimulus-bootstrap CIs, for the own CNN (vermillion) and six ImageNet models (blue). Panels from left: V1 norm component, V1 angular component, LOC angular component, and the slope of the V1 angular contrast from 224 to 448\,px for the ImageNet models (green; none for vit\_b\_16). V1: untrained minus trained; LOC: trained minus untrained.}
 \label{fig:separation}
 \end{figure}
 

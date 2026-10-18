@@ -103,11 +103,11 @@ run):
 ## C1
 
 **Claim.** Raw correlation-distance RSA on GAP features tracks the coupling between
-model and voxel gain axes.
+model and voxel mean-profile alignment.
 
 | | |
 |---|---|
-| Rule and threshold | G1: Spearman(c_gain, raw RSA at V1) ≥ 0.6 over 70 cells (own CNN). GEN1: the same over 64 cells (six ImageNet models). |
+| Rule and threshold | G1: Spearman(c_align (c_gain in the amendment), raw RSA at V1) ≥ 0.6 over 70 cells (own CNN). GEN1: the same over 64 cells (six ImageNet models). |
 | Result | G1 = 0.97 (`\GOneSpearman`); GEN1 = 0.79 (`\GenOneSpearman`) |
 | Verdict | both met |
 | Macros | `\GOneSpearman`, `\GenOneSpearman` |
@@ -118,7 +118,7 @@ model and voxel gain axes.
 ## C2
 
 **Claim.** The overall ranking of untrained versus trained networks at V1 is not
-identifiable across defensible analysis choices.
+the same across defensible analysis choices; it depends on the analysis.
 
 | | |
 |---|---|
@@ -133,7 +133,7 @@ identifiable across defensible analysis choices.
 
 ## C3
 
-**Claim.** On the angular (geometry) component, trained networks match V1 and LOC
+**Claim.** On the angular component, trained networks match V1 and LOC
 better.
 
 | | |
@@ -150,7 +150,7 @@ better.
 
 **Claim.** The evaluation-resolution slope of our CIFAR-trained models disappears under
 unit centering or standardization and is absent in the ridge readout; ImageNet models
-show a small resolution dependence in the geometry component.
+show a small resolution dependence in the angular component.
 
 | | |
 |---|---|
@@ -161,7 +161,7 @@ show a small resolution dependence in the geometry component.
 | Macros | `\SlopeRaw[Lo/Hi]`, `\SlopeZ[Lo/Hi]`, `\MultiOTwoViolations`, `\MultiSlopePaper[Lo/Hi]`, `\PRidgeSlope`, `\SepSlopeAngleCiPositive`, `\SepSlope<Model>AngleCenter[Lo/Hi]`, `\SepSlope<Model>NormCenter[Lo/Hi]` |
 | Figures | `fig:sign_flip`, `fig:multiverse_v1` (panel S), `fig:separation` (right panel) |
 | Amendments | step 5: `7b170b1`; step 6: `73c13f8`; step 7: `084b22c`; step 9: `6ef68f2` |
-| Wording | criterion fixed before the analysis for R3 (`7b170b1` before `d8d4c32`), P_ridge (`73c13f8` before `0614450`) and O2 (`084b22c` before `a468946`). The ImageNet geometry slope is a descriptive point fixed in advance (`6ef68f2`) without a decision rule. |
+| Wording | criterion fixed before the analysis for R3 (`7b170b1` before `d8d4c32`), P_ridge (`73c13f8` before `0614450`) and O2 (`084b22c` before `a468946`). The ImageNet angular slope is a descriptive point fixed in advance (`6ef68f2`) without a decision rule. |
 
 **Note on the basis of C4.** For the own CNN the slope disappears under channel
 z-scoring (R3), under any centring (O2) and under ridge (P_ridge). The claim rests on
@@ -170,7 +170,7 @@ these three rules together; it is not a separate test.
 ## C5
 
 **Claim (recommendation).** Center units over the evaluated stimulus set on both model
-and brain side, and report gain and geometry components separately.
+and brain side, and report norm and angular components separately.
 
 | | |
 |---|---|
@@ -201,7 +201,7 @@ including band-pass inputs.
 
 ### G2 (step 7)
 
-**Prediction.** Partialling the gain RDMs removes the V1 gap and halves the slope.
+**Prediction.** Partialling the alignment RDMs removes the V1 gap and halves the slope.
 
 | | |
 |---|---|
@@ -245,13 +245,13 @@ cells.
 ### SEP2 (step 9)
 
 **Prediction.** The untrained networks' V1 advantage under euclidean distance sits in
-the gain magnitude (norm component).
+the norm component.
 
 | | |
 |---|---|
 | Rule and threshold | V1 norm contrast (F = center) > 0 with CI above 0 in the own CNN and in ≥ 4 of 6 ImageNet models |
 | Result | own CNN +0.017 [−0.004, 0.036] (`\SepOwnVoneNormCenter`, `Lo`, `Hi`), CI includes 0; ImageNet 4 of 6 (`\SepTwoModels`) |
-| Verdict | **not met** (own-CNN part fails). Consequence: by the step 9 interpretation rule the V1 ranking is not attributed to gain or geometry. |
+| Verdict | **not met** (own-CNN part fails). Consequence: by the step 9 interpretation rule the V1 ranking is not attributed to the norm or the angular component. |
 | Macros | `\SepOwnVoneNormCenter[Lo/Hi]`, `\SepTwoModels`, `\Sep<Model>VoneNormCenter[Lo/Hi]` |
 | Figure | `fig:separation` (left column) |
 | Amendment | `amendments/2026-10-10_step9-separation-predictions.md`, `6ef68f2`, 2026-10-13T09:40:49+02:00 |

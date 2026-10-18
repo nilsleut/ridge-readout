@@ -161,7 +161,7 @@ def fig3():
     save(fig, n)
 
 
-# ── Fig 4: gain axis ──────────────────────────────────────────────────────────
+# ── Fig 4: mean-profile alignment  ──────────────────────────────────────────────────────────
 def fig4():
     n = "gain"
     own = read("step7/gain.csv", "kind == 'c_gain' and in_G1 == True", n)
@@ -174,7 +174,7 @@ def fig4():
     marks = dict(zip(conds, ["o", "s", "^", "v", "D", "P", "X"]))
     for r in own.itertuples():
         ax[0].scatter(r.c_gain, r.rsa_raw_V1, color=RULE_COL[r.rule], marker=marks[r.cond], s=12, lw=0)
-    ax[0].set_xlabel("$c_{gain}$")
+    ax[0].set_xlabel("$c_{align}$")
     ax[0].set_ylabel("RSA, raw features (V1)")
     ax[0].set_title("(a) CIFAR CNN", loc="left")
     h = [plt.Line2D([], [], color=RULE_COL[k], marker="o", ls="none", ms=4, label=k.replace("Random Weights", "Random"))
@@ -184,7 +184,7 @@ def fig4():
     for r in imn.itertuples():
         col = OI["blue"] if r.cond == "trained" else OI["vermillion"]
         ax[1].scatter(r.c_gain, r.rsa_raw_V1, color=col, marker=IMN_MARK[r.model], s=12, lw=0)
-    ax[1].set_xlabel("$c_{gain}$")
+    ax[1].set_xlabel("$c_{align}$")
     ax[1].set_title("(b) ImageNet models", loc="left")
     h = [plt.Line2D([], [], color=OI["blue"], marker="o", ls="none", ms=4, label="trained"),
          plt.Line2D([], [], color=OI["vermillion"], marker="o", ls="none", ms=4, label="untrained")]
@@ -209,20 +209,20 @@ def fig4():
     ax[2].set_yticks(y, labels, fontsize=6)
     ax[2].invert_yaxis()
     ax[2].axvline(0, color=OI["black"], lw=0.6)
-    ax[2].set_xlabel("Pearson r with gain axis")
-    ax[2].set_title("(c) Gain vs stimulus", loc="left")
+    ax[2].set_xlabel("Pearson r with mean-profile alignment")
+    ax[2].set_title("(c) Alignment vs stimulus", loc="left")
     ax[2].legend(frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.35, -0.16), ncol=1)
     fig.subplots_adjust(left=0.08, right=0.98, top=0.92, bottom=0.36, wspace=0.75)
     save(fig, n)
 
 
-# ── Fig 5: gain / geometry separation ─────────────────────────────────────────
+# ── Fig 5: norm and angular components  ─────────────────────────────────────────
 def fig5():
     n = "separation"
     con = read("step9/separation.csv", "kind == 'contrast' and F == 'center'", n)
     slo = read("step9/separation_slopes.csv", "kind == 'slope' and F == 'center' and component == 'angle' and model != 'own CNN'", n)
     models = ["own CNN"] + IMN
-    cols = [("V1", "norm", "V1, norm (gain)"), ("V1", "angle", "V1, angle (geometry)"), ("LOC", "angle", "LOC, angle (geometry)")]
+    cols = [("V1", "norm", "V1, norm component"), ("V1", "angle", "V1, angular component"), ("LOC", "angle", "LOC, angular component")]
     fig, ax = plt.subplots(1, 4, figsize=(TWO, 2.6), sharey=True, gridspec_kw={"width_ratios": [1, 1, 1, 1]})
     y = np.arange(len(models))
     for a, (roi, comp, title) in zip(ax[:3], cols):

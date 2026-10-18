@@ -8,14 +8,12 @@ network at every pooling grid (untrained minus trained median $r$ of
 $\PreregRandBpGFour$ at $g = 4$, \PreregRandBpGFourPos{} of 5 seeds positive). In exploratory analyses with
 criteria fixed before each step, the representational similarity analysis (RSA)
 advantage ($+\VoneGapRawTwoTwoFour$ [$\VoneGapRawTwoTwoFourLo$, $\VoneGapRawTwoTwoFourHi$]) and its
-resolution dependence disappeared under correlation distance when model units were standardised over the stimulus set ($\VoneGapZTwoTwoFour$ [$\VoneGapZTwoTwoFourLo$, $\VoneGapZTwoTwoFourHi$]). Raw correlation-distance RSA tracked how a model's
-per-stimulus gain axis covaried with that of the voxels (Spearman \GOneSpearman{} across
+resolution dependence disappeared under correlation distance when model units were standardised over the stimulus set ($\VoneGapZTwoTwoFour$ [$\VoneGapZTwoTwoFourLo$, $\VoneGapZTwoTwoFourHi$]). Raw correlation-distance RSA tracked how a model's mean-profile alignment covaried with that of the voxels (Spearman \GOneSpearman{} across
 our networks, \GenOneSpearman{} across six ImageNet architectures). Across 36
-combinations of unit normalisation, distance measure and voxel normalisation, the sign
-of the V1 ranking was not identifiable, whereas the LOC ranking favoured trained
+combinations of unit normalisation, distance measure and voxel normalisation, the sign of the V1 ranking depended on the analysis, whereas the LOC ranking favoured trained
 networks wherever it was resolved. Decomposing Euclidean distances into a norm and an
-angular component, trained networks were ahead on the angular (geometry) component at
+angular component, trained networks were ahead on the angular component at
 V1 in our network and in \SepThreeModels{} of 6 ImageNet models, and at LOC in all
-seven. A two-feature luminance and contrast model scored above every network under the ridge readout at V1 (point estimates for three subjects). Intervals are stimulus-bootstrap intervals for three subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend centring units over the evaluated stimuli on both
-model and brain side, reporting gain and geometry components separately, and including
+seven. A luminance-and-contrast bank scored above every network under the ridge readout at V1 (point estimates for three subjects). Intervals are stimulus-bootstrap intervals for three subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend centring units over the evaluated stimuli on both
+model and brain side, reporting norm and angular components separately, and including
 trivial baselines.
