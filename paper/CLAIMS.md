@@ -22,6 +22,7 @@ Amendment commits (`git log --diff-filter=A`):
 | `amendments/2026-10-09_step8-generalization-predictions.md` | `10d302b` | 2026-10-09T19:11:05+02:00 | `step8_extract_pretrained.py` `95c364c` 2026-10-09T19:11:45+02:00 |
 | `amendments/2026-10-10_step9-separation-predictions.md` | `6ef68f2` | **2026-10-13T09:40:49+02:00** | `step9_separation.py` `8d17349` 2026-10-13T09:42:21+02:00 |
 | `amendments/2026-10-16_step25-predictions.md` | `74853dc` | **2026-10-18T11:30:57+02:00** | `step25_*.py` `dbc4662` 2026-10-18T11:36:28+02:00 |
+| `amendments/2026-10-18_step28-predictions.md` | `ac59694` | 2026-10-18T21:56:55+02:00 | `step28_*.py` `1da7462` 2026-10-18T21:58:53+02:00 |
 
 For C0:
 
@@ -187,13 +188,14 @@ and brain side, and report norm and angular components separately.
 
 **Claim.** The V1 advantage of the untrained network in raw correlation-distance RSA is
 absent from the component of the patterns orthogonal to the unit-mean profile; the
-parallel component alone does not resolve it.
+parallel component alone does not resolve it, and sufficiency of the parallel component
+was not established.
 
 | | |
 |---|---|
 | Rules and thresholds | M1: own CNN, orthogonal remainder, V1 gap at NATIVE 224 with upper CI ≤ 0.010. M2: S_ortho ≤ 0.5 · S_paper. M3: own CNN, parallel component, V1 gap at NATIVE 224 > 0 with CI above 0, and parallel slope with CI above 0. M4: ImageNet, orthogonal remainder, V1 gap at 224 with upper CI ≤ 0.010 in ≥ 4 of 6 models. Interpretation rule as written in the amendment. |
 | Result | Gate: "full" reproduces the stored paper cells (`\MpGateMaxDelta`). M1: −0.002 [−0.007, 0.003] (`\MpOrthoOwnVoneNatTwoTwoFour`, `Lo`, `Hi`). M2: S_ortho 0.000 [−0.003, 0.003] (`\MpOrthoOwnSlope`, `Lo`, `Hi`). M3: gap +0.012 [−0.011, 0.035] (`\MpParOwnVoneNatTwoTwoFour`, `Lo`, `Hi`), slope +0.006 [−0.007, 0.020] (`\MpParOwnSlope`, `Lo`, `Hi`). M4: 6 of 6 (`\MpMFourModels`). |
-| Verdict | M1, M2, M4 met; **M3 not met**. Interpretation rule: "M3 not met: it is not sufficient." No physiological claim follows. |
+| Verdict | M1, M2, M4 met; **M3 not met**: sufficiency of the parallel component was not established. The rule's wording ("M3 not met: it is not sufficient.") claims more than a missed threshold with this interval can show; the paper states only what the data resolve. Step 28 (C10): paired full − orthogonal contrast resolved (X1 met, +0.032 [0.022, 0.042], `\AbTwoXOne`); mixed cells −0.001 [−0.007, 0.006] (orthogonal model / full brain) and +0.006 [−0.001, 0.012] (full model / orthogonal brain), no attribution to a side. No physiological claim follows. |
 | Macros | `\Mp<Variant>OwnVone<Res>[Lo/Hi/Pos]`, `\Mp<Variant>OwnLoc[Lo/Hi]`, `\Mp<Variant>OwnSlope[Lo/Hi]`, `\Mp<Variant><Model><R>[Lo/Hi]`, `\Mp<Variant><Model>Slope[Lo/Hi]`, `\MpMFourModels`, `\MpGateMaxDelta`; `<Variant>` ∈ {Full, Ortho, Par} |
 | Section | `sec:ablation` |
 | Amendment | `amendments/2026-10-16_step25-predictions.md`, `74853dc`, 2026-10-18T11:30:57+02:00 |
@@ -241,6 +243,22 @@ the classification of the intervals.
 | Verdict | BN1 met |
 | Section | `sec:rsa`, `app:bootnorm` |
 | Amendment | `74853dc` |
+
+## C10 (step 28: ablation on each side)
+
+**Claim.** The drop of the V1 advantage between the full and the orthogonal variant is
+resolved; removing the mean-profile component on only one side does not show on which side
+the intervention matters.
+
+| | |
+|---|---|
+| Rule and threshold | X1: own CNN, V1, NATIVE 224, raw GAP, correlation distance, B = paper: gap[full, full] − gap[ortho, ortho] with CI above 0 (paired, same draws). X2 descriptive: the two mixed cells; ImageNet models at 224 px, counts of mixed-cell CIs above and below 0. Interpretation rule as written in the amendment. |
+| Result | Gate: [full, full] reproduces results/step7 and [ortho, ortho] results/step25 to 1e-9. X1: +0.032 [0.022, 0.042] (`\AbTwoXOne`, `Lo`, `Hi`). Mixed cells, own CNN: orthogonal model / full brain −0.001 [−0.007, 0.006] (`\AbTwoOwnOrthoFull`, `Lo`, `Hi`); full model / orthogonal brain +0.006 [−0.001, 0.012] (`\AbTwoOwnFullOrtho`, `Lo`, `Hi`). ImageNet: orthogonal model / full brain CI above 0 in 0, below 0 in 3 models (`\AbTwoImnOrthoFullPos`, `Neg`); full model / orthogonal brain 0 and 1 (`\AbTwoImnFullOrthoPos`, `Neg`). |
+| Verdict | X1 met. Interpretation rule: both mixed cells include 0, so no attribution to a side. |
+| Macros | `\AbTwoOwn<Model side><Brain side>[Lo/Hi]`, `\AbTwo<Model><Model side><Brain side>[Lo/Hi]` (mixed cells), `\AbTwoImn<Model side><Brain side>[Pos/Neg]`, `\AbTwoXOne[Lo/Hi]` |
+| Section | `sec:ablation`, `app:ablation2x2` |
+| Amendment | `amendments/2026-10-18_step28-predictions.md`, `ac59694`, 2026-10-18T21:56:55+02:00 |
+| Wording | criterion fixed before the analysis (`ac59694` before `1da7462`); written after all earlier results were known |
 
 ---
 

@@ -306,6 +306,21 @@ for _v, _vn in (("full", "Full"), ("ortho", "Ortho"), ("par", "Par")):
             SPECS += _ci(f"Mp{_vn}{_mn}Slope", _MP, f"kind == 'slope' and model == '{_m}' and variant == '{_v}'")
 SPECS += [("MpMFourModels", _MP, "kind == 'rule' and quantity.str.startswith('M4')", "value", "int"),
           ("MpGateMaxDelta", _MP, "kind == 'check' and quantity.str.startswith('gate')", "value", "sci2")]
+_AB = "step28/ablation_2x2.csv"
+for _mk, _mkn in (("full", "Full"), ("ortho", "Ortho")):
+    for _bk, _bkn in (("full", "Full"), ("ortho", "Ortho")):
+        SPECS += _ci(f"AbTwoOwn{_mkn}{_bkn}", _AB,
+                     f"kind == 'cell' and model == 'own CNN' and model_side == '{_mk}' and brain_side == '{_bk}'")
+        if _mk == _bk:
+            continue
+        for _m, _mn in _IMN.items():
+            SPECS += _ci(f"AbTwo{_mn}{_mkn}{_bkn}", _AB,
+                         f"kind == 'cell' and model == '{_m}' and model_side == '{_mk}' and brain_side == '{_bk}'")
+        for _d, _dn in (("above", "Pos"), ("below", "Neg")):
+            SPECS.append((f"AbTwoImn{_mkn}{_bkn}{_dn}", _AB,
+                          f"kind == 'count' and model_side == '{_mk}' and brain_side == '{_bk}' and quantity == 'models with CI {_d} 0'",
+                          "value", "int"))
+SPECS += _ci("AbTwoXOne", _AB, "kind == 'contrast'")
 _WA = "step25/weighted_angle.csv"
 for _roi, _rn in (("V1", "Vone"), ("LOC", "Loc")):
     SPECS += _ci(f"WAngOwn{_rn}", _WA, f"kind == 'contrast' and model == 'own CNN' and roi == '{_roi}'")

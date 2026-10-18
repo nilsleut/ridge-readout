@@ -1,0 +1,48 @@
+This exploratory analysis was added after a second critical review of a revised draft; its
+rule was committed before its script (Section~\ref{sec:inference}). The mean-profile
+decomposition of Section~\ref{sec:gainmethods} was applied to the model side, the brain
+side, both or neither. Table~\ref{tab:ablation2x2} gives the V1 contrast at NATIVE 224\,px
+(raw GAP features, correlation distance, $B$ = paper) for the untrained (uncalibrated BN
+statistics) network minus Backprop in all four combinations, and for the six ImageNet models
+(untrained, mean of three initialisations, minus trained, 224\,px) in the two mixed
+combinations. All values use the same 1000 stimulus-bootstrap resamples. The full/full and
+orthogonal/orthogonal cells reproduce the full and orthogonal variants of
+Section~\ref{sec:ablation}. In the ImageNet models, the CI lay above 0 in
+\AbTwoImnOrthoFullPos{} and below 0 in \AbTwoImnOrthoFullNeg{} models with the orthogonal
+model against the full brain RDM, and above 0 in \AbTwoImnFullOrthoPos{} and below 0 in
+\AbTwoImnFullOrthoNeg{} models with the full model against the orthogonal brain RDM
+(descriptive, no rule).
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lllc@{}}
+\toprule
+Model & Model RDM & Brain RDM & V1 contrast [95\% CI] \\
+\midrule
+own CNN & full & full & $\AbTwoOwnFullFull$ [$\AbTwoOwnFullFullLo$, $\AbTwoOwnFullFullHi$] \\
+own CNN & full & orthogonal & $\AbTwoOwnFullOrtho$ [$\AbTwoOwnFullOrthoLo$, $\AbTwoOwnFullOrthoHi$] \\
+own CNN & orthogonal & full & $\AbTwoOwnOrthoFull$ [$\AbTwoOwnOrthoFullLo$, $\AbTwoOwnOrthoFullHi$] \\
+own CNN & orthogonal & orthogonal & $\AbTwoOwnOrthoOrtho$ [$\AbTwoOwnOrthoOrthoLo$, $\AbTwoOwnOrthoOrthoHi$] \\
+\midrule
+alexnet & orthogonal & full & $\AbTwoAlexnetOrthoFull$ [$\AbTwoAlexnetOrthoFullLo$, $\AbTwoAlexnetOrthoFullHi$] \\
+vgg11\_bn & orthogonal & full & $\AbTwoVggelevenOrthoFull$ [$\AbTwoVggelevenOrthoFullLo$, $\AbTwoVggelevenOrthoFullHi$] \\
+resnet18 & orthogonal & full & $\AbTwoResneteighteenOrthoFull$ [$\AbTwoResneteighteenOrthoFullLo$, $\AbTwoResneteighteenOrthoFullHi$] \\
+resnet50 & orthogonal & full & $\AbTwoResnetfiftyOrthoFull$ [$\AbTwoResnetfiftyOrthoFullLo$, $\AbTwoResnetfiftyOrthoFullHi$] \\
+convnext\_tiny & orthogonal & full & $\AbTwoConvnexttinyOrthoFull$ [$\AbTwoConvnexttinyOrthoFullLo$, $\AbTwoConvnexttinyOrthoFullHi$] \\
+vit\_b\_16 & orthogonal & full & $\AbTwoVitbsixteenOrthoFull$ [$\AbTwoVitbsixteenOrthoFullLo$, $\AbTwoVitbsixteenOrthoFullHi$] \\
+alexnet & full & orthogonal & $\AbTwoAlexnetFullOrtho$ [$\AbTwoAlexnetFullOrthoLo$, $\AbTwoAlexnetFullOrthoHi$] \\
+vgg11\_bn & full & orthogonal & $\AbTwoVggelevenFullOrtho$ [$\AbTwoVggelevenFullOrthoLo$, $\AbTwoVggelevenFullOrthoHi$] \\
+resnet18 & full & orthogonal & $\AbTwoResneteighteenFullOrtho$ [$\AbTwoResneteighteenFullOrthoLo$, $\AbTwoResneteighteenFullOrthoHi$] \\
+resnet50 & full & orthogonal & $\AbTwoResnetfiftyFullOrtho$ [$\AbTwoResnetfiftyFullOrthoLo$, $\AbTwoResnetfiftyFullOrthoHi$] \\
+convnext\_tiny & full & orthogonal & $\AbTwoConvnexttinyFullOrtho$ [$\AbTwoConvnexttinyFullOrthoLo$, $\AbTwoConvnexttinyFullOrthoHi$] \\
+vit\_b\_16 & full & orthogonal & $\AbTwoVitbsixteenFullOrtho$ [$\AbTwoVitbsixteenFullOrthoLo$, $\AbTwoVitbsixteenFullOrthoHi$] \\
+\midrule
+\multicolumn{4}{@{}l}{X1, own CNN: gap[full, full] $-$ gap[orthogonal, orthogonal]: $+\AbTwoXOne$ [$\AbTwoXOneLo$, $\AbTwoXOneHi$] (met)} \\
+\bottomrule
+\end{tabular}
+\caption{V1 contrast with 95\% stimulus-bootstrap CIs (own CNN: untrained minus Backprop,
+mean over 5 seeds; ImageNet: untrained minus trained); mean over three subjects.}
+\label{tab:ablation2x2}
+\end{table}

@@ -1077,6 +1077,61 @@ MpParVitbsixteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast'
 MpParVitbsixteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',ci_hi,3 decimals,0.090
 MpMFourModels,results/step25/mean_profile.csv,kind == 'rule' and quantity.str.startswith('M4'),value,integer,6
 MpGateMaxDelta,results/step25/mean_profile.csv,kind == 'check' and quantity.str.startswith('gate'),value,2-digit scientific,\ensuremath{9.9\times 10^{-17}}
+AbTwoOwnFullFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full',value,3 decimals,0.030
+AbTwoOwnFullFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full',ci_lo,3 decimals,0.018
+AbTwoOwnFullFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full',ci_hi,3 decimals,0.042
+AbTwoOwnFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,0.006
+AbTwoOwnFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.001
+AbTwoOwnFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,0.012
+AbTwoAlexnetFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'alexnet' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,-0.001
+AbTwoAlexnetFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'alexnet' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.007
+AbTwoAlexnetFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'alexnet' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,0.005
+AbTwoVggelevenFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vgg11_bn' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,0.005
+AbTwoVggelevenFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vgg11_bn' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.001
+AbTwoVggelevenFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vgg11_bn' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,0.013
+AbTwoResneteighteenFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet18' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,-0.003
+AbTwoResneteighteenFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet18' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.008
+AbTwoResneteighteenFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet18' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,0.003
+AbTwoResnetfiftyFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet50' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,-0.003
+AbTwoResnetfiftyFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet50' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.008
+AbTwoResnetfiftyFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet50' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,0.003
+AbTwoConvnexttinyFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'convnext_tiny' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,0.003
+AbTwoConvnexttinyFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'convnext_tiny' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.002
+AbTwoConvnexttinyFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'convnext_tiny' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,0.008
+AbTwoVitbsixteenFullOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vit_b_16' and model_side == 'full' and brain_side == 'ortho',value,3 decimals,-0.018
+AbTwoVitbsixteenFullOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vit_b_16' and model_side == 'full' and brain_side == 'ortho',ci_lo,3 decimals,-0.029
+AbTwoVitbsixteenFullOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vit_b_16' and model_side == 'full' and brain_side == 'ortho',ci_hi,3 decimals,-0.008
+AbTwoImnFullOrthoPos,results/step28/ablation_2x2.csv,kind == 'count' and model_side == 'full' and brain_side == 'ortho' and quantity == 'models with CI above 0',value,integer,0
+AbTwoImnFullOrthoNeg,results/step28/ablation_2x2.csv,kind == 'count' and model_side == 'full' and brain_side == 'ortho' and quantity == 'models with CI below 0',value,integer,1
+AbTwoOwnOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,-0.001
+AbTwoOwnOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.007
+AbTwoOwnOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,0.006
+AbTwoAlexnetOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'alexnet' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,-0.002
+AbTwoAlexnetOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'alexnet' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.012
+AbTwoAlexnetOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'alexnet' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,0.008
+AbTwoVggelevenOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vgg11_bn' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,-0.003
+AbTwoVggelevenOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vgg11_bn' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.015
+AbTwoVggelevenOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vgg11_bn' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,0.008
+AbTwoResneteighteenOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet18' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,-0.011
+AbTwoResneteighteenOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet18' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.018
+AbTwoResneteighteenOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet18' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,-0.004
+AbTwoResnetfiftyOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet50' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,-0.012
+AbTwoResnetfiftyOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet50' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.020
+AbTwoResnetfiftyOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'resnet50' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,-0.005
+AbTwoConvnexttinyOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'convnext_tiny' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,0.005
+AbTwoConvnexttinyOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'convnext_tiny' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.002
+AbTwoConvnexttinyOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'convnext_tiny' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,0.012
+AbTwoVitbsixteenOrthoFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vit_b_16' and model_side == 'ortho' and brain_side == 'full',value,3 decimals,-0.024
+AbTwoVitbsixteenOrthoFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vit_b_16' and model_side == 'ortho' and brain_side == 'full',ci_lo,3 decimals,-0.041
+AbTwoVitbsixteenOrthoFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'vit_b_16' and model_side == 'ortho' and brain_side == 'full',ci_hi,3 decimals,-0.008
+AbTwoImnOrthoFullPos,results/step28/ablation_2x2.csv,kind == 'count' and model_side == 'ortho' and brain_side == 'full' and quantity == 'models with CI above 0',value,integer,0
+AbTwoImnOrthoFullNeg,results/step28/ablation_2x2.csv,kind == 'count' and model_side == 'ortho' and brain_side == 'full' and quantity == 'models with CI below 0',value,integer,3
+AbTwoOwnOrthoOrtho,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'ortho' and brain_side == 'ortho',value,3 decimals,-0.002
+AbTwoOwnOrthoOrthoLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'ortho' and brain_side == 'ortho',ci_lo,3 decimals,-0.007
+AbTwoOwnOrthoOrthoHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'ortho' and brain_side == 'ortho',ci_hi,3 decimals,0.003
+AbTwoXOne,results/step28/ablation_2x2.csv,kind == 'contrast',value,3 decimals,0.032
+AbTwoXOneLo,results/step28/ablation_2x2.csv,kind == 'contrast',ci_lo,3 decimals,0.022
+AbTwoXOneHi,results/step28/ablation_2x2.csv,kind == 'contrast',ci_hi,3 decimals,0.042
 WAngOwnVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',value,3 decimals,0.013
 WAngOwnVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',ci_lo,3 decimals,-0.003
 WAngOwnVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',ci_hi,3 decimals,0.030
