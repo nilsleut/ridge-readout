@@ -14,7 +14,11 @@ The first cell with such selections was a condition of the pilot (untrained netw
 calibrated BN statistics, one seed, $g = 1$, sub-01). There the standardised training design had full column rank
 and no dead features (step report in the repository); the pilot diagnosis used a wider
 diagnostic grid than the gate. Table~\ref{tab:lowedge} lists every analysis with such
-selections. Steps~7 to~9 involve no ridge fits.
+selections. Steps~7 to~9 involve no ridge fits. The number of selections at the lowest value changed
+between runs of identical fits (\FSkillLowEdgeHits{} versus \LowEdgePrimaryModelHits{} on the
+model fits of the primary analysis, \LowEdgeEtwoHits{} versus \LowEdgePilotHits{} in the
+pilot cell) because of near-ties under single-thread BLAS; scores agreed to
+\FSkillGateMaxDelta{} and the gate classification was unchanged.
 
 \begin{table}[h]
 \centering
@@ -32,6 +36,9 @@ Other subjects, $g = 1$ (sub-02, sub-03) & \LowEdgeSubjectsHits & \LowEdgeSubjec
 Diagnosis of sub-03 (controls, $g \in \{1, 4, 8\}$) & \LowEdgeSubThreeHits & \LowEdgeSubThreePlateau & \LowEdgeSubThreeExcluded & \LowEdgeSubThreeMaxGain \\
 Ridge across resolutions (sub-01, sub-02, $g = 1$) & \LowEdgeRidgeHits & \LowEdgeRidgePlateau & \LowEdgeRidgeExcluded & \LowEdgeRidgeMaxGain \\
 Pre-specified primary analysis (3 subjects) & \LowEdgePrimaryHits & \LowEdgePrimaryPlateau & \LowEdgePrimaryExcluded & \LowEdgePrimaryMaxGain \\
+Ridge robustness: model fits (3 subjects) & \LowEdgeStepSkillHits & \LowEdgeStepSkillPlateau & \LowEdgeStepSkillExcluded & \LowEdgeStepSkillMaxGain \\
+Ridge robustness: joint readout & \LowEdgeStepJointHits & \LowEdgeStepJointPlateau & \LowEdgeStepJointExcluded & \LowEdgeStepJointMaxGain \\
+Ridge robustness: permutation null & \LowEdgeStepPermHits & \LowEdgeStepPermPlateau & \LowEdgeStepPermExcluded & \LowEdgeStepPermMaxGain \\
 \bottomrule
 \end{tabular}
 \caption{Selections of the lowest regularisation value at reliable voxels, classified by the

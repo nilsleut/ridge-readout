@@ -9,12 +9,13 @@ Table~\ref{tab:evidence} states for each main statement whether it was pre-speci
 \toprule
 Statement & Status & Uncertainty reported & Main caveat \\
 \midrule
-Untrained below Backprop under ridge at V1 (Section~\ref{sec:signflip}) & Pre-specified; verdict ``effect disappears'' & 5 seeds; one-sided sign-flip test; $\Delta_{\min}$; no interval over stimuli, voxels or subjects & One layer; sub-03 near zero; not blind \\
-Raw RSA tracks mean-profile alignment (Section~\ref{sec:gainaxis}) & Exploratory; G1 and GEN1 met & Spearman over 70 and 64 cells, no interval; cells not independent & Correlational; G2 not met \\
-V1 ranking depends on the analysis (Section~\ref{sec:multiverse}) & Exploratory; GEN2 met; cell counts descriptive & Stimulus-bootstrap 95\% intervals per cell, uncorrected; cells dependent & 36 chosen cells, not exhaustive; three subjects \\
-Angular component favours trained networks (Section~\ref{sec:gaingeometry}) & Exploratory; SEP3 and SEP4 met, SEP2 not met & Stimulus-bootstrap 95\% intervals; counts of models descriptive & ``Angular component'' is a definition; one weight set per ImageNet model; convnext\_tiny exception \\
-Resolution slope of own CNN vanishes under centring or standardisation (Sections~\ref{sec:standardization}, \ref{sec:multiverse}) & Exploratory; R3, O2 and P\_ridge met & Stimulus-bootstrap intervals; seed SD for ridge & Rests on three rules together; ImageNet slope remains (GEN4 not met) \\
-Luminance-and-contrast bank above every network at V1 (Section~\ref{sec:signflip}) & Descriptive & Point estimates, mean over three subjects & No interval for the baseline; neural gain and BOLD not separable \\
+Untrained below Backprop under ridge at V1, also in MSE skill and per-fold $r$ (Section~\ref{sec:signflip}) & Pre-specified; verdict ``effect disappears''; robustness checks exploratory (F-R1 to F-R3 met) & 5 seeds; one-sided sign-flip test; no interval over stimuli, voxels or subjects & One layer; sub-03 near zero; absolute variance explained about 1\%; not blind \\
+V1 ranking depends on the analysis (Section~\ref{sec:multiverse}) & Exploratory; GEN2 met; cell counts descriptive & Stimulus-bootstrap 95\% intervals per cell, uncorrected; cells dependent & 36 chosen cells; three subjects \\
+Advantage absent from the component orthogonal to the mean profile (Section~\ref{sec:ablation}) & Exploratory; M1, M2, M4 met; M3 not met & Stimulus-bootstrap intervals & Parallel component alone unresolved; wide interval \\
+Raw RSA covaries with mean-profile alignment (Section~\ref{sec:gainaxis}) & Exploratory; G1, GEN1 met; G2 not met & Spearman over 70 and 64 cells, no interval; cells not independent & Correlational; the ablation tests only the orthogonal remainder \\
+Trained ahead on the unweighted angular component at V1 and LOC (Section~\ref{sec:gaingeometry}) & Exploratory; SEP3, SEP4 met; SEP2 not met & Stimulus-bootstrap intervals; model counts descriptive & Weighted term $W$ not resolved; one weight set per ImageNet model; convnext\_tiny exception \\
+Resolution slope of own CNN vanishes under centring or standardisation (Sections~\ref{sec:standardization}, \ref{sec:multiverse}) & Exploratory; R3, O2, P\_ridge met & Stimulus-bootstrap intervals; seed SD for ridge & Rests on three rules together; ImageNet slope remains (GEN4 not met) \\
+Luminance-and-contrast bank above every network at V1 under ridge (Section~\ref{sec:signflip}) & Descriptive instrument; joint readout F-R4 met & Point estimates per subject, mean over three subjects & No interval for the bank; neural gain and BOLD not separable \\
 \bottomrule
 \end{tabular}
 \caption{Strength of the evidence for the main statements. ``Exploratory'' denotes analyses with rules committed before their step was run, written after earlier results were known.}

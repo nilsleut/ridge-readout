@@ -21,6 +21,7 @@ Amendment commits (`git log --diff-filter=A`):
 | `amendments/2026-10-09_step7-offset-predictions.md` | `084b22c` | 2026-10-09T13:21:18+02:00 | `step7_multiverse.py` `a468946` 2026-10-09T13:22:30+02:00 |
 | `amendments/2026-10-09_step8-generalization-predictions.md` | `10d302b` | 2026-10-09T19:11:05+02:00 | `step8_extract_pretrained.py` `95c364c` 2026-10-09T19:11:45+02:00 |
 | `amendments/2026-10-10_step9-separation-predictions.md` | `6ef68f2` | **2026-10-13T09:40:49+02:00** | `step9_separation.py` `8d17349` 2026-10-13T09:42:21+02:00 |
+| `amendments/2026-10-16_step25-predictions.md` | `74853dc` | **2026-10-18T11:30:57+02:00** | `step25_*.py` `dbc4662` 2026-10-18T11:36:28+02:00 |
 
 For C0:
 
@@ -33,7 +34,9 @@ For C0:
 
 The step 9 amendment is dated 2026-10-10 in its file name and text but was committed on
 2026-10-13. The commit timestamp is authoritative; it still precedes the analysis
-script.
+script. The step 25 amendment is dated 2026-10-16 in its file name but was committed on
+2026-10-18; the commit timestamp is authoritative, and it precedes the step 25 scripts.
+Step 25 was added in response to an external critique of the draft.
 
 ---
 
@@ -102,8 +105,8 @@ run):
 
 ## C1
 
-**Claim.** Raw correlation-distance RSA on GAP features tracks the coupling between
-model and voxel mean-profile alignment.
+**Claim.** Raw correlation-distance RSA on GAP features covaries with the mean-profile
+alignment of model and voxels (see C6 for the ablation of this component).
 
 | | |
 |---|---|
@@ -125,7 +128,7 @@ the same across defensible analysis choices; it depends on the analysis.
 | Rule and threshold | GEN2: in ≥ 4 of 6 ImageNet models, at 224 px, two of four analysis cells have V1 gap CIs that exclude 0 in opposite directions. |
 | Result | GEN2: 4 models (`\GenTwoModels`). Own CNN, 36-cell multiverse: V1 gap CI excludes 0 positively in 13 cells (`\MultiPosCiCells`) and negatively in 9 (`\MultiNegCiCells`). |
 | Examples | paper cell +0.030 [0.018, 0.042] (`\VoneGapRawTwoTwoFour`, `Lo`, `Hi`); channel z-scored −0.011 [−0.017, −0.005] (`\VoneGapZTwoTwoFour`, `Lo`, `Hi`); euclidean +0.023 [0.004, 0.041] (`\MultiEuclidGap`, `Lo`, `Hi`) |
-| Verdict | GEN2 met; step 9 interpretation rule: V1 ranking not attributable (SEP2 not met) |
+| Verdict | GEN2 met: the V1 ranking depends on the analysis; step 9 interpretation rule: V1 ranking not attributed to the norm or angular component (SEP2 not met) |
 | Macros | `\GenTwoModels`, `\MultiPosCiCells`, `\MultiNegCiCells`, `\VoneGapRawTwoTwoFour[Lo/Hi]`, `\VoneGapZTwoTwoFour[Lo/Hi]`, `\MultiEuclidGap[Lo/Hi]` |
 | Figures | `fig:multiverse_v1`, `fig:sign_flip` |
 | Amendments | step 8 (GEN2): `10d302b`; step 7 (multiverse): `084b22c`; step 9 (interpretation rule): `6ef68f2` |
@@ -133,8 +136,8 @@ the same across defensible analysis choices; it depends on the analysis.
 
 ## C3
 
-**Claim.** On the angular component, trained networks match V1 and LOC
-better.
+**Claim.** On the unweighted angular component A of the centred patterns, trained
+networks match V1 and LOC better; the norm-weighted angular term W is not resolved (C8).
 
 | | |
 |---|---|
@@ -179,6 +182,65 @@ and brain side, and report norm and angular components separately.
 | Figures | `fig:multiverse_v1`, `fig:separation` |
 | Amendments | step 7 `084b22c`; step 9 `6ef68f2` |
 | Wording | not a tested criterion; recommendation only |
+
+## C6 (step 25: mean-profile ablation)
+
+**Claim.** The V1 advantage of the untrained network in raw correlation-distance RSA is
+absent from the component of the patterns orthogonal to the unit-mean profile; the
+parallel component alone does not resolve it.
+
+| | |
+|---|---|
+| Rules and thresholds | M1: own CNN, orthogonal remainder, V1 gap at NATIVE 224 with upper CI ≤ 0.010. M2: S_ortho ≤ 0.5 · S_paper. M3: own CNN, parallel component, V1 gap at NATIVE 224 > 0 with CI above 0, and parallel slope with CI above 0. M4: ImageNet, orthogonal remainder, V1 gap at 224 with upper CI ≤ 0.010 in ≥ 4 of 6 models. Interpretation rule as written in the amendment. |
+| Result | Gate: "full" reproduces the stored paper cells (`\MpGateMaxDelta`). M1: −0.002 [−0.007, 0.003] (`\MpOrthoOwnVoneNatTwoTwoFour`, `Lo`, `Hi`). M2: S_ortho 0.000 [−0.003, 0.003] (`\MpOrthoOwnSlope`, `Lo`, `Hi`). M3: gap +0.012 [−0.011, 0.035] (`\MpParOwnVoneNatTwoTwoFour`, `Lo`, `Hi`), slope +0.006 [−0.007, 0.020] (`\MpParOwnSlope`, `Lo`, `Hi`). M4: 6 of 6 (`\MpMFourModels`). |
+| Verdict | M1, M2, M4 met; **M3 not met**. Interpretation rule: "M3 not met: it is not sufficient." No physiological claim follows. |
+| Macros | `\Mp<Variant>OwnVone<Res>[Lo/Hi/Pos]`, `\Mp<Variant>OwnLoc[Lo/Hi]`, `\Mp<Variant>OwnSlope[Lo/Hi]`, `\Mp<Variant><Model><R>[Lo/Hi]`, `\Mp<Variant><Model>Slope[Lo/Hi]`, `\MpMFourModels`, `\MpGateMaxDelta`; `<Variant>` ∈ {Full, Ortho, Par} |
+| Section | `sec:ablation` |
+| Amendment | `amendments/2026-10-16_step25-predictions.md`, `74853dc`, 2026-10-18T11:30:57+02:00 |
+| Wording | criterion fixed before the analysis (`74853dc` before `dbc4662`); written after all earlier results were known, in response to an external critique |
+
+## C7 (step 25: ridge robustness)
+
+**Claim.** The pre-specified ridge result (untrained below Backprop at V1) holds in MSE
+skill and per-fold r, the observed scores lie above a permutation null in sub-01 and
+sub-02, and adding network features to the luminance-and-contrast bank does not improve
+prediction.
+
+| | |
+|---|---|
+| Rules and thresholds | F-R1 (MSE skill) and F-R2 (per-fold r): Random − BP ≤ 0 at every g with ≤ 1 of 5 seeds positive. F-R3: observed pooled r above the 97.5th percentile of its own null at g = 1 and 4 for both conditions in sub-01 and sub-02. F-R4: Backprop joint − bank-alone ≤ 0.010 at g = 1 and 4. F1 floor and sub-03 descriptive. |
+| Result | MSE skill −0.0041 (g = 1) to −0.0074 (g = 8) (`\FSkillMseSkillG<g>Mean`); per-fold r −0.0166 to −0.0311 (`\FSkillPerfoldG<g>Mean`); no seed positive. Floor −0.092 (`\FFloorMean`). Null 97.5th percentiles −0.062 to −0.037 (`\FPermPNineSevenFiveMin`, `Max`); observed 0.052 to 0.120 in sub-01/02 (`\FPermRealMinMain`, `Max`). Joint − bank for Backprop −0.013 and −0.015 (`\FJointBpGOneDiff`, `\FJointBpGFourDiff`); joint below bank in all six conditions (`\FJointMinDiff`, `\FJointMaxDiff`). Reproduction of the primary pooled r: `\FSkillGateMaxDelta`. |
+| Verdict | F-R1, F-R2, F-R3, F-R4 met |
+| Macros | `\FSkill<Score>G<g>[Mean/Sd/Pos]`, `\FFloor<Sub>`, `\FFloorMean`, `\FPerm<Sub><Rule>G<g>[Mean/Lo/Hi/Real]`, `\FJoint<Rule>G<g>[Diff/Joint/Bank]` |
+| Section | `sec:signflip`, `app:ridgerobust` |
+| Amendment | `74853dc` |
+| Wording | criterion fixed before the analysis (`74853dc` before `dbc4662`) |
+
+## C8 (step 25: weighted angular term, descriptive)
+
+**Claim.** The angular result concerns the unweighted angular component A; the
+norm-weighted term W points in the direction of the norm component and is not resolved.
+
+| | |
+|---|---|
+| Rule | none (descriptive points fixed in advance) |
+| Result | W, own CNN V1: +0.013 [−0.003, 0.030] (`\WAngOwnVone`, `Lo`, `Hi`); CI excludes 0 in 1 of 6 ImageNet models (`\WAngImnPosModels`). Rank correlations, own CNN: N–A 0.09 (`\WRankNAOwn`), A–W 0.75 (`\WRankAWOwn`); fMRI per subject `\WRank<Pair><Sub>`. R² of the fMRI RDM on N and A: 0.0017 (untrained) and 0.0012 (Backprop) (`\WRtwoNARand`, `\WRtwoNABp`); contrast +0.0006 [−0.0006, 0.0018] (`\WRtwoNADiff`, `Lo`, `Hi`). |
+| Verdict | descriptive |
+| Section | `sec:gaingeometry` |
+| Amendment | `74853dc` |
+
+## C9 (step 25: normalisation inside the bootstrap)
+
+**Claim.** Estimating the normalisation statistics once on the 720 stimuli does not change
+the classification of the intervals.
+
+| | |
+|---|---|
+| Rule and threshold | BN1: for (z, correlation, paper), (center, euclidean, paper) and (center, correlation, center720) the classification of the 95% CI relative to 0 is unchanged when the statistics are re-estimated within each of 200 resamples. |
+| Result | below 0: [−0.017, −0.005] (`\BNormZCorrPaperLo`, `Hi`); above 0: [0.002, 0.039] (`\BNormCentEuclPaperLo`, `Hi`); includes 0: [−0.005, 0.007] (`\BNormCentCorrCentLo`, `Hi`). |
+| Verdict | BN1 met |
+| Section | `sec:rsa`, `app:bootnorm` |
+| Amendment | `74853dc` |
 
 ---
 
@@ -256,6 +318,21 @@ the norm component.
 | Figure | `fig:separation` (left column) |
 | Amendment | `amendments/2026-10-10_step9-separation-predictions.md`, `6ef68f2`, 2026-10-13T09:40:49+02:00 |
 | Wording | criterion fixed before the analysis (`6ef68f2` before `8d17349`) |
+
+### M3 (step 25)
+
+**Prediction.** The parallel (mean-profile) component alone carries the V1 advantage and
+its resolution slope.
+
+| | |
+|---|---|
+| Rule and threshold | own CNN, parallel component: V1 gap at NATIVE 224 > 0 with CI above 0, and slope (224 − 32) with CI above 0 |
+| Result | gap +0.012 [−0.011, 0.035] (`\MpParOwnVoneNatTwoTwoFour`, `Lo`, `Hi`); slope +0.006 [−0.007, 0.020] (`\MpParOwnSlope`, `Lo`, `Hi`) |
+| Verdict | **not met**. The interval of the parallel gap includes both 0 and the raw gap. |
+| Macros | `\MpParOwnVoneNatTwoTwoFour[Lo/Hi]`, `\MpParOwnSlope[Lo/Hi]` |
+| Figure | none (Section `sec:ablation`, appendix D) |
+| Amendment | `amendments/2026-10-16_step25-predictions.md`, `74853dc`, 2026-10-18T11:30:57+02:00 |
+| Wording | criterion fixed before the analysis (`74853dc` before `dbc4662`) |
 
 ---
 

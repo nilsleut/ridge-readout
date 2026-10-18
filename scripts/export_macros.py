@@ -207,9 +207,8 @@ SPECS += [
     ("LumDefSpearman", "checks/luminance_defs.csv", "quantity == 'spearman'", "value", "rsa"),
     # reference effect SEM (paper v1) from the frozen config; number of failed pre-stated predictions
     ("PreregReferenceSem", "config:config.yaml", "provenance.reference_effect.sem_at_224px", None, "rsa"),
-    # analyses reported in the paper text (steps 2-9, pre-specified); step 25 counted separately below
-    ("FailedPredictions", "failedrules:results,step25", "kind == 'rule' and passed == False", None, "int"),
-    ("FailedPredictionsAll", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
+        # all pre-stated predictions not met (every step); checked against the rows of Tab. tab:failed
+    ("FailedPredictions", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
     # secondary pre-specified contrasts (BN-cal, FA, PC, STDP minus Backprop), all g: largest mean and seeds positive
     ("PreregSecondaryMaxMean", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'", "mean", "rsa"),
     ("PreregSecondaryMaxPos", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'",
@@ -305,7 +304,7 @@ for _v, _vn in (("full", "Full"), ("ortho", "Ortho"), ("par", "Par")):
         if _m != "vit_b_16":
             SPECS += _ci(f"Mp{_vn}{_mn}Slope", _MP, f"kind == 'slope' and model == '{_m}' and variant == '{_v}'")
 SPECS += [("MpMFourModels", _MP, "kind == 'rule' and quantity.str.startswith('M4')", "value", "int"),
-          ("MpGateMaxDelta", _MP, "kind == 'check' and quantity.str.startswith('gate')", "value", "sci")]
+          ("MpGateMaxDelta", _MP, "kind == 'check' and quantity.str.startswith('gate')", "value", "sci2")]
 _WA = "step25/weighted_angle.csv"
 for _roi, _rn in (("V1", "Vone"), ("LOC", "Loc")):
     SPECS += _ci(f"WAngOwn{_rn}", _WA, f"kind == 'contrast' and model == 'own CNN' and roi == '{_roi}'")
@@ -335,11 +334,18 @@ for _m, _mn in (("mse_skill", "MseSkill"), ("r_perfold", "Perfold"), ("r_pooled"
 for _s, _sn in SUBJ_NAMES.items():
     SPECS.append((f"FFloor{_sn}", _RS, f"kind == 'floor' and subject == '{_s}'", "r_pooled", "rsa"))
 SPECS += [("FFloorMean", f"mean3:{_RS}", "kind == 'floor'", "r_pooled", "rsa"),
-          ("FSkillGateMaxDelta", _RS, "kind == 'check'", "value", "sci"),
+          ("FSkillGateMaxDelta", _RS, "kind == 'check'", "value", "sci2"),
           ("FSkillLowEdgeHits", "count:step25/ridge_lower_edge.csv", "block == 'skill'", None, "int"),
           ("FJointLowEdgeHits", "count:step25/ridge_lower_edge.csv", "block == 'joint'", None, "int"),
           ("FPermLowEdgeHits", "count:step25/ridge_lower_edge.csv", "block == 'perm'", None, "int"),
-          ("FLowEdgePlateau", "count:step25/ridge_lower_edge.csv", "classification == 'Plateau'", None, "int")]
+          ("FLowEdgePlateau", "count:step25/ridge_lower_edge.csv", "classification == 'Plateau'", None, "int"),
+          ("LowEdgePrimaryModelHits", "count:prereg/lower_edge.csv", "~condition.str.startswith('control')", None, "int")]
+for _b, _bn in (("skill", "Skill"), ("joint", "Joint"), ("perm", "Perm")):
+    _f = "step25/ridge_lower_edge.csv"
+    SPECS += [(f"LowEdgeStep{_bn}Hits", f"count:{_f}", f"block == '{_b}'", None, "int"),
+              (f"LowEdgeStep{_bn}Plateau", f"count:{_f}", f"block == '{_b}' and classification == 'Plateau'", None, "int"),
+              (f"LowEdgeStep{_bn}Excluded", f"count0:{_f}", f"block == '{_b}' and classification != 'Plateau'", None, "int"),
+              (f"LowEdgeStep{_bn}MaxGain", f"max:{_f}", f"block == '{_b}'", "relative_gain", "sci2")]
 _RJ = "step25/ridge_joint.csv"
 for _r, _rn in RULE_NAMES.items():
     for _g, _gn in ((1, "One"), (4, "Four")):
@@ -467,6 +473,12 @@ def main():
         if kind in ("config", "failedrules"):
             val, source, colname = (config_value(q) if kind == "config"
                                     else failed_rules(tuple(src.split(":", 1)[1].split(",")[1:])))
+            if name == "FailedPredictions":
+                tab = (PAPER / "drafts" / "app_failed.tex").read_text(encoding="utf-8")
+                body = tab.split("\\midrule", 1)[1].split("\\bottomrule", 1)[0]
+                n_rows = body.count("\\\\")
+                if n_rows != val:
+                    raise SystemExit(f"FailedPredictions = {val}, but Tab. tab:failed has {n_rows} rows")
             text = fmt(val, how)
             rounding = {"rsa": "3 decimals", "int": "integer"}[how]
             lines.append(f"% {name}: {source} | {q} | {colname} | {rounding}")

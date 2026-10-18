@@ -709,8 +709,7 @@ NReliableSubThree,results/prereg/primary.csv,subject == 'sub-03' and grid == 1 a
 LumDefPearson,results/checks/luminance_defs.csv,quantity == 'pearson',value,3 decimals,0.997
 LumDefSpearman,results/checks/luminance_defs.csv,quantity == 'spearman',value,3 decimals,0.996
 PreregReferenceSem,config.yaml,provenance.reference_effect.sem_at_224px,config value,3 decimals,0.006
-FailedPredictions,results/**/*.csv except step25,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, P_mech2, SEP2)",integer,5
-FailedPredictionsAll,results/**/*.csv,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, M3, P_mech2, SEP2)",integer,6
+FailedPredictions,results/**/*.csv,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, M3, P_mech2, SEP2)",integer,6
 PreregSecondaryMaxMean,results/prereg/signflip.csv,kind == 'contrast' and role == 'secondary',max of mean over 16 rows,3 decimals,-0.018
 PreregSecondaryMaxPos,results/prereg/signflip.csv,kind == 'contrast' and role == 'secondary',max of seeds_positive over 16 rows,integer,0
 MultiOOneMaxDelta,results/step7/multiverse.csv,kind == 'rule' and quantity.str.startswith('O1'),value,1-digit scientific,\ensuremath{4\times 10^{-14}}
@@ -1077,7 +1076,7 @@ MpParVitbsixteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' a
 MpParVitbsixteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',ci_lo,3 decimals,0.023
 MpParVitbsixteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',ci_hi,3 decimals,0.090
 MpMFourModels,results/step25/mean_profile.csv,kind == 'rule' and quantity.str.startswith('M4'),value,integer,6
-MpGateMaxDelta,results/step25/mean_profile.csv,kind == 'check' and quantity.str.startswith('gate'),value,1-digit scientific,\ensuremath{1\times 10^{-16}}
+MpGateMaxDelta,results/step25/mean_profile.csv,kind == 'check' and quantity.str.startswith('gate'),value,2-digit scientific,\ensuremath{9.9\times 10^{-17}}
 WAngOwnVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',value,3 decimals,0.013
 WAngOwnVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',ci_lo,3 decimals,-0.003
 WAngOwnVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',ci_hi,3 decimals,0.030
@@ -1188,11 +1187,24 @@ FFloorSubOne,results/step25/ridge_skill.csv,kind == 'floor' and subject == 'sub-
 FFloorSubTwo,results/step25/ridge_skill.csv,kind == 'floor' and subject == 'sub-02',r_pooled,3 decimals,-0.088
 FFloorSubThree,results/step25/ridge_skill.csv,kind == 'floor' and subject == 'sub-03',r_pooled,3 decimals,-0.097
 FFloorMean,results/step25/ridge_skill.csv,kind == 'floor',mean of r_pooled over 3 subjects,3 decimals,-0.092
-FSkillGateMaxDelta,results/step25/ridge_skill.csv,kind == 'check',value,1-digit scientific,\ensuremath{2\times 10^{-13}}
+FSkillGateMaxDelta,results/step25/ridge_skill.csv,kind == 'check',value,2-digit scientific,\ensuremath{1.8\times 10^{-13}}
 FSkillLowEdgeHits,results/step25/ridge_lower_edge.csv,block == 'skill',row count,integer,4
 FJointLowEdgeHits,results/step25/ridge_lower_edge.csv,block == 'joint',row count,integer,3
 FPermLowEdgeHits,results/step25/ridge_lower_edge.csv,block == 'perm',row count,integer,3
 FLowEdgePlateau,results/step25/ridge_lower_edge.csv,classification == 'Plateau',row count,integer,10
+LowEdgePrimaryModelHits,results/prereg/lower_edge.csv,~condition.str.startswith('control'),row count,integer,6
+LowEdgeStepSkillHits,results/step25/ridge_lower_edge.csv,block == 'skill',row count,integer,4
+LowEdgeStepSkillPlateau,results/step25/ridge_lower_edge.csv,block == 'skill' and classification == 'Plateau',row count,integer,4
+LowEdgeStepSkillExcluded,results/step25/ridge_lower_edge.csv,block == 'skill' and classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeStepSkillMaxGain,results/step25/ridge_lower_edge.csv,block == 'skill',max of relative_gain over 4 rows,2-digit scientific,\ensuremath{3.0\times 10^{-5}}
+LowEdgeStepJointHits,results/step25/ridge_lower_edge.csv,block == 'joint',row count,integer,3
+LowEdgeStepJointPlateau,results/step25/ridge_lower_edge.csv,block == 'joint' and classification == 'Plateau',row count,integer,3
+LowEdgeStepJointExcluded,results/step25/ridge_lower_edge.csv,block == 'joint' and classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeStepJointMaxGain,results/step25/ridge_lower_edge.csv,block == 'joint',max of relative_gain over 3 rows,2-digit scientific,\ensuremath{3.6\times 10^{-5}}
+LowEdgeStepPermHits,results/step25/ridge_lower_edge.csv,block == 'perm',row count,integer,3
+LowEdgeStepPermPlateau,results/step25/ridge_lower_edge.csv,block == 'perm' and classification == 'Plateau',row count,integer,3
+LowEdgeStepPermExcluded,results/step25/ridge_lower_edge.csv,block == 'perm' and classification != 'Plateau',row count (zero allowed),integer,0
+LowEdgeStepPermMaxGain,results/step25/ridge_lower_edge.csv,block == 'perm',max of relative_gain over 3 rows,2-digit scientific,\ensuremath{2.9\times 10^{-5}}
 FJointRandGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1,value,3 decimals,-0.021
 FJointRandGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1,joint,3 decimals,0.060
 FJointRandGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1,bank,3 decimals,0.081

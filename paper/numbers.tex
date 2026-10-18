@@ -1419,10 +1419,8 @@
 \newcommand{\LumDefSpearman}{0.996}
 % PreregReferenceSem: config.yaml | provenance.reference_effect.sem_at_224px | config value | 3 decimals
 \newcommand{\PreregReferenceSem}{0.006}
-% FailedPredictions: results/**/*.csv except step25 | kind == 'rule' and passed == False | distinct predictions with passed == False (G2, GEN3, GEN4, P_mech2, SEP2) | integer
-\newcommand{\FailedPredictions}{5}
-% FailedPredictionsAll: results/**/*.csv | kind == 'rule' and passed == False | distinct predictions with passed == False (G2, GEN3, GEN4, M3, P_mech2, SEP2) | integer
-\newcommand{\FailedPredictionsAll}{6}
+% FailedPredictions: results/**/*.csv | kind == 'rule' and passed == False | distinct predictions with passed == False (G2, GEN3, GEN4, M3, P_mech2, SEP2) | integer
+\newcommand{\FailedPredictions}{6}
 % PreregSecondaryMaxMean: results/prereg/signflip.csv | kind == 'contrast' and role == 'secondary' | max of mean over 16 rows | 3 decimals
 \newcommand{\PreregSecondaryMaxMean}{-0.018}
 % PreregSecondaryMaxPos: results/prereg/signflip.csv | kind == 'contrast' and role == 'secondary' | max of seeds_positive over 16 rows | integer
@@ -2155,8 +2153,8 @@
 \newcommand{\MpParVitbsixteenRTwoTwoFourHi}{0.090}
 % MpMFourModels: results/step25/mean_profile.csv | kind == 'rule' and quantity.str.startswith('M4') | value | integer
 \newcommand{\MpMFourModels}{6}
-% MpGateMaxDelta: results/step25/mean_profile.csv | kind == 'check' and quantity.str.startswith('gate') | value | 1-digit scientific
-\newcommand{\MpGateMaxDelta}{\ensuremath{1\times 10^{-16}}}
+% MpGateMaxDelta: results/step25/mean_profile.csv | kind == 'check' and quantity.str.startswith('gate') | value | 2-digit scientific
+\newcommand{\MpGateMaxDelta}{\ensuremath{9.9\times 10^{-17}}}
 % WAngOwnVone: results/step25/weighted_angle.csv | kind == 'contrast' and model == 'own CNN' and roi == 'V1' | value | 3 decimals
 \newcommand{\WAngOwnVone}{0.013}
 % WAngOwnVoneLo: results/step25/weighted_angle.csv | kind == 'contrast' and model == 'own CNN' and roi == 'V1' | ci_lo | 3 decimals
@@ -2377,8 +2375,8 @@
 \newcommand{\FFloorSubThree}{-0.097}
 % FFloorMean: results/step25/ridge_skill.csv | kind == 'floor' | mean of r_pooled over 3 subjects | 3 decimals
 \newcommand{\FFloorMean}{-0.092}
-% FSkillGateMaxDelta: results/step25/ridge_skill.csv | kind == 'check' | value | 1-digit scientific
-\newcommand{\FSkillGateMaxDelta}{\ensuremath{2\times 10^{-13}}}
+% FSkillGateMaxDelta: results/step25/ridge_skill.csv | kind == 'check' | value | 2-digit scientific
+\newcommand{\FSkillGateMaxDelta}{\ensuremath{1.8\times 10^{-13}}}
 % FSkillLowEdgeHits: results/step25/ridge_lower_edge.csv | block == 'skill' | row count | integer
 \newcommand{\FSkillLowEdgeHits}{4}
 % FJointLowEdgeHits: results/step25/ridge_lower_edge.csv | block == 'joint' | row count | integer
@@ -2387,6 +2385,32 @@
 \newcommand{\FPermLowEdgeHits}{3}
 % FLowEdgePlateau: results/step25/ridge_lower_edge.csv | classification == 'Plateau' | row count | integer
 \newcommand{\FLowEdgePlateau}{10}
+% LowEdgePrimaryModelHits: results/prereg/lower_edge.csv | ~condition.str.startswith('control') | row count | integer
+\newcommand{\LowEdgePrimaryModelHits}{6}
+% LowEdgeStepSkillHits: results/step25/ridge_lower_edge.csv | block == 'skill' | row count | integer
+\newcommand{\LowEdgeStepSkillHits}{4}
+% LowEdgeStepSkillPlateau: results/step25/ridge_lower_edge.csv | block == 'skill' and classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeStepSkillPlateau}{4}
+% LowEdgeStepSkillExcluded: results/step25/ridge_lower_edge.csv | block == 'skill' and classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeStepSkillExcluded}{0}
+% LowEdgeStepSkillMaxGain: results/step25/ridge_lower_edge.csv | block == 'skill' | max of relative_gain over 4 rows | 2-digit scientific
+\newcommand{\LowEdgeStepSkillMaxGain}{\ensuremath{3.0\times 10^{-5}}}
+% LowEdgeStepJointHits: results/step25/ridge_lower_edge.csv | block == 'joint' | row count | integer
+\newcommand{\LowEdgeStepJointHits}{3}
+% LowEdgeStepJointPlateau: results/step25/ridge_lower_edge.csv | block == 'joint' and classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeStepJointPlateau}{3}
+% LowEdgeStepJointExcluded: results/step25/ridge_lower_edge.csv | block == 'joint' and classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeStepJointExcluded}{0}
+% LowEdgeStepJointMaxGain: results/step25/ridge_lower_edge.csv | block == 'joint' | max of relative_gain over 3 rows | 2-digit scientific
+\newcommand{\LowEdgeStepJointMaxGain}{\ensuremath{3.6\times 10^{-5}}}
+% LowEdgeStepPermHits: results/step25/ridge_lower_edge.csv | block == 'perm' | row count | integer
+\newcommand{\LowEdgeStepPermHits}{3}
+% LowEdgeStepPermPlateau: results/step25/ridge_lower_edge.csv | block == 'perm' and classification == 'Plateau' | row count | integer
+\newcommand{\LowEdgeStepPermPlateau}{3}
+% LowEdgeStepPermExcluded: results/step25/ridge_lower_edge.csv | block == 'perm' and classification != 'Plateau' | row count (zero allowed) | integer
+\newcommand{\LowEdgeStepPermExcluded}{0}
+% LowEdgeStepPermMaxGain: results/step25/ridge_lower_edge.csv | block == 'perm' | max of relative_gain over 3 rows | 2-digit scientific
+\newcommand{\LowEdgeStepPermMaxGain}{\ensuremath{2.9\times 10^{-5}}}
 % FJointRandGOneDiff: results/step25/ridge_joint.csv | kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1 | value | 3 decimals
 \newcommand{\FJointRandGOneDiff}{-0.021}
 % FJointRandGOneJoint: results/step25/ridge_joint.csv | kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1 | joint | 3 decimals
