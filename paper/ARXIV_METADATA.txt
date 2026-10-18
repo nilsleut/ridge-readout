@@ -1,24 +1,23 @@
 arXiv submission metadata (draft)
 
 TITLE:
-The untrained-network advantage at V1 is not geometric: separating gain from geometry in model-brain RSA
+Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model-brain RSA
 
 AUTHORS:
 Nils Leutenegger
 
 CATEGORIES:
-Primary: 
-Cross-lists: 
+Primary:
+Cross-lists:
 (Left empty: no category information was found in evaluation-resolution-rsa, neither at
-tag arxiv-v3 nor in the working-tree file paper/ARXIV_METADATA.txt.)
+tag arxiv-v3 nor in the working tree.)
 
-ABSTRACT (1822 characters including spaces; generated from paper/drafts/abstract.tex with
+ABSTRACT (1820 characters including spaces; generated from paper/drafts/abstract.tex with
 macro values from paper/numbers_map.csv; citations removed):
-Untrained convolutional networks have been reported to rival trained networks as models of visual cortex. In previous work we reported such an advantage at V1 in the THINGS fMRI data, together with a dependence on evaluation resolution. Here we test this result. In a pre-specified analysis, a fitted ridge readout did not reproduce it: the untrained network scored below a backpropagation-trained network at every pooling grid (untrained minus trained median r of -0.043 at g = 4, 0 of 5 seeds positive). In exploratory analyses with criteria fixed before each step, the representational similarity analysis (RSA) advantage (+0.030 [0.018, 0.042]) and its resolution dependence disappeared under correlation distance when model units were standardised over the stimulus set (-0.011 [-0.017, -0.005]). Raw correlation-distance RSA tracked how a model's per-stimulus gain axis covaried with that of the voxels (Spearman 0.97 across our networks, 0.79 across six ImageNet architectures). Across 36 combinations of unit normalisation, distance measure and voxel normalisation, the sign of the V1 ranking was not identifiable, whereas the LOC ranking favoured trained networks wherever it was resolved. Decomposing Euclidean distances into a norm and an angular component, trained networks were ahead on the angular (geometry) component at V1 in our network and in 5 of 6 ImageNet models, and at LOC in all seven. A two-feature luminance and contrast model scored above every network under the ridge readout at V1 (point estimates for three subjects). Intervals are stimulus-bootstrap intervals for three subjects, and 5 pre-stated predictions were not met. We recommend centring units over the evaluated stimuli on both model and brain side, reporting gain and geometry components separately, and including trivial baselines.
+Untrained convolutional networks have been reported to rival trained networks as models of visual cortex, and we had reported an advantage of an untrained network over a backpropagation-trained one at V1 in the THINGS fMRI data, together with a dependence on evaluation resolution. Under a pre-specified ridge readout, the untrained network scored below the trained one at every pooling grid (median r difference -0.043 at g = 4, 0 of 5 seeds positive), and also in MSE skill and per-fold r. In exploratory analyses, across 36 combinations of unit normalisation, distance measure and voxel normalisation, the sign of the V1 contrast depended on the analysis (13 cells with intervals above 0, 9 below 0), and in our networks the resolution dependence of the original convention appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model and voxel patterns with the unit-mean profile (Spearman 0.97 across our networks, 0.79 across six ImageNet architectures); the advantage was absent from the component orthogonal to the mean profile, and the parallel component alone did not resolve it. On the unweighted angular component of centred patterns, trained networks were ahead at V1 (our network and 5 of 6 ImageNet models) and at LOC (all seven); the norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above every network under ridge (point estimates, three subjects), and adding network features to it did not improve prediction. Intervals are stimulus-bootstrap intervals for three subjects, and 6 pre-stated predictions were not met. We recommend centring units over the evaluated stimuli on both model and brain side, reporting components separately together with a small multiverse, and including simple baselines.
 
 COMMENTS:
-24 pages, 6 figures, 9 tables; code and analysis history at https://github.com/nilsleut/ridge-readout
+29 pages, 6 figures, 13 tables; code and analysis history at https://github.com/nilsleut/ridge-readout
 
 NOTE:
-The AI disclosure is in the Acknowledgements section of the PDF. The arXiv metadata above
-contain no AI statement.
+The AI disclosure is in the Acknowledgements section of the PDF.
