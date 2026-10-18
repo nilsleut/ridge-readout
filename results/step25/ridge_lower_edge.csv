@@ -1,0 +1,11 @@
+condition,g,subject,voxel,outer_fold,alpha_min_diagnostic,mse_at_1e_6,mse_min_diagnostic,relative_gain,classification,block,perm_seed,config_hash,git_head
+Random Weights (BN-calibrated) s3,1,sub-01,206,3,1e-06,0.8715696369041404,0.8715696369041404,0.0,Plateau,skill,,206fa875cca5,dbc4662
+Random Weights (BN-calibrated) s3,1,sub-01,934,5,1e-06,0.8212485406845034,0.8212485406845034,0.0,Plateau,skill,,206fa875cca5,dbc4662
+Random Weights (BN-calibrated) s3,1,sub-01,983,5,1e-07,0.8638346025451581,0.8638345644240568,4.413009291748505e-08,Plateau,skill,,206fa875cca5,dbc4662
+Feedback Alignment s2,1,sub-02,867,1,1e-09,1.01725220288233,1.0172216384141977,3.004610660545105e-05,Plateau,skill,,206fa875cca5,dbc4662
+Feedback Alignment s3,1,sub-01,994,6,1e-06,0.8509990465722673,0.8509990465722673,0.0,Plateau,joint,,206fa875cca5,dbc4662
+Random Weights (BN-calibrated) s3,1,sub-01,206,3,1e-09,0.873354159880235,0.8733231325907914,3.552658345138225e-05,Plateau,joint,,206fa875cca5,dbc4662
+Random Weights s0,1,sub-02,1080,3,1e-06,1.0521023493135924,1.0521023493135924,0.0,Plateau,joint,,206fa875cca5,dbc4662
+Random Weights s0,1,sub-01,593,1,1e-09,0.9129385693724249,0.9129124013587196,2.866349892878415e-05,Plateau,perm,6,206fa875cca5,dbc4662
+Backprop s0,1,sub-01,977,6,1e-09,0.9741886432111235,0.9741804957524177,8.36332753680415e-06,Plateau,perm,9,206fa875cca5,dbc4662
+Backprop s0,1,sub-01,348,6,1e-09,1.0111847740767002,1.0111814259754888,3.311067667572271e-06,Plateau,perm,34,206fa875cca5,dbc4662
