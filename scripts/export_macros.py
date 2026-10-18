@@ -355,6 +355,24 @@ for _s, _sn in SUBJ_NAMES.items():
                       (f"FPerm{_sn}{_rn}G{_gn}Lo", _RP, _q, "null_p025", "rsa"),
                       (f"FPerm{_sn}{_rn}G{_gn}Hi", _RP, _q, "null_p975", "rsa"),
                       (f"FPerm{_sn}{_rn}G{_gn}Real", _RP, _q, "real", "rsa")]
+_NULL = "kind != kind"            # kind 'null' rows of ridge_permnull.csv (read as NA)
+SPECS += [("FPermPNineSevenFiveMin", f"min:{_RP}", _NULL, "null_p975", "rsa"),
+          ("FPermPNineSevenFiveMax", f"max:{_RP}", _NULL, "null_p975", "rsa"),
+          ("FPermRealMinMain", f"min:{_RP}", _NULL + " and subject in ('sub-01', 'sub-02')", "real", "rsa"),
+          ("FPermRealMaxMain", f"max:{_RP}", _NULL + " and subject in ('sub-01', 'sub-02')", "real", "rsa"),
+          ("FPermRealMinSubThree", f"min:{_RP}", _NULL + " and subject == 'sub-03'", "real", "rsa"),
+          ("FPermRealMaxSubThree", f"max:{_RP}", _NULL + " and subject == 'sub-03'", "real", "rsa"),
+          ("FJointMinDiff", f"min:{_RJ}", "kind == 'joint_minus_bank'", "value", "rsa"),
+          ("FJointMaxDiff", f"max:{_RJ}", "kind == 'joint_minus_bank'", "value", "rsa")]
+# absolute RSA at V1 in the paper cell (raw/correlation/paper, NATIVE 224): range of the six condition means
+_PC = ("kind == 'rho' and F == 'raw' and D == 'correlation' and B == 'paper' and roi == 'V1' "
+       "and arm == 'NATIVE' and res == 224")
+SPECS += [("AbsRsaPaperMin", "grpmin:step7/multiverse.csv", _PC, "rho@rule", "rsa"),
+          ("AbsRsaPaperMax", "grpmax:step7/multiverse.csv", _PC, "rho@rule", "rsa")]
+# leave-one-subject-out lower bound at V1, cross-run pairs (learning-rules-rsa, tag arxiv-v4)
+for _c, _cn in (("point", ""), ("ci_lo", "Lo"), ("ci_hi", "Hi")):
+    SPECS.append((f"LosoBoundVone{_cn}", "lrtag:arxiv-v4:results/crossrun/step2_summary.csv",
+                  "key == 'lower|cr|V1'", _c, "rsa"))
 _BN = "step25/bootnorm.csv"
 for (_f, _d, _b), _cn in ((("z", "correlation", "paper"), "ZCorrPaper"), (("center", "euclidean", "paper"), "CentEuclPaper"),
                           (("center", "correlation", "center720"), "CentCorrCent")):
@@ -453,6 +471,24 @@ def main():
             lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
             rows.append(dict(macro=name, source=source, filter=q, column=colname, rounding=rounding, value=text))
             continue
+        if kind == "lrtag":
+            # a CSV of learning-rules-rsa (CROSSRUN_REPO) read at a fixed tag: "lrtag:<tag>:<path>"
+            _, tag, rel = src.split(":", 2)
+            import io
+            import subprocess
+            sys.path.insert(0, str(REPO / "src" / "ridge"))
+            import paths
+            blob = subprocess.run(["git", "-C", str(paths.crossrun_repo()), "show", f"{tag}:{rel}"],
+                                  capture_output=True, text=True, check=True).stdout
+            hit = pd.read_csv(io.StringIO(blob)).query(q, engine="python").drop_duplicates()
+            if len(hit) != 1:
+                raise SystemExit(f"{name}: filter matches {len(hit)} rows, expected 1: {q}")
+            text = fmt(hit.iloc[0][col], how)
+            source = f"learning-rules-rsa@{tag}:{rel}"
+            lines.append(f"% {name}: {source} | {q} | {col} | 3 decimals")
+            lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+            rows.append(dict(macro=name, source=source, filter=q, column=col, rounding="3 decimals", value=text))
+            continue
         path = RES / src.split(":", 1)[-1]
         if not path.exists():
             raise SystemExit(f"missing source {path}")
@@ -486,10 +522,18 @@ def main():
             val, colname = hit[col].mean(), f"mean of {col} over 5 rows"
         elif kind == "count0":
             val, colname = len(hit), "row count (zero allowed)"
-        elif kind == "max":
+        elif kind in ("max", "min"):
             if len(hit) == 0:
-                raise SystemExit(f"{name}: max filter matches no row: {q}")
-            val, colname = hit[col].max(), f"max of {col} over {len(hit)} rows"
+                raise SystemExit(f"{name}: {kind} filter matches no row: {q}")
+            val = hit[col].max() if kind == "max" else hit[col].min()
+            colname = f"{kind} of {col} over {len(hit)} rows"
+        elif kind in ("grpmax", "grpmin"):
+            vcol, gcol = col.split("@")
+            if len(hit) == 0:
+                raise SystemExit(f"{name}: {kind} filter matches no row: {q}")
+            m = hit.groupby(gcol)[vcol].mean()
+            val = m.max() if kind == "grpmax" else m.min()
+            colname = f"{kind[3:]} over {gcol} of the mean of {vcol} ({len(m)} groups)"
         elif kind == "count":
             if len(hit) == 0:
                 raise SystemExit(f"{name}: count filter matches no row: {q}")

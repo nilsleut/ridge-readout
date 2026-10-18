@@ -1276,6 +1276,19 @@ FPermSubThreeBpGFourMean,results/step25/ridge_permnull.csv,kind != kind and subj
 FPermSubThreeBpGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',null_p025,3 decimals,-0.093
 FPermSubThreeBpGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',null_p975,3 decimals,-0.048
 FPermSubThreeBpGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',real,3 decimals,0.008
+FPermPNineSevenFiveMin,results/step25/ridge_permnull.csv,kind != kind,min of null_p975 over 12 rows,3 decimals,-0.062
+FPermPNineSevenFiveMax,results/step25/ridge_permnull.csv,kind != kind,max of null_p975 over 12 rows,3 decimals,-0.037
+FPermRealMinMain,results/step25/ridge_permnull.csv,"kind != kind and subject in ('sub-01', 'sub-02')",min of real over 8 rows,3 decimals,0.052
+FPermRealMaxMain,results/step25/ridge_permnull.csv,"kind != kind and subject in ('sub-01', 'sub-02')",max of real over 8 rows,3 decimals,0.120
+FPermRealMinSubThree,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03',min of real over 4 rows,3 decimals,-0.021
+FPermRealMaxSubThree,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03',max of real over 4 rows,3 decimals,0.008
+FJointMinDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank',min of value over 12 rows,3 decimals,-0.047
+FJointMaxDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank',max of value over 12 rows,3 decimals,-0.013
+AbsRsaPaperMin,results/step7/multiverse.csv,kind == 'rho' and F == 'raw' and D == 'correlation' and B == 'paper' and roi == 'V1' and arm == 'NATIVE' and res == 224,min over rule of the mean of rho (6 groups),3 decimals,0.008
+AbsRsaPaperMax,results/step7/multiverse.csv,kind == 'rho' and F == 'raw' and D == 'correlation' and B == 'paper' and roi == 'V1' and arm == 'NATIVE' and res == 224,max over rule of the mean of rho (6 groups),3 decimals,0.053
+LosoBoundVone,learning-rules-rsa@arxiv-v4:results/crossrun/step2_summary.csv,key == 'lower|cr|V1',point,3 decimals,0.051
+LosoBoundVoneLo,learning-rules-rsa@arxiv-v4:results/crossrun/step2_summary.csv,key == 'lower|cr|V1',ci_lo,3 decimals,0.039
+LosoBoundVoneHi,learning-rules-rsa@arxiv-v4:results/crossrun/step2_summary.csv,key == 'lower|cr|V1',ci_hi,3 decimals,0.064
 BNormZCorrPaper,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',value,3 decimals,-0.011
 BNormZCorrPaperLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',ci_lo,3 decimals,-0.017
 BNormZCorrPaperHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',ci_hi,3 decimals,-0.005
