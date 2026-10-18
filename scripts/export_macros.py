@@ -207,7 +207,9 @@ SPECS += [
     ("LumDefSpearman", "checks/luminance_defs.csv", "quantity == 'spearman'", "value", "rsa"),
     # reference effect SEM (paper v1) from the frozen config; number of failed pre-stated predictions
     ("PreregReferenceSem", "config:config.yaml", "provenance.reference_effect.sem_at_224px", None, "rsa"),
-    ("FailedPredictions", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
+    # analyses reported in the paper text (steps 2-9, pre-specified); step 25 counted separately below
+    ("FailedPredictions", "failedrules:results,step25", "kind == 'rule' and passed == False", None, "int"),
+    ("FailedPredictionsAll", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
     # secondary pre-specified contrasts (BN-cal, FA, PC, STDP minus Backprop), all g: largest mean and seeds positive
     ("PreregSecondaryMaxMean", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'", "mean", "rsa"),
     ("PreregSecondaryMaxPos", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'",
@@ -277,6 +279,88 @@ for _s, _sn in SUBJ_NAMES.items():
                   (f"PerSubDiff{_sn}G{_gn}Sd", "seeddiff:prereg/primary.csv", _q, "sd", "rsa"),
                   (f"PerSubDiff{_sn}G{_gn}Pos", "seeddiff:prereg/primary.csv", _q, "pos", "int"),
                   (f"PerSubBp{_sn}G{_gn}", "mean5:prereg/primary.csv", _q + " and rule == 'Backprop'", "r_med_reliable", "rsa")]
+# ── step 25 (review controls) ───────────────────────────────────────────────
+_IMN = {"alexnet": "Alexnet", "vgg11_bn": "Vggeleven", "resnet18": "Resneteighteen", "resnet50": "Resnetfifty",
+        "convnext_tiny": "Convnexttiny", "vit_b_16": "Vitbsixteen"}
+_MP = "step25/mean_profile.csv"
+
+
+def _ci(name, src, q, how="rsa"):
+    return [(name, src, q, "value", how), (name + "Lo", src, q, "ci_lo", how), (name + "Hi", src, q, "ci_hi", how)]
+
+
+for _v, _vn in (("full", "Full"), ("ortho", "Ortho"), ("par", "Par")):
+    for _r, _rn in (("NATIVE_32", "NatThreeTwo"), ("NATIVE_224", "NatTwoTwoFour"), ("UPSAMPLED_224", "UpTwoTwoFour")):
+        _q = f"kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == '{_v}' and res == '{_r}'"
+        SPECS += _ci(f"Mp{_vn}OwnVone{_rn}", _MP, _q)
+        SPECS.append((f"Mp{_vn}OwnVone{_rn}Pos", _MP, _q, "seeds_positive", "int"))
+    SPECS += _ci(f"Mp{_vn}OwnLoc", _MP, f"kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == '{_v}'")
+    SPECS += _ci(f"Mp{_vn}OwnSlope", _MP, f"kind == 'slope' and model == 'own CNN' and variant == '{_v}'")
+    for _m, _mn in _IMN.items():
+        for _R, _Rn in (("R224", "RTwoTwoFour"), ("R448", "RFourFourEight")):
+            if _m == "vit_b_16" and _R == "R448":
+                continue
+            SPECS += _ci(f"Mp{_vn}{_mn}{_Rn}", _MP,
+                         f"kind == 'contrast' and model == '{_m}' and variant == '{_v}' and res == '{_R}'")
+        if _m != "vit_b_16":
+            SPECS += _ci(f"Mp{_vn}{_mn}Slope", _MP, f"kind == 'slope' and model == '{_m}' and variant == '{_v}'")
+SPECS += [("MpMFourModels", _MP, "kind == 'rule' and quantity.str.startswith('M4')", "value", "int"),
+          ("MpGateMaxDelta", _MP, "kind == 'check' and quantity.str.startswith('gate')", "value", "sci")]
+_WA = "step25/weighted_angle.csv"
+for _roi, _rn in (("V1", "Vone"), ("LOC", "Loc")):
+    SPECS += _ci(f"WAngOwn{_rn}", _WA, f"kind == 'contrast' and model == 'own CNN' and roi == '{_roi}'")
+    for _m, _mn in _IMN.items():
+        SPECS += _ci(f"WAng{_mn}{_rn}", _WA, f"kind == 'contrast' and model == '{_m}' and roi == '{_roi}'")
+for _p, _pn in (("N-A", "NA"), ("N-W", "NW"), ("A-W", "AW")):
+    SPECS.append((f"WRank{_pn}Own", _WA, f"kind == 'rankcorr' and model == 'own CNN' and quantity == 'Spearman {_p}'",
+                  "value", "corr"))
+    for _s, _sn in SUBJ_NAMES.items():
+        SPECS.append((f"WRank{_pn}{_sn}", _WA,
+                      f"kind == 'rankcorr' and model == 'fMRI' and subject == '{_s}' and quantity == 'Spearman {_p}'",
+                      "value", "corr"))
+for _c, _cn in (("R2 N", "N"), ("R2 A", "A"), ("R2 N+A", "NA")):
+    for _r, _rn in (("Random Weights", "Rand"), ("Backprop", "Bp")):
+        SPECS.append((f"WRtwo{_cn}{_rn}", _WA, f"kind == 'r2' and component == '{_c}' and quantity == '{_r}'",
+                      "value", "sd"))
+    SPECS += _ci(f"WRtwo{_cn}Diff", _WA, f"kind == 'r2_contrast' and component == '{_c}'", "sd")
+_RS = "step25/ridge_skill.csv"
+for _m, _mn in (("mse_skill", "MseSkill"), ("r_perfold", "Perfold"), ("r_pooled", "Pooled")):
+    for _g, _gn in GRID_NAMES.items():
+        _q = f"kind == 'contrast' and quantity == 'Random Weights - Backprop, {_m}' and grid == {_g}"
+        SPECS += [(f"FSkill{_mn}G{_gn}Mean", _RS, _q, "value", "sd"),
+                  (f"FSkill{_mn}G{_gn}Sd", _RS, _q, "sd", "sd"),
+                  (f"FSkill{_mn}G{_gn}Pos", _RS, _q, "seeds_positive", "int")]
+for _s, _sn in SUBJ_NAMES.items():
+    SPECS.append((f"FFloor{_sn}", _RS, f"kind == 'floor' and subject == '{_s}'", "r_pooled", "rsa"))
+SPECS += [("FFloorMean", f"mean3:{_RS}", "kind == 'floor'", "r_pooled", "rsa"),
+          ("FSkillGateMaxDelta", _RS, "kind == 'check'", "value", "sci"),
+          ("FSkillLowEdgeHits", "count:step25/ridge_lower_edge.csv", "block == 'skill'", None, "int"),
+          ("FJointLowEdgeHits", "count:step25/ridge_lower_edge.csv", "block == 'joint'", None, "int"),
+          ("FPermLowEdgeHits", "count:step25/ridge_lower_edge.csv", "block == 'perm'", None, "int"),
+          ("FLowEdgePlateau", "count:step25/ridge_lower_edge.csv", "classification == 'Plateau'", None, "int")]
+_RJ = "step25/ridge_joint.csv"
+for _r, _rn in RULE_NAMES.items():
+    for _g, _gn in ((1, "One"), (4, "Four")):
+        _q = f"kind == 'joint_minus_bank' and quantity == '{_r}' and grid == {_g}"
+        SPECS += [(f"FJoint{_rn}G{_gn}Diff", _RJ, _q, "value", "rsa"),
+                  (f"FJoint{_rn}G{_gn}Joint", _RJ, _q, "joint", "rsa"),
+                  (f"FJoint{_rn}G{_gn}Bank", _RJ, _q, "bank", "rsa")]
+_RP = "step25/ridge_permnull.csv"
+for _s, _sn in SUBJ_NAMES.items():
+    for _g, _gn in ((1, "One"), (4, "Four")):
+        for _r, _rn in (("Random Weights s0", "Rand"), ("Backprop s0", "Bp")):
+            # kind 'null' is read as NA by pandas, hence "kind != kind" (NA) selects these rows
+            _q = f"kind != kind and subject == '{_s}' and grid == {_g} and quantity == '{_r}'"
+            SPECS += [(f"FPerm{_sn}{_rn}G{_gn}Mean", _RP, _q, "null_mean", "rsa"),
+                      (f"FPerm{_sn}{_rn}G{_gn}Lo", _RP, _q, "null_p025", "rsa"),
+                      (f"FPerm{_sn}{_rn}G{_gn}Hi", _RP, _q, "null_p975", "rsa"),
+                      (f"FPerm{_sn}{_rn}G{_gn}Real", _RP, _q, "real", "rsa")]
+_BN = "step25/bootnorm.csv"
+for (_f, _d, _b), _cn in ((("z", "correlation", "paper"), "ZCorrPaper"), (("center", "euclidean", "paper"), "CentEuclPaper"),
+                          (("center", "correlation", "center720"), "CentCorrCent")):
+    _q = f"kind == 'cell' and F == '{_f}' and D == '{_d}' and B == '{_b}'"
+    SPECS += _ci(f"BNorm{_cn}", _BN, _q) + [(f"BNorm{_cn}FixedLo", _BN, _q, "fixed_ci_lo", "rsa"),
+                                             (f"BNorm{_cn}FixedHi", _BN, _q, "fixed_ci_hi", "rsa")]
 for _g, _gn in GRID_NAMES.items():
     SPECS += [(f"PreregDminG{_gn}Sim", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_sim", "rsa"),
               (f"PreregDminG{_gn}Closed", "prereg/delta_min_prereg.csv", f"g == {_g}", "delta_min_closed", "rsa"),
@@ -332,13 +416,17 @@ def config_value(key):
     return float(node), "config.yaml", "config value"
 
 
-def failed_rules():
-    """Number of distinct pre-stated predictions with a failed rule row in results/.
+def failed_rules(exclude=()):
+    """Number of distinct pre-stated predictions with a failed rule row in results/,
+    skipping the result directories named in `exclude` (e.g. step25, added after the
+    paper text was written).
 
     A prediction is the first token of `quantity` in rows with kind == 'rule'; it counts
     as failed if any of its rule rows has passed == False."""
     failed = set()
     for f in sorted(RES.rglob("*.csv")):
+        if f.relative_to(RES).parts[0] in exclude:
+            continue
         d = pd.read_csv(f, low_memory=False)
         if not {"kind", "passed", "quantity"} <= set(d.columns):
             continue
@@ -346,7 +434,8 @@ def failed_rules():
         failed |= set(r[r.passed.astype(str) == "False"].quantity.str.split().str[0])
     if not failed:
         raise SystemExit("failed_rules: no failed rule row found")
-    return len(failed), "results/**/*.csv", f"distinct predictions with passed == False ({', '.join(sorted(failed))})"
+    src = "results/**/*.csv" + (f" except {', '.join(exclude)}" if exclude else "")
+    return len(failed), src, f"distinct predictions with passed == False ({', '.join(sorted(failed))})"
 
 
 def main():
@@ -356,7 +445,8 @@ def main():
             raise SystemExit(f"invalid macro name {name}")
         kind = src.split(":", 1)[0] if ":" in src else "value"
         if kind in ("config", "failedrules"):
-            val, source, colname = config_value(q) if kind == "config" else failed_rules()
+            val, source, colname = (config_value(q) if kind == "config"
+                                    else failed_rules(tuple(src.split(":", 1)[1].split(",")[1:])))
             text = fmt(val, how)
             rounding = {"rsa": "3 decimals", "int": "integer"}[how]
             lines.append(f"% {name}: {source} | {q} | {colname} | {rounding}")

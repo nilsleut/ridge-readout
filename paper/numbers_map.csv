@@ -709,7 +709,8 @@ NReliableSubThree,results/prereg/primary.csv,subject == 'sub-03' and grid == 1 a
 LumDefPearson,results/checks/luminance_defs.csv,quantity == 'pearson',value,3 decimals,0.997
 LumDefSpearman,results/checks/luminance_defs.csv,quantity == 'spearman',value,3 decimals,0.996
 PreregReferenceSem,config.yaml,provenance.reference_effect.sem_at_224px,config value,3 decimals,0.006
-FailedPredictions,results/**/*.csv,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, P_mech2, SEP2)",integer,5
+FailedPredictions,results/**/*.csv except step25,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, P_mech2, SEP2)",integer,5
+FailedPredictionsAll,results/**/*.csv,kind == 'rule' and passed == False,"distinct predictions with passed == False (G2, GEN3, GEN4, M3, P_mech2, SEP2)",integer,6
 PreregSecondaryMaxMean,results/prereg/signflip.csv,kind == 'contrast' and role == 'secondary',max of mean over 16 rows,3 decimals,-0.018
 PreregSecondaryMaxPos,results/prereg/signflip.csv,kind == 'contrast' and role == 'secondary',max of seeds_positive over 16 rows,integer,0
 MultiOOneMaxDelta,results/step7/multiverse.csv,kind == 'rule' and quantity.str.startswith('O1'),value,1-digit scientific,\ensuremath{4\times 10^{-14}}
@@ -877,6 +878,419 @@ PerSubDiffSubThreeGEightMean,results/prereg/primary.csv,subject == 'sub-03' and 
 PerSubDiffSubThreeGEightSd,results/prereg/primary.csv,subject == 'sub-03' and grid == 8,sd over 5 seeds of Random Weights - Backprop (median r),3 decimals,0.009
 PerSubDiffSubThreeGEightPos,results/prereg/primary.csv,subject == 'sub-03' and grid == 8,pos over 5 seeds of Random Weights - Backprop (median r),integer,0
 PerSubBpSubThreeGEight,results/prereg/primary.csv,subject == 'sub-03' and grid == 8 and rule == 'Backprop',mean of r_med_reliable over 5 rows,3 decimals,0.014
+MpFullOwnVoneNatThreeTwo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_32',value,3 decimals,-0.001
+MpFullOwnVoneNatThreeTwoLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_32',ci_lo,3 decimals,-0.011
+MpFullOwnVoneNatThreeTwoHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_32',ci_hi,3 decimals,0.009
+MpFullOwnVoneNatThreeTwoPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_32',seeds_positive,integer,3
+MpFullOwnVoneNatTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_224',value,3 decimals,0.030
+MpFullOwnVoneNatTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_224',ci_lo,3 decimals,0.018
+MpFullOwnVoneNatTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_224',ci_hi,3 decimals,0.042
+MpFullOwnVoneNatTwoTwoFourPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'NATIVE_224',seeds_positive,integer,5
+MpFullOwnVoneUpTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'UPSAMPLED_224',value,3 decimals,0.035
+MpFullOwnVoneUpTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'UPSAMPLED_224',ci_lo,3 decimals,0.023
+MpFullOwnVoneUpTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'UPSAMPLED_224',ci_hi,3 decimals,0.046
+MpFullOwnVoneUpTwoTwoFourPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'full' and res == 'UPSAMPLED_224',seeds_positive,integer,5
+MpFullOwnLoc,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'full',value,3 decimals,0.011
+MpFullOwnLocLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'full',ci_lo,3 decimals,0.003
+MpFullOwnLocHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'full',ci_hi,3 decimals,0.021
+MpFullOwnSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'full',value,3 decimals,0.031
+MpFullOwnSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'full',ci_lo,3 decimals,0.024
+MpFullOwnSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'full',ci_hi,3 decimals,0.038
+MpFullAlexnetRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'full' and res == 'R224',value,3 decimals,0.005
+MpFullAlexnetRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'full' and res == 'R224',ci_lo,3 decimals,-0.005
+MpFullAlexnetRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'full' and res == 'R224',ci_hi,3 decimals,0.015
+MpFullAlexnetRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'full' and res == 'R448',value,3 decimals,0.014
+MpFullAlexnetRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'full' and res == 'R448',ci_lo,3 decimals,0.004
+MpFullAlexnetRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'full' and res == 'R448',ci_hi,3 decimals,0.024
+MpFullAlexnetSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'full',value,3 decimals,0.008
+MpFullAlexnetSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'full',ci_lo,3 decimals,0.006
+MpFullAlexnetSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'full',ci_hi,3 decimals,0.011
+MpFullVggelevenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'full' and res == 'R224',value,3 decimals,0.019
+MpFullVggelevenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'full' and res == 'R224',ci_lo,3 decimals,0.008
+MpFullVggelevenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'full' and res == 'R224',ci_hi,3 decimals,0.031
+MpFullVggelevenRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'full' and res == 'R448',value,3 decimals,0.027
+MpFullVggelevenRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'full' and res == 'R448',ci_lo,3 decimals,0.015
+MpFullVggelevenRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'full' and res == 'R448',ci_hi,3 decimals,0.039
+MpFullVggelevenSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'full',value,3 decimals,0.008
+MpFullVggelevenSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'full',ci_lo,3 decimals,0.006
+MpFullVggelevenSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'full',ci_hi,3 decimals,0.010
+MpFullResneteighteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'full' and res == 'R224',value,3 decimals,-0.013
+MpFullResneteighteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'full' and res == 'R224',ci_lo,3 decimals,-0.024
+MpFullResneteighteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'full' and res == 'R224',ci_hi,3 decimals,-0.002
+MpFullResneteighteenRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'full' and res == 'R448',value,3 decimals,-0.006
+MpFullResneteighteenRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'full' and res == 'R448',ci_lo,3 decimals,-0.017
+MpFullResneteighteenRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'full' and res == 'R448',ci_hi,3 decimals,0.005
+MpFullResneteighteenSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'full',value,3 decimals,0.007
+MpFullResneteighteenSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'full',ci_lo,3 decimals,0.005
+MpFullResneteighteenSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'full',ci_hi,3 decimals,0.009
+MpFullResnetfiftyRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'full' and res == 'R224',value,3 decimals,-0.002
+MpFullResnetfiftyRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'full' and res == 'R224',ci_lo,3 decimals,-0.013
+MpFullResnetfiftyRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'full' and res == 'R224',ci_hi,3 decimals,0.008
+MpFullResnetfiftyRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'full' and res == 'R448',value,3 decimals,0.003
+MpFullResnetfiftyRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'full' and res == 'R448',ci_lo,3 decimals,-0.007
+MpFullResnetfiftyRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'full' and res == 'R448',ci_hi,3 decimals,0.014
+MpFullResnetfiftySlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'full',value,3 decimals,0.006
+MpFullResnetfiftySlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'full',ci_lo,3 decimals,0.003
+MpFullResnetfiftySlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'full',ci_hi,3 decimals,0.008
+MpFullConvnexttinyRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'full' and res == 'R224',value,3 decimals,0.016
+MpFullConvnexttinyRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'full' and res == 'R224',ci_lo,3 decimals,0.007
+MpFullConvnexttinyRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'full' and res == 'R224',ci_hi,3 decimals,0.024
+MpFullConvnexttinyRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'full' and res == 'R448',value,3 decimals,0.018
+MpFullConvnexttinyRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'full' and res == 'R448',ci_lo,3 decimals,0.008
+MpFullConvnexttinyRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'full' and res == 'R448',ci_hi,3 decimals,0.027
+MpFullConvnexttinySlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'full',value,3 decimals,0.002
+MpFullConvnexttinySlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'full',ci_lo,3 decimals,0.001
+MpFullConvnexttinySlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'full',ci_hi,3 decimals,0.003
+MpFullVitbsixteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'full' and res == 'R224',value,3 decimals,-0.010
+MpFullVitbsixteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'full' and res == 'R224',ci_lo,3 decimals,-0.025
+MpFullVitbsixteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'full' and res == 'R224',ci_hi,3 decimals,0.005
+MpOrthoOwnVoneNatThreeTwo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_32',value,3 decimals,-0.002
+MpOrthoOwnVoneNatThreeTwoLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_32',ci_lo,3 decimals,-0.006
+MpOrthoOwnVoneNatThreeTwoHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_32',ci_hi,3 decimals,0.002
+MpOrthoOwnVoneNatThreeTwoPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_32',seeds_positive,integer,1
+MpOrthoOwnVoneNatTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_224',value,3 decimals,-0.002
+MpOrthoOwnVoneNatTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_224',ci_lo,3 decimals,-0.007
+MpOrthoOwnVoneNatTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_224',ci_hi,3 decimals,0.003
+MpOrthoOwnVoneNatTwoTwoFourPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'NATIVE_224',seeds_positive,integer,1
+MpOrthoOwnVoneUpTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'UPSAMPLED_224',value,3 decimals,0.004
+MpOrthoOwnVoneUpTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'UPSAMPLED_224',ci_lo,3 decimals,-0.001
+MpOrthoOwnVoneUpTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'UPSAMPLED_224',ci_hi,3 decimals,0.009
+MpOrthoOwnVoneUpTwoTwoFourPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'ortho' and res == 'UPSAMPLED_224',seeds_positive,integer,5
+MpOrthoOwnLoc,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'ortho',value,3 decimals,0.005
+MpOrthoOwnLocLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'ortho',ci_lo,3 decimals,0.001
+MpOrthoOwnLocHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'ortho',ci_hi,3 decimals,0.010
+MpOrthoOwnSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'ortho',value,3 decimals,0.000
+MpOrthoOwnSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'ortho',ci_lo,3 decimals,-0.003
+MpOrthoOwnSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'ortho',ci_hi,3 decimals,0.003
+MpOrthoAlexnetRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'ortho' and res == 'R224',value,3 decimals,-0.001
+MpOrthoAlexnetRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'ortho' and res == 'R224',ci_lo,3 decimals,-0.008
+MpOrthoAlexnetRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'ortho' and res == 'R224',ci_hi,3 decimals,0.005
+MpOrthoAlexnetRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'ortho' and res == 'R448',value,3 decimals,0.001
+MpOrthoAlexnetRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'ortho' and res == 'R448',ci_lo,3 decimals,-0.005
+MpOrthoAlexnetRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'ortho' and res == 'R448',ci_hi,3 decimals,0.008
+MpOrthoAlexnetSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'ortho',value,3 decimals,0.003
+MpOrthoAlexnetSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'ortho',ci_lo,3 decimals,0.002
+MpOrthoAlexnetSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'ortho',ci_hi,3 decimals,0.004
+MpOrthoVggelevenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'ortho' and res == 'R224',value,3 decimals,-0.005
+MpOrthoVggelevenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'ortho' and res == 'R224',ci_lo,3 decimals,-0.013
+MpOrthoVggelevenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'ortho' and res == 'R224',ci_hi,3 decimals,0.002
+MpOrthoVggelevenRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'ortho' and res == 'R448',value,3 decimals,0.000
+MpOrthoVggelevenRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'ortho' and res == 'R448',ci_lo,3 decimals,-0.007
+MpOrthoVggelevenRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'ortho' and res == 'R448',ci_hi,3 decimals,0.008
+MpOrthoVggelevenSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'ortho',value,3 decimals,0.005
+MpOrthoVggelevenSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'ortho',ci_lo,3 decimals,0.003
+MpOrthoVggelevenSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'ortho',ci_hi,3 decimals,0.007
+MpOrthoResneteighteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'ortho' and res == 'R224',value,3 decimals,-0.009
+MpOrthoResneteighteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'ortho' and res == 'R224',ci_lo,3 decimals,-0.014
+MpOrthoResneteighteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'ortho' and res == 'R224',ci_hi,3 decimals,-0.005
+MpOrthoResneteighteenRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'ortho' and res == 'R448',value,3 decimals,-0.006
+MpOrthoResneteighteenRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'ortho' and res == 'R448',ci_lo,3 decimals,-0.011
+MpOrthoResneteighteenRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'ortho' and res == 'R448',ci_hi,3 decimals,-0.002
+MpOrthoResneteighteenSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'ortho',value,3 decimals,0.003
+MpOrthoResneteighteenSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'ortho',ci_lo,3 decimals,0.002
+MpOrthoResneteighteenSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'ortho',ci_hi,3 decimals,0.005
+MpOrthoResnetfiftyRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'ortho' and res == 'R224',value,3 decimals,-0.010
+MpOrthoResnetfiftyRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'ortho' and res == 'R224',ci_lo,3 decimals,-0.015
+MpOrthoResnetfiftyRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'ortho' and res == 'R224',ci_hi,3 decimals,-0.005
+MpOrthoResnetfiftyRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'ortho' and res == 'R448',value,3 decimals,-0.006
+MpOrthoResnetfiftyRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'ortho' and res == 'R448',ci_lo,3 decimals,-0.010
+MpOrthoResnetfiftyRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'ortho' and res == 'R448',ci_hi,3 decimals,-0.001
+MpOrthoResnetfiftySlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'ortho',value,3 decimals,0.004
+MpOrthoResnetfiftySlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'ortho',ci_lo,3 decimals,0.003
+MpOrthoResnetfiftySlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'ortho',ci_hi,3 decimals,0.006
+MpOrthoConvnexttinyRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'ortho' and res == 'R224',value,3 decimals,0.001
+MpOrthoConvnexttinyRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'ortho' and res == 'R224',ci_lo,3 decimals,-0.005
+MpOrthoConvnexttinyRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'ortho' and res == 'R224',ci_hi,3 decimals,0.006
+MpOrthoConvnexttinyRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'ortho' and res == 'R448',value,3 decimals,0.002
+MpOrthoConvnexttinyRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'ortho' and res == 'R448',ci_lo,3 decimals,-0.004
+MpOrthoConvnexttinyRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'ortho' and res == 'R448',ci_hi,3 decimals,0.007
+MpOrthoConvnexttinySlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'ortho',value,3 decimals,0.001
+MpOrthoConvnexttinySlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'ortho',ci_lo,3 decimals,-0.000
+MpOrthoConvnexttinySlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'ortho',ci_hi,3 decimals,0.002
+MpOrthoVitbsixteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'ortho' and res == 'R224',value,3 decimals,-0.025
+MpOrthoVitbsixteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'ortho' and res == 'R224',ci_lo,3 decimals,-0.036
+MpOrthoVitbsixteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'ortho' and res == 'R224',ci_hi,3 decimals,-0.014
+MpParOwnVoneNatThreeTwo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_32',value,3 decimals,0.006
+MpParOwnVoneNatThreeTwoLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_32',ci_lo,3 decimals,-0.016
+MpParOwnVoneNatThreeTwoHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_32',ci_hi,3 decimals,0.028
+MpParOwnVoneNatThreeTwoPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_32',seeds_positive,integer,3
+MpParOwnVoneNatTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_224',value,3 decimals,0.012
+MpParOwnVoneNatTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_224',ci_lo,3 decimals,-0.011
+MpParOwnVoneNatTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_224',ci_hi,3 decimals,0.035
+MpParOwnVoneNatTwoTwoFourPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'NATIVE_224',seeds_positive,integer,3
+MpParOwnVoneUpTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'UPSAMPLED_224',value,3 decimals,0.000
+MpParOwnVoneUpTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'UPSAMPLED_224',ci_lo,3 decimals,-0.023
+MpParOwnVoneUpTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'UPSAMPLED_224',ci_hi,3 decimals,0.024
+MpParOwnVoneUpTwoTwoFourPos,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1' and variant == 'par' and res == 'UPSAMPLED_224',seeds_positive,integer,2
+MpParOwnLoc,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'par',value,3 decimals,-0.002
+MpParOwnLocLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'par',ci_lo,3 decimals,-0.020
+MpParOwnLocHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC' and variant == 'par',ci_hi,3 decimals,0.017
+MpParOwnSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'par',value,3 decimals,0.006
+MpParOwnSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'par',ci_lo,3 decimals,-0.007
+MpParOwnSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'own CNN' and variant == 'par',ci_hi,3 decimals,0.020
+MpParAlexnetRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'par' and res == 'R224',value,3 decimals,0.039
+MpParAlexnetRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'par' and res == 'R224',ci_lo,3 decimals,0.002
+MpParAlexnetRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'par' and res == 'R224',ci_hi,3 decimals,0.075
+MpParAlexnetRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'par' and res == 'R448',value,3 decimals,0.033
+MpParAlexnetRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'par' and res == 'R448',ci_lo,3 decimals,-0.003
+MpParAlexnetRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'alexnet' and variant == 'par' and res == 'R448',ci_hi,3 decimals,0.070
+MpParAlexnetSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'par',value,3 decimals,-0.006
+MpParAlexnetSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'par',ci_lo,3 decimals,-0.012
+MpParAlexnetSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'alexnet' and variant == 'par',ci_hi,3 decimals,0.000
+MpParVggelevenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'par' and res == 'R224',value,3 decimals,-0.055
+MpParVggelevenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'par' and res == 'R224',ci_lo,3 decimals,-0.087
+MpParVggelevenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'par' and res == 'R224',ci_hi,3 decimals,-0.025
+MpParVggelevenRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'par' and res == 'R448',value,3 decimals,-0.031
+MpParVggelevenRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'par' and res == 'R448',ci_lo,3 decimals,-0.064
+MpParVggelevenRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vgg11_bn' and variant == 'par' and res == 'R448',ci_hi,3 decimals,-0.002
+MpParVggelevenSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'par',value,3 decimals,0.023
+MpParVggelevenSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'par',ci_lo,3 decimals,0.014
+MpParVggelevenSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'vgg11_bn' and variant == 'par',ci_hi,3 decimals,0.034
+MpParResneteighteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'par' and res == 'R224',value,3 decimals,-0.051
+MpParResneteighteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'par' and res == 'R224',ci_lo,3 decimals,-0.079
+MpParResneteighteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'par' and res == 'R224',ci_hi,3 decimals,-0.024
+MpParResneteighteenRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'par' and res == 'R448',value,3 decimals,-0.016
+MpParResneteighteenRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'par' and res == 'R448',ci_lo,3 decimals,-0.043
+MpParResneteighteenRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet18' and variant == 'par' and res == 'R448',ci_hi,3 decimals,0.009
+MpParResneteighteenSlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'par',value,3 decimals,0.035
+MpParResneteighteenSlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'par',ci_lo,3 decimals,0.023
+MpParResneteighteenSlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet18' and variant == 'par',ci_hi,3 decimals,0.046
+MpParResnetfiftyRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'par' and res == 'R224',value,3 decimals,-0.067
+MpParResnetfiftyRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'par' and res == 'R224',ci_lo,3 decimals,-0.088
+MpParResnetfiftyRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'par' and res == 'R224',ci_hi,3 decimals,-0.044
+MpParResnetfiftyRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'par' and res == 'R448',value,3 decimals,-0.046
+MpParResnetfiftyRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'par' and res == 'R448',ci_lo,3 decimals,-0.067
+MpParResnetfiftyRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'resnet50' and variant == 'par' and res == 'R448',ci_hi,3 decimals,-0.026
+MpParResnetfiftySlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'par',value,3 decimals,0.021
+MpParResnetfiftySlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'par',ci_lo,3 decimals,0.013
+MpParResnetfiftySlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'resnet50' and variant == 'par',ci_hi,3 decimals,0.029
+MpParConvnexttinyRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'par' and res == 'R224',value,3 decimals,-0.016
+MpParConvnexttinyRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'par' and res == 'R224',ci_lo,3 decimals,-0.029
+MpParConvnexttinyRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'par' and res == 'R224',ci_hi,3 decimals,-0.002
+MpParConvnexttinyRFourFourEight,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'par' and res == 'R448',value,3 decimals,-0.015
+MpParConvnexttinyRFourFourEightLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'par' and res == 'R448',ci_lo,3 decimals,-0.028
+MpParConvnexttinyRFourFourEightHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'convnext_tiny' and variant == 'par' and res == 'R448',ci_hi,3 decimals,0.000
+MpParConvnexttinySlope,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'par',value,3 decimals,0.001
+MpParConvnexttinySlopeLo,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'par',ci_lo,3 decimals,-0.002
+MpParConvnexttinySlopeHi,results/step25/mean_profile.csv,kind == 'slope' and model == 'convnext_tiny' and variant == 'par',ci_hi,3 decimals,0.004
+MpParVitbsixteenRTwoTwoFour,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',value,3 decimals,0.059
+MpParVitbsixteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',ci_lo,3 decimals,0.023
+MpParVitbsixteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',ci_hi,3 decimals,0.090
+MpMFourModels,results/step25/mean_profile.csv,kind == 'rule' and quantity.str.startswith('M4'),value,integer,6
+MpGateMaxDelta,results/step25/mean_profile.csv,kind == 'check' and quantity.str.startswith('gate'),value,1-digit scientific,\ensuremath{1\times 10^{-16}}
+WAngOwnVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',value,3 decimals,0.013
+WAngOwnVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',ci_lo,3 decimals,-0.003
+WAngOwnVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'V1',ci_hi,3 decimals,0.030
+WAngAlexnetVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'alexnet' and roi == 'V1',value,3 decimals,0.016
+WAngAlexnetVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'alexnet' and roi == 'V1',ci_lo,3 decimals,-0.006
+WAngAlexnetVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'alexnet' and roi == 'V1',ci_hi,3 decimals,0.038
+WAngVggelevenVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vgg11_bn' and roi == 'V1',value,3 decimals,0.026
+WAngVggelevenVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vgg11_bn' and roi == 'V1',ci_lo,3 decimals,0.004
+WAngVggelevenVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vgg11_bn' and roi == 'V1',ci_hi,3 decimals,0.046
+WAngResneteighteenVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet18' and roi == 'V1',value,3 decimals,0.007
+WAngResneteighteenVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet18' and roi == 'V1',ci_lo,3 decimals,-0.009
+WAngResneteighteenVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet18' and roi == 'V1',ci_hi,3 decimals,0.023
+WAngResnetfiftyVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet50' and roi == 'V1',value,3 decimals,0.004
+WAngResnetfiftyVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet50' and roi == 'V1',ci_lo,3 decimals,-0.011
+WAngResnetfiftyVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet50' and roi == 'V1',ci_hi,3 decimals,0.019
+WAngConvnexttinyVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'convnext_tiny' and roi == 'V1',value,3 decimals,0.005
+WAngConvnexttinyVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'convnext_tiny' and roi == 'V1',ci_lo,3 decimals,-0.008
+WAngConvnexttinyVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'convnext_tiny' and roi == 'V1',ci_hi,3 decimals,0.016
+WAngVitbsixteenVone,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'V1',value,3 decimals,0.016
+WAngVitbsixteenVoneLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'V1',ci_lo,3 decimals,-0.009
+WAngVitbsixteenVoneHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'V1',ci_hi,3 decimals,0.038
+WAngOwnLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC',value,3 decimals,0.011
+WAngOwnLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC',ci_lo,3 decimals,-0.009
+WAngOwnLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'own CNN' and roi == 'LOC',ci_hi,3 decimals,0.031
+WAngAlexnetLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'alexnet' and roi == 'LOC',value,3 decimals,0.010
+WAngAlexnetLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'alexnet' and roi == 'LOC',ci_lo,3 decimals,-0.020
+WAngAlexnetLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'alexnet' and roi == 'LOC',ci_hi,3 decimals,0.045
+WAngVggelevenLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vgg11_bn' and roi == 'LOC',value,3 decimals,0.003
+WAngVggelevenLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vgg11_bn' and roi == 'LOC',ci_lo,3 decimals,-0.028
+WAngVggelevenLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vgg11_bn' and roi == 'LOC',ci_hi,3 decimals,0.038
+WAngResneteighteenLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet18' and roi == 'LOC',value,3 decimals,0.005
+WAngResneteighteenLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet18' and roi == 'LOC',ci_lo,3 decimals,-0.025
+WAngResneteighteenLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet18' and roi == 'LOC',ci_hi,3 decimals,0.036
+WAngResnetfiftyLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet50' and roi == 'LOC',value,3 decimals,0.009
+WAngResnetfiftyLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet50' and roi == 'LOC',ci_lo,3 decimals,-0.021
+WAngResnetfiftyLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'resnet50' and roi == 'LOC',ci_hi,3 decimals,0.040
+WAngConvnexttinyLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'convnext_tiny' and roi == 'LOC',value,3 decimals,-0.021
+WAngConvnexttinyLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'convnext_tiny' and roi == 'LOC',ci_lo,3 decimals,-0.059
+WAngConvnexttinyLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'convnext_tiny' and roi == 'LOC',ci_hi,3 decimals,0.015
+WAngVitbsixteenLoc,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'LOC',value,3 decimals,0.006
+WAngVitbsixteenLocLo,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'LOC',ci_lo,3 decimals,-0.022
+WAngVitbsixteenLocHi,results/step25/weighted_angle.csv,kind == 'contrast' and model == 'vit_b_16' and roi == 'LOC',ci_hi,3 decimals,0.036
+WRankNAOwn,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'own CNN' and quantity == 'Spearman N-A',value,2 decimals,0.09
+WRankNASubOne,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-01' and quantity == 'Spearman N-A',value,2 decimals,0.00
+WRankNASubTwo,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-02' and quantity == 'Spearman N-A',value,2 decimals,0.01
+WRankNASubThree,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-03' and quantity == 'Spearman N-A',value,2 decimals,0.01
+WRankNWOwn,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'own CNN' and quantity == 'Spearman N-W',value,2 decimals,0.30
+WRankNWSubOne,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-01' and quantity == 'Spearman N-W',value,2 decimals,0.34
+WRankNWSubTwo,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-02' and quantity == 'Spearman N-W',value,2 decimals,0.35
+WRankNWSubThree,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-03' and quantity == 'Spearman N-W',value,2 decimals,0.36
+WRankAWOwn,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'own CNN' and quantity == 'Spearman A-W',value,2 decimals,0.75
+WRankAWSubOne,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-01' and quantity == 'Spearman A-W',value,2 decimals,0.63
+WRankAWSubTwo,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-02' and quantity == 'Spearman A-W',value,2 decimals,0.68
+WRankAWSubThree,results/step25/weighted_angle.csv,kind == 'rankcorr' and model == 'fMRI' and subject == 'sub-03' and quantity == 'Spearman A-W',value,2 decimals,0.67
+WRtwoNRand,results/step25/weighted_angle.csv,kind == 'r2' and component == 'R2 N' and quantity == 'Random Weights',value,4 decimals,0.0008
+WRtwoNBp,results/step25/weighted_angle.csv,kind == 'r2' and component == 'R2 N' and quantity == 'Backprop',value,4 decimals,0.0001
+WRtwoNDiff,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 N',value,4 decimals,0.0007
+WRtwoNDiffLo,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 N',ci_lo,4 decimals,-0.0003
+WRtwoNDiffHi,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 N',ci_hi,4 decimals,0.0017
+WRtwoARand,results/step25/weighted_angle.csv,kind == 'r2' and component == 'R2 A' and quantity == 'Random Weights',value,4 decimals,0.0010
+WRtwoABp,results/step25/weighted_angle.csv,kind == 'r2' and component == 'R2 A' and quantity == 'Backprop',value,4 decimals,0.0009
+WRtwoADiff,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 A',value,4 decimals,0.0001
+WRtwoADiffLo,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 A',ci_lo,4 decimals,-0.0005
+WRtwoADiffHi,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 A',ci_hi,4 decimals,0.0008
+WRtwoNARand,results/step25/weighted_angle.csv,kind == 'r2' and component == 'R2 N+A' and quantity == 'Random Weights',value,4 decimals,0.0017
+WRtwoNABp,results/step25/weighted_angle.csv,kind == 'r2' and component == 'R2 N+A' and quantity == 'Backprop',value,4 decimals,0.0012
+WRtwoNADiff,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 N+A',value,4 decimals,0.0006
+WRtwoNADiffLo,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 N+A',ci_lo,4 decimals,-0.0006
+WRtwoNADiffHi,results/step25/weighted_angle.csv,kind == 'r2_contrast' and component == 'R2 N+A',ci_hi,4 decimals,0.0018
+FSkillMseSkillGOneMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 1",value,4 decimals,-0.0041
+FSkillMseSkillGOneSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 1",sd,4 decimals,0.0008
+FSkillMseSkillGOnePos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 1",seeds_positive,integer,0
+FSkillMseSkillGTwoMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 2",value,4 decimals,-0.0055
+FSkillMseSkillGTwoSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 2",sd,4 decimals,0.0010
+FSkillMseSkillGTwoPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 2",seeds_positive,integer,0
+FSkillMseSkillGFourMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 4",value,4 decimals,-0.0069
+FSkillMseSkillGFourSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 4",sd,4 decimals,0.0013
+FSkillMseSkillGFourPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 4",seeds_positive,integer,0
+FSkillMseSkillGEightMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 8",value,4 decimals,-0.0074
+FSkillMseSkillGEightSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 8",sd,4 decimals,0.0013
+FSkillMseSkillGEightPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, mse_skill' and grid == 8",seeds_positive,integer,0
+FSkillPerfoldGOneMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 1",value,4 decimals,-0.0166
+FSkillPerfoldGOneSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 1",sd,4 decimals,0.0051
+FSkillPerfoldGOnePos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 1",seeds_positive,integer,0
+FSkillPerfoldGTwoMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 2",value,4 decimals,-0.0220
+FSkillPerfoldGTwoSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 2",sd,4 decimals,0.0053
+FSkillPerfoldGTwoPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 2",seeds_positive,integer,0
+FSkillPerfoldGFourMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 4",value,4 decimals,-0.0281
+FSkillPerfoldGFourSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 4",sd,4 decimals,0.0068
+FSkillPerfoldGFourPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 4",seeds_positive,integer,0
+FSkillPerfoldGEightMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 8",value,4 decimals,-0.0311
+FSkillPerfoldGEightSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 8",sd,4 decimals,0.0067
+FSkillPerfoldGEightPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_perfold' and grid == 8",seeds_positive,integer,0
+FSkillPooledGOneMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 1",value,4 decimals,-0.0209
+FSkillPooledGOneSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 1",sd,4 decimals,0.0056
+FSkillPooledGOnePos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 1",seeds_positive,integer,0
+FSkillPooledGTwoMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 2",value,4 decimals,-0.0347
+FSkillPooledGTwoSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 2",sd,4 decimals,0.0064
+FSkillPooledGTwoPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 2",seeds_positive,integer,0
+FSkillPooledGFourMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 4",value,4 decimals,-0.0425
+FSkillPooledGFourSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 4",sd,4 decimals,0.0096
+FSkillPooledGFourPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 4",seeds_positive,integer,0
+FSkillPooledGEightMean,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 8",value,4 decimals,-0.0449
+FSkillPooledGEightSd,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 8",sd,4 decimals,0.0092
+FSkillPooledGEightPos,results/step25/ridge_skill.csv,"kind == 'contrast' and quantity == 'Random Weights - Backprop, r_pooled' and grid == 8",seeds_positive,integer,0
+FFloorSubOne,results/step25/ridge_skill.csv,kind == 'floor' and subject == 'sub-01',r_pooled,3 decimals,-0.091
+FFloorSubTwo,results/step25/ridge_skill.csv,kind == 'floor' and subject == 'sub-02',r_pooled,3 decimals,-0.088
+FFloorSubThree,results/step25/ridge_skill.csv,kind == 'floor' and subject == 'sub-03',r_pooled,3 decimals,-0.097
+FFloorMean,results/step25/ridge_skill.csv,kind == 'floor',mean of r_pooled over 3 subjects,3 decimals,-0.092
+FSkillGateMaxDelta,results/step25/ridge_skill.csv,kind == 'check',value,1-digit scientific,\ensuremath{2\times 10^{-13}}
+FSkillLowEdgeHits,results/step25/ridge_lower_edge.csv,block == 'skill',row count,integer,4
+FJointLowEdgeHits,results/step25/ridge_lower_edge.csv,block == 'joint',row count,integer,3
+FPermLowEdgeHits,results/step25/ridge_lower_edge.csv,block == 'perm',row count,integer,3
+FLowEdgePlateau,results/step25/ridge_lower_edge.csv,classification == 'Plateau',row count,integer,10
+FJointRandGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1,value,3 decimals,-0.021
+FJointRandGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1,joint,3 decimals,0.060
+FJointRandGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 1,bank,3 decimals,0.081
+FJointRandGFourDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 4,value,3 decimals,-0.042
+FJointRandGFourJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 4,joint,3 decimals,0.064
+FJointRandGFourBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights' and grid == 4,bank,3 decimals,0.106
+FJointBpGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Backprop' and grid == 1,value,3 decimals,-0.013
+FJointBpGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Backprop' and grid == 1,joint,3 decimals,0.068
+FJointBpGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Backprop' and grid == 1,bank,3 decimals,0.081
+FJointBpGFourDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Backprop' and grid == 4,value,3 decimals,-0.015
+FJointBpGFourJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Backprop' and grid == 4,joint,3 decimals,0.090
+FJointBpGFourBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Backprop' and grid == 4,bank,3 decimals,0.106
+FJointBncalGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights (BN-calibrated)' and grid == 1,value,3 decimals,-0.022
+FJointBncalGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights (BN-calibrated)' and grid == 1,joint,3 decimals,0.059
+FJointBncalGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights (BN-calibrated)' and grid == 1,bank,3 decimals,0.081
+FJointBncalGFourDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights (BN-calibrated)' and grid == 4,value,3 decimals,-0.043
+FJointBncalGFourJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights (BN-calibrated)' and grid == 4,joint,3 decimals,0.063
+FJointBncalGFourBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Random Weights (BN-calibrated)' and grid == 4,bank,3 decimals,0.106
+FJointFaGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Feedback Alignment' and grid == 1,value,3 decimals,-0.023
+FJointFaGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Feedback Alignment' and grid == 1,joint,3 decimals,0.058
+FJointFaGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Feedback Alignment' and grid == 1,bank,3 decimals,0.081
+FJointFaGFourDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Feedback Alignment' and grid == 4,value,3 decimals,-0.047
+FJointFaGFourJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Feedback Alignment' and grid == 4,joint,3 decimals,0.059
+FJointFaGFourBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Feedback Alignment' and grid == 4,bank,3 decimals,0.106
+FJointPcGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Predictive Coding' and grid == 1,value,3 decimals,-0.020
+FJointPcGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Predictive Coding' and grid == 1,joint,3 decimals,0.061
+FJointPcGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Predictive Coding' and grid == 1,bank,3 decimals,0.081
+FJointPcGFourDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Predictive Coding' and grid == 4,value,3 decimals,-0.041
+FJointPcGFourJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Predictive Coding' and grid == 4,joint,3 decimals,0.064
+FJointPcGFourBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'Predictive Coding' and grid == 4,bank,3 decimals,0.106
+FJointStdpGOneDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'STDP' and grid == 1,value,3 decimals,-0.022
+FJointStdpGOneJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'STDP' and grid == 1,joint,3 decimals,0.059
+FJointStdpGOneBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'STDP' and grid == 1,bank,3 decimals,0.081
+FJointStdpGFourDiff,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'STDP' and grid == 4,value,3 decimals,-0.043
+FJointStdpGFourJoint,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'STDP' and grid == 4,joint,3 decimals,0.063
+FJointStdpGFourBank,results/step25/ridge_joint.csv,kind == 'joint_minus_bank' and quantity == 'STDP' and grid == 4,bank,3 decimals,0.106
+FPermSubOneRandGOneMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Random Weights s0',null_mean,3 decimals,-0.070
+FPermSubOneRandGOneLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Random Weights s0',null_p025,3 decimals,-0.083
+FPermSubOneRandGOneHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Random Weights s0',null_p975,3 decimals,-0.040
+FPermSubOneRandGOneReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Random Weights s0',real,3 decimals,0.052
+FPermSubOneBpGOneMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Backprop s0',null_mean,3 decimals,-0.072
+FPermSubOneBpGOneLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Backprop s0',null_p025,3 decimals,-0.083
+FPermSubOneBpGOneHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Backprop s0',null_p975,3 decimals,-0.046
+FPermSubOneBpGOneReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 1 and quantity == 'Backprop s0',real,3 decimals,0.088
+FPermSubOneRandGFourMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Random Weights s0',null_mean,3 decimals,-0.073
+FPermSubOneRandGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Random Weights s0',null_p025,3 decimals,-0.084
+FPermSubOneRandGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Random Weights s0',null_p975,3 decimals,-0.041
+FPermSubOneRandGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Random Weights s0',real,3 decimals,0.060
+FPermSubOneBpGFourMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Backprop s0',null_mean,3 decimals,-0.072
+FPermSubOneBpGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Backprop s0',null_p025,3 decimals,-0.086
+FPermSubOneBpGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Backprop s0',null_p975,3 decimals,-0.046
+FPermSubOneBpGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-01' and grid == 4 and quantity == 'Backprop s0',real,3 decimals,0.118
+FPermSubTwoRandGOneMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Random Weights s0',null_mean,3 decimals,-0.068
+FPermSubTwoRandGOneLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Random Weights s0',null_p025,3 decimals,-0.078
+FPermSubTwoRandGOneHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Random Weights s0',null_p975,3 decimals,-0.056
+FPermSubTwoRandGOneReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Random Weights s0',real,3 decimals,0.073
+FPermSubTwoBpGOneMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Backprop s0',null_mean,3 decimals,-0.069
+FPermSubTwoBpGOneLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Backprop s0',null_p025,3 decimals,-0.079
+FPermSubTwoBpGOneHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Backprop s0',null_p975,3 decimals,-0.062
+FPermSubTwoBpGOneReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 1 and quantity == 'Backprop s0',real,3 decimals,0.096
+FPermSubTwoRandGFourMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Random Weights s0',null_mean,3 decimals,-0.071
+FPermSubTwoRandGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Random Weights s0',null_p025,3 decimals,-0.081
+FPermSubTwoRandGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Random Weights s0',null_p975,3 decimals,-0.060
+FPermSubTwoRandGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Random Weights s0',real,3 decimals,0.071
+FPermSubTwoBpGFourMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Backprop s0',null_mean,3 decimals,-0.069
+FPermSubTwoBpGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Backprop s0',null_p025,3 decimals,-0.080
+FPermSubTwoBpGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Backprop s0',null_p975,3 decimals,-0.055
+FPermSubTwoBpGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-02' and grid == 4 and quantity == 'Backprop s0',real,3 decimals,0.120
+FPermSubThreeRandGOneMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Random Weights s0',null_mean,3 decimals,-0.074
+FPermSubThreeRandGOneLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Random Weights s0',null_p025,3 decimals,-0.091
+FPermSubThreeRandGOneHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Random Weights s0',null_p975,3 decimals,-0.038
+FPermSubThreeRandGOneReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Random Weights s0',real,3 decimals,-0.014
+FPermSubThreeBpGOneMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Backprop s0',null_mean,3 decimals,-0.077
+FPermSubThreeBpGOneLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Backprop s0',null_p025,3 decimals,-0.093
+FPermSubThreeBpGOneHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Backprop s0',null_p975,3 decimals,-0.048
+FPermSubThreeBpGOneReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 1 and quantity == 'Backprop s0',real,3 decimals,-0.004
+FPermSubThreeRandGFourMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Random Weights s0',null_mean,3 decimals,-0.075
+FPermSubThreeRandGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Random Weights s0',null_p025,3 decimals,-0.094
+FPermSubThreeRandGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Random Weights s0',null_p975,3 decimals,-0.037
+FPermSubThreeRandGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Random Weights s0',real,3 decimals,-0.021
+FPermSubThreeBpGFourMean,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',null_mean,3 decimals,-0.076
+FPermSubThreeBpGFourLo,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',null_p025,3 decimals,-0.093
+FPermSubThreeBpGFourHi,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',null_p975,3 decimals,-0.048
+FPermSubThreeBpGFourReal,results/step25/ridge_permnull.csv,kind != kind and subject == 'sub-03' and grid == 4 and quantity == 'Backprop s0',real,3 decimals,0.008
+BNormZCorrPaper,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',value,3 decimals,-0.011
+BNormZCorrPaperLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',ci_lo,3 decimals,-0.017
+BNormZCorrPaperHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',ci_hi,3 decimals,-0.005
+BNormZCorrPaperFixedLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',fixed_ci_lo,3 decimals,-0.017
+BNormZCorrPaperFixedHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'z' and D == 'correlation' and B == 'paper',fixed_ci_hi,3 decimals,-0.005
+BNormCentEuclPaper,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'euclidean' and B == 'paper',value,3 decimals,0.023
+BNormCentEuclPaperLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'euclidean' and B == 'paper',ci_lo,3 decimals,0.002
+BNormCentEuclPaperHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'euclidean' and B == 'paper',ci_hi,3 decimals,0.039
+BNormCentEuclPaperFixedLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'euclidean' and B == 'paper',fixed_ci_lo,3 decimals,0.004
+BNormCentEuclPaperFixedHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'euclidean' and B == 'paper',fixed_ci_hi,3 decimals,0.041
+BNormCentCorrCent,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'correlation' and B == 'center720',value,3 decimals,0.001
+BNormCentCorrCentLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'correlation' and B == 'center720',ci_lo,3 decimals,-0.005
+BNormCentCorrCentHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'correlation' and B == 'center720',ci_hi,3 decimals,0.007
+BNormCentCorrCentFixedLo,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'correlation' and B == 'center720',fixed_ci_lo,3 decimals,-0.005
+BNormCentCorrCentFixedHi,results/step25/bootnorm.csv,kind == 'cell' and F == 'center' and D == 'correlation' and B == 'center720',fixed_ci_hi,3 decimals,0.007
 PreregDminGOneSim,results/prereg/delta_min_prereg.csv,g == 1,delta_min_sim,3 decimals,0.014
 PreregDminGOneClosed,results/prereg/delta_min_prereg.csv,g == 1,delta_min_closed,3 decimals,0.014
 PreregDminGOneParam,results/prereg/delta_min_prereg.csv,g == 1,delta_min_param,3 decimals,0.014
