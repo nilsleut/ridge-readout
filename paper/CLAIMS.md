@@ -209,9 +209,9 @@ prediction.
 | | |
 |---|---|
 | Rules and thresholds | F-R1 (MSE skill) and F-R2 (per-fold r): Random − BP ≤ 0 at every g with ≤ 1 of 5 seeds positive. F-R3: observed pooled r above the 97.5th percentile of its own null at g = 1 and 4 for both conditions in sub-01 and sub-02. F-R4: Backprop joint − bank-alone ≤ 0.010 at g = 1 and 4. F1 floor and sub-03 descriptive. |
-| Result | MSE skill −0.0041 (g = 1) to −0.0074 (g = 8) (`\FSkillMseSkillG<g>Mean`); per-fold r −0.0166 to −0.0311 (`\FSkillPerfoldG<g>Mean`); no seed positive. Floor −0.092 (`\FFloorMean`). Null 97.5th percentiles −0.062 to −0.037 (`\FPermPNineSevenFiveMin`, `Max`); observed 0.052 to 0.120 in sub-01/02 (`\FPermRealMinMain`, `Max`). Joint − bank for Backprop −0.013 and −0.015 (`\FJointBpGOneDiff`, `\FJointBpGFourDiff`); joint below bank in all six conditions (`\FJointMinDiff`, `\FJointMaxDiff`). Reproduction of the primary pooled r: `\FSkillGateMaxDelta`. |
+| Result | MSE skill −0.0041 (g = 1) to −0.0074 (g = 8) (`\FSkillMseSkillG<g>Mean`); per-fold r −0.0166 to −0.0311 (`\FSkillPerfoldG<g>Mean`); no seed positive. Floor −0.092 (`\FFloorMean`). Null 97.5th percentiles −0.062 to −0.037 (`\FPermPNineSevenFiveMin`, `Max`); observed 0.052 to 0.120 in sub-01/02 (`\FPermRealMinMain`, `Max`). Joint − bank for Backprop −0.013 and −0.015 (`\FJointBpGOneDiff`, `\FJointBpGFourDiff`); joint below bank in all six conditions (`\FJointMinDiff`, `\FJointMaxDiff`). Reproduction of the primary pooled r: `\FSkillGateMaxDelta`. Absolute MSE skill at g = 1, 4, 8: Backprop 0.0072, 0.0111, 0.0113; untrained 0.0031, 0.0042, 0.0039 (`\FSkillAbs<Bp/Rand>G<One/Four/Eight>`). Pooled and median r are correlation scores, not variance explained. |
 | Verdict | F-R1, F-R2, F-R3, F-R4 met |
-| Macros | `\FSkill<Score>G<g>[Mean/Sd/Pos]`, `\FFloor<Sub>`, `\FFloorMean`, `\FPerm<Sub><Rule>G<g>[Mean/Lo/Hi/Real]`, `\FJoint<Rule>G<g>[Diff/Joint/Bank]` |
+| Macros | `\FSkill<Score>G<g>[Mean/Sd/Pos]`, `\FSkillAbs<Bp/Rand>G<g>`, `\FFloor<Sub>`, `\FFloorMean`, `\FPerm<Sub><Rule>G<g>[Mean/Lo/Hi/Real]`, `\FJoint<Rule>G<g>[Diff/Joint/Bank]` |
 | Section | `sec:signflip`, `app:ridgerobust` |
 | Amendment | `74853dc` |
 | Wording | criterion fixed before the analysis (`74853dc` before `dbc4662`) |

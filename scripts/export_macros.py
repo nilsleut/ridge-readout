@@ -24,7 +24,8 @@ the reference effect's SEM, which no CSV carries). A "failedrules" spec counts t
 distinct pre-stated predictions with a rule row (kind == 'rule') whose passed is False,
 over all CSVs in results/. A "max" spec takes the maximum of a column over the rows its
 query matches (fails if none match). A "count0" spec is a "count" that allows zero rows.
-A "mean5" spec averages a column over exactly 5 rows. A "seeddiff" spec reads
+A "mean5" spec averages a column over exactly 5 rows; a "mean15" spec over exactly 15 rows
+from 3 subjects (5 seeds each). A "seeddiff" spec reads
 prereg/primary.csv, pairs Random Weights and Backprop by seed (exactly 5 pairs) and
 returns the mean, SD (ddof = 1) or number of positive seeds ("mean", "sd", "pos" as the
 column) of the paired difference in median r.
@@ -331,6 +332,10 @@ for _m, _mn in (("mse_skill", "MseSkill"), ("r_perfold", "Perfold"), ("r_pooled"
         SPECS += [(f"FSkill{_mn}G{_gn}Mean", _RS, _q, "value", "sd"),
                   (f"FSkill{_mn}G{_gn}Sd", _RS, _q, "sd", "sd"),
                   (f"FSkill{_mn}G{_gn}Pos", _RS, _q, "seeds_positive", "int")]
+for _r, _rn in (("Backprop", "Bp"), ("Random Weights", "Rand")):
+    for _g, _gn in ((1, "One"), (4, "Four"), (8, "Eight")):
+        SPECS.append((f"FSkillAbs{_rn}G{_gn}", f"mean15:{_RS}",
+                      f"kind == 'fit' and grid == {_g} and label.str.startswith('{_r} s')", "mse_skill", "sd"))
 for _s, _sn in SUBJ_NAMES.items():
     SPECS.append((f"FFloor{_sn}", _RS, f"kind == 'floor' and subject == '{_s}'", "r_pooled", "rsa"))
 SPECS += [("FFloorMean", f"mean3:{_RS}", "kind == 'floor'", "r_pooled", "rsa"),
@@ -534,6 +539,10 @@ def main():
             if len(hit) != 5:
                 raise SystemExit(f"{name}: mean5 filter matches {len(hit)} rows, expected 5: {q}")
             val, colname = hit[col].mean(), f"mean of {col} over 5 rows"
+        elif kind == "mean15":
+            if len(hit) != 15 or hit.subject.nunique() != 3:
+                raise SystemExit(f"{name}: mean15 filter matches {len(hit)} rows, expected 3 subjects x 5 seeds: {q}")
+            val, colname = hit[col].mean(), f"mean of {col} over 3 subjects x 5 seeds"
         elif kind == "count0":
             val, colname = len(hit), "row count (zero allowed)"
         elif kind in ("max", "min"):

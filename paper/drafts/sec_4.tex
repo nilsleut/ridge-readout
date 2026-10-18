@@ -9,7 +9,7 @@ Table~\ref{tab:evidence} states for each main statement whether it was pre-speci
 \toprule
 Statement & Status & Uncertainty reported & Main caveat \\
 \midrule
-Untrained below Backprop under ridge at V1, also in MSE skill and per-fold $r$ (Section~\ref{sec:signflip}) & Pre-specified; verdict ``effect disappears''; robustness checks exploratory (F-R1 to F-R3 met) & 5 seeds; one-sided sign-flip test; no interval over stimuli, voxels or subjects & One layer; sub-03 near zero; absolute variance explained about 1\%; not blind \\
+Untrained below Backprop under ridge at V1, also in MSE skill and per-fold $r$ (Section~\ref{sec:signflip}) & Pre-specified; verdict ``effect disappears''; robustness checks exploratory (F-R1 to F-R3 met) & 5 seeds; one-sided sign-flip test; no interval over stimuli, voxels or subjects & One layer; sub-03 near zero; low absolute scores (median $r$ \PreregCondBpGFour; MSE skill \FSkillAbsBpGFour); not blind \\
 V1 ranking depends on the analysis (Section~\ref{sec:multiverse}) & Exploratory; GEN2 met; cell counts descriptive & Stimulus-bootstrap 95\% intervals per cell, uncorrected; cells dependent & 36 chosen cells; three subjects \\
 Advantage absent from the component orthogonal to the mean profile (Section~\ref{sec:ablation}) & Exploratory; M1, M2, M4 met; M3 not met & Stimulus-bootstrap intervals & Parallel component alone unresolved; wide interval \\
 Raw RSA covaries with mean-profile alignment (Section~\ref{sec:gainaxis}) & Exploratory; G1, GEN1 met; G2 not met & Spearman over 70 and 64 cells, no interval; cells not independent & Correlational; the ablation tests only the orthogonal remainder \\
@@ -99,8 +99,7 @@ for RSA and training seeds for ridge. Neither includes variation across subjects
 each ImageNet model we used one set of trained weights. Ridge scores in one subject were
 close to zero in every condition, and the primary ridge result is a mean over all three
 subjects (Appendix~\ref{app:persubject}). The absolute scale was small: each norm or angular
-component accounted for about 0.1\% of the rank variance of the fMRI RDM, and the best ridge
-readout for about 1\% of the voxel variance; no noise ceiling was estimated for ridge, and the
+component accounted for about 0.1\% of the rank variance of the fMRI RDM, and the median voxelwise correlation of the best ridge readout was \PreregCondBpGFour{} (a correlation score, not a measure of variance explained; absolute MSE skill \FSkillAbsBpGFour); no noise ceiling was estimated for ridge, and the
 pre-specified leave-one-subject-out bound for ridge was not implemented. The primary analysis
 was not blind, several pre-specified instruments were not implemented, and the exploratory
 analyses were developed sequentially, with intervals not corrected for multiple comparisons.
