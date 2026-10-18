@@ -119,3 +119,7 @@ was made on 2026-10-08. The commit timestamp is authoritative; the file is left 
 ## History cleanup
 
 The committer timestamp of `2fd215a` ("Add step 9 report", 2026-10-13) is the time of a history cleanup that merged a follow-up wording fix (one run-note sentence) into that commit; the substance of the report is unchanged.
+
+## Step 25 motivation
+
+Step 25 (`amendments/2026-10-16_step25-predictions.md`) was prompted by a critical review of an earlier draft, which the author obtained from an AI assistant. The motivation line of the amendment calls it an 'external critique'; the amendment file is left unchanged because its committed text is evidence of the order of events.
