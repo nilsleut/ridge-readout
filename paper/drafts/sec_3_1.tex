@@ -39,9 +39,7 @@ luminance-and-contrast bank scored below the bank alone in all six conditions at
 $g = 4$ (differences from $\FJointMinDiff$ to $\FJointMaxDiff$): for Backprop the joint readout
 reached $\FJointBpGOneJoint$ and $\FJointBpGFourJoint$, against $\FJointBpGOneBank$ and
 $\FJointBpGFourBank$ for the bank alone, and for the untrained network $\FJointRandGOneJoint$
-and $\FJointRandGFourJoint$ (F-R4, joint minus bank at most 0.010 for Backprop: met). Adding
-network features did not improve prediction; this does not show how much variance the
-networks and the bank share. Absolute levels were low: the median $r$ of the best network
+and $\FJointRandGFourJoint$ (F-R4, joint minus bank at most 0.010 for Backprop: met). Concatenating network features with the bank under a shared ridge penalty did not improve prediction. With 32 bank and 512 network features at $g = 4$, the two groups may need different penalties (banded ridge), which we did not fit; the result does not show how much variance the networks and the bank share. Absolute levels were low: the median $r$ of the best network
 condition, Backprop at $g = 4$, was $\PreregCondBpGFour$ (mean over subjects); this correlation score should not be read as variance explained. The absolute MSE skill of Backprop at $g = 4$ was \FSkillAbsBpGFour{} and that of the untrained network \FSkillAbsRandGFour{} (median over reliable voxels, mean over subjects and seeds, relative to the training-fold mean).
 
 Among the control banks, the luminance and contrast bank reached

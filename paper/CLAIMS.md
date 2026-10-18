@@ -173,8 +173,9 @@ these three rules together; it is not a separate test.
 
 ## C5
 
-**Claim (recommendation).** Center units over the evaluated stimulus set on both model
-and brain side, and report norm and angular components separately.
+**Claim (recommendation).** For correlation- or cosine-based ranking claims, report the
+sensitivity to centring units over the evaluated stimulus set on both model and brain
+side, and report norm and angular components separately.
 
 | | |
 |---|---|
@@ -205,8 +206,8 @@ was not established.
 
 **Claim.** The pre-specified ridge result (untrained below Backprop at V1) holds in MSE
 skill and per-fold r, the observed scores lie above a permutation null in sub-01 and
-sub-02, and adding network features to the luminance-and-contrast bank does not improve
-prediction.
+sub-02, and concatenating network features with the luminance-and-contrast bank under a
+shared ridge penalty does not improve prediction (a banded ridge readout was not fitted).
 
 | | |
 |---|---|

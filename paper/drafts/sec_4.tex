@@ -42,8 +42,7 @@ network condition at every pooling grid, including the backpropagation-trained n
 These are point estimates (mean over three subjects, five seeds per network condition)
 without an interval for the bank; in each subject the bank scored above Backprop at every
 grid (Appendix~\ref{app:persubject}). A readout of each network together with the bank
-scored below the bank alone (Section~\ref{sec:signflip}), so adding network features did
-not improve prediction. We cannot say how much variance the bank and the networks share.
+scored below the bank alone (Section~\ref{sec:signflip}), so concatenating network features under a shared penalty did not improve prediction. We cannot say how much variance the bank and the networks share.
 This limits what V1 comparisons in these data can reveal about learning rules. Voxel
 alignment correlated with luminance and contrast, and the untrained network's alignment
 shared these signs. Whether this pattern reflects neural mechanisms such as contrast
@@ -75,9 +74,7 @@ families differ in the ratio of evaluation to training resolution (up to sevenfo
 twofold), and we do not claim that the results transfer between these regimes.
 
 \paragraph{Recommendations.}
-Five practices follow from these results. (1) Centre units over the evaluated stimulus
-set on both the model and the brain side before computing correlation or cosine
-distances; normalising voxels over a larger set of trials is not equivalent. (2) Report
+Five practices follow from these results. (1) For correlation- or cosine-based ranking claims, report the sensitivity to centring units over the evaluated stimulus set on both the model and the brain side, and justify the chosen reference; normalising voxels over a larger set of trials is not equivalent. (2) Report
 norm and angular components separately, for example with the norm and angle
 decomposition used here. (3) Report a small multiverse of distance measure and
 normalisation for any ranking claim. (4) Include simple stimulus-statistic baselines
@@ -119,6 +116,4 @@ for fit; other layers may behave differently.
 
 \paragraph{Conclusion.}
 Whether untrained networks beat trained ones at V1 in model--brain RSA depends on the
-analysis. The advantage we reported earlier was absent from the component orthogonal to the mean profile and from centred angular structure; whether the mean-profile component alone carries it was not resolved. Centring units over the
-evaluated stimuli, reporting components separately and including simple baselines make such
-comparisons interpretable.
+analysis. The advantage we reported earlier was absent from the component orthogonal to the mean profile and from centred angular structure; whether the mean-profile component alone carries it was not resolved. Reporting the sensitivity to centring over the evaluated stimuli, reporting components separately and including simple baselines make such comparisons interpretable.
