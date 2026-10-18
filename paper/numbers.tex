@@ -2155,6 +2155,16 @@
 \newcommand{\MpMFourModels}{6}
 % MpGateMaxDelta: results/step25/mean_profile.csv | kind == 'check' and quantity.str.startswith('gate') | value | 2-digit scientific
 \newcommand{\MpGateMaxDelta}{\ensuremath{9.9\times 10^{-17}}}
+% MultiDistinct: results/step28/distinct_summary.csv | kind == 'summary' and quantity == 'distinct analyses' | value | integer
+\newcommand{\MultiDistinct}{28}
+% MultiDistinctPos: results/step28/distinct_summary.csv | kind == 'summary' and quantity == 'distinct analyses, CI above 0' | value | integer
+\newcommand{\MultiDistinctPos}{5}
+% MultiDistinctNeg: results/step28/distinct_summary.csv | kind == 'summary' and quantity == 'distinct analyses, CI below 0' | value | integer
+\newcommand{\MultiDistinctNeg}{9}
+% MultiDistinctIncl: results/step28/distinct_summary.csv | kind == 'summary' and quantity == 'distinct analyses, CI includes 0' | value | integer
+\newcommand{\MultiDistinctIncl}{14}
+% MultiDistinctEucl: results/step28/distinct_summary.csv | kind == 'summary' and quantity == 'distinct analyses, euclidean cells' | value | integer
+\newcommand{\MultiDistinctEucl}{4}
 % AbTwoOwnFullFull: results/step28/ablation_2x2.csv | kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full' | value | 3 decimals
 \newcommand{\AbTwoOwnFullFull}{0.030}
 % AbTwoOwnFullFullLo: results/step28/ablation_2x2.csv | kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full' | ci_lo | 3 decimals

@@ -306,6 +306,12 @@ for _v, _vn in (("full", "Full"), ("ortho", "Ortho"), ("par", "Par")):
             SPECS += _ci(f"Mp{_vn}{_mn}Slope", _MP, f"kind == 'slope' and model == '{_m}' and variant == '{_v}'")
 SPECS += [("MpMFourModels", _MP, "kind == 'rule' and quantity.str.startswith('M4')", "value", "int"),
           ("MpGateMaxDelta", _MP, "kind == 'check' and quantity.str.startswith('gate')", "value", "sci2")]
+_DS = "step28/distinct_summary.csv"
+for _n, _q in (("MultiDistinct", "distinct analyses"), ("MultiDistinctPos", "distinct analyses, CI above 0"),
+               ("MultiDistinctNeg", "distinct analyses, CI below 0"),
+               ("MultiDistinctIncl", "distinct analyses, CI includes 0"),
+               ("MultiDistinctEucl", "distinct analyses, euclidean cells")):
+    SPECS.append((_n, _DS, f"kind == 'summary' and quantity == '{_q}'", "value", "int"))
 _AB = "step28/ablation_2x2.csv"
 for _mk, _mkn in (("full", "Full"), ("ortho", "Ortho")):
     for _bk, _bkn in (("full", "Full"), ("ortho", "Ortho")):

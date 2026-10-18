@@ -127,13 +127,13 @@ the same across defensible analysis choices; it depends on the analysis.
 | | |
 |---|---|
 | Rule and threshold | GEN2: in ≥ 4 of 6 ImageNet models, at 224 px, two of four analysis cells have V1 gap CIs that exclude 0 in opposite directions. |
-| Result | GEN2: 4 models (`\GenTwoModels`). Own CNN, 36-cell multiverse: V1 gap CI excludes 0 positively in 13 cells (`\MultiPosCiCells`) and negatively in 9 (`\MultiNegCiCells`). |
+| Result | GEN2: 4 models (`\GenTwoModels`). Own CNN, 36-cell multiverse: V1 gap CI excludes 0 positively in 13 cells (`\MultiPosCiCells`) and negatively in 9 (`\MultiNegCiCells`). Step 28: the 36 cells comprise 28 distinct analyses (`\MultiDistinct`; the 12 euclidean cells 4, `\MultiDistinctEucl`, by centring invariance); over distinct analyses the CI lies above 0 in 5, below 0 in 9 and includes 0 in 14 (`\MultiDistinctPos`, `Neg`, `Incl`). |
 | Examples | paper cell +0.030 [0.018, 0.042] (`\VoneGapRawTwoTwoFour`, `Lo`, `Hi`); channel z-scored −0.011 [−0.017, −0.005] (`\VoneGapZTwoTwoFour`, `Lo`, `Hi`); euclidean +0.023 [0.004, 0.041] (`\MultiEuclidGap`, `Lo`, `Hi`) |
 | Verdict | GEN2 met: the V1 ranking depends on the analysis; step 9 interpretation rule: V1 ranking not attributed to the norm or angular component (SEP2 not met) |
-| Macros | `\GenTwoModels`, `\MultiPosCiCells`, `\MultiNegCiCells`, `\VoneGapRawTwoTwoFour[Lo/Hi]`, `\VoneGapZTwoTwoFour[Lo/Hi]`, `\MultiEuclidGap[Lo/Hi]` |
+| Macros | `\GenTwoModels`, `\MultiPosCiCells`, `\MultiNegCiCells`, `\MultiDistinct[Pos/Neg/Incl/Eucl]`, `\VoneGapRawTwoTwoFour[Lo/Hi]`, `\VoneGapZTwoTwoFour[Lo/Hi]`, `\MultiEuclidGap[Lo/Hi]` |
 | Figures | `fig:multiverse_v1`, `fig:sign_flip` |
 | Amendments | step 8 (GEN2): `10d302b`; step 7 (multiverse): `084b22c`; step 9 (interpretation rule): `6ef68f2` |
-| Wording | criterion fixed before the analysis (GEN2: `10d302b` before `1d5bc9e`). The 13 / 9 cell counts are descriptive (no rule was fixed for them). |
+| Wording | criterion fixed before the analysis (GEN2: `10d302b` before `1d5bc9e`). The 13 / 9 cell counts and the 28 / 5 / 9 / 14 counts of distinct analyses are descriptive (the procedure for the latter was fixed in `ac59694`). |
 
 ## C3
 

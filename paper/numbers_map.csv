@@ -1077,6 +1077,11 @@ MpParVitbsixteenRTwoTwoFourLo,results/step25/mean_profile.csv,kind == 'contrast'
 MpParVitbsixteenRTwoTwoFourHi,results/step25/mean_profile.csv,kind == 'contrast' and model == 'vit_b_16' and variant == 'par' and res == 'R224',ci_hi,3 decimals,0.090
 MpMFourModels,results/step25/mean_profile.csv,kind == 'rule' and quantity.str.startswith('M4'),value,integer,6
 MpGateMaxDelta,results/step25/mean_profile.csv,kind == 'check' and quantity.str.startswith('gate'),value,2-digit scientific,\ensuremath{9.9\times 10^{-17}}
+MultiDistinct,results/step28/distinct_summary.csv,kind == 'summary' and quantity == 'distinct analyses',value,integer,28
+MultiDistinctPos,results/step28/distinct_summary.csv,"kind == 'summary' and quantity == 'distinct analyses, CI above 0'",value,integer,5
+MultiDistinctNeg,results/step28/distinct_summary.csv,"kind == 'summary' and quantity == 'distinct analyses, CI below 0'",value,integer,9
+MultiDistinctIncl,results/step28/distinct_summary.csv,"kind == 'summary' and quantity == 'distinct analyses, CI includes 0'",value,integer,14
+MultiDistinctEucl,results/step28/distinct_summary.csv,"kind == 'summary' and quantity == 'distinct analyses, euclidean cells'",value,integer,4
 AbTwoOwnFullFull,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full',value,3 decimals,0.030
 AbTwoOwnFullFullLo,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full',ci_lo,3 decimals,0.018
 AbTwoOwnFullFullHi,results/step28/ablation_2x2.csv,kind == 'cell' and model == 'own CNN' and model_side == 'full' and brain_side == 'full',ci_hi,3 decimals,0.042
