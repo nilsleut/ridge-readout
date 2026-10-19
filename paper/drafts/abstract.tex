@@ -1,8 +1,6 @@
 % Draft abstract. All numbers via macros from numbers.tex.
 Untrained convolutional networks have been reported to rival trained networks as models of
-visual cortex~\citep{truzzi2020, kazemian2025}, and we had reported an advantage of an
-untrained network over a backpropagation-trained one at V1 in the THINGS fMRI data,
-together with a dependence on evaluation resolution~\citep{evalres}. Under a pre-specified
+visual cortex~\citep{truzzi2020, kazemian2025}, and we had reported an untrained-network advantage over backpropagation at V1 in THINGS fMRI, together with a dependence on evaluation resolution~\citep{evalres}. Under a pre-specified
 ridge readout, the untrained network scored below the trained one at every pooling grid
 (median $r$ difference $\PreregRandBpGFour$ at $g = 4$, \PreregRandBpGFourPos{} of 5 seeds
 positive), and also in MSE skill and per-fold $r$. In exploratory analyses, across 36 combinations of unit normalisation, distance measure and voxel normalisation (\MultiDistinct{} distinct analyses), the sign of the V1 contrast depended on the analysis (intervals above 0 in \MultiDistinctPos{} and below 0 in \MultiDistinctNeg{} distinct analyses), and in our networks the resolution dependence of the original convention appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model
@@ -11,6 +9,5 @@ and voxel patterns with the unit-mean profile (Spearman \GOneSpearman{} across o
 component orthogonal to the mean profile, and the parallel component alone did not resolve
 it. On the unweighted angular component of centred patterns, trained networks were ahead at
 V1 (our network and \SepThreeModels{} of 6 ImageNet models) and at LOC (all seven); the
-norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above
-every network under ridge (point estimates, three subjects), and concatenating network features with it under a shared ridge penalty did not improve prediction. Intervals are stimulus-bootstrap intervals for three
-subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend reporting the sensitivity of rankings to centring units over the evaluated stimuli on both model and brain side, reporting components separately together with a small multiverse, and including simple baselines.
+norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above every network under ridge (point estimates), and adding network features under a shared penalty did not improve prediction. Intervals are stimulus-bootstrap intervals for three
+subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend reporting sensitivity to centring over the evaluated stimuli on both sides, reporting components separately, and including a small multiverse and simple baselines.
