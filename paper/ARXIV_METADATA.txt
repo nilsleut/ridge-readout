@@ -17,6 +17,3 @@ Untrained convolutional networks have been reported to rival trained networks as
 
 COMMENTS:
 31 pages, 6 figures, 14 tables; code and analysis history at https://github.com/nilsleut/ridge-readout
-
-NOTE:
-The AI disclosure is in the Acknowledgements section of the PDF.

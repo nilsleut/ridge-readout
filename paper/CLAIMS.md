@@ -40,7 +40,7 @@ The step 9 amendment is dated 2026-10-10 in its file name and text but was commi
 2026-10-13. The commit timestamp is authoritative; it still precedes the analysis
 script. The step 25 amendment is dated 2026-10-16 in its file name but was committed on
 2026-10-18; the commit timestamp is authoritative, and it precedes the step 25 scripts.
-Step 25 was added in response to a critical review of an earlier draft (obtained from an AI assistant). Step 28 followed a second review of the revised draft.
+Step 25 was added in response to criticism of an earlier draft. Step 28 followed further criticism of the revised draft.
 
 ---
 
@@ -203,7 +203,7 @@ was not established.
 | Macros | `\Mp<Variant>OwnVone<Res>[Lo/Hi/Pos]`, `\Mp<Variant>OwnLoc[Lo/Hi]`, `\Mp<Variant>OwnSlope[Lo/Hi]`, `\Mp<Variant><Model><R>[Lo/Hi]`, `\Mp<Variant><Model>Slope[Lo/Hi]`, `\MpMFourModels`, `\MpGateMaxDelta`; `<Variant>` ∈ {Full, Ortho, Par} |
 | Section | `sec:ablation` |
 | Amendment | `amendments/2026-10-16_step25-predictions.md`, `74853dc`, 2026-10-18T11:30:57+02:00 |
-| Wording | criterion fixed before the analysis (`74853dc` before `dbc4662`); written after all earlier results were known, in response to a critical review of an earlier draft (obtained from an AI assistant) |
+| Wording | criterion fixed before the analysis (`74853dc` before `dbc4662`); written after all earlier results were known, in response to criticism of an earlier draft |
 
 ## C7 (step 25: ridge robustness)
 
@@ -262,7 +262,7 @@ the intervention matters.
 | Macros | `\AbTwoOwn<Model side><Brain side>[Lo/Hi]`, `\AbTwo<Model><Model side><Brain side>[Lo/Hi]` (mixed cells), `\AbTwoImn<Model side><Brain side>[Pos/Neg]`, `\AbTwoXOne[Lo/Hi]` |
 | Section | `sec:ablation`, `app:ablation2x2` |
 | Amendment | `amendments/2026-10-18_step28-predictions.md`, `ac59694`, 2026-10-18T21:56:55+02:00 |
-| Wording | criterion fixed before the analysis (`ac59694` before `1da7462`); written after all earlier results were known, following a second review of the revised draft |
+| Wording | criterion fixed before the analysis (`ac59694` before `1da7462`); written after all earlier results were known, following further criticism of the revised draft |
 
 ---
 
