@@ -122,4 +122,4 @@ The committer timestamp of `2fd215a` ("Add step 9 report", 2026-10-13) is the ti
 
 ## Step 25 motivation
 
-Step 25 (`amendments/2026-10-16_step25-predictions.md`) was prompted by a critical review of an earlier draft, which the author obtained from an AI assistant. The motivation line of the amendment calls it an 'external critique'; the amendment file is left unchanged because its committed text is evidence of the order of events.
+Step 25 (`amendments/2026-10-16_step25-predictions.md`) was prompted by a critical review of an earlier draft, which the author obtained from an AI assistant. The motivation line of the amendment calls it an 'external critique'; the amendment file is left unchanged because its committed text is evidence of the order of events. Step 28 (`amendments/2026-10-18_step28-predictions.md`) was prompted by a second critical review of the revised draft, again obtained from an AI assistant.
