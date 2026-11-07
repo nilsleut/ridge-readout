@@ -437,6 +437,11 @@ def fmt(v, how):
     return f"{float(v):.{3 if how == 'rsa' else 2}f}"
 
 
+def tex_minus(text):
+    """Typographic minus for negative values in text and math mode; the value itself is unchanged."""
+    return "\\ensuremath{-}" + text[1:] if text.startswith("-") else text
+
+
 def shuffle_wins(grids):
     """Subjects in which intact > shuffled for Random Weights s0 and Backprop s0 at every g in grids."""
     prim = pd.read_csv(RES / "prereg" / "primary.csv")
@@ -508,7 +513,7 @@ def main():
             text = fmt(val, how)
             rounding = {"rsa": "3 decimals", "int": "integer"}[how]
             lines.append(f"% {name}: {source} | {q} | {colname} | {rounding}")
-            lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+            lines.append(f"\\newcommand{{\\{name}}}{{{tex_minus(text)}}}")
             rows.append(dict(macro=name, source=source, filter=q, column=colname, rounding=rounding, value=text))
             continue
         if kind == "lrtag":
@@ -526,7 +531,7 @@ def main():
             text = fmt(hit.iloc[0][col], how)
             source = f"learning-rules-rsa@{tag}:{rel}"
             lines.append(f"% {name}: {source} | {q} | {col} | 3 decimals")
-            lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+            lines.append(f"\\newcommand{{\\{name}}}{{{tex_minus(text)}}}")
             rows.append(dict(macro=name, source=source, filter=q, column=col, rounding="3 decimals", value=text))
             continue
         path = RES / src.split(":", 1)[-1]
@@ -539,7 +544,7 @@ def main():
             text = fmt(val, how)
             lines.append(f"% {name}: results/prereg/primary.csv + {path.relative_to(REPO).as_posix()} | g in {q} | "
                          f"{colname} | integer")
-            lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+            lines.append(f"\\newcommand{{\\{name}}}{{{tex_minus(text)}}}")
             rows.append(dict(macro=name, source=path.relative_to(REPO).as_posix(), filter=f"g in {q}",
                              column=colname, rounding="integer", value=text))
             continue
@@ -590,7 +595,7 @@ def main():
         rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific", "sci2": "2-digit scientific",
                     "sd": "4 decimals"}[how]
         lines.append(f"% {name}: {path.relative_to(REPO).as_posix()} | {q} | {colname} | {rounding}")
-        lines.append(f"\\newcommand{{\\{name}}}{{{text}}}")
+        lines.append(f"\\newcommand{{\\{name}}}{{{tex_minus(text)}}}")
         rows.append(dict(macro=name, source=path.relative_to(REPO).as_posix(), filter=q, column=colname,
                          rounding=rounding, value=text))
     PAPER.mkdir(exist_ok=True)

@@ -4,8 +4,10 @@ Table~\ref{tab:evidence} states for each main statement whether it was pre-speci
 
 \begin{table}[!t]
 \centering
-\small
-\begin{tabular}{@{}p{0.19\textwidth}p{0.15\textwidth}p{0.26\textwidth}p{0.28\textwidth}@{}}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
 \toprule
 Statement & Status & Uncertainty reported & Main caveat \\
 \midrule
@@ -22,7 +24,6 @@ Luminance-and-contrast bank above every network at V1 under ridge (Section~\ref{
 \label{tab:evidence}
 \end{table}
 
-\FloatBarrier
 \paragraph{What the V1 advantage measured.}
 The advantage of the untrained network at V1 that we reported earlier \citep{evalres} was
 not robust to the analysis choices examined here. Its sign changed across the multiverse:
