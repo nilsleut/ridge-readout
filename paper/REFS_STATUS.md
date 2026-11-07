@@ -30,6 +30,7 @@ tag and are marked `% TO VERIFY` in `refs.bib`.
 | `truzzi2020` | untrained CNNs and human object representations, CogSci 2020 | **new, to verify** (URL, no DOI) | abstract, 1 |
 | `kazemian2025` | convolutional architectures cortex-aligned de novo, Nature Machine Intelligence 2025 | **new, verified 2026-10-15** against the publisher page | abstract, 1 |
 | `liu2022` | ConvNeXt, CVPR 2022 | **new, to verify** (no DOI given) | 4 |
+| `cao2024` | explanatory models in neuroscience, part 2, Cognitive Systems Research 2024 | **new, to verify** (metadata from the reference list of Kazemian et al. 2025; first names and page count not verified) | 4 |
 
 `truzzi2025` (placeholder) was removed on 2026-10-14 and replaced by `truzzi2020` and
 `kazemian2025` (published version of the bioRxiv preprint; replaced on 2026-10-15).
