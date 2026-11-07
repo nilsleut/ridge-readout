@@ -38,7 +38,7 @@ Visual Cortex*
 
 ### (1b) Prefix for the arXiv abstract field
 
-> Revision note (v4): the V1 resolution dependence reported here is not robust to the analysis choices examined in arXiv:[ID]; see page 1. Text below unchanged.
+> Not used: the abstract field has 1871 characters (measured 2026-11-07 on the arXiv listing text) and the full prefix would exceed the limit of 1920. Option, only if the length check at submission time allows it: 'Revision note (v4): see Comments. ' (34 characters). Otherwise the abstract field stays unchanged; the notice is on page 1 of the PDF and in the Comments field.
 
 ### (1c) Comments field
 
@@ -69,7 +69,7 @@ Source notes:
 | 10 | 26, 158, 160 | Limiting content widens the V1 gap | direction holds under standardisation; no untrained advantage remains (V1 difference −0.011 native, +0.002 content-limited) | `results/step5/paper_comparisons_raw_vs_z.csv` (variant z, "diff V1"); `\VoneGapZTwoTwoFour`, `\VoneGapZUp` |
 | 11 | 26, 162 | LOC backpropagation advantage disappears under upsampling | holds under centring (CSV only, not in the new paper) | `results/step5/paper_comparisons_raw_vs_z.csv` (variant z, "diff LOC") |
 | 12 | 26, 139 | Luminance scalar matches the untrained network at V1 | not tested here | — |
-| 13 | 26, 51, 179 | LOC: backpropagation above untrained at every resolution | holds under centring | `\LocGapZ`; `results/step7/multiverse.csv` (F = center, LOC) |
+| 13 | 26, 51, 179 | LOC: backpropagation above untrained at every resolution | holds at 224 px under standardisation and centring; other resolutions not in the new paper | `\LocGapZ`; `results/step7/multiverse.csv` (F = center, LOC) |
 | 14 | 85 | Every trained condition peaks at 32 px and falls off | not tested here | — |
 | 15 | 85 | Untrained network's V1 alignment climbs with resolution | not robust to the analysis choices (point estimate) (CSV only, not in the new paper) | `results/step5/resolution_rsa.csv` |
 | 16 | 96 | Best V1 layer: Conv2 for untrained, Conv1 for backpropagation | not tested here | — |
@@ -95,6 +95,8 @@ Source notes:
 ### (1b) Prefix for the arXiv abstract field
 
 > Revision note (v5): the V1 result reported here is not robust to the analysis choices examined in arXiv:[ID]; see page 1. Text below unchanged.
+
+Fits: the abstract field has 1569 characters (measured 2026-11-07 on the arXiv listing text); with this prefix about 1713 of 1920. The existing sentence 'Revised version (v4): ...' stays after the new prefix.
 
 ### (1c) Comments field
 
@@ -127,7 +129,7 @@ Source notes:
 | 13 | 252 | All ten pairwise V1 differences are significant | not tested here | — |
 | 14 | 252, 346 | At 32 px backpropagation and untrained do not differ | not robust to the analysis choices | `\VoneGapZThreeTwo` |
 | 15 | 278 | Untrained highest at V1 and V2, lowest at LOC and IT | not tested here (V2: point estimates in the repository only) | `results/step5/resolution_rsa.csv` |
-| 16 | 293 | Per subject, untrained exceeds backpropagation at V1 | not robust to the analysis choices (point estimate) | `results/step5/resolution_rsa.csv` |
+| 16 | 293 | Per subject, untrained exceeds backpropagation at V1 | not robust to the analysis choices (point estimate) (CSV only, not in the new paper) | `results/step5/resolution_rsa.csv` |
 | 17 | 293 | LOC difference significant only in sub-02 | not tested here | — |
 | 18 | 304 | Seed SD small relative to the V1 difference | not tested here | — |
 | 19 | 308 | Best layer: FC1 highest for untrained at V1 | not tested here | — |
@@ -222,14 +224,14 @@ the trajectory and best-layer analyses were not re-tested.
 - [ ] After downloading each source: measure the length of the arXiv abstract field (plain
       text, with markup as in the metadata field); the limit is 1920 characters. If (1b)
       does not fit, the abstract field stays unchanged, and the notice appears only in the
-      Comments field and on page 1 of the PDF.
+      Comments field and on page 1 of the PDF. Remeasure in the arXiv form at submission time; the figures above come from the listing text.
 
 ### (b) Files to change per preprint
 
 | Preprint | Repository | File | Title line | PDF notice (page 1) | Abstract | Abstract length check | Version | Comments |
 |---|---|---|---|---|---|---|---|---|
-| 2608.12408 v4 | `Projekte_2/evaluation-resolution-rsa` (tag `arxiv-v3`) | `paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex` (copy to a v4 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | to be measured (no `ARXIV_METADATA.txt` at tag `arxiv-v3`) | v3 → v4 where the TeX states a version | (1c); `paper/arxiv_upload_v3/ARXIV_COMMENT.txt` (v4 copy) and arXiv form |
-| 2604.16875 v5 | `Projekte_1/learning-rules-rsa` (tag `arxiv-v4`) | `paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex` (copy to a v5 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | to be measured (no `ARXIV_METADATA.txt` at tag `arxiv-v4`) | v4 → v5 where the TeX states a version | (1c); arXiv form |
+| 2608.12408 v4 | `Projekte_2/evaluation-resolution-rsa` (tag `arxiv-v3`) | `paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex` (copy to a v4 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | measured 1871; (1b) does not fit, see (1b) | v3 → v4 where the TeX states a version | (1c); `paper/arxiv_upload_v3/ARXIV_COMMENT.txt` (v4 copy) and arXiv form |
+| 2604.16875 v5 | `Projekte_1/learning-rules-rsa` (tag `arxiv-v4`) | `paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex` (copy to a v5 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | measured 1569; (1b) fits | v4 → v5 where the TeX states a version | (1c); arXiv form |
 | 2605.22401 v3 | `Projekte_2/Cross_Species_RSA` (commit and tag the posted v2 first) | `paper/Cross_species_rsa_paper_final_version/Cross_species_rsa_paper_final.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | to be measured | v2 → v3 where the TeX states a version | (1c); arXiv form |
 | 2605.30556 v3 | `Projekte_2/training_dynamics` (initialise git, commit and tag the posted v2 first) | `training_dynamics_arxiv/training_dynamics.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | to be measured | v2 → v3 where the TeX states a version | (1c); arXiv form |
 
