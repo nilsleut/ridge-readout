@@ -61,8 +61,10 @@ The three analyses ask different questions:
 \item ridge asks which features predict the voxel responses better under this regularised
   linear readout.
 \end{itemize}
-A different ranking under ridge therefore does not by itself show that the RSA ranking is
-wrong.
+A different ranking under ridge therefore does not by itself show that the RSA ranking is wrong.
+
+\paragraph{Sensitivity is not invalidity.}
+That rankings change across defensible analyses shows that the metric matters; it does not show that any single analysis is invalid. Raw, centred and standardised variants and euclidean, correlation and cosine distances may capture different aspects of a representation, and a fitted readout asks another question again. Our ablation shows that the earlier advantage depends on the component along the mean profile of the units; it does not show that this component is a biologically meaningful property of the representation, and we do not claim that it is. Which representational properties a benchmark should preserve is a question about what the comparison is meant to explain, and it cannot be settled by whether a choice yields a stable ranking (cf.~\citealt{cao2024}). Our results support the narrower point that a brain-alignment score is a measurement defined by the evaluation procedure and its assumptions, not an intrinsic measure of a model.
 
 \paragraph{Evaluation resolution.}
 In our CIFAR-trained networks, the dependence of the V1 gap on evaluation resolution
@@ -77,8 +79,7 @@ twofold), and we do not claim that the results transfer between these regimes.
 \paragraph{Recommendations.}
 Five practices follow from these results. (1) For cor\-re\-la\-tion- or cosine-based ranking claims, report the sensitivity to centring units over the evaluated stimulus set on both the model and the brain side, and justify the chosen reference; normalising voxels over a larger set of trials is not equivalent. (2) Report
 norm and angular components separately, for example with the norm and angle
-decomposition used here. (3) Report a small multiverse of distance measure and
-normalisation for any ranking claim. (4) Include simple stimulus-statistic baselines
+decomposition used here. (3) For ranking claims in a paper, report a small multiverse of distance measure and normalisation. For benchmark platforms, where a full multiverse for every submission may be too costly, a fixed primary procedure with a stated rationale, plus supplementary diagnostics for the leading models (for example the ranking under centring and the norm and angular components), would make the dependence visible without changing the reference score. (4) Include simple stimulus-statistic baselines
 alongside network models. (5) State how the normalisation statistics of untrained
 networks were set, since calibrated and uncalibrated variants behaved differently.
 
@@ -103,8 +104,7 @@ was not blind, several pre-specified instruments were not implemented, and the e
 analyses were developed sequentially, with intervals not corrected for multiple comparisons. The re-estimation of the normalisation statistics within the bootstrap covered three cells and not the ablation. Run-grouped folds and the encoding-RSA check were run for one subject. A banded ridge readout, with a separate penalty per feature group, was not fitted.
 \FailedPredictions{} pre-stated predictions failed (Appendix~\ref{app:failed}); among them,
 the LOC ranking was not resolved under Euclidean distance in the ImageNet models (GEN3), and
-the parallel component alone was not resolved (M3), so the mean-profile account remains a
-candidate. The norm-weighted angular term $W$ behaved differently from the unweighted angular
+the parallel component alone was not resolved (M3), so the mean-profile account remains a candidate. Whether that component reflects a property of neural representations or of the measurement is not established. The norm-weighted angular term $W$ behaved differently from the unweighted angular
 component $A$. The repeated-image test set (100 images, 12 repetitions) was used only for
 voxel reliability, and cross-validated distances were not computed. Counts of lowest-value
 selections of the regularisation varied between identical runs through near-ties under
