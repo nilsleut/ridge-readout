@@ -264,6 +264,23 @@ the intervention matters.
 | Amendment | `amendments/2026-10-18_step28-predictions.md`, `ac59694`, 2026-10-18T21:56:55+02:00 |
 | Wording | criterion fixed before the analysis (`ac59694` before `1da7462`); written after all earlier results were known, following further criticism of the revised draft |
 
+## C11 (interpretation and scope of the recommendations)
+
+**Claim.** Sensitivity is not invalidity: that rankings change across defensible analyses
+shows that the metric matters, not that any single analysis is invalid. The ablation shows
+that the earlier advantage depends on the mean-profile component, not that this component
+is biologically meaningful. The multiverse recommendation distinguishes ranking claims in
+papers (report a small multiverse) from benchmark platforms (a fixed primary procedure
+with a stated rationale plus supplementary diagnostics for the leading models).
+
+| | |
+|---|---|
+| Rule | none (interpretation and recommendation, derived from C2, C6 and C10) |
+| Supporting numbers | none beyond those of C2, C6 and C10 |
+| Section | Discussion: "Sensitivity is not invalidity", "Recommendations" (3), "Limitations" |
+| Reference | `cao2024` (marked to verify in `paper/refs.bib`) |
+| Wording | not a tested criterion; the wording was revised after comments from a colleague working on the Brain-Score benchmark |
+
 ---
 
 ## Failed predictions
