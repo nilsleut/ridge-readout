@@ -153,7 +153,7 @@ Rankings Across Human fMRI and Macaque Electrophysiology*
 
 ### (1b) Prefix for the arXiv abstract field
 
-> Revision note (v3): the human V1 results are not robust to the analysis choices examined in arXiv:[ID]; the macaque results were not re-tested. Text below unchanged.
+> Not used: the abstract field (v2) has 1857 characters (measured 2026-11-07 on the listing text, including the August correction note), and the full prefix would exceed the limit of 1920. Option, only if the length check at submission time allows it: 'Revision note (v3): see Comments. ' (34 characters, about 1891 in total). Otherwise the abstract field stays unchanged.
 
 ### (1c) Comments field
 
@@ -225,6 +225,7 @@ the trajectory and best-layer analyses were not re-tested.
       text, with markup as in the metadata field); the limit is 1920 characters. If (1b)
       does not fit, the abstract field stays unchanged, and the notice appears only in the
       Comments field and on page 1 of the PDF. Remeasure in the arXiv form at submission time; the figures above come from the listing text.
+- [ ] Categories: 2605.22401 listing: cs.LG primary, q-bio.NC and cs.NE cross-lists; 2604.16875 and 2605.30556: cs.LG, q-bio.NC; 2608.12408: q-bio.NC primary, cs.LG cross-list. Keep categories unchanged on replacement.
 
 ### (b) Files to change per preprint
 
@@ -232,7 +233,7 @@ the trajectory and best-layer analyses were not re-tested.
 |---|---|---|---|---|---|---|---|---|
 | 2608.12408 v4 | `Projekte_2/evaluation-resolution-rsa` (tag `arxiv-v3`) | `paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex` (copy to a v4 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | measured 1871; (1b) does not fit, see (1b) | v3 → v4 where the TeX states a version | (1c); `paper/arxiv_upload_v3/ARXIV_COMMENT.txt` (v4 copy) and arXiv form |
 | 2604.16875 v5 | `Projekte_1/learning-rules-rsa` (tag `arxiv-v4`) | `paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex` (copy to a v5 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | measured 1569; (1b) fits | v4 → v5 where the TeX states a version | (1c); arXiv form |
-| 2605.22401 v3 | `Projekte_2/Cross_Species_RSA` (commit and tag the posted v2 first) | `paper/Cross_species_rsa_paper_final_version/Cross_species_rsa_paper_final.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | to be measured | v2 → v3 where the TeX states a version | (1c); arXiv form |
+| 2605.22401 v3 | `Projekte_2/Cross_Species_RSA` (commit and tag the posted v2 first) | `paper/Cross_species_rsa_paper_final_version/Cross_species_rsa_paper_final.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | measured 1857; (1b) does not fit, see (1b) | v2 → v3 where the TeX states a version | (1c); arXiv form |
 | 2605.30556 v3 | `Projekte_2/training_dynamics` (initialise git, commit and tag the posted v2 first) | `training_dynamics_arxiv/training_dynamics.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | to be measured | v2 → v3 where the TeX states a version | (1c); arXiv form |
 
 ### (c) Order after the announcement of the new paper
