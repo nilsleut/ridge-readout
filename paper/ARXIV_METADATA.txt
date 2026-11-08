@@ -1,19 +1,28 @@
-arXiv submission metadata (draft)
+arXiv submission metadata
 
 TITLE:
-Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model-brain RSA
+Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA
 
 AUTHORS:
 Nils Leutenegger
 
-CATEGORIES:
-Primary:
-Cross-lists:
-Use the categories of the listing of arXiv:2608.12408; to be filled by the author.
+AFFILIATION (as in the PDF author block):
+Independent researcher, Zug, Switzerland
 
-ABSTRACT (1824 characters including spaces; generated from paper/drafts/abstract.tex with
-macro values from paper/numbers_map.csv; citations removed):
+CATEGORIES:
+Primary: q-bio.NC
+Cross-list: cs.LG
+
+LICENSE:
+CC BY 4.0
+
+ABSTRACT (1824 characters including spaces, limit 1920; plain text generated from
+paper/drafts/abstract.tex with macro values from paper/numbers_map.csv; citations removed;
+minus signs written as ASCII hyphen-minus):
 Untrained convolutional networks have been reported to rival trained networks as models of visual cortex, and we had reported an untrained-network advantage over backpropagation at V1 in THINGS fMRI, together with a dependence on evaluation resolution. Under a pre-specified ridge readout, the untrained network scored below the trained one at every pooling grid (median r difference -0.043 at g = 4, 0 of 5 seeds positive), and also in MSE skill and per-fold r. In exploratory analyses, across 36 combinations of unit normalisation, distance measure and voxel normalisation (28 distinct analyses), the sign of the V1 contrast depended on the analysis (intervals above 0 in 5 and below 0 in 9 distinct analyses), and in our networks the resolution dependence of the original convention appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model and voxel patterns with the unit-mean profile (Spearman 0.97 across our networks, 0.79 across six ImageNet architectures); the advantage was absent from the component orthogonal to the mean profile, and the parallel component alone did not resolve it. On the unweighted angular component of centred patterns, trained networks were ahead at V1 (our network and 5 of 6 ImageNet models) and at LOC (all seven); the norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above every network under ridge (point estimates), and adding network features under a shared penalty did not improve prediction. Intervals are stimulus-bootstrap intervals for three subjects, and 6 pre-stated predictions were not met. We recommend reporting sensitivity to centring over the evaluated stimuli on both sides, reporting components separately, and including a small multiverse and simple baselines.
 
 COMMENTS:
-31 pages, 6 figures, 14 tables; code and analysis history at https://github.com/nilsleut/ridge-readout
+31 pages, 6 figures; code and data pipeline: https://github.com/nilsleut/ridge-readout
+
+# Note: the GitHub repository (remote origin, https://github.com/nilsleut/ridge-readout.git)
+# is made public only on the day of the arXiv upload.
