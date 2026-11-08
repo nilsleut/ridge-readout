@@ -182,7 +182,7 @@ Plausible Learning Rules*
 
 ### (1a) Notice for page 1 of the replaced PDF
 
-> Revision note (v3). The degradation of V1 alignment with training reported here is not robust to the analysis choices examined in "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA" [arXiv ID of the new paper]. In the model set re-tested there, with standardised model units, a fixed Conv1 layer and 224 px input, backpropagation after training scores above the untrained network at V1 (+0.011 [0.005, 0.017]). This covers the endpoint only; the trajectory and the best-layer analyses were not re-tested. The text below is unchanged.
+> Revision note (v3). The degradation of V1 alignment with training reported here is not robust to the analysis choices examined in "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA" [arXiv ID of the new paper]. In the model set re-tested there, with standardised model units, a fixed Conv1 layer and 224 px input, backpropagation after training scores above the untrained network at V1 (+0.011 [0.005, 0.017]). This covers the endpoint only; the trajectory and the best-layer analyses were not re-tested. The statement of the August note that the degradation of V1 alignment survives for every rule tested is likewise not robust to these choices at the endpoint. The text below is unchanged.
 
 ### (1b) Prefix for the arXiv abstract field
 
@@ -195,6 +195,7 @@ Plausible Learning Rules*
 Source notes:
 - +0.011 [0.005, 0.017]: `\VoneGapZTwoTwoFour`, `Lo`, `Hi` with the sign reversed (backpropagation minus untrained; `results/step5/paper_comparisons_raw_vs_z.csv`).
 - "In the model set re-tested there": the new paper re-tests the 30-checkpoint retrain of the same configuration (`results/step5/paper_comparisons_raw_vs_z.csv`); the abstract of 2604.16875 v4 states that its +0.030 comes from the five-seed model set of the resolution study.
+- The August note of v2 states that the degradation survives for every rule tested; the new paper's endpoint result (backpropagation above the untrained network under standardisation, Conv1, 224 px) is the basis of the added sentence.
 
 ### (3) Affected claims
 
@@ -234,7 +235,7 @@ the trajectory and best-layer analyses were not re-tested.
 | 2608.12408 v4 | `Projekte_2/evaluation-resolution-rsa` (tag `arxiv-v3`) | `paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex` (copy to a v4 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | measured 1871; (1b) does not fit, see (1b) | v3 → v4 where the TeX states a version | (1c); `paper/arxiv_upload_v3/ARXIV_COMMENT.txt` (v4 copy) and arXiv form |
 | 2604.16875 v5 | `Projekte_1/learning-rules-rsa` (tag `arxiv-v4`) | `paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex` (copy to a v5 folder) | unchanged | (1a) at the top of page 1 | (1b) at the start of the abstract field, if the length check passes | measured 1569; (1b) fits | v4 → v5 where the TeX states a version | (1c); arXiv form |
 | 2605.22401 v3 | `Projekte_2/Cross_Species_RSA` (commit and tag the posted v2 first) | `paper/Cross_species_rsa_paper_final_version/Cross_species_rsa_paper_final.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | measured 1857; (1b) does not fit, see (1b) | v2 → v3 where the TeX states a version | (1c); arXiv form |
-| 2605.30556 v3 | `Projekte_2/training_dynamics` (initialise git, commit and tag the posted v2 first) | `training_dynamics_arxiv/training_dynamics.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | to be measured | v2 → v3 where the TeX states a version | (1c); arXiv form |
+| 2605.30556 v3 | `Projekte_2/training_dynamics` (initialise git, commit and tag the posted v2 first) | `training_dynamics_arxiv/training_dynamics.tex` | unchanged | (1a) at the top of page 1, before the August note | (1b) at the start of the abstract field, if the length check passes | to be measured. The abstract field of v2 contains the August correction paragraph; measure the field text on arxiv.org/abs/2605.30556 (the PDF text of the abstract is about 2012 characters and is therefore not the field text). | v2 → v3 where the TeX states a version | (1c); arXiv form |
 
 ### (c) Order after the announcement of the new paper
 
