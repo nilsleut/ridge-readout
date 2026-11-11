@@ -85,9 +85,10 @@ Check the frozen configuration first:
 
 (a) **Tests.** `python tests/test_phase2_controls.py` (97 checks) and
 `python tests/test_loader_hardening.py` (41 checks); `python tests/suite_count.py` prints
-both counts. `tests/test_lower_edge_gate.py` (2 checks) reads `RIDGE_DATA_DIR`. The suites
-need the external data and checkpoints above; without them they stop with the message of
-`src/ridge/paths.py` naming the missing variable.
+both counts. `tests/test_lower_edge_gate.py` (2 checks) reads `RIDGE_DATA_DIR`. The phase-2
+controls run without external data; the loader suite needs the checkpoints (`CKPT_DIR`)
+and the lower-edge gate the derived inputs (`RIDGE_DATA_DIR`). Without them they stop with
+the message of `src/ridge/paths.py` naming the missing variable.
 
 (b) **Numbers in the paper.** `python scripts/export_macros.py` regenerates
 `paper/numbers.tex` and `paper/numbers_map.csv` from `results/` (every number in the text
