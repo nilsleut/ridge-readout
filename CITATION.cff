@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this code or analysis record, please cite the paper and the repository."
+title: "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA"
+type: software
+authors:
+  - family-names: Leutenegger
+    given-names: Nils
+    affiliation: "Independent researcher, Zug, Switzerland"
+repository-code: "https://github.com/nilsleut/ridge-readout"
+license:
+  - MIT
+  - CC-BY-4.0
+preferred-citation:
+  type: article
+  title: "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA"
+  authors:
+    - family-names: Leutenegger
+      given-names: Nils
+      affiliation: "Independent researcher, Zug, Switzerland"
+  year: 2026

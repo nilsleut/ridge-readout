@@ -1,0 +1,12 @@
+# Versions used for all analyses in this repository (Python 3.11.9, Windows, CPU).
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.15.2
+torch==2.10.0
+torchvision==0.25.0
+pillow==11.2.0
+matplotlib==3.10.1
+pyyaml==6.0.3
+h5py==3.16.0
+# Only for the GPU feature extraction scripts (scripts/*_modal.py), not needed otherwise:
+# modal
