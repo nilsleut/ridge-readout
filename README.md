@@ -1,13 +1,58 @@
 # ridge-readout
 
-Code, analysis record and manuscript for a test of arXiv:2608.12408: does the advantage of
-an untrained network over a backpropagation-trained one at V1 (Conv1 → V1, THINGS-fMRI)
-survive a fitted ridge readout on the full feature map, and how does the ranking of the
-two networks depend on the choices made in representational similarity analysis (RSA)?
-The repository contains the frozen analysis plan, every amendment with its predictions,
-the analysis code, the derived results (CSV) and the LaTeX sources of the paper.
+**Do untrained networks really beat trained ones at V1, or does it depend on how you measure?**
+
+[![Code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
+[![Text: CC BY 4.0](https://img.shields.io/badge/text%20%26%20figures-CC%20BY%204.0-lightgrey.svg)](LICENSE-CC-BY-4.0.md)
+![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
+![Config hash](https://img.shields.io/badge/config%20hash-206fa875cca5-informational.svg)
 
 Paper: Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA (arXiv: ID follows after announcement)
+
+An earlier study (arXiv:2608.12408) found that an untrained convolutional network matches
+human V1 (THINGS-fMRI) better than a backpropagation-trained one. This repository re-tests
+that result with a pre-specified ridge readout and a multiverse of representational
+similarity analyses (RSA), and holds everything needed to check the claims: the frozen
+analysis plan, every amendment with its predictions, the code, the derived results and the
+LaTeX sources of the paper.
+
+## Findings at a glance
+
+- **Ridge readout (pre-specified):** the untrained network scores *below* the trained one
+  at every pooling grid (median r difference −0.043 at g = 4; 0 of 5 seeds positive).
+- **RSA multiverse:** across 36 combinations of unit normalisation, distance measure and
+  voxel normalisation (28 distinct analyses), the sign of the V1 contrast depends on the
+  analysis: intervals above 0 in 5 and below 0 in 9 distinct analyses.
+- **What raw RSA picks up:** raw correlation-distance RSA covaries with how strongly model
+  and voxel patterns align with the unit-mean profile (Spearman 0.97 across our networks,
+  0.79 across six ImageNet architectures); the advantage is absent from the component
+  orthogonal to that profile.
+- **Angular structure:** on the angular component of centred patterns, trained networks
+  are ahead at V1 and at LOC.
+- **Simple baselines:** a luminance-and-contrast feature bank scores above every network
+  under the ridge readout (point estimates).
+
+<p align="center">
+  <img src="docs/multiverse_v1.png" width="820"
+       alt="Untrained minus Backprop at V1 in the 36 cells of the analysis multiverse">
+  <br>
+  <em>Untrained minus backpropagation at V1 in the 36 cells of the multiverse (left: gap at
+  224 px; right: resolution slope). Orange: untrained ahead; blue: trained ahead; dots: 95%
+  bootstrap CI excludes 0; framed: the convention of the earlier study.</em>
+</p>
+
+## Quick start
+
+    git clone https://github.com/nilsleut/ridge-readout.git
+    cd ridge-readout
+    pip install -r requirements.txt
+    python tests/test_phase2_controls.py        # 97 checks, no external data needed
+    python scripts/export_macros.py             # regenerates every number in the paper from results/
+    cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main
+
+`export_macros.py` reads one value from the learning-rules-rsa repository
+(`CROSSRUN_REPO`, see below); the full analyses need the external data listed further
+down.
 
 ## Repository structure
 
@@ -20,6 +65,7 @@ Paper: Analysis choices decide whether untrained networks beat trained ones at V
     scripts/      analysis steps, macro and figure generators
     tests/        control suites (phase-2 controls, loader hardening, lower-edge gate)
     paper/        manuscript sources, claims ledger, correction notes
+    docs/         figure images for this README (rendered from paper/figures/)
     PROVENANCE.md, CHANGES_FROM_ORIGIN.md   origin of imported files and all deviations
     DATA_MANIFEST.txt                       expected external files with sizes and sha256
 
