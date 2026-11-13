@@ -18,3 +18,9 @@ preferred-citation:
       given-names: Nils
       affiliation: "Independent researcher, Zug, Switzerland"
   year: 2026
+  journal: "arXiv preprint"
+  url: "https://arxiv.org/abs/2611.15533"
+  identifiers:
+    - type: other
+      value: "arXiv:2611.15533"
+      description: "arXiv identifier"

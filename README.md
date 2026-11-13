@@ -7,7 +7,7 @@
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Config hash](https://img.shields.io/badge/config%20hash-206fa875cca5-informational.svg)
 
-Paper: Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA (arXiv: ID follows after announcement)
+Paper: Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA arXiv:2611.15533, https://arxiv.org/abs/2611.15533
 
 An earlier study (arXiv:2608.12408) found that an untrained convolutional network matches
 human V1 (THINGS-fMRI) better than a backpropagation-trained one. This repository re-tests
