@@ -1,0 +1,267 @@
+\pdfoutput=1
+\documentclass[10pt]{article}
+% Anonymous TMLR submission: no [accepted] or [preprint] option.
+\usepackage{tmlr}
+\usepackage[utf8]{inputenc}
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{hyperref}
+% Anonymity: empty PDF document information, no pdfTeX file-name keys, no path-derived trailer ID.
+\hypersetup{pdftitle={}, pdfauthor={}, pdfsubject={}, pdfkeywords={}, pdfcreator={}, pdfproducer={}}
+\pdfsuppressptexinfo=-1
+\pdftrailerid{}
+\pdfinfoomitdate=1
+
+\input{numbers}
+
+\title{Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model--brain RSA}
+% Authors are hidden by tmlr.sty in submission mode; left empty on purpose.
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\input{drafts/abstract}
+\end{abstract}
+
+\section{Introduction}
+\input{drafts/sec_1}
+
+\section{Methods}
+\subsection{Data}
+\label{sec:data}
+
+We used the THINGS-fMRI data set \citep{hebart2023} of 3 subjects. Single-trial
+betas were taken from the ROI masks of the voxel metadata (V1; LOC as the union of lLOC
+and rLOC) and z-scored per voxel across all 9{,}840 trials of the subject before stimulus
+selection. The 720 evaluation stimuli are one exemplar each of 720 distinct concepts,
+in the same order for all subjects; all are single-presentation \texttt{train} trials
+from one session per subject.
+
+Voxel reliability was measured on the 100 \texttt{test} images, shown 12 times each,
+identical across subjects and disjoint from the 720. Per voxel, the Pearson
+correlation between the means of two halves of 6 repetitions was averaged over all 462
+balanced splits and Spearman--Brown corrected, $r_{\mathrm{SB}} = 2r/(1+r)$. A voxel is
+reliable if $r_{\mathrm{SB}} > 0.2$, a threshold fixed in advance for all conditions;
+measured on other images, selection cannot leak into fits on the 720. V1 contained \NReliableSubOne,
+\NReliableSubTwo{} and \NReliableSubThree{} reliable voxels in sub-01, sub-02 and
+sub-03. Ridge scores use reliable V1 voxels; RSA uses all voxels of the ROI.
+
+RDMs were compared on cross-run pairs only: pairs of distinct stimuli shown in different
+runs in every subject, 210{,}205 of the 258{,}840 pairs of the full set. In every subject
+the 720 fall into 10 runs of 72; sub-01 and sub-02 saw them in identical run order, so
+same-run pairs share a run component, and the restriction removes it \citep{evalres}.
+
+\subsection{Models}
+
+\paragraph{CIFAR-trained CNNs.} We evaluated the 30 checkpoints of \citet{evalres}:
+6 conditions $\times$ 5 seeds (42, 123, 456, 789, 1337) of one convolutional
+architecture, trained on CIFAR-10 \citep{krizhevsky2009} at 32\,px, the training resolution. The
+conditions are Backprop, Feedback Alignment (FA) \citep{lillicrap2016}, Predictive Coding (PC)
+\citep{rao1999,whittington2017}, STDP \citep{bi1998,masquelier2007} and two untrained networks: untrained (uncalibrated BN
+statistics), with BatchNorm running statistics left at initialisation, and untrained
+(BN-calibrated), with running statistics set by 50 forward-only passes of CIFAR batches
+at 32\,px. ``Untrained'' alone means the uncalibrated variant, as in the published
+headline.
+
+The V1 layer is Conv1, the output of the whole first block (convolution, BatchNorm, ReLU,
+$2 \times 2$ max pooling; 32 channels, map side half the input size); LOC is mapped to
+Conv3. Features were extracted in eval mode with the original code, in two
+input arms. NATIVE: the image is resized and centre-cropped
+to $p \in \{32, 64, 96, 128, 160, 224\}$\,px. UPSAMPLED: the image is resized and
+cropped to 32\,px and then resized to $p$, so its content is limited to 32\,px; we used
+it at $p = 224$. Both arms apply the CIFAR channel normalisation.
+
+\paragraph{ImageNet models.} Six torchvision models \citep{paszke2019, marcel2010}: alexnet,
+vgg11\_bn, resnet18, resnet50, convnext\_tiny and vit\_b\_16, in eval mode. Trained
+models use the IMAGENET1K\_V1 weights. Untrained models were built without weights after
+\texttt{torch.manual\_seed($s$)}, $s \in \{0, 1, 2\}$, with BatchNorm running statistics
+at their defaults (mean 0, variance 1); convnext\_tiny and vit\_b\_16 use LayerNorm. RGB images
+were resized (shorter side) and centre-cropped to $R \in \{112, 224, 448\}$ (training
+resolution 224) and ImageNet-normalised; vit\_b\_16 accepts only 224. Layers (V1 / LOC),
+fixed before the run: alexnet
+\texttt{features[1]} / \texttt{features[12]}; vgg11\_bn \texttt{features[2]} / last max
+pooling of \texttt{features}; resnet18 and resnet50 \texttt{maxpool} / \texttt{layer4};
+convnext\_tiny \texttt{features[0]} / \texttt{features[7]}; vit\_b\_16
+\texttt{encoder.layers[0]} / \texttt{encoder.layers[-1]}. Outputs were averaged over
+space, or over tokens without the class token.
+
+\subsection{RSA convention}
+\label{sec:rsa}
+
+Unless stated otherwise, RSA follows \citet{evalres}. The model RDM is the
+correlation distance ($1 -$ Pearson $r$ across units) between the globally average-pooled
+(GAP) features of two stimuli; the fMRI RDM is the correlation distance between their
+beta patterns over all ROI voxels. RSA is the Spearman correlation between the two RDMs
+over the cross-run pairs, per subject, then averaged. A
+contrast is the mean over seeds of the per-seed difference between two conditions; for
+ImageNet models it is untrained (mean over the 3 initialisation seeds) minus trained.
+
+Uncertainty is over stimuli: the 1000 bootstrap resamples of \citet{evalres} (720
+stimuli drawn with replacement, seed 20261002). Each draw recomputes the cross-run pair
+set on the resampled stimuli, dropping pairs of a stimulus with itself, and every
+difference, slope and ratio is formed within the draw (paired). Intervals are 95\%
+percentile intervals. They describe stimulus variation in 3 subjects, not the population. Unit means and SDs, the feature transformations $F$, the voxel normalisations $B$, the mean profile and the norms are estimated once on the 720 stimuli and held fixed across resamples; the bootstrap resamples pairs of fixed RDMs. Re-estimating them within 200 resamples left the classification of three cells unchanged (Appendix~\ref{app:bootnorm}).
+
+\subsection{Analysis multiverse}
+\label{sec:mvmethods}
+
+Three factors were crossed. Feature normalisation $F$, per unit over the 720 stimuli:
+raw; center (mean subtracted); scale (divided by the SD, not centred); z (both). Units
+with SD below $10^{-8}$ are set to 0. Distance $D$: correlation, cosine or euclidean,
+applied to features and betas alike. fMRI normalisation $B$: paper (betas
+as in Section~\ref{sec:data}), center720 (centred per voxel over the 720 stimuli) and
+z720 (z-scored per voxel over the 720). The cell (raw, correlation, paper) is the
+convention of \citet{evalres}. All $4 \times 3 \times 3 = 36$ cells were computed for
+the V1 contrast (Conv1, untrained $-$ Backprop) and the LOC contrast (Conv3, Backprop
+$-$ untrained). The resolution slope is
+$S = \mathrm{Gap}(\text{NATIVE } 224) - \mathrm{Gap}(\text{NATIVE } 32)$, with Gap the V1
+contrast. As a check, euclidean RDMs under $F$ = raw and center must coincide. For
+ImageNet models, all 36 cells were computed as point estimates and four were
+bootstrapped: (raw, correlation, paper), (z, correlation, paper), (raw, euclidean,
+paper) and (center, correlation, center720); their slope is
+$S_{\mathrm{gen}} = \mathrm{Gap}(448) - \mathrm{Gap}(224)$.
+
+\input{drafts/methods_short}
+
+
+
+\section{Results}
+\subsection{Sign flip between RSA and ridge (including the pre-specified primary analysis)}
+\label{sec:signflip}
+% TMLR layout: Figure 2 set beside the text (same size and caption as before).
+\begin{wrapfigure}{r}{3.55in}
+\vspace{-1.2em}
+\centering
+\includegraphics[width=3.5in]{figures/prereg_ladder.pdf}
+\caption{Pre-specified primary analysis. Median $r$ over reliable V1 voxels (Conv1, NATIVE 224\,px), averaged over the three subjects, against grid size $g$ (logarithmic axis). Coloured lines: the six conditions, mean over 5 seeds, error bars SD over seeds. Grey dashed and dotted lines: control banks (luminance and contrast, darker; pixels; Gabor). The permuted-assignment control is not shown (Section~\ref{sec:signflip}).}
+\label{fig:prereg_ladder}
+\vspace{-1em}
+\end{wrapfigure}
+\input{drafts/sec_3_1}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/sign_flip.pdf}
+\caption{Untrained (uncalibrated BN statistics) minus Backprop at V1 (Conv1) against evaluation resolution; NATIVE inputs left of the dotted line, UPSAMPLED 224\,px (open markers) right. RSA with raw features (circles) and channel-z-scored features (squares): per subject on cross-run pairs, averaged over subjects and 5 seeds; bars are 95\% stimulus-bootstrap CIs where computed. Ridge (triangles): median $r$ over reliable voxels, mean over sub-01 and sub-02, error bars SD over seeds.}
+\label{fig:sign_flip}
+\end{figure}
+
+
+\subsection{Channel standardization removes gap and slope}
+\label{sec:standardization}
+\input{drafts/sec_3_2}
+\subsection{Analysis multiverse}
+\label{sec:multiverse}
+\input{drafts/sec_3_3}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/multiverse_v1.pdf}
+\caption{Untrained minus Backprop at V1 in the 36 cells of the analysis multiverse. Left: gap at NATIVE 224\,px; right: resolution slope $S$ (224 minus 32\,px). Rows: feature normalisation $F$; columns: distance $D$ within fMRI normalisation $B$. Colour: value on a diverging scale centred at 0. Dots: 95\% stimulus-bootstrap CI excludes 0. Black frame: the convention of \citet{evalres}. Mean over 5 seeds and 3 subjects. Euclidean cells agree in pairs of rows (raw and center; scale and z) and between the paper and center720 columns (centring invariance).}
+\label{fig:multiverse_v1}
+\end{figure}
+
+
+\subsection{Mean-profile alignment}
+\label{sec:gainaxis}
+\input{drafts/sec_3_4_short}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/gain.pdf}
+\caption{(a)~Own CNN: raw-feature RSA at V1 against $c_{\mathrm{align}}$ for the untrained (vermillion) and Backprop (blue) checkpoints; markers code the input condition. (b)~ImageNet models: the same for trained (blue) and untrained (vermillion) networks; markers code the model. (c)~Pearson correlation over stimuli between mean-profile alignment and stimulus mean luminance (orange) or RMS contrast (light blue), for V1 voxels per subject, the own CNN's conditions and the ImageNet models.}
+\label{fig:gain}
+\end{figure}
+
+\subsection{Removing the mean-profile component}
+\label{sec:ablation}
+\input{drafts/sec_3_ablation_short}
+
+\subsection{Norm and angular components}
+\label{sec:gaingeometry}
+\input{drafts/sec_3_5_short}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/separation.pdf}
+\caption{Component RSA contrasts with $F$ = center and 95\% stimulus-bootstrap CIs, for the own CNN (vermillion) and six ImageNet models (blue). Panels from left: V1 norm component, V1 angular component, LOC angular component, and the slope of the V1 angular contrast from 224 to 448\,px for the ImageNet models (green; none for vit\_b\_16). V1: untrained minus trained; LOC: trained minus untrained.}
+\label{fig:separation}
+\end{figure}
+
+\FloatBarrier
+\section{Discussion}
+\input{drafts/sec_4}
+
+% Acknowledgements removed for anonymous review (restore for camera-ready).
+\section*{Use of large language models}
+Claude (Anthropic), a large language model, was used as an assistant throughout this work: to suggest and refine analyses and decision rules, to write and run analysis code, and to draft most of the manuscript text. The authors defined the research question, decided which analyses to run and which claims to make, checked the results with reproduction tests and gates, and take full responsibility for the content, including any errors.
+
+\bibliographystyle{tmlr}
+\bibliography{refs}
+
+\appendix
+\section{Lower-edge gate}
+\label{app:lowedge}
+\input{drafts/app_lowedge}
+\section{Run-grouped folds}
+\label{app:runfolds}
+\input{drafts/app_runfolds}
+\section{Band-pass inputs}
+\label{app:bandpass}
+\input{drafts/app_bandpass}
+\section{Failed predictions}
+\label{app:failed}
+\input{drafts/app_failed}
+\section{Per-subject results of the primary analysis}
+\label{app:persubject}
+\input{drafts/app_persubject}
+\section{Ridge robustness}
+\label{app:ridgerobust}
+\input{drafts/app_ridgerobust}
+\section{Bootstrap with re-estimated normalisation}
+\label{app:bootnorm}
+\input{drafts/app_bootnorm}
+\section{Ablation on each side}
+\label{app:ablation2x2}
+\input{drafts/app_ablation2x2}
+\section{Extended methods}
+\label{app:extmethods}
+This appendix gives the full text of the methods condensed in Sections~\ref{sec:ridge}--\ref{sec:inference}.
+\input{drafts/app_extmethods_ridge_gain}
+\subsection{Analysis plan, amendments and inference}
+\label{app:inference}
+\input{drafts/sec_2_7}
+\section{Extended results}
+\label{app:extresults}
+Figure~\ref{fig:multiverse_loc} shows the LOC contrast in the 36 cells of the analysis multiverse (Section~\ref{sec:multiverse}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=3.5in]{figures/multiverse_loc.pdf}
+\caption{Backprop minus untrained at LOC (Conv3), NATIVE 224\,px, in the 36 cells of the analysis multiverse. Layout, colour scale, dots and frame as in Fig.~\ref{fig:multiverse_v1}.}
+\label{fig:multiverse_loc}
+\end{figure}
+This appendix gives the full results condensed in Sections~\ref{sec:gainaxis}--\ref{sec:gaingeometry}.
+\subsection{Mean-profile alignment}
+\label{app:extgainaxis}
+\input{drafts/sec_3_4}
+\subsection{Removing the mean-profile component}
+\label{app:extablation}
+\input{drafts/sec_3_ablation}
+\subsection{Norm and angular components}
+\label{app:extgeometry}
+\input{drafts/sec_3_5}
+
+\end{document}

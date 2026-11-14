@@ -1,0 +1,46 @@
+% Introduction.
+Representational similarity analysis (RSA) is one of the most widely used tools for asking
+which artificial networks capture the computations of visual cortex: it summarises each
+system by the dissimilarities between its responses to a set of stimuli and compares
+these summaries directly, without fitting a mapping \citep{kriegeskorte2008}. A
+recurring and surprising result is that networks with random, untrained weights can
+rival trained networks as models of visual cortex, in some reports exceeding them
+\citep{truzzi2020, kazemian2025}.
+
+A result of this kind was reported in THINGS fMRI \citep{hebart2023}:
+an untrained network with uncalibrated batch-normalisation statistics exceeded a
+backpropagation-trained network at V1 when images were evaluated at 224\,px, but not at
+32\,px, the resolution at which the networks had been trained \citep{evalres}; a related
+claim appears in \citet{lrrsa}. Both analyses used a single convention:
+globally pooled features, correlation distance between units, and voxel responses
+normalised over all trials of the experiment.
+
+Correlation distance across
+units is not invariant to constant offsets of individual units over the stimulus set:
+when units have different mean responses, the dissimilarity between two stimuli depends
+in part on how strongly each stimulus pattern is aligned with the shared profile of unit means. Euclidean distance is invariant to such offsets but not to the norm of
+each stimulus's response vector. Different distance measures and normalisations
+therefore weight a gain-like quantity and the direction of the response pattern
+differently. The role of centring is explicit in related similarity measures
+\citep{kornblith2019}, and the choice of dissimilarity measure is known to affect
+the reliability of RSA \citep{walther2016, diedrichsen2017}, but its effect on
+the ranking of candidate models has rarely been examined.
+
+Here we test this result in four ways: (i) a pre-specified analysis replaces RSA by a fitted
+ridge readout on the full feature map; (ii) exploratory analyses, each with predictions and
+decision rules committed before it was run, ask where the discrepancy between RSA and ridge
+arises, including whether the advantage is carried by the component along the mean profile of
+the units; (iii) a multiverse of 36 combinations of unit normalisation, distance measure and
+voxel normalisation \citep{steegen2016} tests which conclusions hold across defensible analysis
+choices, and six ImageNet architectures test whether they generalise beyond the CIFAR-trained
+networks; (iv) an exact decomposition of Euclidean distances separates norm and angular
+components.
+
+We find that whether the untrained network beats the trained one at V1 depends on the
+analysis. The advantage is not reproduced by the fitted readout, disappears under
+correlation distance when model units are standardised, and is absent from the angular
+component and from the component orthogonal to the mean profile, whereas raw
+correlation-distance RSA closely tracks the mean-profile alignment of model and voxels.
+The ranking at LOC favours the trained networks wherever it is resolved. A luminance-and-contrast bank scored above every network under the ridge readout at V1 (point estimates). We
+report all pre-stated predictions, including those that failed, and state which earlier claims
+\citep{evalres, lrrsa} do not hold.

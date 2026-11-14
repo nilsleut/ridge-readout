@@ -1,0 +1,38 @@
+In an exploratory analysis prompted by criticism of an earlier draft (Section~\ref{sec:inference}),
+each raw GAP pattern and each beta pattern was split into its projection on the mean profile
+and the remainder orthogonal to it (Section~\ref{sec:gainmethods}); each model component was
+compared with the same component of the brain, with the RSA convention and bootstrap of
+Section~\ref{sec:rsa}. The full variant reproduced the stored paper cell of the own CNN and
+of the ImageNet models to within \MpGateMaxDelta{} (reproduction gate: met).
+
+M1 was met: in the orthogonal remainder, the V1 contrast of the untrained (uncalibrated BN
+statistics) network minus Backprop at NATIVE 224\,px was $\MpOrthoOwnVoneNatTwoTwoFour$
+[$\MpOrthoOwnVoneNatTwoTwoFourLo$, $\MpOrthoOwnVoneNatTwoTwoFourHi$], with an upper bound of
+at most 0.010, against $+\MpFullOwnVoneNatTwoTwoFour$ [$\MpFullOwnVoneNatTwoTwoFourLo$,
+$\MpFullOwnVoneNatTwoTwoFourHi$] in the full variant. M2 was met: the resolution slope of
+the orthogonal remainder was $\MpOrthoOwnSlope$ [$\MpOrthoOwnSlopeLo$, $\MpOrthoOwnSlopeHi$],
+below half of $S_{\mathrm{paper}}$. M4 was met: for the ImageNet models at 224\,px, the upper
+bound of the orthogonal V1 contrast was at most 0.010 in \MpMFourModels{} of 6 models. M3 was
+not met: the parallel component gave $+\MpParOwnVoneNatTwoTwoFour$
+[$\MpParOwnVoneNatTwoTwoFourLo$, $\MpParOwnVoneNatTwoTwoFourHi$] at NATIVE 224\,px and a
+slope of $+\MpParOwnSlope$ [$\MpParOwnSlopeLo$, $\MpParOwnSlopeHi$]. The interval of the
+parallel gap includes both 0 and the raw gap, so these data do not decide whether the
+parallel component alone suffices. At LOC, described without a rule, Backprop minus
+untrained was $+\MpFullOwnLoc$ [$\MpFullOwnLocLo$, $\MpFullOwnLocHi$] in the full variant,
+$+\MpOrthoOwnLoc$ [$\MpOrthoOwnLocLo$, $\MpOrthoOwnLocHi$] in the orthogonal remainder and
+$\MpParOwnLoc$ [$\MpParOwnLocLo$, $\MpParOwnLocHi$] in the parallel component.
+
+M3 was not met, and sufficiency of the parallel component was not established. The wording
+of the pre-stated rule (``M3 not met: it is not sufficient'') claimed more than a missed
+threshold with this interval can show, and we state only what the data resolve: the
+advantage is absent from the orthogonal remainder, and the parallel component alone did not
+resolve it. No physiological claim follows.
+
+On the same resamples, the paired contrast of the V1 gap with the full variant on both
+sides minus the gap with the orthogonal remainder on both sides was $+\AbTwoXOne$ [$\AbTwoXOneLo$, $\AbTwoXOneHi$] (X1: met), which restates
+that the drop between the full and the orthogonal variant is resolved. With the orthogonal
+remainder on one side only (Appendix~\ref{app:ablation2x2}), the V1 contrast was
+$\AbTwoOwnOrthoFull$ [$\AbTwoOwnOrthoFullLo$, $\AbTwoOwnOrthoFullHi$] for the orthogonal model
+against the full brain RDM and $+\AbTwoOwnFullOrtho$ [$\AbTwoOwnFullOrthoLo$,
+$\AbTwoOwnFullOrthoHi$] for the full model against the orthogonal brain RDM; both intervals
+include 0, so under the pre-stated rule no attribution to a side is claimed. Removing the component from only one side brought the point estimate from $+\MpFullOwnVoneNatTwoTwoFour$ in the full variant to values close to that of the orthogonal variant, and the intervals of both mixed cells lay below that of the full variant. This is consistent with an advantage that depends on the mean-profile component on both sides, as the alignment correlation $c_{\mathrm{align}}$ of Section~\ref{sec:gainaxis} suggests; it is a descriptive observation, not covered by a rule, and we did not test a paired contrast.

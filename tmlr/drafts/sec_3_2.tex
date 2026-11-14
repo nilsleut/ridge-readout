@@ -1,0 +1,41 @@
+In an exploratory analysis, each channel of the GAP features was z-scored over the 720
+stimuli before RSA. In sub-01 on the reliable voxels (S1), the untrained (uncalibrated
+BN statistics) minus Backprop difference became $\SOneStdGap$, below the threshold of
+0.010 for the scale hypothesis, which was therefore supported; the two untrained
+networks differed by \SOneStdRandBncal{} (control criterion $\leq 0.010$: met).
+
+With the RSA convention of Section~\ref{sec:rsa} (all ROI voxels, three subjects,
+stimulus bootstrap), raw features reproduced the published values (R1, met):
+$+\VoneGapRawTwoTwoFour$ [$\VoneGapRawTwoTwoFourLo$, $\VoneGapRawTwoTwoFourHi$] at NATIVE
+224\,px and $\VoneGapRawThreeTwo$ [$\VoneGapRawThreeTwoLo$, $\VoneGapRawThreeTwoHi$] at 32\,px.
+Absolute RSA values at V1 were low ($\rho$ between \AbsRsaPaperMin{} and \AbsRsaPaperMax{}
+in the paper cell at NATIVE 224\,px, means of the six conditions). The leave-one-subject-out
+lower bound of the noise ceiling was \LosoBoundVone{} [\LosoBoundVoneLo, \LosoBoundVoneHi] on
+cross-run pairs \citep{lrrsa}; the upper bound is not informative with three
+subjects, so we cannot say how close the models are to the ceiling. With z-scored channels the V1 gap was $\VoneGapZTwoTwoFour$
+[$\VoneGapZTwoTwoFourLo$, $\VoneGapZTwoTwoFourHi$] at 224\,px (R2, upper bound
+$\leq 0.010$: met) and $\VoneGapZThreeTwo$ [$\VoneGapZThreeTwoLo$, $\VoneGapZThreeTwoHi$]
+at 32\,px. The resolution slope fell from $S_{\mathrm{raw}} = +\SlopeRaw$
+[$\SlopeRawLo$, $\SlopeRawHi$] to $S_z = +\SlopeZ$ [$\SlopeZLo$, $\SlopeZHi$]
+(R3, $S_z \leq 0.5\,S_{\mathrm{raw}}$: met; Fig.~\ref{fig:sign_flip}). At LOC the
+Backprop-minus-untrained gap at 224\,px was $+\LocGapRaw$ [$\LocGapRawLo$, $\LocGapRawHi$]
+with raw and $+\LocGapZ$ [$\LocGapZLo$, $\LocGapZHi$] with z-scored channels (R4, CI above
+0 under z: met). With content limited to 32\,px (UPSAMPLED 224), the V1 gap was
+$+\VoneGapRawUp$ [$\VoneGapRawUpLo$, $\VoneGapRawUpHi$] raw and $+\VoneGapZUp$
+[$\VoneGapZUpLo$, $\VoneGapZUpHi$] z-scored (R5, upper bound $\leq 0.010$: met).
+
+The moment ratio $m = \lVert\mu\rVert^2 / (\lVert\mu\rVert^2 + \sum_k \sigma_k^2)$ of the
+channel means $\mu$ and SDs $\sigma_k$ tracks the difference $d$ between raw and
+z-scored RSA: over 60 checkpoint-by-resolution cells of the untrained network and
+Backprop, Spearman$(m, d) = \MOneSpearman$ (MR1, called M1 in the step 5 amendment; threshold 0.6: met). For Backprop, $m$ was
+ordered UPSAMPLED 224 $<$ NATIVE 224 $<$ NATIVE 32 in \PMechOneBpSeeds{} of 5 seeds, and
+the untrained network's range of $m$ (\PMechOneRandRange) was below half of Backprop's
+(P\_mech1, met). P\_mech2 was not met (Appendix~\ref{app:bandpass}): Backprop's $m$ was higher for band-pass inputs
+without the coarse band than for the coarse band alone in \PMechTwoNotchSeeds{} of 5
+seeds, but Spearman$(m, d)$ over all 50 cells including the band-pass inputs was
+\PMechTwoSpearman, below 0.6.
+
+Ridge on the same GAP features ($g = 1$) at every NATIVE resolution (P\_ridge; sub-01 and
+sub-02) gave untrained-minus-Backprop contrasts of $\PRidgeGapThreeTwo$ at 32\,px and
+$\PRidgeGapTwoTwoFour$ at 224\,px, non-positive at all six resolutions, with a slope of
+$\PRidgeSlope$, below half of $S_{\mathrm{raw}}$ (met; Fig.~\ref{fig:sign_flip}).

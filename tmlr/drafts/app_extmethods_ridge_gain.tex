@@ -1,0 +1,89 @@
+% Moved verbatim from Sections 2.5 and 2.6 of the arXiv-v1 main.tex (labels renamed).
+\subsection{Ridge readout}
+\label{app:ridge}
+
+Encoding models used dual ridge regression \citep{hoerl1970}, with the kernel
+$K = XX^{\top}$ eigendecomposed once per split. The Conv1 maps were
+pooled to a $g \times g$ grid by adaptive average pooling, $g \in \{1, 2, 4, 8\}$, giving
+$32g^2$ features independent of resolution; $g = 1$ is GAP, and larger $g$ retains
+spatial structure. Features were standardised with statistics of the training rows of
+each split only.
+
+Cross-validation is nested: 8 outer folds and 5 inner folds within each outer training
+set, from a fixed partition (seed 20260818); with one exemplar per concept, folds are
+concept-grouped. Per voxel and outer fold, $\alpha$ was
+chosen from 29 log-spaced values between $10^{-6}$ and $10^{8}$ by the minimum mean
+squared error over the inner folds, and the model was refit on the outer training set.
+The regularisation is selected by mean squared error, not by Pearson $r$, the reported score. In simulations with the dimensions of the primary data set, selection by $r$ placed a substantial share of the selections at reliable voxels on the lowest grid value in every simulated population that contained reliable voxels, irrespective of the strength of the signal, whereas selection by mean squared error placed none there (Phase~2b report in the repository); because $r$ does not depend on the scale of the predictions, which $\alpha$ mainly sets, its inner-fold optimum was not localised on the grid. The selected $\alpha$ therefore need not maximise $r$.
+Out-of-fold predictions were pooled over the outer folds and scored by one Pearson $r$
+per voxel over all 720 stimuli. When the selected regularisation shrinks the predictions
+of a voxel towards the training mean, this pooled correlation is negative in
+expectation, so features without signal yield negative rather than zero scores. A model that predicts the mean of the training rows of each fold scored $\FFloorMean$ (mean over subjects); the 97.5th percentile of a permutation null for the seed-0 networks lay between $\FPermPNineSevenFiveMin$ and $\FPermPNineSevenFiveMax$, and observed scores were above it in sub-01 and sub-02 (Appendix~\ref{app:ridgerobust}). The score is the median $r$ over reliable V1 voxels,
+averaged over subjects, with contrasts formed within seed.
+
+A low-edge selection at a reliable voxel is logged, not fatal (amendment of 2026-10-03).
+With diagnostic values $10^{-7}$, $10^{-8}$ and $10^{-9}$
+added, it is a valid plateau if the inner-fold MSE improves by less than a relative
+$10^{-3}$ on its value at $10^{-6}$; otherwise the cell is excluded. The gate never
+changes a score.
+
+The pre-specified analysis used the 720 single-trial betas at NATIVE 224\,px, all
+checkpoints and subjects, and all four $g$; the $g = 2$ features were extracted on a CPU,
+subject to a downstream equivalence gate (amendment of 2026-10-13). An exploratory fit
+at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
+
+Two controls used the identical readout. The control band consists of low-level banks
+pooled to the same grid: pixels; the luminance-and-contrast bank, two feature maps (luminance, Rec.\,709, $Y = 0.2126R + 0.7152G + 0.0722B$, and local RMS contrast in a $9 \times 9$ window) pooled to the $g \times g$ grid, i.e.\ $2g^2$ features (2 at $g = 1$, 128 at $g = 8$); absolute responses of a Gabor bank (4 orientations $\times$
+3 spatial frequencies); and, as negative test, Backprop seed-0 features with permuted
+stimulus assignment. The spatial-correspondence control permutes the $g \times g$ cells
+differently for every image (seed 20260820), keeping dimensionality and per-channel
+distributions; it was run for the seed-0 untrained and Backprop checkpoints at
+$g \in \{2, 4, 8\}$.
+
+\subsection{Mean-profile components and decomposition}
+\label{app:gainmethods}
+
+For a stimulus $\times$ unit matrix $X$ (720 rows), let $\mu$ be the unit means over the 720
+stimuli, $\mu_c = \mu - \overline{\mu}$ the mean profile with its mean over units removed,
+$u = \mu_c / \lVert \mu_c \rVert$, and $\tilde{x}_i$ row $i$ centred across units. The
+mean-profile alignment of stimulus $i$ is the cosine between its centred pattern and the
+mean profile,
+\begin{equation}
+  a_i = \frac{\langle \tilde{x}_i, u \rangle}{\lVert \tilde{x}_i \rVert}.
+\end{equation}
+Model alignment was computed on raw features, voxel alignment on all ROI voxels under
+$B$ = paper. $c_{\mathrm{align}}$ is the Pearson correlation over the 720 stimuli between
+model and V1 voxel alignment, averaged over subjects. The alignment RDM is
+$\lvert a_i - a_j \rvert$. Partial RSA regresses the ranks of the model and of the fMRI
+RDM, per subject and draw, on an intercept and the ranks of their own alignment RDM and
+correlates the residuals (Pearson). Alignments were described against stimulus mean
+luminance and RMS contrast, the per-image mean and SD of Rec.\,601 luminance
+($Y = 0.299R + 0.587G + 0.114B$); over the 720 stimuli at 224\,px, the image means of the
+two luminance definitions correlate at Pearson \LumDefPearson{} (Spearman
+\LumDefSpearman).
+
+The projection coefficient $p_i = \langle \tilde{x}_i, u \rangle = a_i \lVert \tilde{x}_i \rVert$
+and the remainder $r_i = \tilde{x}_i - p_i u$ split each centred pattern into a part along
+the mean profile and a part orthogonal to it. We compare three variants: ``full'', the
+correlation distance on $x_i$ (the convention of \citet{evalres}); ``orthogonal'', the
+correlation distance on $r_i$; and ``parallel'', the RDM $\lvert p_i - p_j \rvert$. The beta
+patterns are decomposed in the same way (voxel means over the 720 stimuli, $B$ = paper),
+and each model component is compared with the same component of the brain.
+
+The norm and angular components start from $X_c$, $X$ with every unit centred over the
+720 stimuli ($F$ = center; for $F$ = z, units are also scaled to SD 1). With
+$n_i = \lVert X_{c,i} \rVert$ and $\cos\theta_{ij}$ the cosine between rows $i$ and $j$,
+\begin{equation}
+  \lVert X_{c,i} - X_{c,j} \rVert^2 = (n_i - n_j)^2 + W_{ij}, \qquad
+  W_{ij} = 2\, n_i n_j \,(1 - \cos\theta_{ij}).
+\end{equation}
+We report the norm RDM $N_{ij} = \lvert n_i - n_j \rvert$, the angular component
+$A_{ij} = 1 - \cos\theta_{ij}$, the unweighted angular dissimilarity of the patterns
+centred over stimuli, and the norm-weighted angular term $W_{ij}$. The identity holds for
+$W$, not for $A$ alone; we therefore report $N$, $A$ and $W$ separately, and the RSA of the
+euclidean RDM is not the sum of the RSA of its components. The literature uses
+``representational geometry'' more broadly, for the distance structure including the
+norms; ``angular component'' here denotes only $A$. The betas are decomposed in the same
+way, and the RSA of a component compares the model and fMRI RDMs of that component. The
+identity was checked numerically. These names label quantities defined here; they are
+not claims about physiological gain.

@@ -1,0 +1,43 @@
+In an exploratory analysis, the euclidean RDM on unit-centred features was decomposed
+into its norm component and its angular component (Section~\ref{sec:gainmethods};
+Fig.~\ref{fig:separation}). Contrasts are untrained minus trained at V1 and trained minus
+untrained at LOC; for the own CNN they are untrained (uncalibrated BN statistics) and
+Backprop. The identity held to a maximum relative error of
+\SepOneMaxRelError{} (SEP1, threshold $10^{-8}$: met).
+
+SEP2 was not met: the V1 norm contrast ($F$ = center) was $+\SepOwnVoneNormCenter$
+[$\SepOwnVoneNormCenterLo$, $\SepOwnVoneNormCenterHi$] in the own CNN, with a CI
+including 0, and had a CI above 0 in \SepTwoModels{} of 6 ImageNet models. SEP3 was met:
+the V1 angle contrast was $\SepOwnVoneAngleCenter$ [$\SepOwnVoneAngleCenterLo$,
+$\SepOwnVoneAngleCenterHi$] in the own CNN and had a CI below 0 in \SepThreeModels{} of 6
+ImageNet models. SEP4 was met: the LOC angle contrast was $+\SepOwnLocAngleCenter$
+[$\SepOwnLocAngleCenterLo$, $\SepOwnLocAngleCenterHi$] in the own CNN and had a CI above 0
+in \SepFourModels{} of 6 ImageNet models. Because SEP2 was not met, the pre-stated interpretation rule applies: the V1 ranking is not attributed to the norm or the angular component. On the angular component alone, the trained
+networks were ahead at V1 in the own CNN and in \SepThreeModels{} ImageNet models, and
+at LOC in the own CNN and in \SepFourModels{} ImageNet models. The norm-weighted angular
+term $W$ gave a V1 contrast of $+\WAngOwnVone$ [$\WAngOwnVoneLo$, $\WAngOwnVoneHi$] in the own
+CNN, and its interval excluded 0 in \WAngImnPosModels{} of 6 ImageNet models (vgg11\_bn,
+$+\WAngVggelevenVone$ [$\WAngVggelevenVoneLo$, $\WAngVggelevenVoneHi$]). The angular result
+thus concerns the unweighted angular dissimilarity $A$; the norm-weighted term $W$ pointed in
+the direction of the norm component and was not resolved. Over the cross-run pairs, $N$ and $A$
+were nearly uncorrelated (Spearman \WRankNAOwn{} in the own CNN, mean over checkpoints;
+\WRankNASubOne, \WRankNASubTwo{} and \WRankNASubThree{} in the fMRI of the three subjects),
+whereas $A$ and $W$ were correlated (\WRankAWOwn; \WRankAWSubOne, \WRankAWSubTwo{} and
+\WRankAWSubThree). In a regression of the ranks of the fMRI RDM on the ranks of $N$, $A$ or
+both (own CNN, V1, NATIVE 224\,px), each component accounted for about 0.1\% of the rank
+variance of the fMRI RDM ($R^2$ for $N$ and $A$ together: \WRtwoNARand{} for the untrained
+network, \WRtwoNABp{} for Backprop), and no contrast of $R^2$ was resolved.
+
+The resolution slope of the contrasts was a descriptive point fixed in advance without a
+decision rule. For the ImageNet models, the V1 angle contrast grew from 224 to 448\,px
+with a CI above 0 in \SepSlopeAngleCiPositive{} of 5 models, for example
+$+\SepSlopeResnetfiftyAngleCenter$ [$\SepSlopeResnetfiftyAngleCenterLo$,
+$\SepSlopeResnetfiftyAngleCenterHi$] for resnet50; no norm slope had a CI excluding 0. For
+the own CNN neither component had a slope from 32 to 224\,px under $F$ = center (norm
+$\SepSlopeOwnNormCenter$ [$\SepSlopeOwnNormCenterLo$, $\SepSlopeOwnNormCenterHi$], angle
+$+\SepSlopeOwnAngleCenter$ [$\SepSlopeOwnAngleCenterLo$, $\SepSlopeOwnAngleCenterHi$]).
+convnext\_tiny was the exception among the ImageNet models: its V1 angle contrast
+($\SepConvnexttinyVoneAngleCenter$ [$\SepConvnexttinyVoneAngleCenterLo$,
+$\SepConvnexttinyVoneAngleCenterHi$]) and its angle slope ($+\SepSlopeConvnexttinyAngleCenter$
+[$\SepSlopeConvnexttinyAngleCenterLo$, $\SepSlopeConvnexttinyAngleCenterHi$]) both had CIs
+including 0. We did not test an explanation for this exception.

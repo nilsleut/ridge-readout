@@ -1,0 +1,85 @@
+In the pre-specified primary analysis (Section~\ref{sec:inference}), the untrained
+(uncalibrated BN statistics) network scored below Backprop at every rung of the grid
+ladder (Fig.~\ref{fig:prereg_ladder}). The untrained-minus-Backprop contrast in median
+$r$ over reliable V1 voxels, averaged over subjects, was $\PreregRandBpGOne$,
+$\PreregRandBpGTwo$, $\PreregRandBpGFour$ and $\PreregRandBpGEight$ at $g = 1, 2, 4, 8$.
+The number of positive seeds was \PreregRandBpGOnePos, \PreregRandBpGTwoPos,
+\PreregRandBpGFourPos{} and \PreregRandBpGEightPos{} of 5, and the one-sided sign-flip
+$p$ was \PreregRandBpGOneP, \PreregRandBpGTwoP, \PreregRandBpGFourP{} and
+\PreregRandBpGEightP. The pre-specified minimal detectable effect, derived from the
+pilot's seed-level standard deviation (\PreregPilotSd), was
+$\Delta_{\min} = \PreregDminSim$ (supplementary value from the primary analysis's own
+seed variability: \PreregRandBpGFourDmin{} at $g = 4$ and \PreregRandBpGEightDmin{} at
+$g = 8$), below the reference effect of $+\PreregReferenceEffect$. The criterion for
+survival at $g \geq 4$ was not met. Because $\Delta_{\min}$ was smaller than the
+reference effect, absence is informative under the plan, and the pre-specified rule
+classifies this outcome as ``The effect disappears'' rather than ``The method cannot
+resolve it''. In every seed the contrast was negative. With five seeds the smallest attainable one-sided $p$ is $1/32$ and the test addresses only the positive direction, so the negative direction is an observation, not a tested effect. Per-subject values are given in Appendix~\ref{app:persubject}; the mean over subjects includes sub-03, where ridge scores were close to zero. The four
+secondary contrasts against Backprop (untrained BN-calibrated, FA, PC, STDP) were also
+negative at every $g$; the largest was $\PreregSecondaryMaxMean$, and at most
+\PreregSecondaryMaxPos{} of 5 seeds were positive in any of them.
+
+In an exploratory check of this result (three subjects, Conv1, NATIVE 224\,px;
+Appendix~\ref{app:ridgerobust}), the untrained (uncalibrated BN statistics) minus Backprop
+contrast was negative in two further scores. In the MSE skill (one minus the ratio of the
+squared error to that of the training-fold mean) it was $\FSkillMseSkillGOneMean$,
+$\FSkillMseSkillGTwoMean$, $\FSkillMseSkillGFourMean$ and $\FSkillMseSkillGEightMean$ at
+$g = 1, 2, 4, 8$, and in the per-fold $r$ it was $\FSkillPerfoldGOneMean$,
+$\FSkillPerfoldGTwoMean$, $\FSkillPerfoldGFourMean$ and $\FSkillPerfoldGEightMean$ (mean over
+subjects and seeds); no seed was positive in either score at any $g$ (F-R1 and F-R2: met). A
+model that predicts the training-fold mean scored a pooled $r$ of $\FFloorMean$ (mean over
+subjects); per-fold $r$ is undefined for predictions that are constant within each fold. Under
+50 permutations of the stimulus assignment of the features (seed-0 untrained and Backprop,
+$g = 1$ and $g = 4$), the 97.5th percentile of the null lay between $\FPermPNineSevenFiveMin$
+and $\FPermPNineSevenFiveMax$; the observed scores in sub-01 and sub-02 (from $\FPermRealMinMain$
+to $\FPermRealMaxMain$) lay above it (F-R3: met). In sub-03, described without a rule, the
+observed scores (from $\FPermRealMinSubThree$ to $\FPermRealMaxSubThree$) also lay above the
+97.5th percentiles of their nulls. A readout of each network together with the
+luminance-and-contrast bank scored below the bank alone in all six conditions at $g = 1$ and
+$g = 4$ (differences from $\FJointMinDiff$ to $\FJointMaxDiff$): for Backprop the joint readout
+reached $\FJointBpGOneJoint$ and $\FJointBpGFourJoint$, against $\FJointBpGOneBank$ and
+$\FJointBpGFourBank$ for the bank alone, and for the untrained network $\FJointRandGOneJoint$
+and $\FJointRandGFourJoint$ (F-R4, joint minus bank at most 0.010 for Backprop: met). Concatenating network features with the bank under a shared ridge penalty did not improve prediction. With 32 bank and 512 network features at $g = 4$, the two groups may need different penalties (banded ridge), which we did not fit; the result does not show how much variance the networks and the bank share. Absolute levels were low: the median $r$ of the best network
+condition, Backprop at $g = 4$, was $\PreregCondBpGFour$ (mean over subjects); this correlation score should not be read as variance explained. The absolute MSE skill of Backprop at $g = 4$ was \FSkillAbsBpGFour{} and that of the untrained network \FSkillAbsRandGFour{} (median over reliable voxels, mean over subjects and seeds, relative to the training-fold mean).
+
+Among the control banks, the luminance and contrast bank reached
+\PreregCtlLumcontrastMeanGOne, \PreregCtlLumcontrastMeanGTwo,
+\PreregCtlLumcontrastMeanGFour{} and \PreregCtlLumcontrastMeanGEight{} at
+$g = 1, 2, 4, 8$, above the mean of every network condition at every $g$, including
+Backprop (\PreregCondBpGOne, \PreregCondBpGTwo, \PreregCondBpGFour, \PreregCondBpGEight).
+The pixel and Gabor banks ranged from \PreregCtlGaborMeanGTwo{} to
+\PreregCtlPixelsMeanGFour. At $g = 4$ and $g = 8$ the intact grid exceeded its
+image-wise cell shuffle for both the untrained and the Backprop seed-0 network in
+\PreregShuffleWinSubjects{} of 3 subjects; this instrument covers one seed per condition
+and is descriptive. The permuted-assignment control, the pipeline's negative test, for
+which the plan expected a value near zero, gave \PreregCtlPermutedMeanGOne,
+\PreregCtlPermutedMeanGTwo, \PreregCtlPermutedMeanGFour{} and
+\PreregCtlPermutedMeanGEight; negative values are expected for features without
+signal under the pooled out-of-fold correlation (Section~\ref{sec:ridge}), and the
+control is not shown in Fig.~\ref{fig:prereg_ladder}. All
+\PreregLowEdgeHits{} lower-boundary selections at reliable voxels (Appendix~\ref{app:lowedge}) were classified as
+plateaus (\PreregLowEdgePlateau), and no cell was excluded.
+
+In an exploratory analysis of sub-01 (\NReliableSubOne{} reliable V1 voxels, $g = 1$,
+NATIVE 224\,px), RSA and ridge disagreed in sign on the same voxels. RSA on the reliable
+voxels gave an untrained-minus-Backprop difference of $+\RsaGapReliableGOne$; ridge gave
+$\RidgeGapGOne$, and $\RidgeGapGFour$ and $\RidgeGapGEight$ at $g = 4$ and $g = 8$
+(Fig.~\ref{fig:sign_flip}). Four candidate sources of the disagreement were tested
+against rules fixed before each run, and none was supported. The voxel set: the RSA
+difference stays positive on the voxels the ridge readout uses. The pooled out-of-fold
+score: with per-fold $r$ the ridge contrast was $\ETwoPerFoldGap$ (a positive value would
+have implicated pooling), and the two networks differed by \ETwoHiFracDiff{} in the share
+of selections at the largest $\alpha$, below the threshold of 0.10 for a collapse
+asymmetry. The fold convention: with run-grouped folds (Appendix~\ref{app:runfolds}) the contrast was
+$\EThreeRunFoldGap$ (a positive value would have implicated leakage within runs). The
+score: correlating RDMs built from the ridge predictions with the fMRI RDM gave
+$\EFourEncGapRandom$ with random folds (\EFourEncPosSeedsRandom{} of 5 seeds
+positive) and $\EFourEncGapRun$ with run-grouped folds. This meets the pre-stated rule
+($\leq 0$), but the random-fold value is close to zero: the analysis shows that the RSA
+advantage of the untrained network does not carry over to RDMs of ridge predictions, not
+that it reverses there. In
+the same subject, ridge did not separate the two untrained networks
+($\POneRidgeRandBncal$; rule $\leq 0.010$: met), whereas RSA separated them by
+$\POneRsaRandBncal$. In sub-02 and sub-03 the signs of the predicted pattern held: RSA
+$+\STwoSubTwoRsa$ and $+\STwoSubThreeRsa$, ridge $\STwoSubTwoRidge$ and
+$\STwoSubThreeRidge$. Sub-03 has \NReliableSubThree{} reliable voxels, ridge scores near zero in every condition and RSA and ridge differences close to zero; it contributes little to the pattern.

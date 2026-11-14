@@ -1,0 +1,84 @@
+These checks of the pre-specified ridge result are exploratory (Section~\ref{sec:inference}).
+They used the pre-specified configuration (three subjects, Conv1, NATIVE 224\,px, reliable V1
+voxels, the same nested cross-validation and regularisation grid) with the fitting code
+unchanged; the pooled median $r$ of every model fit reproduced the primary analysis to
+\FSkillGateMaxDelta. Table~\ref{tab:skill} gives the untrained (uncalibrated BN statistics)
+minus Backprop contrast in two further scores, the MSE skill (one minus the squared error
+relative to that of the mean of the training rows of each outer fold, median over reliable
+voxels) and the per-fold $r$ (Pearson $r$ within each outer fold, averaged over folds, median
+over reliable voxels), mean over subjects.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$g$ & MSE skill & per-fold $r$ \\
+\midrule
+1 & $\FSkillMseSkillGOneMean \pm \FSkillMseSkillGOneSd$ (\FSkillMseSkillGOnePos/5) & $\FSkillPerfoldGOneMean \pm \FSkillPerfoldGOneSd$ (\FSkillPerfoldGOnePos/5) \\
+2 & $\FSkillMseSkillGTwoMean \pm \FSkillMseSkillGTwoSd$ (\FSkillMseSkillGTwoPos/5) & $\FSkillPerfoldGTwoMean \pm \FSkillPerfoldGTwoSd$ (\FSkillPerfoldGTwoPos/5) \\
+4 & $\FSkillMseSkillGFourMean \pm \FSkillMseSkillGFourSd$ (\FSkillMseSkillGFourPos/5) & $\FSkillPerfoldGFourMean \pm \FSkillPerfoldGFourSd$ (\FSkillPerfoldGFourPos/5) \\
+8 & $\FSkillMseSkillGEightMean \pm \FSkillMseSkillGEightSd$ (\FSkillMseSkillGEightPos/5) & $\FSkillPerfoldGEightMean \pm \FSkillPerfoldGEightSd$ (\FSkillPerfoldGEightPos/5) \\
+\bottomrule
+\end{tabular}
+\caption{Untrained minus Backprop, mean $\pm$ SD over 5 seeds (positive seeds of 5), mean
+over subjects.}
+\label{tab:skill}
+\end{table}
+
+A model that predicts the mean of the training rows of each fold scored a pooled $r$ of $\FFloorSubOne$, $\FFloorSubTwo$, $\FFloorSubThree$
+in sub-01, sub-02 and sub-03; its per-fold $r$ is undefined, because the prediction is constant
+within each fold. Table~\ref{tab:permnull} gives the null distribution of the pooled median $r$
+under 50 permutations of the stimulus assignment of the feature rows (the same permutation for
+all voxels; seed-0 checkpoints) next to the observed value.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lclcc@{}}
+\toprule
+Subject & $g$ & Condition & Null mean [2.5\%, 97.5\%] & Observed \\
+\midrule
+sub-01 & 1 & untrained & $\FPermSubOneRandGOneMean$ [$\FPermSubOneRandGOneLo$, $\FPermSubOneRandGOneHi$] & $\FPermSubOneRandGOneReal$ \\
+sub-01 & 1 & Backprop & $\FPermSubOneBpGOneMean$ [$\FPermSubOneBpGOneLo$, $\FPermSubOneBpGOneHi$] & $\FPermSubOneBpGOneReal$ \\
+sub-01 & 4 & untrained & $\FPermSubOneRandGFourMean$ [$\FPermSubOneRandGFourLo$, $\FPermSubOneRandGFourHi$] & $\FPermSubOneRandGFourReal$ \\
+sub-01 & 4 & Backprop & $\FPermSubOneBpGFourMean$ [$\FPermSubOneBpGFourLo$, $\FPermSubOneBpGFourHi$] & $\FPermSubOneBpGFourReal$ \\
+sub-02 & 1 & untrained & $\FPermSubTwoRandGOneMean$ [$\FPermSubTwoRandGOneLo$, $\FPermSubTwoRandGOneHi$] & $\FPermSubTwoRandGOneReal$ \\
+sub-02 & 1 & Backprop & $\FPermSubTwoBpGOneMean$ [$\FPermSubTwoBpGOneLo$, $\FPermSubTwoBpGOneHi$] & $\FPermSubTwoBpGOneReal$ \\
+sub-02 & 4 & untrained & $\FPermSubTwoRandGFourMean$ [$\FPermSubTwoRandGFourLo$, $\FPermSubTwoRandGFourHi$] & $\FPermSubTwoRandGFourReal$ \\
+sub-02 & 4 & Backprop & $\FPermSubTwoBpGFourMean$ [$\FPermSubTwoBpGFourLo$, $\FPermSubTwoBpGFourHi$] & $\FPermSubTwoBpGFourReal$ \\
+sub-03 & 1 & untrained & $\FPermSubThreeRandGOneMean$ [$\FPermSubThreeRandGOneLo$, $\FPermSubThreeRandGOneHi$] & $\FPermSubThreeRandGOneReal$ \\
+sub-03 & 1 & Backprop & $\FPermSubThreeBpGOneMean$ [$\FPermSubThreeBpGOneLo$, $\FPermSubThreeBpGOneHi$] & $\FPermSubThreeBpGOneReal$ \\
+sub-03 & 4 & untrained & $\FPermSubThreeRandGFourMean$ [$\FPermSubThreeRandGFourLo$, $\FPermSubThreeRandGFourHi$] & $\FPermSubThreeRandGFourReal$ \\
+sub-03 & 4 & Backprop & $\FPermSubThreeBpGFourMean$ [$\FPermSubThreeBpGFourLo$, $\FPermSubThreeBpGFourHi$] & $\FPermSubThreeBpGFourReal$ \\
+\bottomrule
+\end{tabular}
+\caption{Permutation null of the pooled median $r$ (seed-0 checkpoints).}
+\label{tab:permnull}
+\end{table}
+
+For the joint readout, the network features and the luminance-and-contrast bank of the same
+$g$ were concatenated into one feature matrix. Each feature was standardised with the
+statistics of the training rows of each split, as in every other fit, and the cross-validation
+scheme and regularisation grid were unchanged. Table~\ref{tab:joint} compares the bank alone,
+the network alone and the joint readout.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}clccc@{}}
+\toprule
+$g$ & Network & Bank alone & Network alone & Network and bank \\
+\midrule
+1 & untrained & $\FJointRandGOneBank$ & $\PreregCondRandGOne$ & $\FJointRandGOneJoint$ \\
+1 & Backprop & $\FJointBpGOneBank$ & $\PreregCondBpGOne$ & $\FJointBpGOneJoint$ \\
+4 & untrained & $\FJointRandGFourBank$ & $\PreregCondRandGFour$ & $\FJointRandGFourJoint$ \\
+4 & Backprop & $\FJointBpGFourBank$ & $\PreregCondBpGFour$ & $\FJointBpGFourJoint$ \\
+\bottomrule
+\end{tabular}
+\caption{Median $r$ over reliable V1 voxels, mean over seeds and subjects.}
+\label{tab:joint}
+\end{table}

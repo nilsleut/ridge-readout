@@ -1,0 +1,84 @@
+% TMLR version: condensed Sections 2.5-2.7. Full arXiv-v1 text in Appendix I (Extended methods).
+\subsection{Ridge readout}
+\label{sec:ridge}
+
+Encoding models used dual ridge regression \citep{hoerl1970} on the Conv1 maps, pooled to a
+$g \times g$ grid by adaptive average pooling, $g \in \{1, 2, 4, 8\}$, giving $32g^2$ features
+($g = 1$ is GAP), standardised with statistics of the training rows of each split only.
+Cross-validation is nested and concept-grouped (8 outer and 5 inner folds, seed 20260818); per
+voxel and outer fold, $\alpha$ was chosen from 29 log-spaced values between $10^{-6}$ and $10^{8}$
+by the minimum inner-fold mean squared error, not by Pearson $r$, the reported score
+(Appendix~\ref{app:ridge}). Out-of-fold predictions were pooled over the outer folds and scored by
+one Pearson $r$ per voxel over all 720 stimuli; the score is the median $r$ over reliable V1 voxels,
+averaged over subjects, with contrasts formed within seed. Under this pooled score, features
+without signal yield negative rather than zero scores.
+
+The pre-specified analysis used the 720 single-trial betas at NATIVE 224\,px, all checkpoints and
+subjects, and all four $g$; an exploratory fit at $g = 1$ covered all NATIVE resolutions and
+UPSAMPLED 224. Controls with the identical readout were low-level banks (pixels; a
+luminance-and-contrast bank of $2g^2$ features; a Gabor bank), Backprop seed-0 features with
+permuted stimulus assignment as negative test, and an image-wise permutation of the $g \times g$
+cells (seed-0 untrained and Backprop, $g \in \{2, 4, 8\}$; details in Appendix~\ref{app:ridge}).
+
+\subsection{Mean-profile components and decomposition}
+\label{sec:gainmethods}
+
+For a stimulus $\times$ unit matrix $X$ (720 rows), let $u$ be the mean profile (unit means over
+the 720 stimuli, minus their mean over units, scaled to unit norm) and $\tilde{x}_i$ row $i$
+centred across units. The mean-profile alignment of stimulus $i$ is
+$a_i = \langle \tilde{x}_i, u \rangle / \lVert \tilde{x}_i \rVert$; $c_{\mathrm{align}}$ is the
+Pearson correlation over stimuli between model alignment (raw features) and V1 voxel alignment
+($B$ = paper), averaged over subjects. Each centred pattern splits into its projection
+$p_i = \langle \tilde{x}_i, u \rangle$ on the mean profile and the orthogonal remainder
+$r_i = \tilde{x}_i - p_i u$. We compare ``full'' (correlation distance on $x_i$, the convention of
+\citet{evalres}), ``orthogonal'' (correlation distance on $r_i$) and ``parallel''
+($\lvert p_i - p_j \rvert$) RDMs; the betas are decomposed in the same way, and each model
+component is compared with the same component of the brain.
+
+For unit-centred features $X_c$ ($F$ = center) with row norms $n_i$, euclidean distances decompose
+exactly as $\lVert X_{c,i} - X_{c,j} \rVert^2 = (n_i - n_j)^2 + W_{ij}$ with
+$W_{ij} = 2\, n_i n_j \,(1 - \cos\theta_{ij})$. We report the norm RDM
+$N_{ij} = \lvert n_i - n_j \rvert$, the unweighted angular component $A_{ij} = 1 - \cos\theta_{ij}$
+and the norm-weighted angular term $W_{ij}$ separately, for features and betas alike; ``angular
+component'' denotes only $A$. These names label quantities defined here; they are not claims about
+physiological gain (details in Appendix~\ref{app:gainmethods}).
+
+\subsection{Analysis plan, amendments and inference}
+\label{sec:inference}
+
+\paragraph{Pre-specified primary analysis.}
+The ridge-readout analysis followed a written analysis plan with a frozen configuration
+(configuration hash \texttt{206fa875cca5}), dated 20~August~2026. The plan was not publicly
+registered; its dating rests on in-text date stamps and the configuration hash, and the files
+were placed under version control on 3~October~2026. We therefore describe its criteria as fixed
+before the analysis rather than as preregistered. The unit of inference was the training seed
+($n = 5$), tested with a one-sided exact sign-flip test over all 32 sign assignments, and the
+effect was to count as surviving only if it held at $g \geq 4$. A minimal detectable effect
+$\Delta_{\min}$, derived from the pilot's seed-level standard deviation by simulating this test,
+was compared with the reference effect reported in version~1 of \citet{evalres}
+($+\PreregReferenceEffect \pm \PreregReferenceSem$ at 224\,px); the pre-specified rule labels the
+outcome ``The effect disappears'' when $\Delta_{\min}$ is below the reference effect, a decision
+label under the plan, not an equivalence test. Three amendments were adopted before any fit to
+THINGS data and four further decisions after data had been seen, among them a post-hoc plateau
+gate and a downstream-equivalence gate that replaced a failed reproduction gate for the
+CPU-extracted $g = 2$ features; an implementation error in $\Delta_{\min}$ did not change the
+verdict. The primary analysis was not blind (results for subject~1 at $g \in \{1, 4, 8\}$ and for
+subjects~2 and~3 at $g = 1$ were known), and several pre-specified instruments were not
+implemented (Appendix~\ref{app:inference}).
+
+\paragraph{Exploratory analyses and inference.}
+All analyses in Sections~\ref{sec:standardization}--\ref{sec:gaingeometry} lie outside the
+pre-specified plan and were developed sequentially. For each step, predictions and decision rules
+were committed to version control before the step's scripts were run, and we report every
+pre-stated prediction, including the \FailedPredictions{} that were not met
+(Appendix~\ref{app:failed}). The rules of later steps were written after the results of earlier
+steps were known, and we chose the thresholds ourselves, so ``met'' means consistent with a
+pre-stated rule, not independently confirmed; some analyses were added in response to criticism of
+earlier drafts (Appendix~\ref{app:inference}). Observations without a rule are labelled
+descriptive. RSA intervals are 95\% stimulus-bootstrap percentile intervals over the 720 stimuli,
+for these three subjects and these networks. The 36 multiverse cells are
+strongly dependent, intervals are not corrected for multiple comparisons, and counts of cells and
+of ImageNet models (one set of trained weights each) are descriptive. With three subjects, the
+results do not generalise to a population of observers (Table~\ref{tab:evidence}). Code,
+configuration, amendments and the full commit history are available in the accompanying
+repository.\footnote{\url{https://anonymous.4open.science/r/PLACEHOLDER}}

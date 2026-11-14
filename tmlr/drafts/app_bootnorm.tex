@@ -1,0 +1,28 @@
+In the main analyses, unit means and SDs, the feature transformations $F$, the voxel
+normalisations $B$, the mean profile and the norms are estimated once on the 720 stimuli,
+and the bootstrap resamples pairs of the resulting fixed RDMs (Section~\ref{sec:rsa}). In this
+exploratory check, the statistics were re-estimated from the resampled rows of each of the
+first 200 resamples (duplicates kept, self-pairs dropped), and the RDMs were rebuilt with
+them. Table~\ref{tab:bootnorm} compares the V1 contrast of the untrained (uncalibrated BN
+statistics) network minus Backprop at NATIVE 224\,px in three cells. The classification of
+the interval relative to 0 was the same in all three cells (BN1: met). With euclidean
+distance, centring does not change the distances, so the two intervals agree by construction
+over the same resamples.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Cell ($F$, $D$, $B$) & Value & Fixed (1000) & Re-estimated (200) & Interval \\
+\midrule
+$z$, correlation, paper & $\BNormZCorrPaper$ & [$\BNormZCorrPaperFixedLo$, $\BNormZCorrPaperFixedHi$] & [$\BNormZCorrPaperLo$, $\BNormZCorrPaperHi$] & below 0 \\
+center, euclidean, paper & $\BNormCentEuclPaper$ & [$\BNormCentEuclPaperFixedLo$, $\BNormCentEuclPaperFixedHi$] & [$\BNormCentEuclPaperLo$, $\BNormCentEuclPaperHi$] & above 0 \\
+center, correlation, center720 & $\BNormCentCorrCent$ & [$\BNormCentCorrCentFixedLo$, $\BNormCentCorrCentFixedHi$] & [$\BNormCentCorrCentLo$, $\BNormCentCorrCentHi$] & includes 0 \\
+\bottomrule
+\end{tabular}
+\caption{V1 contrast with 95\% stimulus-bootstrap intervals, normalisation fixed (1000
+resamples) or re-estimated within each resample (first 200 resamples).}
+\label{tab:bootnorm}
+\end{table}

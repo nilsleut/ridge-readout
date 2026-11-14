@@ -17,6 +17,10 @@ paper/*.out
 paper/*.bbl
 paper/*.blg
 paper/build/
+tmlr/*.aux
+tmlr/*.out
+tmlr/*.bbl
+tmlr/*.blg
 .env
 *.log
 .DS_Store

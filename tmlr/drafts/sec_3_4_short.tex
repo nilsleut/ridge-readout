@@ -1,0 +1,10 @@
+% TMLR version: condensed Section 3.4. Full arXiv-v1 text in Appendix J.1.
+In an exploratory analysis (Fig.~\ref{fig:gain}), $c_{\mathrm{align}}$ predicted the raw-feature
+RSA at V1 with Spearman \GOneSpearman{} over the 70 cells of the untrained (uncalibrated BN
+statistics) network and Backprop (G1, threshold 0.6: met), and with \GenOneSpearman{} over 64 cells of the ImageNet models (GEN1, met).
+G2 was not met: after the ranks of both RDMs were regressed on the ranks of their own alignment
+RDMs, the V1 gap at NATIVE 224\,px was $+\GTwoPartialGap$ [$\GTwoPartialGapLo$,
+$\GTwoPartialGapHi$], whose upper bound exceeds 0.010, and the partial slope remained above half of
+$S_{\mathrm{paper}}$ (Appendix~\ref{app:extgainaxis}). Descriptively, V1 voxel alignment
+correlated with stimulus mean luminance and RMS contrast, and at 224\,px the untrained network's
+alignment had the same signs (Fig.~\ref{fig:gain}c).

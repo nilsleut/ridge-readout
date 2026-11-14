@@ -1,0 +1,926 @@
+--- arxiv-v1:paper/drafts/abstract.tex
++++ tmlr/drafts/abstract.tex
+@@ -1,13 +1,13 @@
+ % Abstract. All numbers via macros from numbers.tex.
+ Untrained convolutional networks have been reported to rival trained networks as models of
+-visual cortex~\citep{truzzi2020, kazemian2025}, and we had reported an untrained-network advantage over backpropagation at V1 in THINGS fMRI, together with a dependence on evaluation resolution~\citep{evalres}. Under a pre-specified
++visual cortex~\citep{truzzi2020, kazemian2025}, and an earlier analysis reported an untrained-network advantage over backpropagation at V1 in THINGS fMRI, together with a dependence on evaluation resolution~\citep{evalres}. Under a pre-specified
+ ridge readout, the untrained network scored below the trained one at every pooling grid
+ (median $r$ difference $\PreregRandBpGFour$ at $g = 4$, \PreregRandBpGFourPos{} of 5 seeds
+-positive), and also in MSE skill and per-fold $r$. In exploratory analyses, across 36 combinations of unit normalisation, distance measure and voxel normalisation (\MultiDistinct{} distinct analyses), the sign of the V1 contrast depended on the analysis (intervals above 0 in \MultiDistinctPos{} and below 0 in \MultiDistinctNeg{} distinct analyses), and in our networks the resolution dependence of the original convention appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model
+-and voxel patterns with the unit-mean profile (Spearman \GOneSpearman{} across our networks,
++positive), and also in MSE skill and per-fold $r$. In exploratory analyses, across 36 combinations of unit normalisation, distance measure and voxel normalisation (\MultiDistinct{} distinct analyses), the sign of the V1 contrast depended on the analysis (intervals above 0 in \MultiDistinctPos{} and below 0 in \MultiDistinctNeg{} distinct analyses), and in the CIFAR-trained networks the resolution dependence of the original convention appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model
++and voxel patterns with the unit-mean profile (Spearman \GOneSpearman{} across the CIFAR-trained networks,
+ \GenOneSpearman{} across six ImageNet architectures); the advantage was absent from the
+ component orthogonal to the mean profile, and the parallel component alone did not resolve
+ it. On the unweighted angular component of centred patterns, trained networks were ahead at
+-V1 (our network and \SepThreeModels{} of 6 ImageNet models) and at LOC (all seven); the
++V1 (the CIFAR-trained network and \SepThreeModels{} of 6 ImageNet models) and at LOC (all seven); the
+ norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above every network under ridge (point estimates), and adding network features under a shared penalty did not improve prediction. Intervals are stimulus-bootstrap intervals for three
+ subjects, and \FailedPredictions{} pre-stated predictions were not met. We recommend reporting sensitivity to centring over the evaluated stimuli on both sides, reporting components separately, and including a small multiverse and simple baselines.
+--- arxiv-v1:paper/drafts/app_extmethods_ridge_gain.tex
++++ tmlr/drafts/app_extmethods_ridge_gain.tex
+@@ -0,0 +1,89 @@
++% Moved verbatim from Sections 2.5 and 2.6 of the arXiv-v1 main.tex (labels renamed).
++\subsection{Ridge readout}
++\label{app:ridge}
++
++Encoding models used dual ridge regression \citep{hoerl1970}, with the kernel
++$K = XX^{\top}$ eigendecomposed once per split. The Conv1 maps were
++pooled to a $g \times g$ grid by adaptive average pooling, $g \in \{1, 2, 4, 8\}$, giving
++$32g^2$ features independent of resolution; $g = 1$ is GAP, and larger $g$ retains
++spatial structure. Features were standardised with statistics of the training rows of
++each split only.
++
++Cross-validation is nested: 8 outer folds and 5 inner folds within each outer training
++set, from a fixed partition (seed 20260818); with one exemplar per concept, folds are
++concept-grouped. Per voxel and outer fold, $\alpha$ was
++chosen from 29 log-spaced values between $10^{-6}$ and $10^{8}$ by the minimum mean
++squared error over the inner folds, and the model was refit on the outer training set.
++The regularisation is selected by mean squared error, not by Pearson $r$, the reported score. In simulations with the dimensions of the primary data set, selection by $r$ placed a substantial share of the selections at reliable voxels on the lowest grid value in every simulated population that contained reliable voxels, irrespective of the strength of the signal, whereas selection by mean squared error placed none there (Phase~2b report in the repository); because $r$ does not depend on the scale of the predictions, which $\alpha$ mainly sets, its inner-fold optimum was not localised on the grid. The selected $\alpha$ therefore need not maximise $r$.
++Out-of-fold predictions were pooled over the outer folds and scored by one Pearson $r$
++per voxel over all 720 stimuli. When the selected regularisation shrinks the predictions
++of a voxel towards the training mean, this pooled correlation is negative in
++expectation, so features without signal yield negative rather than zero scores. A model that predicts the mean of the training rows of each fold scored $\FFloorMean$ (mean over subjects); the 97.5th percentile of a permutation null for the seed-0 networks lay between $\FPermPNineSevenFiveMin$ and $\FPermPNineSevenFiveMax$, and observed scores were above it in sub-01 and sub-02 (Appendix~\ref{app:ridgerobust}). The score is the median $r$ over reliable V1 voxels,
++averaged over subjects, with contrasts formed within seed.
++
++A low-edge selection at a reliable voxel is logged, not fatal (amendment of 2026-10-03).
++With diagnostic values $10^{-7}$, $10^{-8}$ and $10^{-9}$
++added, it is a valid plateau if the inner-fold MSE improves by less than a relative
++$10^{-3}$ on its value at $10^{-6}$; otherwise the cell is excluded. The gate never
++changes a score.
++
++The pre-specified analysis used the 720 single-trial betas at NATIVE 224\,px, all
++checkpoints and subjects, and all four $g$; the $g = 2$ features were extracted on a CPU,
++subject to a downstream equivalence gate (amendment of 2026-10-13). An exploratory fit
++at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
++
++Two controls used the identical readout. The control band consists of low-level banks
++pooled to the same grid: pixels; the luminance-and-contrast bank, two feature maps (luminance, Rec.\,709, $Y = 0.2126R + 0.7152G + 0.0722B$, and local RMS contrast in a $9 \times 9$ window) pooled to the $g \times g$ grid, i.e.\ $2g^2$ features (2 at $g = 1$, 128 at $g = 8$); absolute responses of a Gabor bank (4 orientations $\times$
++3 spatial frequencies); and, as negative test, Backprop seed-0 features with permuted
++stimulus assignment. The spatial-correspondence control permutes the $g \times g$ cells
++differently for every image (seed 20260820), keeping dimensionality and per-channel
++distributions; it was run for the seed-0 untrained and Backprop checkpoints at
++$g \in \{2, 4, 8\}$.
++
++\subsection{Mean-profile components and decomposition}
++\label{app:gainmethods}
++
++For a stimulus $\times$ unit matrix $X$ (720 rows), let $\mu$ be the unit means over the 720
++stimuli, $\mu_c = \mu - \overline{\mu}$ the mean profile with its mean over units removed,
++$u = \mu_c / \lVert \mu_c \rVert$, and $\tilde{x}_i$ row $i$ centred across units. The
++mean-profile alignment of stimulus $i$ is the cosine between its centred pattern and the
++mean profile,
++\begin{equation}
++  a_i = \frac{\langle \tilde{x}_i, u \rangle}{\lVert \tilde{x}_i \rVert}.
++\end{equation}
++Model alignment was computed on raw features, voxel alignment on all ROI voxels under
++$B$ = paper. $c_{\mathrm{align}}$ is the Pearson correlation over the 720 stimuli between
++model and V1 voxel alignment, averaged over subjects. The alignment RDM is
++$\lvert a_i - a_j \rvert$. Partial RSA regresses the ranks of the model and of the fMRI
++RDM, per subject and draw, on an intercept and the ranks of their own alignment RDM and
++correlates the residuals (Pearson). Alignments were described against stimulus mean
++luminance and RMS contrast, the per-image mean and SD of Rec.\,601 luminance
++($Y = 0.299R + 0.587G + 0.114B$); over the 720 stimuli at 224\,px, the image means of the
++two luminance definitions correlate at Pearson \LumDefPearson{} (Spearman
++\LumDefSpearman).
++
++The projection coefficient $p_i = \langle \tilde{x}_i, u \rangle = a_i \lVert \tilde{x}_i \rVert$
++and the remainder $r_i = \tilde{x}_i - p_i u$ split each centred pattern into a part along
++the mean profile and a part orthogonal to it. We compare three variants: ``full'', the
++correlation distance on $x_i$ (the convention of \citet{evalres}); ``orthogonal'', the
++correlation distance on $r_i$; and ``parallel'', the RDM $\lvert p_i - p_j \rvert$. The beta
++patterns are decomposed in the same way (voxel means over the 720 stimuli, $B$ = paper),
++and each model component is compared with the same component of the brain.
++
++The norm and angular components start from $X_c$, $X$ with every unit centred over the
++720 stimuli ($F$ = center; for $F$ = z, units are also scaled to SD 1). With
++$n_i = \lVert X_{c,i} \rVert$ and $\cos\theta_{ij}$ the cosine between rows $i$ and $j$,
++\begin{equation}
++  \lVert X_{c,i} - X_{c,j} \rVert^2 = (n_i - n_j)^2 + W_{ij}, \qquad
++  W_{ij} = 2\, n_i n_j \,(1 - \cos\theta_{ij}).
++\end{equation}
++We report the norm RDM $N_{ij} = \lvert n_i - n_j \rvert$, the angular component
++$A_{ij} = 1 - \cos\theta_{ij}$, the unweighted angular dissimilarity of the patterns
++centred over stimuli, and the norm-weighted angular term $W_{ij}$. The identity holds for
++$W$, not for $A$ alone; we therefore report $N$, $A$ and $W$ separately, and the RSA of the
++euclidean RDM is not the sum of the RSA of its components. The literature uses
++``representational geometry'' more broadly, for the distance structure including the
++norms; ``angular component'' here denotes only $A$. The betas are decomposed in the same
++way, and the RSA of a component compares the model and fMRI RDMs of that component. The
++identity was checked numerically. These names label quantities defined here; they are
++not claims about physiological gain.
+--- arxiv-v1:paper/drafts/methods_short.tex
++++ tmlr/drafts/methods_short.tex
+@@ -0,0 +1,84 @@
++% TMLR version: condensed Sections 2.5-2.7. Full arXiv-v1 text in Appendix I (Extended methods).
++\subsection{Ridge readout}
++\label{sec:ridge}
++
++Encoding models used dual ridge regression \citep{hoerl1970} on the Conv1 maps, pooled to a
++$g \times g$ grid by adaptive average pooling, $g \in \{1, 2, 4, 8\}$, giving $32g^2$ features
++($g = 1$ is GAP), standardised with statistics of the training rows of each split only.
++Cross-validation is nested and concept-grouped (8 outer and 5 inner folds, seed 20260818); per
++voxel and outer fold, $\alpha$ was chosen from 29 log-spaced values between $10^{-6}$ and $10^{8}$
++by the minimum inner-fold mean squared error, not by Pearson $r$, the reported score
++(Appendix~\ref{app:ridge}). Out-of-fold predictions were pooled over the outer folds and scored by
++one Pearson $r$ per voxel over all 720 stimuli; the score is the median $r$ over reliable V1 voxels,
++averaged over subjects, with contrasts formed within seed. Under this pooled score, features
++without signal yield negative rather than zero scores.
++
++The pre-specified analysis used the 720 single-trial betas at NATIVE 224\,px, all checkpoints and
++subjects, and all four $g$; an exploratory fit at $g = 1$ covered all NATIVE resolutions and
++UPSAMPLED 224. Controls with the identical readout were low-level banks (pixels; a
++luminance-and-contrast bank of $2g^2$ features; a Gabor bank), Backprop seed-0 features with
++permuted stimulus assignment as negative test, and an image-wise permutation of the $g \times g$
++cells (seed-0 untrained and Backprop, $g \in \{2, 4, 8\}$; details in Appendix~\ref{app:ridge}).
++
++\subsection{Mean-profile components and decomposition}
++\label{sec:gainmethods}
++
++For a stimulus $\times$ unit matrix $X$ (720 rows), let $u$ be the mean profile (unit means over
++the 720 stimuli, minus their mean over units, scaled to unit norm) and $\tilde{x}_i$ row $i$
++centred across units. The mean-profile alignment of stimulus $i$ is
++$a_i = \langle \tilde{x}_i, u \rangle / \lVert \tilde{x}_i \rVert$; $c_{\mathrm{align}}$ is the
++Pearson correlation over stimuli between model alignment (raw features) and V1 voxel alignment
++($B$ = paper), averaged over subjects. Each centred pattern splits into its projection
++$p_i = \langle \tilde{x}_i, u \rangle$ on the mean profile and the orthogonal remainder
++$r_i = \tilde{x}_i - p_i u$. We compare ``full'' (correlation distance on $x_i$, the convention of
++\citet{evalres}), ``orthogonal'' (correlation distance on $r_i$) and ``parallel''
++($\lvert p_i - p_j \rvert$) RDMs; the betas are decomposed in the same way, and each model
++component is compared with the same component of the brain.
++
++For unit-centred features $X_c$ ($F$ = center) with row norms $n_i$, euclidean distances decompose
++exactly as $\lVert X_{c,i} - X_{c,j} \rVert^2 = (n_i - n_j)^2 + W_{ij}$ with
++$W_{ij} = 2\, n_i n_j \,(1 - \cos\theta_{ij})$. We report the norm RDM
++$N_{ij} = \lvert n_i - n_j \rvert$, the unweighted angular component $A_{ij} = 1 - \cos\theta_{ij}$
++and the norm-weighted angular term $W_{ij}$ separately, for features and betas alike; ``angular
++component'' denotes only $A$. These names label quantities defined here; they are not claims about
++physiological gain (details in Appendix~\ref{app:gainmethods}).
++
++\subsection{Analysis plan, amendments and inference}
++\label{sec:inference}
++
++\paragraph{Pre-specified primary analysis.}
++The ridge-readout analysis followed a written analysis plan with a frozen configuration
++(configuration hash \texttt{206fa875cca5}), dated 20~August~2026. The plan was not publicly
++registered; its dating rests on in-text date stamps and the configuration hash, and the files
++were placed under version control on 3~October~2026. We therefore describe its criteria as fixed
++before the analysis rather than as preregistered. The unit of inference was the training seed
++($n = 5$), tested with a one-sided exact sign-flip test over all 32 sign assignments, and the
++effect was to count as surviving only if it held at $g \geq 4$. A minimal detectable effect
++$\Delta_{\min}$, derived from the pilot's seed-level standard deviation by simulating this test,
++was compared with the reference effect reported in version~1 of \citet{evalres}
++($+\PreregReferenceEffect \pm \PreregReferenceSem$ at 224\,px); the pre-specified rule labels the
++outcome ``The effect disappears'' when $\Delta_{\min}$ is below the reference effect, a decision
++label under the plan, not an equivalence test. Three amendments were adopted before any fit to
++THINGS data and four further decisions after data had been seen, among them a post-hoc plateau
++gate and a downstream-equivalence gate that replaced a failed reproduction gate for the
++CPU-extracted $g = 2$ features; an implementation error in $\Delta_{\min}$ did not change the
++verdict. The primary analysis was not blind (results for subject~1 at $g \in \{1, 4, 8\}$ and for
++subjects~2 and~3 at $g = 1$ were known), and several pre-specified instruments were not
++implemented (Appendix~\ref{app:inference}).
++
++\paragraph{Exploratory analyses and inference.}
++All analyses in Sections~\ref{sec:standardization}--\ref{sec:gaingeometry} lie outside the
++pre-specified plan and were developed sequentially. For each step, predictions and decision rules
++were committed to version control before the step's scripts were run, and we report every
++pre-stated prediction, including the \FailedPredictions{} that were not met
++(Appendix~\ref{app:failed}). The rules of later steps were written after the results of earlier
++steps were known, and we chose the thresholds ourselves, so ``met'' means consistent with a
++pre-stated rule, not independently confirmed; some analyses were added in response to criticism of
++earlier drafts (Appendix~\ref{app:inference}). Observations without a rule are labelled
++descriptive. RSA intervals are 95\% stimulus-bootstrap percentile intervals over the 720 stimuli,
++for these three subjects and these networks. The 36 multiverse cells are
++strongly dependent, intervals are not corrected for multiple comparisons, and counts of cells and
++of ImageNet models (one set of trained weights each) are descriptive. With three subjects, the
++results do not generalise to a population of observers (Table~\ref{tab:evidence}). Code,
++configuration, amendments and the full commit history are available in the accompanying
++repository.\footnote{\url{https://anonymous.4open.science/r/PLACEHOLDER}}
+--- arxiv-v1:paper/drafts/sec_1.tex
++++ tmlr/drafts/sec_1.tex
+@@ -1,23 +1,21 @@
+ % Introduction.
+-Comparisons between artificial networks and neural data have become a standard way to
+-ask which models capture the computations of visual cortex. Representational similarity
+-analysis (RSA) is one of the most widely used tools for this purpose: it summarises each
++Representational similarity analysis (RSA) is one of the most widely used tools for asking
++which artificial networks capture the computations of visual cortex: it summarises each
+ system by the dissimilarities between its responses to a set of stimuli and compares
+ these summaries directly, without fitting a mapping \citep{kriegeskorte2008}. A
+ recurring and surprising result is that networks with random, untrained weights can
+ rival trained networks as models of visual cortex, in some reports exceeding them
+-\citep{truzzi2020, kazemian2025}. If true, such results bear on how much of early visual
+-representation follows from architecture alone and how much from learning.
++\citep{truzzi2020, kazemian2025}.
+ 
+-We reported a result of this kind ourselves. In THINGS fMRI \citep{hebart2023},
++A result of this kind was reported in THINGS fMRI \citep{hebart2023}:
+ an untrained network with uncalibrated batch-normalisation statistics exceeded a
+ backpropagation-trained network at V1 when images were evaluated at 224\,px, but not at
+ 32\,px, the resolution at which the networks had been trained \citep{evalres}; a related
+-claim appears in \citet{leutenegger2026}. Both analyses used a single convention:
++claim appears in \citet{lrrsa}. Both analyses used a single convention:
+ globally pooled features, correlation distance between units, and voxel responses
+ normalised over all trials of the experiment.
+ 
+-That convention has a property that is easy to overlook. Correlation distance across
++Correlation distance across
+ units is not invariant to constant offsets of individual units over the stimulus set:
+ when units have different mean responses, the dissimilarity between two stimuli depends
+ in part on how strongly each stimulus pattern is aligned with the shared profile of unit means. Euclidean distance is invariant to such offsets but not to the norm of
+@@ -28,16 +26,15 @@
+ the reliability of RSA \citep{walther2016, diedrichsen2017}, but its effect on
+ the ranking of candidate models has rarely been examined.
+ 
+-Here we test our earlier result in four ways. First, a pre-specified analysis replaces
+-RSA by a fitted ridge readout on the full feature map. Second, a sequence of exploratory
+-analyses, each with predictions and decision rules committed before it was run, asks
+-where the discrepancy between RSA and ridge arises; among them, we test whether the
+-advantage is carried by the component along the mean profile of the units. Third, a
+-multiverse of 36 combinations of unit normalisation, distance measure and voxel
+-normalisation \citep{steegen2016} tests which conclusions hold across defensible analysis
+-choices, and six ImageNet architectures test whether they generalise beyond our networks.
+-Fourth, an exact decomposition of Euclidean distances separates a norm component from an
+-angular component.
++Here we test this result in four ways: (i) a pre-specified analysis replaces RSA by a fitted
++ridge readout on the full feature map; (ii) exploratory analyses, each with predictions and
++decision rules committed before it was run, ask where the discrepancy between RSA and ridge
++arises, including whether the advantage is carried by the component along the mean profile of
++the units; (iii) a multiverse of 36 combinations of unit normalisation, distance measure and
++voxel normalisation \citep{steegen2016} tests which conclusions hold across defensible analysis
++choices, and six ImageNet architectures test whether they generalise beyond the CIFAR-trained
++networks; (iv) an exact decomposition of Euclidean distances separates norm and angular
++components.
+ 
+ We find that whether the untrained network beats the trained one at V1 depends on the
+ analysis. The advantage is not reproduced by the fitted readout, disappears under
+@@ -45,5 +42,5 @@
+ component and from the component orthogonal to the mean profile, whereas raw
+ correlation-distance RSA closely tracks the mean-profile alignment of model and voxels.
+ The ranking at LOC favours the trained networks wherever it is resolved. A luminance-and-contrast bank scored above every network under the ridge readout at V1 (point estimates). We
+-report all pre-stated predictions, including those that failed, and we revise the
+-corresponding claims of our earlier work.
++report all pre-stated predictions, including those that failed, and state which earlier claims
++\citep{evalres, lrrsa} do not hold.
+--- arxiv-v1:paper/drafts/sec_2_7.tex
++++ tmlr/drafts/sec_2_7.tex
+@@ -1,5 +1,4 @@
+-\subsection{Analysis plan, amendments and inference}
+-\label{sec:inference}
++% Full text of former Section 2.7 (arXiv v1); heading and label now set in main.tex (Appendix).
+ 
+ \paragraph{Pre-specified primary analysis.}
+ The ridge-readout analysis (Section~\ref{sec:ridge}) followed a written analysis plan
+@@ -67,4 +66,4 @@
+ \paragraph{Inference and its limits.}
+ We distinguish three kinds of statements. (a)~The pre-specified primary analysis, whose decision rule was fixed before its run. (b)~Exploratory analyses with pre-stated rules: each rule was committed before its step was run, and we report it as met or not met. The rules of later steps were written after the results of earlier steps were known, and we chose the thresholds ourselves, so ``met'' means consistent with a pre-stated rule, not independently confirmed. The analyses of Section~\ref{sec:ablation} and Appendices~\ref{app:ridgerobust} and~\ref{app:bootnorm} (ablation of the mean-profile component, ridge robustness and the bootstrap with re-estimated normalisation) were added in response to criticism of an earlier draft; their rules were committed before their scripts (amendment dated 2026-10-16, committed on 2026-10-18 as \texttt{74853dc}; the commit timestamp is authoritative). The count of distinct multiverse analyses and the ablation on each side (Appendix~\ref{app:ablation2x2}) followed further criticism of the revised draft; their rules were committed before their scripts (amendment dated 2026-10-18, committed as \texttt{ac59694}). (c)~Descriptive observations without a rule, which we label as such.
+ 
+-The intervals have different sources in different parts of the paper. For RSA, we resampled stimuli (1000 bootstrap resamples, seed 20261002) and computed differences between conditions from the same resamples; intervals are 95\% percentile intervals. They describe variation over the 720 stimuli, for these three subjects and these networks; training seeds are averaged within each resample and are not part of the intervals. For ridge scores, the unit of inference is the training seed ($n = 5$). With 32 sign assignments, the smallest attainable one-sided $p$ is $1/32 \approx 0.031$ and the smallest two-sided $p$ is $2/32 = 0.0625$, so the test cannot support a two-sided claim at the 5\% level; we use it, as pre-specified, for the positive direction only. Seed standard deviations do not include variation over stimuli, voxels or subjects. For each ImageNet model we used one set of trained weights, and counts such as ``5 of 6 models'' are descriptive. The 36 cells of the multiverse share the same stimuli and resamples and are strongly dependent; intervals are not corrected for multiple comparisons, and counts of cells are descriptive. With three subjects, the results describe these subjects and do not generalise to a population of observers (Table~\ref{tab:evidence}). Code, configuration, amendments and the full commit history are available in the accompanying repository.\footnote{\url{https://github.com/nilsleut/ridge-readout}}
++The intervals have different sources in different parts of the paper. For RSA, we resampled stimuli (1000 bootstrap resamples, seed 20261002) and computed differences between conditions from the same resamples; intervals are 95\% percentile intervals. They describe variation over the 720 stimuli, for these three subjects and these networks; training seeds are averaged within each resample and are not part of the intervals. For ridge scores, the unit of inference is the training seed ($n = 5$). With 32 sign assignments, the smallest attainable one-sided $p$ is $1/32 \approx 0.031$ and the smallest two-sided $p$ is $2/32 = 0.0625$, so the test cannot support a two-sided claim at the 5\% level; we use it, as pre-specified, for the positive direction only. Seed standard deviations do not include variation over stimuli, voxels or subjects. For each ImageNet model we used one set of trained weights, and counts such as ``5 of 6 models'' are descriptive. The 36 cells of the multiverse share the same stimuli and resamples and are strongly dependent; intervals are not corrected for multiple comparisons, and counts of cells are descriptive. With three subjects, the results describe these subjects and do not generalise to a population of observers (Table~\ref{tab:evidence}). Code, configuration, amendments and the full commit history are available in the accompanying repository.\footnote{\url{https://anonymous.4open.science/r/PLACEHOLDER}}
+--- arxiv-v1:paper/drafts/sec_3_2.tex
++++ tmlr/drafts/sec_3_2.tex
+@@ -11,7 +11,7 @@
+ Absolute RSA values at V1 were low ($\rho$ between \AbsRsaPaperMin{} and \AbsRsaPaperMax{}
+ in the paper cell at NATIVE 224\,px, means of the six conditions). The leave-one-subject-out
+ lower bound of the noise ceiling was \LosoBoundVone{} [\LosoBoundVoneLo, \LosoBoundVoneHi] on
+-cross-run pairs \citep{leutenegger2026}; the upper bound is not informative with three
++cross-run pairs \citep{lrrsa}; the upper bound is not informative with three
+ subjects, so we cannot say how close the models are to the ceiling. With z-scored channels the V1 gap was $\VoneGapZTwoTwoFour$
+ [$\VoneGapZTwoTwoFourLo$, $\VoneGapZTwoTwoFourHi$] at 224\,px (R2, upper bound
+ $\leq 0.010$: met) and $\VoneGapZThreeTwo$ [$\VoneGapZThreeTwoLo$, $\VoneGapZThreeTwoHi$]
+--- arxiv-v1:paper/drafts/sec_3_4_short.tex
++++ tmlr/drafts/sec_3_4_short.tex
+@@ -0,0 +1,10 @@
++% TMLR version: condensed Section 3.4. Full arXiv-v1 text in Appendix J.1.
++In an exploratory analysis (Fig.~\ref{fig:gain}), $c_{\mathrm{align}}$ predicted the raw-feature
++RSA at V1 with Spearman \GOneSpearman{} over the 70 cells of the untrained (uncalibrated BN
++statistics) network and Backprop (G1, threshold 0.6: met), and with \GenOneSpearman{} over 64 cells of the ImageNet models (GEN1, met).
++G2 was not met: after the ranks of both RDMs were regressed on the ranks of their own alignment
++RDMs, the V1 gap at NATIVE 224\,px was $+\GTwoPartialGap$ [$\GTwoPartialGapLo$,
++$\GTwoPartialGapHi$], whose upper bound exceeds 0.010, and the partial slope remained above half of
++$S_{\mathrm{paper}}$ (Appendix~\ref{app:extgainaxis}). Descriptively, V1 voxel alignment
++correlated with stimulus mean luminance and RMS contrast, and at 224\,px the untrained network's
++alignment had the same signs (Fig.~\ref{fig:gain}c).
+--- arxiv-v1:paper/drafts/sec_3_5_short.tex
++++ tmlr/drafts/sec_3_5_short.tex
+@@ -0,0 +1,21 @@
++% TMLR version: condensed Section 3.6. Full arXiv-v1 text in Appendix J.3.
++In an exploratory analysis, the euclidean RDM on unit-centred features was decomposed into its norm
++and angular components (Section~\ref{sec:gainmethods}; Fig.~\ref{fig:separation}); contrasts are
++untrained minus trained at V1 and trained minus untrained at LOC. The identity held to a maximum
++relative error of \SepOneMaxRelError{} (SEP1: met). SEP2 was not met: the V1 norm contrast
++($F$ = center) was $+\SepOwnVoneNormCenter$ [$\SepOwnVoneNormCenterLo$, $\SepOwnVoneNormCenterHi$]
++in the own CNN, with a CI including 0, and had a CI above 0 in \SepTwoModels{} of 6 ImageNet
++models; under the pre-stated interpretation rule, the V1 ranking is therefore not attributed to the
++norm or the angular component. On the unweighted angular component $A$, the trained networks were
++ahead at V1 ($\SepOwnVoneAngleCenter$ [$\SepOwnVoneAngleCenterLo$, $\SepOwnVoneAngleCenterHi$] in
++the own CNN; CI below 0 in \SepThreeModels{} of 6 ImageNet models; SEP3: met) and at LOC
++($+\SepOwnLocAngleCenter$ [$\SepOwnLocAngleCenterLo$, $\SepOwnLocAngleCenterHi$]; CI above 0 in
++\SepFourModels{} of 6; SEP4: met). The norm-weighted angular term $W$ ($+\WAngOwnVone$
++[$\WAngOwnVoneLo$, $\WAngOwnVoneHi$] in the own CNN; interval excluding 0 in \WAngImnPosModels{}
++of 6 ImageNet models) pointed in the direction of the norm component and was not resolved. Each
++component accounted for about 0.1\% of the rank variance of the fMRI RDM (own CNN, V1, NATIVE
++224\,px). Descriptively (no decision rule), the V1 angle contrast of the ImageNet models grew from
++224 to 448\,px with a CI above 0 in \SepSlopeAngleCiPositive{} of 5 models, no norm slope had a CI
++excluding 0, and in the own CNN neither component had a slope from 32 to 224\,px; convnext\_tiny
++was an exception, with CIs including 0 for its V1 angle contrast and its angle slope
++(Appendix~\ref{app:extgeometry}).
+--- arxiv-v1:paper/drafts/sec_3_ablation_short.tex
++++ tmlr/drafts/sec_3_ablation_short.tex
+@@ -0,0 +1,22 @@
++% TMLR version: condensed Section 3.5. Full arXiv-v1 text in Appendix J.2.
++In an exploratory analysis prompted by criticism of an earlier draft (Section~\ref{sec:inference}),
++each raw GAP pattern and each beta pattern was split into its projection on the mean profile and
++the remainder orthogonal to it (Section~\ref{sec:gainmethods}); each model component was compared
++with the same component of the brain (RSA convention and bootstrap of
++Section~\ref{sec:rsa}). M1 was met: in the orthogonal
++remainder, the V1 contrast of the untrained (uncalibrated BN statistics) network minus Backprop at
++NATIVE 224\,px was $\MpOrthoOwnVoneNatTwoTwoFour$ [$\MpOrthoOwnVoneNatTwoTwoFourLo$,
++$\MpOrthoOwnVoneNatTwoTwoFourHi$], with an upper bound of at most 0.010, against
++$+\MpFullOwnVoneNatTwoTwoFour$ [$\MpFullOwnVoneNatTwoTwoFourLo$, $\MpFullOwnVoneNatTwoTwoFourHi$] in
++the full variant; the paired difference between the two variants was resolved (X1: met). M2 was
++met: the resolution slope of the orthogonal remainder was below half of $S_{\mathrm{paper}}$. M4
++was met: for the ImageNet models at 224\,px, the upper bound of the orthogonal V1 contrast was at
++most 0.010 in \MpMFourModels{} of 6 models. M3 was not met: the parallel component gave
++$+\MpParOwnVoneNatTwoTwoFour$ [$\MpParOwnVoneNatTwoTwoFourLo$, $\MpParOwnVoneNatTwoTwoFourHi$] at
++NATIVE 224\,px, an interval that includes both 0 and the raw gap, so these data do not decide
++whether the parallel component alone suffices (the wording of the pre-stated rule claimed more;
++Appendix~\ref{app:extablation}). With the orthogonal remainder on one side only, both intervals
++included 0, so no attribution to a side is claimed; the point estimates lay close to that of the
++orthogonal variant (descriptive, no paired contrast tested; Appendix~\ref{app:ablation2x2}). We
++state only what the data resolve: the advantage is absent from the orthogonal remainder, and the
++parallel component alone did not resolve it. No physiological claim follows.
+--- arxiv-v1:paper/drafts/sec_4.tex
++++ tmlr/drafts/sec_4.tex
+@@ -25,7 +25,7 @@
+ \end{table}
+ 
+ \paragraph{What the V1 advantage measured.}
+-The advantage of the untrained network at V1 that we reported earlier \citep{evalres} was
++The advantage of the untrained network at V1 reported by \citet{evalres} was
+ not robust to the analysis choices examined here. Its sign changed across the multiverse:
+ under correlation distance it disappeared when model units were standardised over the
+ stimulus set, and a pre-specified ridge readout placed the untrained network below the
+@@ -33,7 +33,7 @@
+ but the angular component favoured the trained networks. It was absent from the component
+ orthogonal to the mean profile of the units, and removing the mean-profile component from either side alone brought the contrast close to zero, while the parallel component alone did not resolve it (M3). It was also not shared by the untrained network with calibrated
+ batch-normalisation statistics. Raw correlation-distance RSA, the convention of the
+-earlier work, covaried with the mean-profile alignment of model and voxels, across our
++earlier analysis, covaried with the mean-profile alignment of model and voxels, across our
+ networks and across six ImageNet architectures; removing the alignment RDM by rank
+ regression left part of the resolution slope (G2, not met). We therefore read the earlier result as not reflecting angular structure and as sensitive to the mean-profile component under one convention; whether that component alone carries it remains open, and we do not claim that it is a physiological gain.
+ 
+@@ -54,7 +54,7 @@
+ 
+ \paragraph{Ridge and RSA address different questions.}
+ The three analyses ask different questions:
+-\begin{itemize}
++\begin{itemize}[nosep]
+ \item raw RSA asks which unaltered distance structure resembles the measured one;
+ \item centred angular RSA asks which direction-based structure resembles it after centring
+   over the stimuli;
+@@ -67,12 +67,12 @@
+ That rankings change across defensible analyses shows that the metric matters; it does not show that any single analysis is invalid. Raw, centred and standardised variants and euclidean, correlation and cosine distances may capture different aspects of a representation, and a fitted readout asks another question again. Our ablation shows that the earlier advantage depends on the component along the mean profile of the units; it does not show that this component is a biologically meaningful property of the representation, and we do not claim that it is. Which representational properties a benchmark should preserve is a question about what the comparison is meant to explain, and it cannot be settled by whether a choice yields a stable ranking (on what makes a model explanatory, see \citealt{cao2024}). Our results support the narrower point that a brain-alignment score is a measurement defined by the evaluation procedure and its assumptions, not an intrinsic measure of a model.
+ 
+ \paragraph{Evaluation resolution.}
+-In our CIFAR-trained networks, the dependence of the V1 gap on evaluation resolution
++In the CIFAR-trained networks, the dependence of the V1 gap on evaluation resolution
+ vanished under unit centring and standardisation and was absent in the ridge readout.
+ In the ImageNet models, a small dependence on resolution above the training resolution
+ remained under standardisation and resided in the angular component. Evaluation
+ resolution can therefore affect the angular component of model--brain similarity, but
+-in our earlier work the size of the effect depended on uncentred units. The two model
++in the earlier analysis \citep{evalres} the size of the effect depended on uncentred units. The two model
+ families differ in the ratio of evaluation to training resolution (up to sevenfold versus
+ twofold), and we do not claim that the results transfer between these regimes.
+ 
+@@ -83,12 +83,10 @@
+ alongside network models. (5) State how the normalisation statistics of untrained
+ networks were set, since calibrated and uncalibrated variants behaved differently.
+ 
+-\paragraph{Consequences for our earlier work.}
++\paragraph{Consequences for earlier work.}
+ The headline of \citet{evalres}, that untrained networks exceed backpropagation at V1
+ at 224\,px and that this gap depends on evaluation resolution, and the corresponding
+-claim in \citet{leutenegger2026} are not robust to the analysis choices examined here. An audit
+-of our earlier preprints identified the affected statements; revised versions refer to
+-this work.
++claim in \citet{lrrsa} are not robust to the analysis choices examined here.
+ 
+ \paragraph{Limitations.}
+ The data comprise three subjects from a single data set, and the intervals reported here
+@@ -116,4 +114,4 @@
+ 
+ \paragraph{Conclusion.}
+ Whether untrained networks beat trained ones at V1 in model--brain RSA depends on the
+-analysis. The advantage we reported earlier was absent from the component orthogonal to the mean profile and from centred angular structure; whether the mean-profile component alone carries it was not resolved. Reporting the sensitivity to centring over the evaluated stimuli, reporting components separately and including simple baselines make such comparisons interpretable.
++analysis. The previously reported advantage \citep{evalres} was absent from the component orthogonal to the mean profile and from centred angular structure; whether the mean-profile component alone carries it was not resolved. Reporting the sensitivity to centring over the evaluated stimuli, reporting components separately and including simple baselines make such comparisons interpretable.
+--- arxiv-v1:paper/main.tex
++++ tmlr/main.tex
+@@ -1,8 +1,8 @@
+ \pdfoutput=1
+ \documentclass[10pt]{article}
++% Anonymous TMLR submission: no [accepted] or [preprint] option.
++\usepackage{tmlr}
+ \usepackage[utf8]{inputenc}
+-\usepackage[T1]{fontenc}
+-\usepackage{lmodern}
+ \input{glyphtounicode}
+ \pdfgentounicode=1
+ \usepackage{amsmath}
+@@ -13,12 +13,20 @@
+ \usepackage{url}
+ \usepackage{placeins}
+ \usepackage{float}
++\usepackage{wrapfig}
++\usepackage{enumitem}
++\usepackage{hyperref}
++% Anonymity: empty PDF document information, no pdfTeX file-name keys, no path-derived trailer ID.
++\hypersetup{pdftitle={}, pdfauthor={}, pdfsubject={}, pdfkeywords={}, pdfcreator={}, pdfproducer={}}
++\pdfsuppressptexinfo=-1
++\pdftrailerid{}
++\pdfinfoomitdate=1
+ 
+ \input{numbers}
+-\pdfinfo{/Title <FEFF0041006E0061006C0079007300690073002000630068006F006900630065007300200064006500630069006400650020007700680065007400680065007200200075006E0074007200610069006E006500640020006E006500740077006F0072006B00730020006200650061007400200074007200610069006E006500640020006F006E00650073002000610074002000560031003A002000610020006D0075006C007400690076006500720073006500200061006E0061006C00790073006900730020006F00660020006D006F00640065006C20130062007200610069006E0020005200530041> /Author <FEFF004E0069006C00730020004C0065007500740065006E00650067006700650072>}
+ 
+ \title{Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model--brain RSA}
+-\author{Nils Leutenegger\\Independent researcher, Zug, Switzerland\\\texttt{nils.leutenegger@gmail.com}}
++% Authors are hidden by tmlr.sty in submission mode; left empty on purpose.
++\author{}
+ \date{}
+ 
+ \begin{document}
+@@ -126,101 +134,22 @@
+ paper) and (center, correlation, center720); their slope is
+ $S_{\mathrm{gen}} = \mathrm{Gap}(448) - \mathrm{Gap}(224)$.
+ 
+-\subsection{Ridge readout}
+-\label{sec:ridge}
+-
+-Encoding models used dual ridge regression \citep{hoerl1970}, with the kernel
+-$K = XX^{\top}$ eigendecomposed once per split. The Conv1 maps were
+-pooled to a $g \times g$ grid by adaptive average pooling, $g \in \{1, 2, 4, 8\}$, giving
+-$32g^2$ features independent of resolution; $g = 1$ is GAP, and larger $g$ retains
+-spatial structure. Features were standardised with statistics of the training rows of
+-each split only.
+-
+-Cross-validation is nested: 8 outer folds and 5 inner folds within each outer training
+-set, from a fixed partition (seed 20260818); with one exemplar per concept, folds are
+-concept-grouped. Per voxel and outer fold, $\alpha$ was
+-chosen from 29 log-spaced values between $10^{-6}$ and $10^{8}$ by the minimum mean
+-squared error over the inner folds, and the model was refit on the outer training set.
+-The regularisation is selected by mean squared error, not by Pearson $r$, the reported score. In simulations with the dimensions of the primary data set, selection by $r$ placed a substantial share of the selections at reliable voxels on the lowest grid value in every simulated population that contained reliable voxels, irrespective of the strength of the signal, whereas selection by mean squared error placed none there (Phase~2b report in the repository); because $r$ does not depend on the scale of the predictions, which $\alpha$ mainly sets, its inner-fold optimum was not localised on the grid. The selected $\alpha$ therefore need not maximise $r$.
+-Out-of-fold predictions were pooled over the outer folds and scored by one Pearson $r$
+-per voxel over all 720 stimuli. When the selected regularisation shrinks the predictions
+-of a voxel towards the training mean, this pooled correlation is negative in
+-expectation, so features without signal yield negative rather than zero scores. A model that predicts the mean of the training rows of each fold scored $\FFloorMean$ (mean over subjects); the 97.5th percentile of a permutation null for the seed-0 networks lay between $\FPermPNineSevenFiveMin$ and $\FPermPNineSevenFiveMax$, and observed scores were above it in sub-01 and sub-02 (Appendix~\ref{app:ridgerobust}). The score is the median $r$ over reliable V1 voxels,
+-averaged over subjects, with contrasts formed within seed.
+-
+-A low-edge selection at a reliable voxel is logged, not fatal (amendment of 2026-10-03).
+-With diagnostic values $10^{-7}$, $10^{-8}$ and $10^{-9}$
+-added, it is a valid plateau if the inner-fold MSE improves by less than a relative
+-$10^{-3}$ on its value at $10^{-6}$; otherwise the cell is excluded. The gate never
+-changes a score.
+-
+-The pre-specified analysis used the 720 single-trial betas at NATIVE 224\,px, all
+-checkpoints and subjects, and all four $g$; the $g = 2$ features were extracted on a CPU,
+-subject to a downstream equivalence gate (amendment of 2026-10-13). An exploratory fit
+-at $g = 1$ covered all NATIVE resolutions and UPSAMPLED 224.
+-
+-Two controls used the identical readout. The control band consists of low-level banks
+-pooled to the same grid: pixels; the luminance-and-contrast bank, two feature maps (luminance, Rec.\,709, $Y = 0.2126R + 0.7152G + 0.0722B$, and local RMS contrast in a $9 \times 9$ window) pooled to the $g \times g$ grid, i.e.\ $2g^2$ features (2 at $g = 1$, 128 at $g = 8$); absolute responses of a Gabor bank (4 orientations $\times$
+-3 spatial frequencies); and, as negative test, Backprop seed-0 features with permuted
+-stimulus assignment. The spatial-correspondence control permutes the $g \times g$ cells
+-differently for every image (seed 20260820), keeping dimensionality and per-channel
+-distributions; it was run for the seed-0 untrained and Backprop checkpoints at
+-$g \in \{2, 4, 8\}$.
+-
+-\subsection{Mean-profile components and decomposition}
+-\label{sec:gainmethods}
+-
+-For a stimulus $\times$ unit matrix $X$ (720 rows), let $\mu$ be the unit means over the 720
+-stimuli, $\mu_c = \mu - \overline{\mu}$ the mean profile with its mean over units removed,
+-$u = \mu_c / \lVert \mu_c \rVert$, and $\tilde{x}_i$ row $i$ centred across units. The
+-mean-profile alignment of stimulus $i$ is the cosine between its centred pattern and the
+-mean profile,
+-\begin{equation}
+-  a_i = \frac{\langle \tilde{x}_i, u \rangle}{\lVert \tilde{x}_i \rVert}.
+-\end{equation}
+-Model alignment was computed on raw features, voxel alignment on all ROI voxels under
+-$B$ = paper. $c_{\mathrm{align}}$ is the Pearson correlation over the 720 stimuli between
+-model and V1 voxel alignment, averaged over subjects. The alignment RDM is
+-$\lvert a_i - a_j \rvert$. Partial RSA regresses the ranks of the model and of the fMRI
+-RDM, per subject and draw, on an intercept and the ranks of their own alignment RDM and
+-correlates the residuals (Pearson). Alignments were described against stimulus mean
+-luminance and RMS contrast, the per-image mean and SD of Rec.\,601 luminance
+-($Y = 0.299R + 0.587G + 0.114B$); over the 720 stimuli at 224\,px, the image means of the
+-two luminance definitions correlate at Pearson \LumDefPearson{} (Spearman
+-\LumDefSpearman).
+-
+-The projection coefficient $p_i = \langle \tilde{x}_i, u \rangle = a_i \lVert \tilde{x}_i \rVert$
+-and the remainder $r_i = \tilde{x}_i - p_i u$ split each centred pattern into a part along
+-the mean profile and a part orthogonal to it. We compare three variants: ``full'', the
+-correlation distance on $x_i$ (the convention of \citet{evalres}); ``orthogonal'', the
+-correlation distance on $r_i$; and ``parallel'', the RDM $\lvert p_i - p_j \rvert$. The beta
+-patterns are decomposed in the same way (voxel means over the 720 stimuli, $B$ = paper),
+-and each model component is compared with the same component of the brain.
+-
+-The norm and angular components start from $X_c$, $X$ with every unit centred over the
+-720 stimuli ($F$ = center; for $F$ = z, units are also scaled to SD 1). With
+-$n_i = \lVert X_{c,i} \rVert$ and $\cos\theta_{ij}$ the cosine between rows $i$ and $j$,
+-\begin{equation}
+-  \lVert X_{c,i} - X_{c,j} \rVert^2 = (n_i - n_j)^2 + W_{ij}, \qquad
+-  W_{ij} = 2\, n_i n_j \,(1 - \cos\theta_{ij}).
+-\end{equation}
+-We report the norm RDM $N_{ij} = \lvert n_i - n_j \rvert$, the angular component
+-$A_{ij} = 1 - \cos\theta_{ij}$, the unweighted angular dissimilarity of the patterns
+-centred over stimuli, and the norm-weighted angular term $W_{ij}$. The identity holds for
+-$W$, not for $A$ alone; we therefore report $N$, $A$ and $W$ separately, and the RSA of the
+-euclidean RDM is not the sum of the RSA of its components. The literature uses
+-``representational geometry'' more broadly, for the distance structure including the
+-norms; ``angular component'' here denotes only $A$. The betas are decomposed in the same
+-way, and the RSA of a component compares the model and fMRI RDMs of that component. The
+-identity was checked numerically. These names label quantities defined here; they are
+-not claims about physiological gain.
+-
+-
+-\input{drafts/sec_2_7}
++\input{drafts/methods_short}
++
++
+ 
+ \section{Results}
+ \subsection{Sign flip between RSA and ridge (including the pre-specified primary analysis)}
+ \label{sec:signflip}
++% TMLR layout: Figure 2 set beside the text (same size and caption as before).
++\begin{wrapfigure}{r}{3.55in}
++\vspace{-1.2em}
++\centering
++\includegraphics[width=3.5in]{figures/prereg_ladder.pdf}
++\caption{Pre-specified primary analysis. Median $r$ over reliable V1 voxels (Conv1, NATIVE 224\,px), averaged over the three subjects, against grid size $g$ (logarithmic axis). Coloured lines: the six conditions, mean over 5 seeds, error bars SD over seeds. Grey dashed and dotted lines: control banks (luminance and contrast, darker; pixels; Gabor). The permuted-assignment control is not shown (Section~\ref{sec:signflip}).}
++\label{fig:prereg_ladder}
++\vspace{-1em}
++\end{wrapfigure}
+ \input{drafts/sec_3_1}
+ 
+ \begin{figure}[t]
+@@ -230,12 +159,6 @@
+ \label{fig:sign_flip}
+ \end{figure}
+ 
+-\begin{figure}[t]
+-\centering
+-\includegraphics[width=3.5in]{figures/prereg_ladder.pdf}
+-\caption{Pre-specified primary analysis. Median $r$ over reliable V1 voxels (Conv1, NATIVE 224\,px), averaged over the three subjects, against grid size $g$ (logarithmic axis). Coloured lines: the six conditions, mean over 5 seeds, error bars SD over seeds. Grey dashed and dotted lines: control banks (luminance and contrast, darker; pixels; Gabor). The permuted-assignment control is not shown (Section~\ref{sec:signflip}).}
+-\label{fig:prereg_ladder}
+-\end{figure}
+ 
+ \subsection{Channel standardization removes gap and slope}
+ \label{sec:standardization}
+@@ -251,16 +174,10 @@
+ \label{fig:multiverse_v1}
+ \end{figure}
+ 
+-\begin{figure}[t]
+-\centering
+-\includegraphics[width=3.5in]{figures/multiverse_loc.pdf}
+-\caption{Backprop minus untrained at LOC (Conv3), NATIVE 224\,px, in the 36 cells of the analysis multiverse. Layout, colour scale, dots and frame as in Fig.~\ref{fig:multiverse_v1}.}
+-\label{fig:multiverse_loc}
+-\end{figure}
+ 
+ \subsection{Mean-profile alignment}
+ \label{sec:gainaxis}
+-\input{drafts/sec_3_4}
++\input{drafts/sec_3_4_short}
+ 
+ \begin{figure}[t]
+ \centering
+@@ -271,11 +188,11 @@
+ 
+ \subsection{Removing the mean-profile component}
+ \label{sec:ablation}
+-\input{drafts/sec_3_ablation}
++\input{drafts/sec_3_ablation_short}
+ 
+ \subsection{Norm and angular components}
+ \label{sec:gaingeometry}
+-\input{drafts/sec_3_5}
++\input{drafts/sec_3_5_short}
+ 
+ \begin{figure}[t]
+ \centering
+@@ -288,12 +205,11 @@
+ \section{Discussion}
+ \input{drafts/sec_4}
+ 
+-\section*{Acknowledgements}
+-We thank Kartik Pradeepan for detailed feedback on a draft of this manuscript, in particular on the distinction between sensitivity and validity and on the recommendations for benchmarking platforms.
+-
+-Claude (Anthropic), a large language model, was used as an assistant throughout this work: to suggest and refine analyses and decision rules, to write and run analysis code, and to draft most of the manuscript text. The author defined the research question, decided which analyses to run and which claims to make, checked the results with reproduction tests and gates, and takes full responsibility for the content, including any errors.
+-
+-\bibliographystyle{plainnat}
++% Acknowledgements removed for anonymous review (restore for camera-ready).
++\section*{Use of large language models}
++Claude (Anthropic), a large language model, was used as an assistant throughout this work: to suggest and refine analyses and decision rules, to write and run analysis code, and to draft most of the manuscript text. The authors defined the research question, decided which analyses to run and which claims to make, checked the results with reproduction tests and gates, and take full responsibility for the content, including any errors.
++
++\bibliographystyle{tmlr}
+ \bibliography{refs}
+ 
+ \appendix
+@@ -321,5 +237,31 @@
+ \section{Ablation on each side}
+ \label{app:ablation2x2}
+ \input{drafts/app_ablation2x2}
++\section{Extended methods}
++\label{app:extmethods}
++This appendix gives the full text of the methods condensed in Sections~\ref{sec:ridge}--\ref{sec:inference}.
++\input{drafts/app_extmethods_ridge_gain}
++\subsection{Analysis plan, amendments and inference}
++\label{app:inference}
++\input{drafts/sec_2_7}
++\section{Extended results}
++\label{app:extresults}
++Figure~\ref{fig:multiverse_loc} shows the LOC contrast in the 36 cells of the analysis multiverse (Section~\ref{sec:multiverse}).
++\begin{figure}[H]
++\centering
++\includegraphics[width=3.5in]{figures/multiverse_loc.pdf}
++\caption{Backprop minus untrained at LOC (Conv3), NATIVE 224\,px, in the 36 cells of the analysis multiverse. Layout, colour scale, dots and frame as in Fig.~\ref{fig:multiverse_v1}.}
++\label{fig:multiverse_loc}
++\end{figure}
++This appendix gives the full results condensed in Sections~\ref{sec:gainaxis}--\ref{sec:gaingeometry}.
++\subsection{Mean-profile alignment}
++\label{app:extgainaxis}
++\input{drafts/sec_3_4}
++\subsection{Removing the mean-profile component}
++\label{app:extablation}
++\input{drafts/sec_3_ablation}
++\subsection{Norm and angular components}
++\label{app:extgeometry}
++\input{drafts/sec_3_5}
+ 
+ \end{document}
+--- arxiv-v1:paper/refs.bib
++++ tmlr/refs.bib
+@@ -1,24 +1,5 @@
+-% refs.bib
+-%
+-% Neither evaluation-resolution-rsa tag arxiv-v3 nor learning-rules-rsa tag arxiv-v4 contains a
+-% .bib file; both papers use an inline thebibliography. Entries marked "converted" carry
+-% the \bibitem text of the named tag field by field (author, title, venue, volume, pages,
+-% year, DOI where given), with no field added; the original \bibitem is quoted above each.
+-% Where both tags have an entry, the learning-rules-rsa tag arxiv-v4 version is used (longer
+-% titles, DOIs given), and the difference is noted.
+-% Entries with a "% Verified" comment are new and not taken from either tag.
+-
+-% ---------------------------------------------------------------------------
+-% Converted entries
+-% ---------------------------------------------------------------------------
+-
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem hebart2023)
+-% \bibitem[Hebart et~al., 2023]{hebart2023} Hebart, M.~N., Contier, O., Teichmann, L., Rockter,
+-%   A.~H., Zheng, C.~Y., Kidder, A., Corriveau, A., Vaziri-Pashkam, M., and Baker, C.~I. (2023).
+-%   THINGS-data, a multimodal collection of large-scale datasets for investigating object
+-%   representations in human brain and behavior. \textit{eLife}, 12:e82580. doi:10.7554/eLife.82580.
+-% Also in evaluation-resolution-rsa tag arxiv-v3 (same text, without DOI).
++% Anonymised bibliography for the TMLR submission (provenance comments: see paper/refs.bib).
++
+ @article{hebart2023,
+   author  = {Hebart, M.~N. and Contier, O. and Teichmann, L. and Rockter, A.~H. and Zheng, C.~Y. and Kidder, A. and Corriveau, A. and Vaziri-Pashkam, M. and Baker, C.~I.},
+   title   = {{THINGS}-data, a multimodal collection of large-scale datasets for investigating object representations in human brain and behavior},
+@@ -29,25 +10,13 @@
+   doi     = {10.7554/eLife.82580}
+ }
+ 
+-% Source: evaluation-resolution-rsa tag arxiv-v3,
+-%   paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex (\bibitem leutenegger2026)
+-% \bibitem[Leutenegger(2026)]{leutenegger2026} Leutenegger, N. (2026). Untrained CNNs exceed
+-%   backpropagation in V1 alignment at high evaluation resolution: A systematic RSA comparison of
+-%   four learning rules against human fMRI. \textit{arXiv:2604.16875}, v4.
+-@misc{leutenegger2026,
+-  author       = {Nils Leutenegger},
++@misc{lrrsa,
++  author       = {Anonymous},
+   title        = {Untrained {CNNs} exceed backpropagation in {V1} alignment at high evaluation resolution: A systematic {RSA} comparison of four learning rules against human {fMRI}},
+-  howpublished = {arXiv:2604.16875},
+-  note         = {v4},
++  howpublished = {Preprint},
+   year         = {2026}
+ }
+ 
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem kriegeskorte2008)
+-% \bibitem[Kriegeskorte et~al., 2008]{kriegeskorte2008} Kriegeskorte, N., Mur, M., and
+-%   Bandettini, P. (2008). Representational similarity analysis -- connecting the branches of
+-%   systems neuroscience. \textit{Frontiers in Systems Neuroscience}, 2:4.
+-% evaluation-resolution-rsa tag arxiv-v3 writes the title with a colon instead of " -- ".
+ @article{kriegeskorte2008,
+   author  = {Kriegeskorte, N. and Mur, M. and Bandettini, P.},
+   title   = {Representational similarity analysis -- connecting the branches of systems neuroscience},
+@@ -57,12 +26,6 @@
+   year    = {2008}
+ }
+ 
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem nili2014)
+-% \bibitem[Nili et~al., 2014]{nili2014} Nili, H., Wingfield, C., Walther, A., Su, L.,
+-%   Marslen-Wilson, W., and Kriegeskorte, N. (2014). A toolbox for representational similarity
+-%   analysis. \textit{PLoS Computational Biology}, 10:e1003553.
+-% Also in evaluation-resolution-rsa tag arxiv-v3 (same text).
+ @article{nili2014,
+   author  = {Nili, H. and Wingfield, C. and Walther, A. and Su, L. and Marslen-Wilson, W. and Kriegeskorte, N.},
+   title   = {A toolbox for representational similarity analysis},
+@@ -72,12 +35,6 @@
+   year    = {2014}
+ }
+ 
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem lillicrap2016)
+-% \bibitem[Lillicrap et~al., 2016]{lillicrap2016} Lillicrap, T.~P., Cownden, D., Tweed, D.~B.,
+-%   and Akerman, C.~J. (2016). Random synaptic feedback weights support error backpropagation for
+-%   deep learning. \textit{Nature Communications}, 7:13276.
+-% Also in evaluation-resolution-rsa tag arxiv-v3 (same text).
+ @article{lillicrap2016,
+   author  = {Lillicrap, T.~P. and Cownden, D. and Tweed, D.~B. and Akerman, C.~J.},
+   title   = {Random synaptic feedback weights support error backpropagation for deep learning},
+@@ -87,12 +44,6 @@
+   year    = {2016}
+ }
+ 
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem rao1999)
+-% \bibitem[Rao and Ballard, 1999]{rao1999} Rao, R.~P.~N. and Ballard, D.~H. (1999). Predictive
+-%   coding in the visual cortex: a functional interpretation of some extra-classical
+-%   receptive-field effects. \textit{Nature Neuroscience}, 2:79--87.
+-% evaluation-resolution-rsa tag arxiv-v3 gives the short title "Predictive coding in the visual cortex".
+ @article{rao1999,
+   author  = {Rao, R.~P.~N. and Ballard, D.~H.},
+   title   = {Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects},
+@@ -102,12 +53,6 @@
+   year    = {1999}
+ }
+ 
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem whittington2017)
+-% \bibitem[Whittington and Bogacz, 2017]{whittington2017} Whittington, J.~C.~R. and Bogacz, R.
+-%   (2017). An approximation of the error backpropagation algorithm in a predictive coding network
+-%   with local Hebbian synaptic plasticity. \textit{Neural Computation}, 29:1229--1262.
+-% Also in evaluation-resolution-rsa tag arxiv-v3 (same text).
+ @article{whittington2017,
+   author  = {Whittington, J.~C.~R. and Bogacz, R.},
+   title   = {An approximation of the error backpropagation algorithm in a predictive coding network with local {Hebbian} synaptic plasticity},
+@@ -117,12 +62,6 @@
+   year    = {2017}
+ }
+ 
+-% Source: learning-rules-rsa tag arxiv-v4,
+-%   paper/arxiv_upload_learning_rules_v3/learning_rules_rsa_paper_v3.tex (\bibitem bi1998)
+-% \bibitem[Bi and Poo, 1998]{bi1998} Bi, G.-q. and Poo, M.-m. (1998). Synaptic modifications in
+-%   cultured hippocampal neurons: dependence on spike timing, synaptic strength, and postsynaptic
+-%   cell type. \textit{Journal of Neuroscience}, 18:10464--10472.
+-% evaluation-resolution-rsa tag arxiv-v3 gives the short title and "J. Neurosci.".
+ @article{bi1998,
+   author  = {Bi, G.-q. and Poo, M.-m.},
+   title   = {Synaptic modifications in cultured hippocampal neurons: dependence on spike timing, synaptic strength, and postsynaptic cell type},
+@@ -132,11 +71,6 @@
+   year    = {1998}
+ }
+ 
+-% Source: evaluation-resolution-rsa tag arxiv-v3,
+-%   paper/arxiv_upload_v3/Evaluation_Resolution_Confounds_paper_v3.tex (\bibitem masquelier2007)
+-% \bibitem[Masquelier and Thorpe(2007)]{masquelier2007} Masquelier, T. and Thorpe, S.~J. (2007).
+-%   Unsupervised learning of visual features through spike timing dependent plasticity.
+-%   \textit{PLOS Computational Biology}, 3(2):e31.
+ @article{masquelier2007,
+   author  = {Masquelier, T. and Thorpe, S.~J.},
+   title   = {Unsupervised learning of visual features through spike timing dependent plasticity},
+@@ -147,25 +81,13 @@
+   year    = {2007}
+ }
+ 
+-% ---------------------------------------------------------------------------
+-% New entries, not in either tag
+-% ---------------------------------------------------------------------------
+-
+-% Verified 2026-10-19 against the arXiv listing (title, author, version v3): (the paper itself has no self-entry). Title and author from
+-%   evaluation-resolution-rsa tag arxiv-v3, Evaluation_Resolution_Confounds_paper_v3.tex lines 13-16;
+-%   year, DOI, eprint and archivePrefix as specified by the author on 2026-10-13.
+ @misc{evalres,
+-  author        = {Leutenegger, Nils},
+-  title         = {Evaluation Resolution Confounds Learning-Rule Comparisons in Model--Brain {RSA} of Early Visual Cortex},
+-  howpublished  = {arXiv:2608.12408},
+-  note          = {v3},
+-  year          = {2026},
+-  doi           = {10.48550/arXiv.2608.12408},
+-  eprint        = {2608.12408},
+-  archivePrefix = {arXiv}
+-}
+-
+-% No DOI exists; standard citation of the Toronto technical report.
++  author       = {Anonymous},
++  title        = {Evaluation Resolution Confounds Learning-Rule Comparisons in Model--Brain {RSA} of Early Visual Cortex},
++  howpublished = {Preprint},
++  year         = {2026}
++}
++
+ @techreport{krizhevsky2009,
+   author      = {Krizhevsky, Alex},
+   title       = {Learning Multiple Layers of Features from Tiny Images},
+@@ -173,7 +95,6 @@
+   year        = {2009}
+ }
+ 
+-% Verified 2026-10-19 against the Crossref record (title, authors, volume, pages): ridge regression
+ @article{hoerl1970,
+   author  = {Hoerl, Arthur E. and Kennard, Robert W.},
+   title   = {Ridge Regression: Biased Estimation for Nonorthogonal Problems},
+@@ -185,7 +106,6 @@
+   doi     = {10.1080/00401706.1970.10488634}
+ }
+ 
+-% Verified 2026-10-19 against the Crossref record (title, authors, volume, pages): torchvision
+ @inproceedings{marcel2010,
+   author    = {Marcel, S{\'e}bastien and Rodriguez, Yann},
+   title     = {Torchvision the Machine-Vision Package of Torch},
+@@ -195,7 +115,6 @@
+   doi       = {10.1145/1873951.1874254}
+ }
+ 
+-% Verified 2026-11-07 against NeurIPS and dblp-style listings (authors, pages 8024--8035)
+ @inproceedings{paszke2019,
+   author = {Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and Desmaison, Alban and K{\"o}pf, Andreas and Yang, Edward and DeVito, Zachary and Raison, Martin and Tejani, Alykhan and Chilamkurthy, Sasank and Steiner, Benoit and Fang, Lu and Bai, Junjie and Chintala, Soumith},
+   title  = {{PyTorch}: An Imperative Style, High-Performance Deep Learning Library},
+@@ -204,7 +123,6 @@
+   year   = {2019}
+ }
+ 
+-% Verified 2026-11-07 against the PMLR page (title, authors, volume, pages)
+ @inproceedings{kornblith2019,
+   author    = {Kornblith, Simon and Norouzi, Mohammad and Lee, Honglak and Hinton, Geoffrey},
+   title     = {Similarity of Neural Network Representations Revisited},
+@@ -215,7 +133,6 @@
+   year      = {2019}
+ }
+ 
+-% Verified 2026-10-19 against the Crossref record (title, authors, volume, pages): reliability of dissimilarity measures
+ @article{walther2016,
+   author  = {Walther, Alexander and Nili, Hamed and Ejaz, Naveed and Alink, Arjen and Kriegeskorte, Nikolaus and Diedrichsen, J{\"o}rn},
+   title   = {Reliability of Dissimilarity Measures for Multi-Voxel Pattern Analysis},
+@@ -226,7 +143,6 @@
+   doi     = {10.1016/j.neuroimage.2015.12.012}
+ }
+ 
+-% Verified 2026-10-19 against the Crossref record (title, authors, volume, pages): representational models
+ @article{diedrichsen2017,
+   author  = {Diedrichsen, J{\"o}rn and Kriegeskorte, Nikolaus},
+   title   = {Representational Models: A Common Framework for Understanding Encoding, Pattern-Component, and Representational-Similarity Analysis},
+@@ -238,7 +154,6 @@
+   doi     = {10.1371/journal.pcbi.1005508}
+ }
+ 
+-% Verified 2026-10-19 against the Crossref record (title, authors, volume, pages): multiverse analysis
+ @article{steegen2016,
+   author  = {Steegen, Sara and Tuerlinckx, Francis and Gelman, Andrew and Vanpaemel, Wolf},
+   title   = {Increasing Transparency Through a Multiverse Analysis},
+@@ -250,7 +165,6 @@
+   doi     = {10.1177/1745691616658637}
+ }
+ 
+-% Verified 2026-10-19 against the Crossref record (title, authors, volume, pages): normalisation
+ @article{carandini2012,
+   author  = {Carandini, Matteo and Heeger, David J.},
+   title   = {Normalization as a Canonical Neural Computation},
+@@ -262,7 +176,6 @@
+   doi     = {10.1038/nrn3136}
+ }
+ 
+-% Verified 2026-10-19 against the CogSci 2020 proceedings page (title and authors): untrained CNNs as models of visual cortex
+ @inproceedings{truzzi2020,
+   author    = {Truzzi, Anna and Cusack, Rhodri},
+   title     = {Can Visual Object Representations in the Human Brain Be Modelled by Untrained Convolutional Neural Networks with Random Weights?},
+@@ -271,7 +184,6 @@
+   url       = {https://cognitivesciencesociety.org/cogsci20/papers/0691/index.html}
+ }
+ 
+-% Verified 2026-10-15 against the publisher page (nature.com/articles/s42256-025-01142-3)
+ @article{kazemian2025,
+   author  = {Kazemian, Atlas and Elmoznino, Eric and Bonner, Michael F.},
+   title   = {Convolutional Architectures Are Cortex-Aligned de Novo},
+@@ -283,7 +195,6 @@
+   doi     = {10.1038/s42256-025-01142-3}
+ }
+ 
+-% Verified 2026-11-07 against the CVF open-access page (pages 11976--11986; dblp lists 11966--11976, which we do not follow)
+ @inproceedings{liu2022,
+   author    = {Liu, Zhuang and Mao, Hanzi and Wu, Chao-Yuan and Feichtenhofer, Christoph and Darrell, Trevor and Xie, Saining},
+   title     = {A {ConvNet} for the 2020s},
+@@ -293,7 +204,6 @@
+   doi       = {10.1109/CVPR52688.2022.01167}
+ }
+ 
+-% Verified 2026-11-07: title, journal and DOI as listed in Kazemian et al. (2025); the arXiv version (2104.01489) is titled 'Part 2 -- constraint-based intelligibility'. Author first names not verified.
+ @article{cao2024,
+   author  = {Cao, R. and Yamins, D.},
+   title   = {Explanatory models in neuroscience, part 2: functional intelligibility and the contravariance principle},

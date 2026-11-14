@@ -1,0 +1,22 @@
+% TMLR version: condensed Section 3.5. Full arXiv-v1 text in Appendix J.2.
+In an exploratory analysis prompted by criticism of an earlier draft (Section~\ref{sec:inference}),
+each raw GAP pattern and each beta pattern was split into its projection on the mean profile and
+the remainder orthogonal to it (Section~\ref{sec:gainmethods}); each model component was compared
+with the same component of the brain (RSA convention and bootstrap of
+Section~\ref{sec:rsa}). M1 was met: in the orthogonal
+remainder, the V1 contrast of the untrained (uncalibrated BN statistics) network minus Backprop at
+NATIVE 224\,px was $\MpOrthoOwnVoneNatTwoTwoFour$ [$\MpOrthoOwnVoneNatTwoTwoFourLo$,
+$\MpOrthoOwnVoneNatTwoTwoFourHi$], with an upper bound of at most 0.010, against
+$+\MpFullOwnVoneNatTwoTwoFour$ [$\MpFullOwnVoneNatTwoTwoFourLo$, $\MpFullOwnVoneNatTwoTwoFourHi$] in
+the full variant; the paired difference between the two variants was resolved (X1: met). M2 was
+met: the resolution slope of the orthogonal remainder was below half of $S_{\mathrm{paper}}$. M4
+was met: for the ImageNet models at 224\,px, the upper bound of the orthogonal V1 contrast was at
+most 0.010 in \MpMFourModels{} of 6 models. M3 was not met: the parallel component gave
+$+\MpParOwnVoneNatTwoTwoFour$ [$\MpParOwnVoneNatTwoTwoFourLo$, $\MpParOwnVoneNatTwoTwoFourHi$] at
+NATIVE 224\,px, an interval that includes both 0 and the raw gap, so these data do not decide
+whether the parallel component alone suffices (the wording of the pre-stated rule claimed more;
+Appendix~\ref{app:extablation}). With the orthogonal remainder on one side only, both intervals
+included 0, so no attribution to a side is claimed; the point estimates lay close to that of the
+orthogonal variant (descriptive, no paired contrast tested; Appendix~\ref{app:ablation2x2}). We
+state only what the data resolve: the advantage is absent from the orthogonal remainder, and the
+parallel component alone did not resolve it. No physiological claim follows.

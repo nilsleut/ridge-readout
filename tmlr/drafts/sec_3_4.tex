@@ -1,0 +1,17 @@
+In an exploratory analysis, the mean-profile alignment of Section~\ref{sec:gainmethods} was computed for every model
+and for the V1 voxels of each subject (Fig.~\ref{fig:gain}). Over the 70 cells of the
+untrained (uncalibrated BN statistics) network and Backprop (5 seeds, six NATIVE
+resolutions and UPSAMPLED 224\,px), $c_{\mathrm{align}}$ predicts the raw-feature RSA at
+V1 with Spearman \GOneSpearman{} (G1, threshold 0.6: met). Over 64 cells of the ImageNet
+models the same correlation was \GenOneSpearman{} (GEN1, met). G2 was not met: after the
+ranks of both RDMs were regressed on the ranks of their own alignment RDMs, the V1 gap at
+NATIVE 224\,px was $+\GTwoPartialGap$ [$\GTwoPartialGapLo$, $\GTwoPartialGapHi$], whose
+upper bound exceeds 0.010, and the slope was $S_{\mathrm{partial}} = +\GTwoPartialSlope$
+[$\GTwoPartialSlopeLo$, $\GTwoPartialSlopeHi$], above half of $S_{\mathrm{paper}}$.
+
+Descriptively, V1 voxel alignment correlated with stimulus mean luminance at
+\VoxGainLumSubOne, \VoxGainLumSubTwo{} and \VoxGainLumSubThree, and with RMS contrast at
+\VoxGainConSubOne, \VoxGainConSubTwo{} and \VoxGainConSubThree{} (sub-01, sub-02,
+sub-03). At 224\,px the untrained network's alignment had the same signs
+(\ModelGainRandLum{} with luminance, \ModelGainRandCon{} with contrast); Backprop's alignment correlated positively with luminance (\ModelGainBpLum), and its correlation with contrast
+was close to zero (\ModelGainBpCon).

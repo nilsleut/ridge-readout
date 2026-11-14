@@ -1,0 +1,51 @@
+The band-pass inputs were built from the image after resizing and centre-cropping to
+224\,px and before the channel normalisation. Gaussian low-pass filters $L_r$ with
+$r \in \{112, 56, 28, 14\}$ have an amplitude response of 0.5 at $r/2$ cycles per image; the
+octave bands are differences of consecutive filters. Band 0--14 is the coarse residual $L_{14}$ and
+contains the image mean. Condition ``only 0--14'' keeps this band alone, and condition ``notch
+0--14'' is the native image minus this band, shifted by the CIFAR-10 channel-mean grey. Both were
+evaluated at NATIVE 224\,px with all 30 checkpoints.
+
+Table~\ref{tab:bandgap} gives the V1 contrast (untrained minus Backprop) and the LOC contrast
+(Backprop minus untrained) with raw and channel-z-scored features, with 95\% stimulus-bootstrap
+intervals. The V1 contrast with the coarse band alone was positive under raw features, as for
+native input ($+\VoneGapRawTwoTwoFour$); without the coarse band it was negative.
+Table~\ref{tab:bandm} gives the moment ratio $m$ of Section~\ref{sec:standardization}, mean over
+seeds. The prediction P\_mech2 that relates $m$ to the difference between raw and z-scored RSA
+was not met (Appendix~\ref{app:failed}).
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & Only 0--14 & Notch 0--14 \\
+\midrule
+V1, raw & $\BandOnlyVoneRaw\ [\BandOnlyVoneRawLo, \BandOnlyVoneRawHi]$ & $\BandNotchVoneRaw\ [\BandNotchVoneRawLo, \BandNotchVoneRawHi]$ \\
+V1, z & $\BandOnlyVoneZ\ [\BandOnlyVoneZLo, \BandOnlyVoneZHi]$ & $\BandNotchVoneZ\ [\BandNotchVoneZLo, \BandNotchVoneZHi]$ \\
+LOC, raw & $\BandOnlyLocRaw\ [\BandOnlyLocRawLo, \BandOnlyLocRawHi]$ & $\BandNotchLocRaw\ [\BandNotchLocRawLo, \BandNotchLocRawHi]$ \\
+LOC, z & $\BandOnlyLocZ\ [\BandOnlyLocZLo, \BandOnlyLocZHi]$ & $\BandNotchLocZ\ [\BandNotchLocZLo, \BandNotchLocZHi]$ \\
+\bottomrule
+\end{tabular}
+\caption{Contrasts for band-pass inputs (NATIVE 224\,px; V1: untrained minus Backprop, LOC:
+Backprop minus untrained; 95\% stimulus-bootstrap intervals).}
+\label{tab:bandgap}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Input & $m$, untrained & $m$, Backprop \\
+\midrule
+Native 224\,px & \BandMNativeRand & \BandMNativeBp \\
+Only 0--14 & \BandMOnlyRand & \BandMOnlyBp \\
+Notch 0--14 & \BandMNotchRand & \BandMNotchBp \\
+\bottomrule
+\end{tabular}
+\caption{Moment ratio $m$ of the Conv1 features (mean over 5 seeds).}
+\label{tab:bandm}
+\end{table}
