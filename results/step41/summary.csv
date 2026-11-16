@@ -1,0 +1,21 @@
+kind,part,quantity,value,passed,seed,U_BP,U_Random,U_diff,U_skill_BP,U_skill_Random,note,config_hash,git_head
+rule,A,"D-A1 |median r(joint, alpha_net = 1e12) - median r(bank)| <= 1e-6 in every fit",3.782832158627514e-09,True,,,,,,,,8458e04a269a,ec7cba2
+rule,A,D-A2 median r(conditional) - median r(bank) >= -0.002 in every fit,-0.0049811301331061,False,,,,,,,,8458e04a269a,ec7cba2
+interpretation,A,B1 violation of step 40 attributed to selection variance of the 2D search,,False,,,,,,,,8458e04a269a,ec7cba2
+U_conditional,A,,,,0,0.0020205899697862,0.0001673271759724,0.0018532627938138,-0.0004736618527153,-0.00079849926883,,8458e04a269a,ec7cba2
+U_conditional,A,,,,1,0.0020612100014582,-0.000782000946452,0.0028432109479102,-0.0002502162722134,-0.0009884723719439,,8458e04a269a,ec7cba2
+U_conditional,A,,,,2,0.0047604892836706,0.0004671466093066,0.004293342674364,-9.25977152831566e-05,-0.0006631519311247,,8458e04a269a,ec7cba2
+U_conditional,A,,,,3,0.0040984213175606,-0.0015425120432922,0.0056409333608528,-0.0005341395475217,-0.0009638270567821,,8458e04a269a,ec7cba2
+U_conditional,A,,,,4,0.005210602987543,0.0004947607939363,0.0047158421936066,-0.0002092771250838,-0.0010191261844262,,8458e04a269a,ec7cba2
+U_conditional_mean,A,,,,,0.0036302627120037,-0.0002390556821057,0.0038693183941095,-0.0003119785025635,-0.0008866153626214,,8458e04a269a,ec7cba2
+optimism,A,bank,0.0013593510652766,,,,,,,,"inner MSE 0.97170, outer MSE 0.97390",8458e04a269a,ec7cba2
+optimism,A,joint2d,0.0035734822961322,,,,,,,,"inner MSE 0.96926, outer MSE 0.97441",8458e04a269a,ec7cba2
+optimism,A,cond,0.0033243286346212,,,,,,,,"inner MSE 0.96946, outer MSE 0.97432",8458e04a269a,ec7cba2
+check,A,"joint2d median r vs step 40 banded.csv, max |d|",8.326672684688674e-17,,,,,,,,,8458e04a269a,ec7cba2
+check,A,"low-edge hits (reliable voxels), invalid",0.0,,,,,,,,invalid 0,8458e04a269a,ec7cba2
+runtime,A,CPU seconds (sum of fits),19042.051564216614,,,,,,,,wall 2785 s; estimate 7570 s,8458e04a269a,ec7cba2
+rule,N,"N1 raw, correlation vs b1, V1: Delta(1) > Delta(12)",0.017604273010122868,True,,,,,,,"Delta(1) -0.0002, Delta(12) -0.0178",8458e04a269a,ec7cba2
+rule,N,"N2 same cell: Spearman(k, Delta(k)) <= -0.8",-0.942857142857143,True,,,,,,,,8458e04a269a,ec7cba2
+rule,N,N3 same cell: Delta(1) > 0,-0.00015850070582019635,False,,,,,,,,8458e04a269a,ec7cba2
+rule,N,"N4 z, correlation vs b1, V1: Delta(k) <= 0 for every k",-0.015933194557383352,True,,,,,,,max Delta(k) over k,8458e04a269a,ec7cba2
+runtime,N,wall seconds,193.3572051525116,,,,,,,,,8458e04a269a,ec7cba2
