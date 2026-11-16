@@ -91,14 +91,19 @@ def _grid_pairs(grids: Sequence[np.ndarray]) -> np.ndarray:
 
 def fit_banded(groups: List[np.ndarray], Y: np.ndarray, *, grids: Sequence[np.ndarray],
                n_outer: int = 8, n_inner: int = 5, seed: int = 20260818,
-               reliable: Optional[np.ndarray] = None, gate: bool = True) -> Dict:
+               reliable: Optional[np.ndarray] = None, gate: bool = True,
+               fixed: Optional[Dict[int, np.ndarray]] = None) -> Dict:
     """Nested-CV banded ridge.
 
     groups: list of (n, d_g) feature arrays (bank first, network last by convention).
     grids:  one penalty grid per group (same order). A grid of length 1 fixes that penalty.
     reliable: bool mask over voxels for the low-edge gate and for reporting.
+    fixed:  optional {group index: (n_outer, n_voxel) penalties}; that group's penalty is
+            then fixed per outer fold and voxel (the value must lie on its grid) and only the
+            other groups are searched (conditional search, step 41). Default: none fixed.
     Returns pooled out-of-fold predictions, per-voxel r and MSE skill, selected penalties
-    (n_outer, n_voxel) per group, and the classified low-edge hits.
+    (n_outer, n_voxel) per group, the classified low-edge hits, and per outer fold and voxel
+    the mean inner-CV MSE at the selected penalty and the outer-fold MSE.
     """
     Y = np.asarray(Y, np.float64)
     n, v = Y.shape
@@ -114,6 +119,12 @@ def fit_banded(groups: List[np.ndarray], Y: np.ndarray, *, grids: Sequence[np.nd
     base_oof = np.full((n, v), np.nan)
     fold_of = np.full(n, -1)
     sel = np.zeros((len(groups), n_outer, v))
+    inner_sel = np.zeros((n_outer, v))
+    outer_mse = np.zeros((n_outer, v))
+    fixed = {} if fixed is None else {int(k): np.asarray(a, np.float64) for k, a in fixed.items()}
+    for gi, a in fixed.items():
+        if a.shape != (n_outer, v):
+            raise ValueError(f"fixed penalties for group {gi} must have shape {(n_outer, v)}")
     hits = []
 
     for fi, (tr, te, inner) in enumerate(outer_inner_splits(np.arange(n), n_outer, n_inner, seed)):
@@ -125,14 +136,23 @@ def fit_banded(groups: List[np.ndarray], Y: np.ndarray, *, grids: Sequence[np.nd
             crit += np.stack([mse_columns(p, Y[iva]) for p in P])
             cache.append((itr, iva, Ktr, Kva))
         crit /= len(inner)
-        best = np.argmin(crit, axis=0)                      # (v,)
+        if fixed:
+            allowed = np.ones((len(pairs), v), bool)
+            for gi, a in fixed.items():
+                allowed &= np.isclose(pairs[:, gi][:, None], a[fi][None, :], rtol=1e-12)
+            if not allowed.any(axis=0).all():
+                raise ValueError("a fixed penalty is not on its group's grid")
+            best = np.argmin(np.where(allowed, crit, np.inf), axis=0)
+        else:
+            best = np.argmin(crit, axis=0)                  # (v,)
         for gi in range(len(groups)):
             sel[gi, fi] = pairs[best, gi]
+        inner_sel[fi] = crit[best, np.arange(v)]
 
-        # low-edge selections at reliable voxels, per group with a real grid
+        # low-edge selections at reliable voxels, per searched group with a real grid
         if gate:
             for gi, g in enumerate(grids):
-                if len(g) < 2:
+                if len(g) < 2 or gi in fixed:
                     continue
                 lo = np.flatnonzero(np.isclose(pairs[best, gi], g[0], rtol=1e-12) & rel)
                 if not len(lo):
@@ -157,6 +177,7 @@ def fit_banded(groups: List[np.ndarray], Y: np.ndarray, *, grids: Sequence[np.nd
         P = banded_predict(Ktr, Kte, Y[tr], pairs[used])
         pos = {u: k for k, u in enumerate(used)}
         pred_oof[te] = np.stack([P[pos[b], :, j] for j, b in enumerate(best)], axis=1)
+        outer_mse[fi] = ((Y[te] - pred_oof[te]) ** 2).mean(axis=0)
         base_oof[te] = Y[tr].mean(axis=0)
         fold_of[te] = fi
 
@@ -165,4 +186,5 @@ def fit_banded(groups: List[np.ndarray], Y: np.ndarray, *, grids: Sequence[np.nd
     r = pearson_columns(pred_oof, Y)
     skill = 1.0 - ((Y - pred_oof) ** 2).sum(axis=0) / ((Y - base_oof) ** 2).sum(axis=0)
     return dict(r=r, mse_skill=skill, pred_oof=pred_oof, selected=sel, hits=hits,
-                outer_fold_of_stimulus=fold_of, n_outer=n_outer, pairs=pairs)
+                outer_fold_of_stimulus=fold_of, n_outer=n_outer, pairs=pairs,
+                inner_mse_selected=inner_sel, outer_mse=outer_mse)

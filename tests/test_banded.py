@@ -9,6 +9,9 @@ Checks for src/ridge/banded.py (step 40, part A). All must pass before any step 
         edge, or r(joint) >= r(network alone) - 0.002 (median over voxels)
   (iv)  one group: fit_banded equals fit.fit_condition on the same grid and folds
   (v)   banded_predict with one group equals ridge_dual.DualRidge on every alpha
+  (vi)  step 41: the conditional search (alpha_bank fixed per voxel and fold at the bank-alone
+        selection) with alpha_net = 1e12 only reproduces bank alone exactly
+  (vii) step 41: the conditional search keeps alpha_bank at the bank-alone selection
 
 Run: python tests/test_banded.py
 """
@@ -78,6 +81,15 @@ def main():
     Q = DualRidge(GRID).fit(a, Y[tr]).predict_path(b)
     d5 = float(np.abs(P - Q).max())
     check("(v) banded_predict equals DualRidge on every alpha", d5 <= 1e-8, f"max |d| = {d5:.2e}")
+
+    cond = fit_banded([Xb, Xn], Y, grids=[GRID, [1e12]], gate=False, fixed={0: bank["selected"][0]})
+    d6 = float(np.abs(cond["pred_oof"] - bank["pred_oof"]).max())
+    same_sel = bool(np.array_equal(cond["selected"][0], bank["selected"][0]))
+    check("(vi) conditional search with alpha_net = 1e12 only reproduces bank alone",
+          d6 <= 1e-6 and same_sel, f"max |d| = {d6:.2e}, alpha_bank identical: {same_sel}")
+    cond2 = fit_banded([Xb, Xn], Y, grids=[GRID, GRID], gate=False, fixed={0: bank["selected"][0]})
+    check("(vii) conditional search keeps alpha_bank at the bank-alone selection",
+          bool(np.array_equal(cond2["selected"][0], bank["selected"][0])))
 
     if FAILS:
         print(f"  {len(FAILS)} failure(s) of {N} checks")
