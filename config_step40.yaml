@@ -1,0 +1,47 @@
+# Step 40 configuration (amendments/2026-11-16_step40-predictions.md).
+# Separate from config.yaml, whose hash 206fa875cca5 stays unchanged.
+schema_version: 1
+step: 40
+
+subjects: [sub-01, sub-02, sub-03]
+conditions: [random, backprop]        # pilot_features keys: Random Weights (no BN calibration), Backprop
+seed_idx: [0, 1, 2, 3, 4]
+layer: Conv1 after max-pooling, 224 px NATIVE
+
+cv:
+  n_outer: 8
+  n_inner: 5
+  seed: 20260818                      # inner folds: seed + 1000 * (outer_fold + 1)
+
+banded:
+  roi: V1
+  reliability_threshold: 0.2          # split-half, Arm B, as in the paper
+  alpha_grid: {min: 1.0e-6, max: 1.0e+8, n_points: 15}   # factor 10, shared by both penalties
+  selection: inner-CV minimum MSE, (alpha_bank, alpha_net) chosen jointly per voxel
+  grids_primary: [4]
+  grids_secondary: [1, 8]
+  bank: control_lumcontrast           # 2 g^2 features
+  network_features: model_<condition>_seed<i>   # 32 g^2 features
+  b1_tolerance: 0.002
+  lower_edge_gate: {diagnostic_points: [1.0e-7, 1.0e-8, 1.0e-9], gain_threshold: 1.0e-3}
+  runtime_limit_hours: 12
+
+cvrsa:
+  rois: [V1, LOC]                     # V1 primary; all voxels of the ROI
+  n_test_images: 100
+  presentations_expected: 12
+  model_features: global average pooling of Conv1 (g = 1 rung of extract_pilot)
+  model_normalisation: [raw, z]        # z: standardised over the 100 stimuli
+  cells:
+    - {model_distance: correlation, brain_rdm: b1}
+    - {model_distance: euclidean, brain_rdm: b2}
+    - {model_distance: euclidean, brain_rdm: b3}
+  comparison: Spearman over all 4950 pairs, per subject, then mean over subjects and seeds
+  bootstrap: {n_resamples: 1000, seed: 20261002, unit: stimulus, self_pairs: dropped}
+
+extraction_gate:
+  n_images: 20
+  image_seed: 20261116                 # 20 of the 720 Arm A images, rng.choice without replacement
+  grid: 4
+  subject: sub-01
+  threshold_median_r: 1.0e-4           # |delta median r| per checkpoint and |delta (Random - BP)|
