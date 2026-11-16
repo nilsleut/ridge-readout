@@ -1,0 +1,33 @@
+# Step 41 configuration (amendments/2026-11-16_step41-predictions.md).
+# config.yaml (206fa875cca5) and config_step40.yaml (3732a848c7a8) stay unchanged.
+schema_version: 1
+step: 41
+
+subjects: [sub-01, sub-02, sub-03]
+conditions: [random, backprop]
+seed_idx: [0, 1, 2, 3, 4]
+
+diagnosis:
+  roi: V1
+  reliability_threshold: 0.2
+  grid: 4
+  alpha_grid: {min: 1.0e-6, max: 1.0e+8, n_points: 15}
+  cv: {n_outer: 8, n_inner: 5, seed: 20260818}
+  da1_alpha_net_fixed: 1.0e+12
+  da1_tolerance: 1.0e-6          # |median r(joint, alpha_net = 1e12) - median r(bank alone)| per fit
+  da2_tolerance: 0.002           # conditional joint - bank >= -0.002 in every fit
+  conditional_search: alpha_bank fixed per voxel and outer fold at the bank-alone selection; alpha_net over the 15-point axis by inner-CV min MSE
+  optimism: outer-fold MSE minus mean inner-CV MSE at the selected penalty, per voxel and fold; median over reliable voxels, mean over folds
+  runtime_limit_hours: 6
+
+noise_curve:
+  rois: [V1, LOC]
+  ks: [1, 2, 3, 4, 6, 12]
+  n_draws: 20                    # per k; k = 12 is a single draw
+  draw_seed: 20261116            # sessions drawn without replacement, same sessions for all images and subjects in a draw
+  model_normalisation: [raw, z]
+  cells:
+    - {model_distance: correlation, brain_rdm: b1}
+    - {model_distance: euclidean, brain_rdm: b2}
+    - {model_distance: euclidean, brain_rdm: b3}   # needs k >= 2
+  bootstrap: {n_resamples: 1000, seed: 20261002, ks: [1, 12], self_pairs: dropped}
