@@ -1,0 +1,10 @@
+rule,quantity,value,passed,note,config_hash,git_head,seed,config_hash_42b
+P1,"raw, correlation, V1, k = 3: mean Delta <= 0",-0.016943182383156764,True,"CI [-0.0300, -0.0023], 8/8 negative, p 0.0039",da1cbb33b6d7,becabd7,,02d0ae4e72de
+P2,"z, correlation, V1, k = 3: >= 6/8 negative, p <= 0.05, CI excludes 0",-0.02623302258347074,True,"8/8 negative, p 0.0039, CI [-0.0359, -0.0177]",da1cbb33b6d7,becabd7,,02d0ae4e72de
+P3,"z, correlation, LO-obj, k = 3: >= 6/8 negative, p <= 0.05",-0.005910567566825913,True,"8/8 negative, p 0.0039, CI [-0.0091, -0.0028]",da1cbb33b6d7,becabd7,,02d0ae4e72de
+P4,"raw, correlation, V1: mean Delta(k = 3) <= mean Delta(k = 1)",-0.004922545907951914,True,"Delta(3) -0.0169, Delta(1) -0.0120",da1cbb33b6d7,becabd7,,02d0ae4e72de
+Q1,"V1, raw, euclidean, k = 3, subj02-08: Delta positive in >= 5/7, p <= 0.05",-0.011063957218559559,False,"1/7 positive, p 0.9922, CI [-0.0349, +0.0122]",da1cbb33b6d7,becabd7,,02d0ae4e72de
+Q2,"V1, center, N, k = 3, subj02-08: Delta positive in >= 5/7, p <= 0.05",-0.008323594091658428,False,"2/7 positive, p 0.9531, CI [-0.0341, +0.0179]",da1cbb33b6d7,becabd7,,02d0ae4e72de
+Q3,"V1, center, A, k = 3, subj02-08: Delta negative in >= 5/7, p <= 0.05",-0.018106462122567328,True,"7/7 negative, p 0.0078, CI [-0.0346, -0.0000]",da1cbb33b6d7,becabd7,,02d0ae4e72de
+Q4,"LO-obj, center, A, k = 3, subj02-08: Delta negative in >= 5/7, p <= 0.05",-0.008991973605893185,True,"7/7 negative, p 0.0078, CI [-0.0137, -0.0044]",da1cbb33b6d7,becabd7,,02d0ae4e72de
+runtime,group step wall seconds,5851.75201010704,,,da1cbb33b6d7,becabd7,,02d0ae4e72de
