@@ -19,11 +19,21 @@ p = fraction of assignments whose mean is <= the observed mean), and a stimulus 
 of the 8-subject mean (1000 resamples, seed 20261002, self-pairs dropped, the same resample
 for all subjects and cells; at k = 1 the run exclusion is applied to the resampled pairs).
 
+Step 42b (amendments/2026-11-17_step42b-predictions.md): norm-angle components at k = 3,
+model units and voxels centred over the 515 images, N = |n_i - n_j|, A = 1 - cos, W =
+2 n_i n_j (1 - cos), computed by the EXISTING function scripts/step25_weighted_angle.py::nwa
+(which calls step9_separation.normf and .components), imported unchanged. nwa indexes the
+pairs through its module-level TRI (720 stimuli); for n images TRI is set to the n-image upper
+triangle for the duration of the call and restored afterwards (component_vectors).
+Model component vs the same brain component, Spearman over all pairs. Rows: model_units
+"center", distance "N", "A" or "W".
+
 Usage:
-  python scripts/nsd_rsa.py subject <subject>   # results/step42/rsa_<subject>.csv
-                                                # (pilot subject: results/step42/pilot_subj01.csv)
-  python scripts/nsd_rsa.py gates <subject>     # pilot gates G1-G5 -> results/step42/pilot_gates.csv
-  python scripts/nsd_rsa.py group               # all 8 subjects (not run in the pilot)
+  python scripts/nsd_rsa.py subject <subject>   # NSD_DIR/rsa/<subject>.csv (aggregated rho values)
+                                                # pilot (step 42): results/step42/pilot_subj01.csv
+  python scripts/nsd_rsa.py gates <subject>     # G1-G5 -> results/step42/gates.csv
+                                                # (pilot: results/step42/pilot_gates.csv)
+  python scripts/nsd_rsa.py group [workers]     # results/step42/{subjects,group,summary}.csv
 Brain RDMs are cached under NSD_DIR/rdm (never in the repository). Output CSVs contain only
 rho values, contrasts, intervals, p values and counts.
 """
@@ -42,6 +52,8 @@ from cvrsa import condensed_index, model_rdm
 ROIS = ["V1", "LO-obj", "lateral"]
 UNITS = ["raw", "z"]
 DISTS = ["correlation", "euclidean"]
+COMPS = ["N", "A", "W"]
+CONFIG_B = C.REPO / "config_step42b.yaml"
 
 
 # ── core ────────────────────────────────────────────────────────────────────
@@ -97,6 +109,39 @@ def rsa_subject(P, session, run, rois, models, k1=True):
     return pd.DataFrame(rows)
 
 
+def component_vectors(X):
+    """{'N', 'A', 'W'} condensed vectors of X (n x features) via step25_weighted_angle.nwa
+    (F = center), with that module's TRI set to the n-item upper triangle during the call."""
+    import step25_weighted_angle as W25
+    X = np.asarray(X, np.float64)
+    old = W25.TRI
+    W25.TRI = np.triu_indices(X.shape[0], 1)
+    try:
+        return W25.nwa(X)
+    finally:
+        W25.TRI = old
+
+
+def rsa_components(brain_X, rois, feats, keep=None):
+    """Component rho rows: brain_X (n, v) (k = 3 average), rois {name: mask over v},
+    feats {(label, seed): (n, units)}; keep = optional boolean pair mask (all pairs if None)."""
+    mk = list(feats)
+    mcomp = {k: component_vectors(feats[k]) for k in mk}
+    rows = []
+    for roi, m in rois.items():
+        b = component_vectors(np.asarray(brain_X)[:, m])
+        for c in COMPS:
+            M = np.stack([mcomp[k][c] for k in mk])
+            bv = b[c]
+            if keep is not None:
+                M, bv = M[:, keep], bv[keep]
+            rho = rank_z(M) @ rank_z(bv)[0]
+            for (lab, si), v in zip(mk, rho):
+                rows.append(dict(roi=roi, k=3, presentation=0, condition=lab, seed=si, model_units="center",
+                                 distance=c, rho=float(v), n_pairs=len(bv)))
+    return pd.DataFrame(rows)
+
+
 def contrasts(rho):
     """Per (roi, k, units, distance): rho Random, rho BP (means over seeds and, at k = 1, over
     presentations) and Delta = Random - BP."""
@@ -106,13 +151,18 @@ def contrasts(rho):
     return out
 
 
-def sign_flip_p(deltas):
-    """One-sided (predicted Delta < 0): fraction of the 2^n sign assignments with mean <= observed."""
+def sign_flip_p(deltas, direction="negative"):
+    """One-sided sign-flip p over the 2^n sign assignments: predicted negative -> fraction with
+    mean <= observed; predicted positive -> fraction with mean >= observed."""
     d = np.asarray(deltas, np.float64)
     n = len(d)
     signs = 1 - 2 * ((np.arange(2 ** n)[:, None] >> np.arange(n)) & 1)
     means = (signs * d).mean(axis=1)
-    return float(np.mean(means <= d.mean() + 1e-15))
+    if direction == "negative":
+        return float(np.mean(means <= d.mean() + 1e-15))
+    if direction == "positive":
+        return float(np.mean(means >= d.mean() - 1e-15))
+    raise ValueError(direction)
 
 
 def boot_pairs(n, n_boot, seed):
@@ -146,8 +196,15 @@ def load_features():
 def run_subject(subject):
     t0 = time.time()
     P, session, run, rois, valid = load_patterns(subject)
-    models = model_vectors(load_features())
+    images = np.load(C.nsd_dir("patterns") / f"{subject}.npz")["images"]
+    ref = C.design(C.cfg()["pilot_subject"])["images"]
+    if not np.array_equal(images, ref):
+        raise SystemExit(f"STOP: image order of {subject} differs from the feature order")
+    feats = load_features()
+    models = model_vectors(feats)
     rho = rsa_subject(P, session, run, rois, models)
+    Pm = P.astype(np.float64).mean(axis=1)
+    rho = pd.concat([rho, rsa_components(Pm, rois, feats)], ignore_index=True)
     rho["kind"], rho["subject"] = "rho", subject
     con = contrasts(rho)
     con["kind"], con["subject"] = "contrast", subject
@@ -158,12 +215,13 @@ def run_subject(subject):
     for d in DISTS:
         for r, m in rois.items():
             for name, v in brain_vectors(P[:, :, m], d).items():
-                cache[f"{r}|{d}|{name}"] = v.astype(np.float32)
+                cache[f"{r}|{d}|{name}"] = v
+    for r, m in rois.items():
+        for c, v in component_vectors(Pm[:, m]).items():
+            cache[f"{r}|{c}|k3"] = v
     np.savez(C.nsd_dir("rdm") / f"{subject}.npz", session=session, run=run, **cache)
     out = pd.concat([rho, con, vox], ignore_index=True)
-    name = "pilot_subj01.csv" if subject == C.cfg()["pilot_subject"] else f"rsa_{subject}.csv"
-    C.OUT.mkdir(parents=True, exist_ok=True)
-    C.stamp(out).to_csv(C.OUT / name, index=False)
+    C.stamp(out).to_csv(C.nsd_dir("rsa") / f"{subject}.csv", index=False)
     print(f"{subject}: {len(rho)} rho values, {time.time() - t0:.0f} s")
     return out
 
@@ -229,7 +287,13 @@ def run_gates(subject):
                      passed=bool(n_ok == 10)))
     df = pd.DataFrame(rows)
     df["subject"] = subject
-    C.stamp(df).to_csv(C.OUT / "pilot_gates.csv", index=False)
+    C.stamp(df)
+    f = C.OUT / "gates.csv"
+    if f.exists():
+        prev = pd.read_csv(f)
+        df = pd.concat([prev[prev.subject != subject], df], ignore_index=True)
+    df.to_csv(f, index=False)
+    df = df[df.subject == subject]
     print(df.drop(columns=["config_hash", "git_head", "seed"]).to_string(index=False))
     failed = df[df.passed == False]                         # noqa: E712
     if len(failed):
@@ -237,63 +301,173 @@ def run_gates(subject):
 
 
 # ── group ───────────────────────────────────────────────────────────────────
-def run_group():
-    c = C.cfg()
-    subs = c["subjects"]
-    con = []
-    for s in subs:
-        name = "pilot_subj01.csv" if s == c["pilot_subject"] else f"rsa_{s}.csv"
-        df = pd.read_csv(C.OUT / name)
-        con.append(df[df.kind == "contrast"])
-    con = pd.concat(con, ignore_index=True)
-    keys = ["roi", "k", "model_units", "distance"]
-    rows = []
-    for key, g in con.groupby(keys):
-        d = g.set_index("subject").loc[subs, "delta"].to_numpy()
-        rows.append(dict(zip(keys, key), mean_delta=float(d.mean()), n_negative=int((d < 0).sum()),
-                         p_signflip=sign_flip_p(d)))
-    res = pd.DataFrame(rows)
-    ci = group_bootstrap(subs)
-    res = res.merge(ci, on=keys, how="left")
-    res["kind"] = "group"
-    C.stamp(res).to_csv(C.OUT / "group.csv", index=False)
-    print(res.drop(columns=["config_hash", "git_head", "seed"]).to_string(index=False))
+_G = {}
 
 
-def group_bootstrap(subs):
-    """Bootstrap interval of the 8-subject mean Delta for every cell."""
-    b = C.cfg()["rsa"]["bootstrap"]
+def cfg_b():
+    from config_hash import load_config
+    return load_config(CONFIG_B)
+
+
+def boot_indices(n, n_boot, seed):
+    """The resampled image indices (same RNG sequence as boot_pairs)."""
+    rng = np.random.default_rng(seed)
+    return [rng.integers(0, n, n) for _ in range(n_boot)]
+
+
+def _init_boot(subs):
     feats = load_features()
-    models = model_vectors(feats)
-    n = 515
-    rdm = {s: np.load(C.nsd_dir("rdm") / f"{s}.npz") for s in subs}
-    acc = {}
-    for i_b, (si, sj) in enumerate(boot_pairs(n, b["n_resamples"], b["seed"])):
+    _G.update(subs=subs, models=model_vectors(feats),
+              mcomp={k: component_vectors(X) for k, X in feats.items()},
+              rdm={s: dict(np.load(C.nsd_dir("rdm") / f"{s}.npz")) for s in subs})
+
+
+def _delta(rho, keys, units=None):
+    lab = np.array([k[0] for k in keys])
+    sel = np.ones(len(keys), bool) if units is None else np.array([k[2] == units for k in keys])
+    return float(rho[sel & (lab == "Random")].mean() - rho[sel & (lab == "BP")].mean())
+
+
+def _boot_chunk(chunk):
+    """chunk: list of (b, idx). Returns (resample numbers, {cell: (len(subs), len(chunk)) Deltas})."""
+    subs, models, mcomp, rdm = _G["subs"], _G["models"], _G["mcomp"], _G["rdm"]
+    n = len(chunk[0][1])
+    a, b = np.triu_indices(n, 1)
+    out = {}
+    for j, (_, idx) in enumerate(chunk):
+        si, sj = idx[a], idx[b]
+        keep = si != sj
+        si, sj = si[keep], sj[keep]
         ci = condensed_index(si, sj, n)
         for d in DISTS:
             ks = [k for k in models if k[3] == d]
-            lab = np.array([k[0] for k in ks])
             M = np.stack([models[k][ci] for k in ks])
             Zm = rank_z(M)
-            for s in subs:
+            for s_i, s in enumerate(subs):
                 z = rdm[s]
-                keep_r = {r: z["session"][si, r] * 100 + z["run"][si, r] != z["session"][sj, r] * 100 + z["run"][sj, r]
-                          for r in range(3)}
-                Zm_r = {r: rank_z(M[:, k]) for r, k in keep_r.items()}
+                kr = {r: z["session"][si, r] * 100 + z["run"][si, r] != z["session"][sj, r] * 100 + z["run"][sj, r]
+                      for r in range(3)}
+                Zr = {r: rank_z(M[:, k]) for r, k in kr.items()}
                 for roi in ROIS:
                     rho3 = Zm @ rank_z(z[f"{roi}|{d}|k3"][ci])[0]
-                    rho1 = np.mean([Zm_r[r] @ rank_z(z[f"{roi}|{d}|k1_{r}"][ci][keep_r[r]])[0] for r in range(3)], axis=0)
-                    for k, rho in ((3, rho3), (1, rho1)):
+                    rho1 = np.mean([Zr[r] @ rank_z(z[f"{roi}|{d}|k1_{r}"][ci][kr[r]])[0] for r in range(3)], axis=0)
+                    for kk, rho in ((3, rho3), (1, rho1)):
                         for u in UNITS:
-                            sel = np.array([kk[2] == u for kk in ks])
-                            delta = rho[sel & (lab == "Random")].mean() - rho[sel & (lab == "BP")].mean()
-                            acc.setdefault((roi, k, u, d), np.zeros((len(subs), b["n_resamples"])))[
-                                subs.index(s), i_b] = delta
+                            cell = (roi, kk, u, d)
+                            out.setdefault(cell, np.zeros((len(subs), len(chunk))))[s_i, j] = _delta(rho, ks, u)
+        mk = list(mcomp)
+        keys = [(lab, si_, "center", None) for lab, si_ in mk]
+        for c in COMPS:
+            Zc = rank_z(np.stack([mcomp[k][c][ci] for k in mk]))
+            for s_i, s in enumerate(subs):
+                for roi in ROIS:
+                    rho = Zc @ rank_z(rdm[s][f"{roi}|{c}|k3"][ci])[0]
+                    cell = (roi, 3, "center", c)
+                    out.setdefault(cell, np.zeros((len(subs), len(chunk))))[s_i, j] = _delta(rho, keys)
+    return [bb for bb, _ in chunk], out
+
+
+def group_bootstrap(subs, workers=8):
+    """{cell: (len(subs), n_resamples)} bootstrap Deltas per subject (same resamples for all)."""
+    from concurrent.futures import ProcessPoolExecutor
+    bc = C.cfg()["rsa"]["bootstrap"]
+    idx = boot_indices(515, bc["n_resamples"], bc["seed"])
+    items = list(enumerate(idx))
+    n_chunks = workers * 4
+    chunks = [items[i::n_chunks] for i in range(n_chunks)]
+    acc = {}
+    t0 = time.time()
+    with ProcessPoolExecutor(max_workers=workers, initializer=_init_boot, initargs=(subs,)) as ex:
+        for done, (bs, out) in enumerate(ex.map(_boot_chunk, chunks), 1):
+            for cell, arr in out.items():
+                acc.setdefault(cell, np.zeros((len(subs), len(idx))))[:, bs] = arr
+            print(f"bootstrap chunk {done}/{len(chunks)} ({time.time() - t0:.0f} s)", flush=True)
+    return acc
+
+
+def stamp_b(df):
+    from config_hash import config_hash
+    C.stamp(df)
+    df["config_hash_42b"] = config_hash(cfg_b())
+    return df
+
+
+def run_group(workers=8):
+    t0 = time.time()
+    cb = cfg_b()
+    subs, qs = cb["all_subjects"], cb["q_subjects"]
+    per = {s: pd.read_csv(C.nsd_dir("rsa") / f"{s}.csv") for s in subs}
+    allp = pd.concat(per.values(), ignore_index=True)
+    subjects = allp[allp.kind.isin(["rho", "n_voxels", "n_voxels_invalid"])].drop(
+        columns=["config_hash", "git_head"])
+    stamp_b(subjects).to_csv(C.OUT / "subjects.csv", index=False)
+    con = allp[allp.kind == "contrast"]
+    keys = ["roi", "k", "model_units", "distance"]
+    acc = group_bootstrap(subs, workers)
     rows = []
-    for (roi, k, u, d), a in acc.items():
-        m = a.mean(axis=0)
-        rows.append(dict(roi=roi, k=k, model_units=u, distance=d, ci_lo=float(np.quantile(m, .025)),
-                         ci_hi=float(np.quantile(m, .975))))
+    for key, g in con.groupby(keys):
+        g = g.set_index("subject")
+        for set_name, ss in (("all 8", subs), ("subj02-08", qs)):
+            d = g.loc[ss, "delta"].to_numpy()
+            bt = acc[tuple(key)][[subs.index(s) for s in ss]].mean(axis=0)
+            rows.append(dict(zip(keys, key), subjects=set_name, n_subjects=len(ss), mean_delta=float(d.mean()),
+                             mean_rho_random=float(g.loc[ss, "rho_random"].mean()),
+                             mean_rho_bp=float(g.loc[ss, "rho_bp"].mean()),
+                             n_negative=int((d < 0).sum()), n_positive=int((d > 0).sum()),
+                             p_negative=sign_flip_p(d, "negative"), p_positive=sign_flip_p(d, "positive"),
+                             ci_lo=float(np.quantile(bt, .025)), ci_hi=float(np.quantile(bt, .975))))
+    grp = pd.DataFrame(rows)
+    grp["kind"] = "group"
+    stamp_b(grp).to_csv(C.OUT / "group.csv", index=False)
+    summ = rules(grp, cb)
+    summ = pd.concat([summ, pd.DataFrame([dict(rule="runtime", quantity="group step wall seconds",
+                                               value=time.time() - t0)])], ignore_index=True)
+    stamp_b(summ).to_csv(C.OUT / "summary.csv", index=False)
+    print(summ.drop(columns=["config_hash", "git_head", "seed", "config_hash_42b"]).to_string(index=False))
+
+
+def _cell(grp, roi, k, units, dist, subjects):
+    q = grp[(grp.roi == roi) & (grp.k == k) & (grp.model_units == units) & (grp.distance == dist)
+            & (grp.subjects == subjects)]
+    assert len(q) == 1, (roi, k, units, dist, subjects)
+    return q.iloc[0]
+
+
+def rules(grp, cb):
+    rows = []
+    a8 = "all 8"
+    r = _cell(grp, "V1", 3, "raw", "correlation", a8)
+    rows.append(dict(rule="P1", quantity="raw, correlation, V1, k = 3: mean Delta <= 0", value=r.mean_delta,
+                     passed=bool(r.mean_delta <= 0),
+                     note=f"CI [{r.ci_lo:+.4f}, {r.ci_hi:+.4f}], {r.n_negative}/8 negative, p {r.p_negative:.4f}"))
+    r = _cell(grp, "V1", 3, "z", "correlation", a8)
+    ok = bool(r.n_negative >= 6 and r.p_negative <= 0.05 and r.ci_hi < 0)
+    rows.append(dict(rule="P2", quantity="z, correlation, V1, k = 3: >= 6/8 negative, p <= 0.05, CI excludes 0",
+                     value=r.mean_delta, passed=ok,
+                     note=f"{r.n_negative}/8 negative, p {r.p_negative:.4f}, CI [{r.ci_lo:+.4f}, {r.ci_hi:+.4f}]"))
+    r = _cell(grp, "LO-obj", 3, "z", "correlation", a8)
+    ok = bool(r.n_negative >= 6 and r.p_negative <= 0.05)
+    rows.append(dict(rule="P3", quantity="z, correlation, LO-obj, k = 3: >= 6/8 negative, p <= 0.05",
+                     value=r.mean_delta, passed=ok,
+                     note=f"{r.n_negative}/8 negative, p {r.p_negative:.4f}, CI [{r.ci_lo:+.4f}, {r.ci_hi:+.4f}]"))
+    r3 = _cell(grp, "V1", 3, "raw", "correlation", a8)
+    r1 = _cell(grp, "V1", 1, "raw", "correlation", a8)
+    rows.append(dict(rule="P4", quantity="raw, correlation, V1: mean Delta(k = 3) <= mean Delta(k = 1)",
+                     value=r3.mean_delta - r1.mean_delta, passed=bool(r3.mean_delta <= r1.mean_delta),
+                     note=f"Delta(3) {r3.mean_delta:+.4f}, Delta(1) {r1.mean_delta:+.4f}"))
+    q7 = "subj02-08"
+    for name, spec in cb["predictions"].items():
+        units, dist = spec["cell"]
+        r = _cell(grp, spec["roi"], 3, units, dist, q7)
+        if spec["direction"] == "positive":
+            n_ok, p = r.n_positive, r.p_positive
+        else:
+            n_ok, p = r.n_negative, r.p_negative
+        ok = bool(n_ok >= spec["min_subjects"] and p <= spec["p_max"])
+        quantity = (f"{spec['roi']}, {units}, {dist}, k = 3, subj02-08: Delta {spec['direction']} "
+                    f"in >= {spec['min_subjects']}/7, p <= {spec['p_max']}")
+        rows.append(dict(rule=name, quantity=quantity, value=r.mean_delta, passed=ok,
+                         note=f"{n_ok}/7 {spec['direction']}, p {p:.4f}, CI [{r.ci_lo:+.4f}, {r.ci_hi:+.4f}]"))
     return pd.DataFrame(rows)
 
 
@@ -303,7 +477,7 @@ if __name__ == "__main__":
         run_subject(args[1])
     elif args[:1] == ["gates"] and len(args) == 2:
         run_gates(args[1])
-    elif args == ["group"]:
-        run_group()
+    elif args[:1] == ["group"]:
+        run_group(int(args[1]) if len(args) > 1 else 8)
     else:
         raise SystemExit("usage: nsd_rsa.py {subject <s> | gates <s> | group}")

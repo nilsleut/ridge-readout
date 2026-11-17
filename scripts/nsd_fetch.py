@@ -28,6 +28,7 @@ import nsd_common as C     # noqa: I001  (pins BLAS threads)
 
 import sys
 import time
+from datetime import datetime, timezone
 from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
@@ -87,14 +88,15 @@ def main(subject):
     def fetch(s):
         C.require_free(sizes[s] / 1e9)
         t = time.time()
+        started = datetime.now(timezone.utc).isoformat(timespec="seconds")
         p = C.download(beta_key(subject, s), tmp / f"{subject}_betas_session{s:02d}.nii.gz")
-        return p, time.time() - t
+        return p, time.time() - t, started
 
     rows = []
     with ThreadPoolExecutor(1) as pool:
         fut = pool.submit(fetch, todo[0]) if todo else None
         for i, s in enumerate(todo):
-            path, t_dl = fut.result()
+            path, t_dl, started = fut.result()
             fut = pool.submit(fetch, todo[i + 1]) if i + 1 < len(todo) else None
             t = time.time()
             if union is None:
@@ -112,7 +114,8 @@ def main(subject):
                      zmean_absmax=np.abs(zm).max(), zsd_absdev_max=np.abs(zs - 1).max(),
                      zmean_q=np.quantile(zm, [0, .5, 1]), zsd_q=np.quantile(zs, [0, .5, 1]))
             path.unlink()
-            rows.append(dict(kind="session", subject=subject, session=s, size_gb=sizes[s] / 1e9,
+            rows.append(dict(kind="session", subject=subject, session=s, download_started_utc=started,
+                             size_gb=sizes[s] / 1e9,
                              download_s=t_dl, process_s=time.time() - t, free_gb=C.free_gb(),
                              trials_kept=int(sel.sum()), n_invalid_voxels=int((~valid).sum()),
                              zmean_absmax=float(np.abs(zm).max()), zsd_absdev_max=float(np.abs(zs - 1).max())))

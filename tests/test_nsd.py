@@ -15,6 +15,11 @@ All must pass before any NSD betas are loaded.
         3 subjects, V1 and LOC, 10 models) to 1e-9
   (iv)  the commit check of rule (c) finds a test file deliberately placed under NSD_DIR
         (inside a temporary repository) and the pre-commit hook refuses the commit
+  (v)   step 42b: nsd_rsa.rsa_components (N and A via step25_weighted_angle.nwa) on the THINGS
+        data (720 stimuli, cross-run pairs) reproduces the per-subject component rho values of
+        results/step9/separation.csv (own CNN, NATIVE 224, Random Weights and Backprop, 5 seeds,
+        V1 and LOC, F = center, norm and angle) to 1e-9; the TRI of step25_weighted_angle is
+        restored after every call
 
 Run: python tests/test_nsd.py [--skip-gate]
 """
@@ -115,6 +120,35 @@ def test_things_reproduction():
           f"{n} values, max |d rho| {worst:.1e}")
 
 
+def test_components_reproduction():
+    import step25_weighted_angle as W25
+    from common_up_pairs import pair_set, run_labels
+    from nsd_rsa import rsa_components
+    from step6_common import roi_betas
+    from step9_separation import own_X
+    tri0 = W25.TRI
+    ref = pd.read_csv(REPO / "results" / "step9" / "separation.csv")
+    ref = ref[(ref.kind == "rho") & (ref.source == "own") & (ref.res == "NATIVE_224") & (ref.F == "center")]
+    _, _, keep = pair_set(None, run_labels())
+    lab = {"Random Weights": "Random", "Backprop": "BP"}
+    comp = {"N": "norm", "A": "angle"}
+    worst, n = 0.0, 0
+    for roi in ("V1", "LOC"):
+        feats = {(lab[rule], si): own_X("NATIVE", 224, rule, si, roi) for rule in lab for si in range(5)}
+        for s in ("sub-01", "sub-02", "sub-03"):
+            B = roi_betas(s, roi)
+            rho = rsa_components(B, {roi: np.ones(B.shape[1], bool)}, feats, keep=keep)
+            for row in rho[rho.distance.isin(["N", "A"])].itertuples():
+                rule = [k for k, v in lab.items() if v == row.condition][0]
+                q = ref[(ref.cond == rule) & (ref.seed_idx == row.seed) & (ref.roi == roi)
+                        & (ref.component == comp[row.distance])]
+                assert len(q) == 1
+                worst = max(worst, abs(row.rho - float(q[f"rho_{s}"].iloc[0])))
+                n += 1
+    check("(v) N and A reproduce step 9 on THINGS", worst <= 1e-9 and n == 120 and W25.TRI is tri0,
+          f"{n} values, max |d rho| {worst:.1e}")
+
+
 def test_commit_check():
     with tempfile.TemporaryDirectory() as td:
         repo = Path(td) / "repo"
@@ -157,6 +191,7 @@ def main():
     test_synthetic()
     test_commit_check()
     test_things_reproduction()
+    test_components_reproduction()
     if "--skip-gate" not in sys.argv:
         import nsd_features as F
         ok = F.run_gate(extract=True)
