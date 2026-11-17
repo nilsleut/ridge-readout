@@ -1,0 +1,69 @@
+# Step 43 configuration (amendments/2026-11-17_step43-predictions.md): NSD extensions.
+# config_step42.yaml (da1cbb33b6d7) and config_step42b.yaml (02d0ae4e72de) stay unchanged;
+# data, ROIs, patterns and the step 42 own-CNN features are reused from NSD_DIR.
+schema_version: 1
+step: 43
+
+subjects: [subj01, subj02, subj03, subj04, subj05, subj06, subj07, subj08]
+k: 3                       # all cells except NC (k = 3 and k = 1)
+rois: {primary: V1, secondary: LO-obj, sensitivity: lateral}
+delta: "untrained - trained; own CNN Random - BP, mean over seeds 0-4; ImageNet mean of untrained s0-s2 minus trained"
+
+inference:
+  bootstrap: {n_resamples: 1000, seed: 20261002, unit: images, self_pairs: dropped, same resamples as step 42}
+  sign_flip: {assignments: 256, sided: one-sided in the predicted direction}
+  interval: 95 % percentile of the 8-subject mean
+
+multiverse:
+  source: scripts/step7_multiverse.py (FS, DS, BS, betas, normalise) and scripts/step28_distinct_cells.py (class rule)
+  model: own CNN, GAP Conv1, NATIVE 224 (the step 42 features), Random and BP x seeds 0-4
+  roi: V1
+  F: [raw, center, scale, z]           # per unit over the 515 images
+  D: [correlation, cosine, euclidean]  # model and brain alike
+  B:
+    paper: patterns as in step 42 (z per voxel and session, mean of the 3 presentations)
+    center720: voxels centred over the 515 images (step7_multiverse.betas with roi_betas set to the NSD patterns)
+    z720: voxels z-scored over the 515 images (same)
+  distinct: two cells are one analysis if their V1 rho agree to 1e-9 for all 10 models and 8 subjects (connected components, every pair inside a class must agree, members must share the interval class; else STOP)
+  classify: interval of the 8-subject mean Delta above 0, below 0, or includes 0
+  M1: interval above 0 in at most 2 distinct analyses
+  M2: interval below 0 in at least half of the distinct analyses
+
+imagenet:
+  source: scripts/step8_extract_pretrained.py (build, layers, pool, tf, extract), imported unchanged; images replaced by the 515 NSD PNGs
+  models: [alexnet, vgg11_bn, resnet18, resnet50, convnext_tiny, vit_b_16]
+  conditions:
+    trained: IMAGENET1K_V1 (one weight set)
+    untrained: "s0, s1, s2; torch.manual_seed(s) before construction, weights=None, BN statistics at defaults"
+  resolution: 224
+  layers: {V1: V1 layer of step 8, LO-obj and lateral: LOC layer of step 8}
+  cells: [[raw, correlation], [z, correlation], [center, N], [center, A], [center, W]]   # brain side as in step 42 / 42b
+  I1: V1, A, Delta < 0 (8-subject mean) in at least 5 of 6 architectures
+  I2: V1, raw, correlation, Delta <= 0 (8-subject mean) in at least 4 of 6 architectures
+
+resolution:
+  source: v12_lift (namespaces, transform, load_v12_model, extract_features) as in scripts/step5_extract_gap.py; RSA as in step 42
+  arm: NATIVE
+  px: [32, 64, 96, 128, 160, 224]
+  roi: V1
+  cells: [[raw, correlation], [z, correlation]]
+  slope: S = Delta(224) - Delta(32), formed within every bootstrap draw
+  prediction: none
+
+ceiling:
+  source: learning-rules-rsa scripts/noise_ceiling_v2/common.py::nili_bounds (lower bound), imported unchanged
+  rois: [V1, LO-obj]
+  distance: correlation
+  k3: patterns averaged over the 3 presentations, all 132,355 pairs
+  k1: per presentation r, pairs where no subject has the two presentations in the same session and run; mean over r
+  interval: same bootstrap resamples
+  prediction: none
+
+tests:
+  i: NSD multiverse path on THINGS reproduces results/step7/multiverse.csv (V1 and LOC, NATIVE 224, per subject) to 1e-9
+  ii: NSD ImageNet extraction on the 20 step 40 gate images (R = 224) through the downstream-equivalence gate against data/step8_gap (rows replaced, paper cell per subject, V1 and LOC, all models and conditions); |d rho| <= 1e-4 and |d Delta| <= 1e-4
+  iii: NSD resolution path on THINGS (720 images re-extracted, NATIVE 32 and 224) reproduces results/step5/resolution_rsa.csv rho (raw and z, V1) to 1e-9
+  iv: nili_bounds on THINGS V1, cross-run pairs, reproduces lower|cr|V1 of learning-rules-rsa results/crossrun/step2_summary.csv (0.0514) to 1e-9
+
+runtime: {stop_hours: 10}
+disk: {min_free_gb: 30}
