@@ -1,0 +1,13 @@
+gate,quantity,value,passed,note,subject,config_hash,git_head,seed
+G1,images with exactly 3 presentations,515.0,True,"515 images, 1545 distinct trials",subj01,da1cbb33b6d7,fb51f33,
+G2,max |mean| per voxel and session,7.389644451905042e-16,True,"30 sessions; median over voxels of mean: range 0.0e+00 to 0.0e+00; SD over voxels: min 1.000000, median 1.000000, max 1.000000; invalid voxels per session 0-0",subj01,da1cbb33b6d7,fb51f33,
+G2,max |SD - 1| per voxel and session,3.3306690738754696e-16,True,,subj01,da1cbb33b6d7,fb51f33,
+G3,voxels V1,1350.0,True,must exceed 300,subj01,da1cbb33b6d7,fb51f33,
+G3,voxels LO-obj,2921.0,True,must exceed 300,subj01,da1cbb33b6d7,fb51f33,
+G3,voxels lateral,7799.0,,reported,subj01,da1cbb33b6d7,fb51f33,
+G3,voxels excluded as invalid in some session,0.0,,,subj01,da1cbb33b6d7,fb51f33,
+G4,Spearman V1 RDM presentation 1 vs 2,0.26453000519333203,True,,subj01,da1cbb33b6d7,fb51f33,
+G4,Spearman V1 RDM presentation 1 vs 3,0.24878885874992868,,,subj01,da1cbb33b6d7,fb51f33,
+G4,Spearman V1 RDM presentation 2 vs 3,0.24745744411715695,,,subj01,da1cbb33b6d7,fb51f33,
+G5,feature gate passed,1.0,True,max |delta median r| 1.25e-09; |delta (Random - BP)| 9.48e-10,subj01,da1cbb33b6d7,fb51f33,
+G5,models with 515 finite feature rows,10.0,True,,subj01,da1cbb33b6d7,fb51f33,
