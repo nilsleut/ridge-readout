@@ -1,0 +1,74 @@
+# Step 42 configuration (amendments/2026-11-17_step42-predictions.md): NSD replication.
+# config.yaml (206fa875cca5), config_step40.yaml (3732a848c7a8) and config_step41.yaml
+# (8458e04a269a) stay unchanged. NSD data and everything derived at voxel or RDM level live
+# only under $NSD_DIR (outside the repository).
+schema_version: 1
+step: 42
+
+subjects: [subj01, subj02, subj03, subj04, subj05, subj06, subj07, subj08]
+pilot_subject: subj01
+conditions: [random, backprop]
+seed_idx: [0, 1, 2, 3, 4]
+
+bucket: {name: natural-scenes-dataset, region: us-east-2, unsigned: true}
+
+design:
+  file: nsddata/experiments/nsd/nsd_expdesign.mat
+  sessions_completed: [40, 40, 32, 30, 40, 32, 40, 30]
+  images: shared images shown three times to every subject (515), ordered by 73k ID
+  n_images: 515
+  sessions_loaded: [1, 30]            # all 1545 trials of the 515 images lie in sessions 1-30 for every subject
+  trials_per_session: 750
+  presentation_order: chronological   # presentation 1, 2, 3 = first, second, third trial of the image
+  run: from stimpattern (12 runs per session)
+
+betas:
+  path: nsddata_betas/ppdata/{subject}/func1pt8mm/betas_fithrf_GLMdenoise_RR/betas_session{session:02d}.nii.gz
+  version: betas_fithrf_GLMdenoise_RR
+  space: func1pt8mm
+  scale_divisor: 300                  # int16 / 300 = percent signal change
+  zscore: per voxel within session over all 750 trials (ddof 0), before trial selection
+  invalid_voxels: voxels with zero SD in any loaded session are excluded for that subject (count reported)
+  dtype_stored: float32
+
+rois:
+  V1: {file: roi/prf-visualrois.nii.gz, labels: [1, 2]}                        # V1v + V1d, primary
+  LO-obj: {file: roi/streams.nii.gz, labels: [6], and_tval: floc_objectstval.nii.gz, tval_threshold: 0.0}   # secondary; t > 0 fixed
+  lateral: {file: roi/streams.nii.gz, labels: [6]}                             # sensitivity variant, no prediction
+  grid_check: ROI files and floc_objectstval must match the betas in shape and affine (STOP otherwise)
+
+images:
+  path: nsddata/stimuli/nsd/shared1000/shared{shared:04d}_nsd{nsd73k:05d}.png   # 425 x 425 RGB
+features:
+  extractor: scripts/pilot_features_modal.py::extract_pilot (as in step 40, on the CPU)
+  layer: Conv1 after max-pool
+  resolution: 224                     # Resize(224), CenterCrop(224), ToTensor, Normalize, as for THINGS
+  pooling: global average (g = 1)
+  rules: {Random Weights: random, Backprop: backprop}
+  gate: downstream-equivalence gate of step 40 on the 20 images of config_step40.yaml extraction_gate (threshold 1e-4)
+
+rsa:
+  rois: [V1, LO-obj, lateral]
+  k: [3, 1]                           # 3 = mean of the three presentations (primary); 1 = each presentation separately, rho averaged over the three
+  k1_exclusion: pairs whose two chosen presentations fall in the same session and run are excluded
+  model_units: [raw, z]               # z = standardised over the 515 images
+  distances: [correlation, euclidean] # the same distance on the model and the brain side
+  comparison: Spearman over all pairs (132,355 at k = 3)
+  aggregation: per subject mean over seeds; contrast Delta = Random - BP
+  sign_flip: {assignments: 256, sided: one-sided in the predicted direction (Delta < 0), p: fraction of assignments with mean <= observed mean}
+  bootstrap: {n_resamples: 1000, seed: 20261002, unit: stimuli, self_pairs: dropped, same resample for all subjects and cells, k1_exclusion: applied to the resampled pairs}
+
+predictions:
+  P1: {cell: [raw, correlation, V1, 3], rule: mean Delta <= 0}
+  P2: {cell: [z, correlation, V1, 3], rule: Delta < 0 in >= 6 of 8 subjects, sign-flip p <= 0.05, bootstrap interval excludes 0}
+  P3: {cell: [z, correlation, LO-obj, 3], rule: Delta < 0 in >= 6 of 8 subjects, sign-flip p <= 0.05}
+  P4: {cell: [raw, correlation, V1], rule: mean Delta(k = 3) <= mean Delta(k = 1)}
+
+pilot_gates:
+  G1: every one of the 515 images has exactly 3 presentations
+  G2: {rule: after scaling and z-score, per voxel and session mean ~ 0 and SD ~ 1, tolerance_mean: 1.0e-4, tolerance_sd: 1.0e-3}
+  G3: {min_voxels: {V1: 300, LO-obj: 300}, report: [V1, LO-obj, lateral]}
+  G4: Spearman between the V1 RDMs (correlation distance) of presentations 1 and 2 is positive; 1 vs 3 and 2 vs 3 reported
+  G5: feature gate passed and 10 models x 515 images extracted
+
+disk: {min_free_gb: 30}
