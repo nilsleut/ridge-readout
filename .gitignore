@@ -28,3 +28,5 @@ Thumbs.db
 *.pth
 *.ckpt
 *.pkl
+# NSD data (NSD_DIR) must never enter the repository
+nsd_data/
