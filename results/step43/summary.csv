@@ -1,0 +1,10 @@
+rule,quantity,value,passed,note,config_hash,git_head,seed,config_hash_42
+M1,distinct analyses with the interval above 0 <= 2,0.0,True,"0 above, 13 below, 15 include 0 of 28",e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+M2,distinct analyses with the interval below 0 >= half,13.0,False,13 of 28 (half = 14),e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+I1,"V1, A: 8-subject mean Delta < 0 in >= 5 of 6 architectures",6.0,True,alexnet -0.0846; vgg11_bn -0.0699; resnet18 -0.0749; resnet50 -0.0661; convnext_tiny -0.0157; vit_b_16 -0.0996,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+I2,"V1, raw, correlation: 8-subject mean Delta <= 0 in >= 4 of 6 architectures",6.0,True,alexnet -0.0181; vgg11_bn -0.0047; resnet18 -0.0117; resnet50 -0.0129; convnext_tiny -0.0053; vit_b_16 -0.0571,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+runtime,multiverse wall seconds,19406.931774377823,,,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+runtime,imagenet wall seconds,10486.853093385696,,,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+runtime,resolution wall seconds,4422.767853021622,,,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+runtime,ceiling wall seconds,546.1628353595734,,,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
+runtime,total wall seconds (multiverse + resumed parts),34862.71756029129,,,e0a00a888b48,0c7e1fd,,da1cbb33b6d7
