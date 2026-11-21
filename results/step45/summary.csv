@@ -1,0 +1,10 @@
+rule,quantity,value,passed,note,config_hash,config_hash_44,git_head,seed
+W6,"THINGS-720 V1 Delta after partialling L, C and LP (<= +0.010)",0.01803688655956869,False,Delta without +0.0304; explained fraction 0.408,347f9a0110a8,451099bd833e,62c1b0b,
+W7,"rho(V1, LP) / LOSO bound: THINGS-720 > test (k = 1) and > NSD (k = 1)",0.8739937320831747,True,things720 0.874; things_test 0.356; nsd 0.170,347f9a0110a8,451099bd833e,62c1b0b,
+W3 (step 44),from results/step44/summary.csv,,True,,347f9a0110a8,451099bd833e,62c1b0b,
+W4 (step 44),from results/step44/summary.csv,,True,,347f9a0110a8,451099bd833e,62c1b0b,
+interpretation,amendment rule,0.4075765847822349,,not identified; explained fraction 0.408,347f9a0110a8,451099bd833e,62c1b0b,
+runtime,things720 seconds,50.96733641624451,,,347f9a0110a8,451099bd833e,62c1b0b,
+runtime,things_test seconds,8.298061847686768,,,347f9a0110a8,451099bd833e,62c1b0b,
+runtime,nsd seconds,106.92076683044434,,,347f9a0110a8,451099bd833e,62c1b0b,
+runtime,total seconds,166.4429168701172,,,347f9a0110a8,451099bd833e,62c1b0b,
