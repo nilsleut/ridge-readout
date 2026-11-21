@@ -153,9 +153,16 @@ def things720_images():
 
 
 def crossrun_index(stims=None):
-    """Condensed 720-index of the cross-run pairs of a stimulus sample (pair_set)."""
+    """Condensed 720-index of the cross-run pairs P (pair_set) whose two images both lie in the
+    subset stims (drawn without replacement); stims None = all 720. pair_set itself takes
+    resamples of size 720 only, so P is taken from it and restricted to the subset."""
     from common_up_pairs import pair_set, run_labels
-    a, b, _ = pair_set(stims, run_labels())
+    a, b, _ = pair_set(None, run_labels())
+    if stims is not None:
+        inside = np.zeros(N720, bool)
+        inside[np.asarray(stims)] = True
+        k = inside[a] & inside[b]
+        a, b = a[k], b[k]
     return condensed_index(a, b, N720)
 
 

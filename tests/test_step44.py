@@ -98,6 +98,20 @@ def test_subset_full():
                     & (ref.layer == "Conv1") & (ref.variant == "raw")].value.iloc[0])
     check("(iii) subset code with the full set reproduces the paper cell", abs(d - ref) <= 1e-12 and same
           and len(ci_full) == 210205, f"{d:.9f} vs {ref:.9f}, |d| {abs(d - ref):.1e}, {len(ci_full)} pairs")
+    # a 100-image subset: pairs equal brute force (both in the subset, different runs for every subject)
+    from common_up_pairs import run_labels
+    from cvrsa import condensed_index
+    runs = run_labels()
+    ok, n = True, 0
+    for seed in range(3):
+        stims = np.sort(np.random.default_rng(seed).choice(W.N720, 100, replace=False))
+        brute = sorted(condensed_index(np.array([i]), np.array([j]), W.N720)[0]
+                       for x, i in enumerate(stims) for j in stims[x + 1:]
+                       if all(r[i] != r[j] for r in runs.values()))
+        got = W.crossrun_index(stims)
+        ok &= np.array_equal(np.sort(got), np.array(brute))
+        n += len(got)
+    check("(iii) subset pairs equal brute force (3 subsets of 100)", bool(ok), f"{n} pairs")
 
 
 def test_gates():
