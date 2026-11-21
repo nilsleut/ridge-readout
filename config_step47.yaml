@@ -1,0 +1,52 @@
+# Step 47 configuration (amendments/2026-11-21_step47-predictions.md): run structure in THINGS-720
+# and ridge replication in NSD. config.yaml (206fa875cca5) and the configs of steps 40-45 stay
+# unchanged. Feasibility: reports/STEP47_SETUP.md.
+schema_version: 1
+step: 47
+
+A:
+  subjects: [sub-01, sub-02, sub-03]
+  responses: "THINGS-fMRI h5, ROI rows only, z-scored per voxel over all 9840 trials (as arm_b_betas.load_arm_a; gate: equals the stored arm_a betas)"
+  run_mean: all trials of the run in the session of the 720 (82 = 72 main + 10 test)
+  run_centring: "betas of the 720 minus the voxel's run mean of the same run, after the existing normalisation; then correlation-distance RDM on the ROI voxels"
+  pairs: cross-run P (common_up_pairs.pair_set, 210,205)
+  models: "step7_multiverse.feat, NATIVE 224; V1 <- Conv1, LOC <- Conv3; Random and BP, seeds 0-4; cvrsa.model_rdm raw correlation (paper cell)"
+  delta: Random - BP, mean over seeds 0-4, then subjects
+  L_C: step 44 (step44_why.lum_contrast)
+  partial: step 44 (step44_why.partial_rho)
+  loso: nsd_step43.loso_lower (nili_bounds) on P
+  RC1: {criterion: "run-centred V1 Delta <= +0.010"}
+  RC2: {criterion: "run-centred: mean over subjects of Spearman(V1 RDM, L-RDM) on P / LOSO lower bound on the run-centred V1 RDMs < 0.5"}
+  RC3:
+    statistic: "variance (population, ddof 0) over the 10 runs of the mean L of the 72 images of each run"
+    criterion: "statistic for the sub-01/02 assignment > statistic for the sub-03 assignment"
+    permutation: {n: 10000, seed: 20261121, draw: "numpy default_rng(seed).permutation(720) per draw, cut into 10 runs of 72"}
+  RC4:
+    cells: "36 cells F x D x B of step7_multiverse (FS, DS, BS, normalise, betas) with roi_betas pointed at the run-centred betas"
+    distinct: "rule of step 28: two cells are one analysis if their V1 rho agree to 1e-9 for all 30 checkpoints, 3 subjects, NATIVE 32, NATIVE 224 and UPSAMPLED 224; connected components, transitivity and equal interval class required (else STOP)"
+    interval: "V1 gap (Random - BP) at NATIVE 224, the paper's 1000 stimulus resamples (v12_lift.boot_idx, boot_pairs), 95 % percentile"
+    criterion: at most 2 distinct analyses with the interval above 0
+  CO1:
+    covariate: "|L_prev(i) - L_prev(j)|, L_prev = MEANLUM of the image of the preceding trial (same session and run, any trial type, metadata row order), per subject"
+    pairs: "P restricted to pairs in which both images have a predecessor in every subject"
+    change: "Delta with the covariate partialled minus Delta without, both on the restricted pairs"
+    criterion: "|change| >= 0.005"
+  interpretation: "statements collected in this order: RC1, RC2 and RC3 met -> run-level structure; RC1 not met -> run structure is not the explanation (explained fraction 1 - Delta_rc / Delta); CO1 met -> carry-over contributes; none -> no statement of the rule applies"
+
+B:
+  subjects: [subj01, subj02, subj03, subj04, subj05, subj06, subj07, subj08]
+  responses: "k = 3: mean of the three presentations of nsd_rsa.load_patterns (z per voxel and session), 515 images"
+  rois: {primary: V1, secondary: LO-obj}
+  reliability:
+    definition: "mean over the 3 presentation pairs of the voxel-wise Pearson correlation across the 515 images (r), Spearman-Brown corrected to the 3-presentation mean: 3 r / (1 + 2 r)"
+    threshold: 0.2
+    note: "the 2 r / (1 + r) count is reported alongside"
+  features: "nsd_features.build (prereg extraction code), own CNN Conv1 after max-pool, 224 px, g in {1, 4, 8}; Random and BP, seeds 0-4; luminance-and-contrast bank control_lumcontrast (2 g^2 features)"
+  fit: "fit.fit_condition defaults (dual ridge, 8 x 5 nested CV, seed 20260818), alpha grid of config.yaml (1e-6 ... 1e8, 29 points), min-MSE selection, assert_low_boundary False; groups = one per image"
+  lower_edge: "scripts/lower_edge_gate.py (hits_from_fit, gate; plateau rule, gain threshold 1e-3); invalid cells excluded and reported"
+  score: "pooled out-of-fold r, median over reliable voxels; MSE skill as step25_ridge.scores"
+  RD1: "g = 4: Random - BP (seed means) < 0 in >= 6 of 8 subjects and one-sided sign-flip p <= 0.05 (nsd_rsa.sign_flip_p, 256 assignments)"
+  RD2: same criterion at g = 1 and at g = 8 (both)
+
+runtime: {stop_hours_A: 8, stop_hours_B: 8}
+disk: {min_free_gb: 30}
