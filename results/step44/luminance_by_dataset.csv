@@ -1,0 +1,75 @@
+kind,dataset,roi,layer,condition,seed,rho,rho_random,rho_bp,seeds_random_larger,sd,n_subjects,loso_lower,ratio,pairs,n_pairs,k,n_draws,quantity,value,ref,config_hash,git_head
+model_lum,things720,V1,Conv1,Random,0,0.5695051030511561,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,Random,1,0.6366577077244956,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,Random,2,0.5920417180507844,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,Random,3,0.6265332158739767,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,Random,4,0.6516783903281621,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,BP,0,0.26076028494957204,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,BP,1,0.27315780424131836,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,BP,2,0.2686932708775968,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,BP,3,0.2702877470950046,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,V1,Conv1,BP,4,0.3074101049957242,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum_summary,things720,V1,Conv1,,,,0.615283227005715,0.2760618424318432,5.0,,,,,,,,,,,,451099bd833e,7777f32
+brain_lum,things720,V1,,,,0.05362694834788493,,,,0.04255291473041933,3.0,0.05143321045653574,1.0426521671868614,cross-run P,210205.0,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,Random,0,0.6799368032384862,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,Random,1,0.7245158143647353,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,Random,2,0.5885865232102584,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,Random,3,0.6444868068192604,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,Random,4,0.7301403837932088,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,BP,0,0.03807973322815772,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,BP,1,0.001383540524307735,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,BP,2,-0.0003479458759491803,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,BP,3,0.00022364660957719867,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things720,LOC,Conv3,BP,4,0.040186481606367036,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum_summary,things720,LOC,Conv3,,,,0.6735332662851898,0.015905091218492103,5.0,,,,,,,,,,,,451099bd833e,7777f32
+brain_lum,things720,LOC,,,,0.0009069756943812,,,,0.0035130040899833733,3.0,0.018261523225714667,0.04966593877032431,cross-run P,210205.0,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,Random,0,0.6042390982984298,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,Random,1,0.6464566935013691,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,Random,2,0.6187488141515687,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,Random,3,0.6509228256615165,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,Random,4,0.6620366820790834,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,BP,0,0.31782840193590295,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,BP,1,0.29914877533450146,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,BP,2,0.3136343723366932,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,BP,3,0.31833027262511737,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,V1,Conv1,BP,4,0.3387217437154743,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum_summary,things_test,V1,Conv1,,,,0.6364808227383936,0.3175327131895379,5.0,,,,,,,,,,,,451099bd833e,7777f32
+brain_lum,things_test,V1,,,,0.008705326188248073,,,,0.00674312025923422,3.0,0.03403731579387149,0.25575830482542017,all,4950.0,1.0,20.0,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,Random,0,0.6042390982984298,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,Random,1,0.6464566935013691,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,Random,2,0.6187488141515687,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,Random,3,0.6509228256615165,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,Random,4,0.6620366820790834,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,BP,0,0.31782840193590295,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,BP,1,0.29914877533450146,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,BP,2,0.3136343723366932,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,BP,3,0.31833027262511737,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,things_test,LOC,Conv1,BP,4,0.3387217437154743,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum_summary,things_test,LOC,Conv1,,,,0.6364808227383936,0.3175327131895379,5.0,,,,,,,,,,,,451099bd833e,7777f32
+brain_lum,things_test,LOC,,,,-0.0025850577522684107,,,,0.013042470289055712,3.0,0.014923566688384963,-0.17321983452389875,all,4950.0,1.0,20.0,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,Random,0,0.5638346026044863,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,Random,1,0.6636009700352978,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,Random,2,0.5944311146796696,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,Random,3,0.649956831908104,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,Random,4,0.6841277547140249,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,BP,0,0.322451361075529,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,BP,1,0.3305488934820675,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,BP,2,0.33999358114633704,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,BP,3,0.3268579857249863,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,V1,Conv1,BP,4,0.3587336071692656,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum_summary,nsd,V1,Conv1,,,,0.6311902547883166,0.3357170857196371,5.0,,,,,,,,,,,,451099bd833e,7777f32
+brain_lum,nsd,V1,,,,0.020050924568266827,,,,0.003631857520180649,8.0,0.2691006158709175,0.07451088323738686,"k = 1, no subject same session and run",131924.0,1.0,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,Random,0,0.5638346026044863,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,Random,1,0.6636009700352978,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,Random,2,0.5944311146796696,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,Random,3,0.649956831908104,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,Random,4,0.6841277547140249,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,BP,0,0.322451361075529,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,BP,1,0.3305488934820675,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,BP,2,0.33999358114633704,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,BP,3,0.3268579857249863,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum,nsd,LO-obj,Conv1,BP,4,0.3587336071692656,,,,,,,,,,,,,,,451099bd833e,7777f32
+model_lum_summary,nsd,LO-obj,Conv1,,,,0.6311902547883166,0.3357170857196371,5.0,,,,,,,,,,,,451099bd833e,7777f32
+brain_lum,nsd,LO-obj,,,,0.0027668964791515115,,,,0.0032839298590728212,8.0,0.0843267906020417,0.03281159474228253,"k = 1, no subject same session and run",131924.0,1.0,,,,,451099bd833e,7777f32
+check,,,,,,,,,,,,,,,,,,test images k = 1 Delta vs step 41,-0.0001585007058201944,-0.0001585007058201,451099bd833e,7777f32
+check,,,,,,,,,,,,,,,,,,THINGS-720 paper cell vs step 5,0.030445937983289543,0.0304459379832895,451099bd833e,7777f32

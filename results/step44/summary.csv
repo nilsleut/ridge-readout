@@ -1,0 +1,13 @@
+rule,quantity,value,passed,note,config_hash,git_head,seed
+W1,fraction of subsets with Delta > -0.0002 (>= 0.95),0.97,True,"mean +0.0302, 2.5-97.5 % [-0.0017, +0.0654]",451099bd833e,7777f32,
+W2,THINGS-720 V1 Delta after partialling L and C (<= +0.010),0.016275511344113782,False,Delta without +0.0304,451099bd833e,7777f32,
+W3,"seeds with Spearman(model, L) Random > BP (5 of 5 in each dataset)",5.0,True,things720 5/5; things_test 5/5; nsd 5/5,451099bd833e,7777f32,
+W4,"rho(V1, L) / LOSO bound: THINGS-720 > test (k = 1) and > NSD (k = 1)",1.0426521671868614,True,things720 1.043; things_test 0.256; nsd 0.075,451099bd833e,7777f32,
+W5,|Delta(T partialled) - Delta| (< 0.005),0.0006858742845789051,True,Delta +0.0304 -> +0.0311,451099bd833e,7777f32,
+interpretation,amendment rule,,,not identified,451099bd833e,7777f32,
+runtime,setup seconds,31.507856845855713,,,451099bd833e,7777f32,
+runtime,W1 subsets seconds,97.70260381698608,,,451099bd833e,7777f32,
+runtime,W2/W5 partial seconds,28.492671966552734,,,451099bd833e,7777f32,
+runtime,W3/W4 luminance seconds,18.01598310470581,,,451099bd833e,7777f32,
+runtime,order seconds,2.4355521202087402,,,451099bd833e,7777f32,
+runtime,total seconds,178.18666696548462,,,451099bd833e,7777f32,
