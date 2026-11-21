@@ -46,7 +46,7 @@ covariates equal step 41 (−0.000159, \|d\| < 1e-9). `tests/test_step44.py --on
 
 **Interpretation (amendment rule): not identified.** W6 is not met. Explained fraction
 1 − Δ(L + C + LP) / Δ = 1 − 0.0180 / 0.0304 = **0.408**. For comparison, L + C alone (step 44)
-explains 0.464 and LP alone 0.125. Adding LP to L and C raises Δ again (+0.0163 → +0.0180): the
+explains 0.465 and LP alone 0.126. Adding LP to L and C raises Δ again (+0.0163 → +0.0180): the
 partial Random ρ rises slightly (0.0239 → 0.0253) while the BP ρ falls (0.0076 → 0.0073). Δ stays
 positive in all 5 seeds and 3 subjects under every covariate set.
 
