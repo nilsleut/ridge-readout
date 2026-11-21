@@ -1,0 +1,45 @@
+# Step 45 configuration (amendments/2026-11-21_step45-predictions.md): coarse spatial luminance.
+# config.yaml (206fa875cca5) and the configs of steps 40-44 stay unchanged; datasets, pair sets,
+# models, L, C, T and the partial Spearman are those of config_step44.yaml (451099bd833e) and
+# scripts/step44_why.py, imported unchanged.
+schema_version: 1
+step: 45
+
+reuse:
+  config: config_step44.yaml
+  script: "scripts/step44_why.py (partial_rho, crossrun_index, delta_on, lum_contrast, positions, things720_*, test_set, nsd_k1_index, abs_vec)"
+
+LP:
+  grey: "Rec. 709 grey image of colour_statistic_control.load_rgb(path, 224) (Resize(224) + CenterCrop(224), [0, 1]), weights of step44_why.REC709"
+  band: "only_0-14 of arXiv:2608.12408: bandpass_filters.condition(x, bands(x), 'only_0-14') on the grey image as a (1, 224, 224) array; includes the mean (no grey shift for 0-14)"
+  filter_source: "src/vendor/bandpass_filters.py (verbatim copy of evaluation-resolution-rsa code/bandpass/bandpass_extract.py, sha256 b35e6799...ded6, identical to the current source)"
+  downsample: "torch.nn.functional.interpolate(mode='area') to 28 x 28 (8 x 8 block means)"
+  rdm: Euclidean distance between the 784-dimensional vectors (scipy pdist)
+  output: per-image LP vectors are not written
+
+datasets:
+  things720: {pairs: cross-run P, rois: [V1, LOC], models: "Conv1 -> V1, Conv3 -> LOC"}
+  things_test: {k: 1, draws: "20 single-session draws of step 41, mean over draws", pairs: all 4950, rois: [V1, LOC], models: Conv1}
+  nsd: {k: 1, pairs: "step 43 NC rule per presentation, mean over the 3 presentations", rois: [V1, LO-obj], models: Conv1}
+
+partial_sets:
+  things720: ["none", "L+C", "LP", "L+C+LP", "L+C+LP+T"]
+  things_test: ["none", "L+C", "LP", "L+C+LP"]
+  nsd: ["none", "L+C", "LP", "L+C+LP"]
+
+W6: {dataset: things720, roi: V1, covariates: [L, C, LP], criterion: "partial Delta <= +0.010"}
+W7:
+  quantity: "mean over subjects of Spearman(V1 RDM, LP-RDM) on the ceiling pair set, divided by the LOSO lower bound (bounds as in step 44)"
+  criterion: ratio(things720) > ratio(things_test, k = 1) and ratio(things720) > ratio(nsd, k = 1)
+
+interpretation:
+  step44: "W3 and W4 from results/step44/summary.csv (both met)"
+  rule: "W6, W7, W3 and W4 met -> coarse luminance structure; otherwise not identified, with the explained fraction 1 - Delta(L+C+LP) / Delta(none)"
+
+tests:
+  gate: "only_0-14 images of the 20 step 40 gate images through v12 extract_features reproduce the stored step 6 GAP features (STEP5_GAP_DIR/bandpass) and the evaluation-resolution-rsa RDM entries (RIDGE_DATA_DIR/data/bandpass/rdms), and rho with replaced rows, to 1e-4"
+  identity: LP-RDM without filter and without downsampling equals the Euclidean distance of the grey images
+  step44: partialling L and C alone reproduces step 44 (+0.0163) exactly
+
+runtime: {stop_hours: 4}
+disk: {min_free_gb: 30}
