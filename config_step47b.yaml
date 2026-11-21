@@ -1,0 +1,57 @@
+# Step 47b configuration (amendments/2026-11-21_step47b-predictions.md): mechanism of the run
+# structure and robustness to run centring. config.yaml (206fa875cca5) and the configs of steps
+# 40-47 stay unchanged. Feasibility: reports/STEP47B_SETUP.md.
+schema_version: 1
+step: 47b
+
+run_centring:
+  definition: "subtract from every trial the voxel mean over all trials of the same run (same session), after the existing normalisation"
+  things: "responses of step47_runs.load_resp (h5 ROI rows, z per voxel over all 9840 trials); run = (session, run) of the stimulus metadata, 82 trials per run"
+  nsd: "z-scored trials of nsd_fetch.process (per voxel and session over all 750 trials); run means over all trials of the run (stimpattern, 12 runs); every stored presentation minus the mean of its (session, run); then the three presentations are averaged"
+
+X:
+  subjects: [sub-01, sub-02, sub-03]
+  roi: V1
+  images: "the 820 images of the session of the 720: the 720 in common_up_pairs.stim_order order, then the 100 test images in step40_common.test_stimuli order"
+  brain_run_rdm: "correlation distance between the 10 run-mean V1 patterns (mean over all 82 trials of the run of the z-scored responses); 45 pairs, runs ordered by run number"
+  model_features: "GAP Conv1, NATIVE 224, raw units: step7_multiverse.feat for the 720, step40_features/test100 g = 1 for the 100 (same extraction, gate in the setup report)"
+  model_run_rdm: "correlation distance between the 10 run-mean feature vectors (mean over the 82 images of the run); per seed, then mean over seeds 0-4 of the 45 entries"
+  alignment: "A = Spearman (scipy.stats.spearmanr) between brain and model run RDM over the 45 pairs; Delta A = A(Random) - A(BP)"
+  run_index_rdm: "|r - s| for runs r, s"
+  permutation:
+    n: 10000
+    seed: 20261122
+    draw: "numpy default_rng(seed).permutation(820) per draw over the image order above, cut into 10 runs of 82 (step47_runs.perm_null scheme); the same draws for every subject; model side only, brain run RDM fixed"
+    percentile: "100 * fraction of null Delta A strictly below the observed Delta A"
+  X1: "Delta A > 0 in sub-01 and in sub-02"
+  X2: "the observed Delta A of sub-01 and of sub-02 lies within the central 95 % of its null: 2.5 <= percentile <= 97.5, both"
+  X3: "Spearman(brain run RDM, run-index RDM) > 0 in at least 2 of 3 subjects"
+  interpretation: "X1, X2 and X3 met -> drift together with chance alignment; X1 met, X2 not met and every subject that fails X2 lies above the 97.5th percentile -> stimulus-driven run-level structure; otherwise -> not identified"
+  reported: "A(Random), A(BP), percentiles per subject (also sub-03); Spearman between brain run RDMs (by run index) of sub-01 vs sub-02, sub-01 vs sub-03, sub-02 vs sub-03; run-level part of Delta per subject = Delta raw - Delta run-centred (results/step47/run_centring.csv)"
+
+Y:
+  Y1:
+    analysis: "primary ridge analysis of results/prereg (fit.fit_condition, assert_low_boundary False, lower_edge_gate plateau rule, pilot_features g = 4, Random and BP seeds 0-4, groups one per image), V1 targets = run-centred arm_a betas"
+    reliable_voxels: "split-half reliability (arm_b_betas.split_half_reliability, 462 splits, SB 2r/(1+r)) recomputed on the run-centred test presentations, threshold 0.2"
+    aggregation: "median r over reliable voxels per subject; a (condition, seed) cell enters only if all three subjects are valid; mean over subjects; Random - BP per seed"
+    criterion: "Random - BP < 0 in 5 of 5 seeds"
+    reported: "g = 1 and g = 8; g = 4 with the original reliable voxels (armb.npz)"
+  Y2:
+    analysis: "nsd_rsa.rsa_subject on the run-centred presentations, k = 3; paper cell = raw model units, correlation distance, V1; standardised cell = z model units, correlation, V1"
+    criterion: "Delta < 0 in at least 6 of 8 subjects, in each of the two cells"
+    reported: "sign-flip p (nsd_rsa.sign_flip_p); LO-obj and lateral"
+  Y3:
+    analysis: "step47_nsd_ridge.fit_one (step 47 part B) with k = 3 targets = mean of the three run-centred presentations"
+    reliable_voxels: "step47_nsd_ridge.reliability recomputed on the run-centred presentations, SB 3r/(1+2r) > 0.2"
+    criterion: "g = 4, V1: Random - BP (seed means) < 0 in at least 6 of 8 subjects"
+    reported: "g = 1 and 8; LO-obj; g = 4 V1 with the step 47 reliable voxels; sign-flip p"
+  Y4:
+    analysis: "step 47 part B without run centring, g = 4, V1, all valid V1 voxels as the scoring set (reliable mask = all ones; low-edge hits counted over all voxels)"
+    criterion: "Random - BP < 0 in at least 6 of 8 subjects"
+  things_test:
+    analysis: "100 test images; single presentations of step40_common.load_reps run-centred (h5 responses, gate: uncentred equal load_reps); step41_noise_curve.session_draws and brain_for (b1, correlation); k = 1 (20 draws) and k = 12; models cvrsa.model_rdm of test100 g = 1, raw (paper cell) and z (standardised cell), correlation; Spearman over 4950 pairs; mean over draws, subjects, seeds; V1 and LOC"
+  nsd_multiverse:
+    analysis: "the step 43 multiverse (nsd_step43 mv_models, mv_brains, mv_pairs, draw_index, rho_pairs, summarise, ci_class, distinct_classes; bootstrap seed and 1000 resamples of config_step43.yaml) on the mean of the three run-centred presentations; rho_pairs is called once per draw for all subjects (identical values, models ranked once)"
+
+runtime: {stop_hours_per_part: 8, factor: 1.5}
+disk: {min_free_gb: 30}
