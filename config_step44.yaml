@@ -1,0 +1,68 @@
+# Step 44 configuration (amendments/2026-11-19_step44-predictions.md): why does the THINGS-720
+# set show an untrained advantage? config.yaml (206fa875cca5) and the step 40-43 configs stay
+# unchanged. Feasibility: reports/STEP44_SETUP.md.
+schema_version: 1
+step: 44
+
+datasets:
+  things720:
+    images: 720 evaluation stimuli, stim_order_sub-01.txt (common_up_pairs.stim_order), files via v12 find_img
+    subjects: [sub-01, sub-02, sub-03]
+    brain: v12_lift.load_fmri_tri (one presentation per image), V1 and LOC
+    pairs: "cross-run pair set P (common_up_pairs.pair_set, 210,205 pairs)"
+    models: "step7_multiverse.feat(NATIVE, 224, rule, seed, layer); V1 <- Conv1, LOC <- Conv3"
+    ceiling: "LOSO lower bound on P (nili_bounds), as test (iv) of step 43"
+  things_test:
+    images: 100 test images (step40_common.test_stimuli), files via v12 find_img
+    subjects: [sub-01, sub-02, sub-03]
+    brain: "k = 1 as in step 41: the 20 single-session draws of step41_noise_curve.session_draws, correlation distance (b1) on the single presentations (step40_common.load_reps), mean over draws"
+    pairs: all 4950 pairs (as in step 41)
+    models: "GAP Conv1 features of step 40 (step40_features/test100, g1) for V1 and LOC (as in step 41)"
+    ceiling: LOSO lower bound per draw over the 3 subjects, mean over the 20 draws
+  nsd:
+    images: 515 shared images (nsd_features.image_paths)
+    subjects: [subj01, subj02, subj03, subj04, subj05, subj06, subj07, subj08]
+    brain: "k = 1 from the step 42 RDM cache ({roi}|correlation|k1_r), V1 and LO-obj"
+    pairs: "per presentation r, pairs where no subject has the two presentations in the same session and run (the step 43 NC rule); mean over r"
+    models: step 42 GAP Conv1 features (nsd_common.load_features) for V1 and LO-obj
+    ceiling: results/step43/ceiling_nsd.csv, V1 and LO-obj, k = 1 (same pair rule)
+
+rsa:
+  model_rdm: cvrsa.model_rdm, raw units, correlation distance (paper cell)
+  statistic: Spearman over the pair set, per subject; Delta = Random - BP, mean over seeds 0-4, then subjects
+  seeds: [0, 1, 2, 3, 4]
+
+covariates:
+  source: "evaluation-resolution-rsa code/colour_statistic_control.py (load_rgb: Resize(224) + CenterCrop(224), RGB in [0, 1]; build_references: MEANLUM), imported unchanged"
+  L: "mean Rec. 709 luminance (0.2126 R + 0.7152 G + 0.0722 B) per image; L-RDM = |L_i - L_j| (MEANLUM)"
+  C: "RMS contrast = SD over pixels of the Rec. 709 grey values of the same load_rgb image; C-RDM = |C_i - C_j|"
+  T: "position within the session in trials (row order of the stimulus metadata within the session, 0..819, all non-catch trials), per subject; T-RDM = |p_i - p_j|; THINGS-720 only"
+  output: per-image L and C are not written; NSD values aggregated only
+
+partial:
+  source: "evaluation-resolution-rsa code/paper_v3/compute_lowlevel.py::rank_resid and ::pearson (lifted by AST, unchanged)"
+  definition: ranks over the pair set; model ranks and brain ranks regressed (OLS with intercept) on the covariate ranks; Pearson of the residuals
+  per_subject: yes (T is subject-specific)
+
+W1:
+  n_subsets: 1000
+  subset_size: 100
+  seed: 20261119
+  draw: "numpy default_rng(seed).choice(720, 100, replace=False) per subset, sorted"
+  pairs: cross-run pairs within the subset (pair_set(stims))
+  threshold: -0.0002
+  criterion: Delta > threshold in at least 95 % of subsets
+W2: {dataset: things720, roi: V1, covariates: [L, C], criterion: "partial Delta <= +0.010"}
+W3:
+  criterion: "Spearman(model RDM, L-RDM) Random > BP for seed s, in 5 of 5 seeds, in each of things720, things_test and nsd (V1 layer)"
+  pairs: "things720: P; things_test: all 4950; nsd: all 132,355 (model and L do not depend on subject)"
+W4:
+  quantity: "mean over subjects of Spearman(V1 RDM, L-RDM) on the ceiling pair set, divided by the LOSO lower bound"
+  criterion: ratio(things720) > ratio(things_test, k = 1) and ratio(things720) > ratio(nsd, k = 1)
+W5: {dataset: things720, roi: V1, covariates: [T], criterion: "|partial Delta - Delta| < 0.005"}
+
+interpretation:
+  rule: "statements collected in this order: W2, W3 and W4 met -> luminance; W5 not met -> presentation order contributes; W1 not met -> sampling variation; no statement -> not identified"
+
+runtime: {stop_hours: 4}
+disk: {min_free_gb: 30}
