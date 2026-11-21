@@ -77,6 +77,16 @@ stored step 42 trials): this needs the first NSD download. The download happens 
 amendment commit, so the gate is the first action after that commit and runs before anything
 else is loaded. Its result is added below in the scripts commit.
 
+Result: `python scripts/nsd_runmeans.py gate`, run after the amendment commit edbb11d
+(2026-11-21 18:22:05).
+
+- The file is 0.49 GB; download took 38 s and processing 7 s.
+- The 42 trials of the 515 images in session 1 are **identical** to
+  `NSD_DIR/betas/subj01/session01.npz`, both Z (`np.array_equal`) and the valid mask.
+  **Passed.**
+- The session has 12 runs of 62–63 trials, 750 in total.
+- The run means of this session are kept and reused by the full reload.
+
 ## 4. Runtimes (for the estimates of the parts)
 
 | Part | basis | estimate × 1.5 |
@@ -91,3 +101,20 @@ else is loaded. Its result is added below in the scripts commit.
 
 The scripts print the final estimate per part before each run. A part stops if its estimate is
 above 8 h.
+
+## 5. Tests before the runs (`tests/test_step47b.py`, 9/9 passed)
+
+| Test | Result |
+|---|---|
+| (i) synthetic drift: X3 statistic, run RDMs, permutation null | slow drift +0.989 (no drift +0.120); hand-built RDMs equal; null draw k equals Delta A on draw k; Random-built brain gives A = 1, percentile 100 |
+| (ii) permutation keeps 10 × 82 | 500 draws; with 720 / 72 the step 47 `perm_null` draws are reproduced exactly (0) |
+| (iii) THINGS ridge vs `results/prereg` (g = 4, 30 fits) | max \|d r\| 6.7e-16; hits, gate and voxel counts equal |
+| (iii) NSD RSA vs step 42 | 960 rho, max \|d\| 9.9e-17; P1 −0.016943, P2 −0.026233 (\|d\| 1.1e-16) |
+| (iii) NSD ridge vs step 47 (subj01 V1 g = 4, 11 fits) | max \|d\| 8.3e-17; hits and voxel counts equal |
+| (iii) multiverse draw path | identity draw = step 43 rho (9.7e-17); resamples 1–2 = per-subject `rho_pairs` to 8.0e-16 (the test first demanded bit identity; the difference is floating-point order of the dot products with memory-mapped arrays; tolerance set to 1e-12, the class rule uses 1e-9) |
+| (iv) run-centred THINGS RSA path | +0.007032171 = step 47 (1e-12) |
+| (v) synthetic NSD sessions | `process` vs hand z-score 1.0e-7 (float32); run means 1.8e-8; centring exact; centred run means 1.4e-8 |
+
+Existing suites passing: phase 2 97/97, loader 41/41, lower edge 2/2, banded 7/7, cvrsa 4/4, noise
+curve 4/4, `test_nsd --skip-gate` 7/7, `test_step44` 7/7, `test_step45 --only ii,iii` 2/2,
+`test_step47` 8/8; `config.yaml` hash 206fa875cca5.
