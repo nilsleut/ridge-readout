@@ -1,0 +1,48 @@
+# Step 47c configuration (amendments/2026-11-22_step47c-predictions.md): decomposition of run
+# centring in THINGS-720. config.yaml (206fa875cca5) and the configs of steps 40-47b stay
+# unchanged. Feasibility and gates: reports/STEP47C_SETUP.md. No NSD data.
+schema_version: 1
+step: 47c
+
+data:
+  subjects: [sub-01, sub-02, sub-03]
+  rois: [V1, LOC]
+  responses: "step47_runs.load_resp (h5 ROI rows, z per voxel over all 9840 trials); the 720 rows = arm_a betas (identical)"
+  session: "the session of the 720: 10 runs of 82 trials = 820 trials (the 720 and the 100 test images)"
+
+decomposition:
+  m: "voxel mean over all 820 trials of the session, per ROI"
+  run_mean: "mu_r = voxel mean over the 82 trials of run r"
+  d_r: "mu_r - m"
+  m_hat: "m / ||m|| (Euclidean norm over the ROI voxels)"
+  d_par: "(d_r . m_hat) m_hat"
+  d_perp: "d_r - d_par"
+  variants:
+    V0: "x (nothing removed, paper cell)"
+    V1: "x - m"
+    V2: "x - d_r"
+    V3: "x - m - d_r (run centring, step 47)"
+    V4: "V3 + d_par"
+    V5: "V3 + d_perp"
+
+delta:
+  definition: "paper cell: brain RDM = correlation distance of the variant's 720 patterns; models step44_why.things720_models (GAP, NATIVE 224, raw, correlation; Conv1 for V1, Conv3 for LOC); Spearman over the cross-run pairs (step44_why.crossrun_index); Random - BP, mean over seeds 0-4, then mean over subjects (step44_why.delta_on)"
+
+predictions:
+  Z1: "V1 ROI: Delta(V2) <= +0.015"
+  Z2: "V1 ROI: Delta(V4) >= +0.020 and Delta(V5) <= +0.012"
+  Z3: "V1 ROI: across-run SD (ddof 0) of the scalar d_r . m_hat is smallest in sub-03"
+  interpretation: "Z1 and Z2 met -> run-wise shifts of global activation along the voxel mean-profile axis; Z1 not met and Delta(V1) <= +0.015 -> mainly removal of the session mean profile (equivalent to voxel centring), not between-run structure; otherwise -> not identified"
+
+reported:
+  per_subject: "all variants per subject, V1 and LOC"
+  share_along_m_hat: "sum_r (d_r . m_hat)^2 / sum_r ||d_r||^2 per subject and ROI"
+  cosine_luminance: "Spearman between cos(pattern_i, m_hat) and the image luminance (step44_why.lum_contrast L of the 720) per subject and ROI, for V0 (without) and V3 (with run centring)"
+
+gates:
+  tolerance: 1.0e-12
+  sum: "m + d_r equals the run mean (max |Delta| <= tolerance)"
+  V3: "Delta(V3) reproduces step 47 run-centred V1 (results/step47/run_centring.csv)"
+  V0: "Delta(V0) reproduces the paper cell (results/step47/run_centring.csv raw V1, +0.030445938)"
+
+runtime: {stop_hours: 8, factor: 1.5}
