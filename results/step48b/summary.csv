@@ -1,0 +1,9 @@
+rule,quantity,value,passed,note,config_hash,git_head,seed
+D1,"Spearman(model RDM, A^M) Random > BP in 5 of 5 seeds, in each dataset",5.0,True,things720: 5/5 (R +0.588 +0.333 +0.508 +0.521 +0.381; BP +0.258 +0.236 +0.320 +0.242 +0.207); things_test: 5/5 (R +0.545 +0.376 +0.454 +0.463 +0.403; BP +0.348 +0.355 +0.404 +0.330 +0.280); nsd515: 5/5 (R +0.708 +0.404 +0.616 +0.634 +0.459; BP +0.175 +0.194 +0.238 +0.224 +0.192),73c5a25219bb,4a4dc3e,
+D2,"Spearman(brain RDM, A): T-raw > T-session in 3 of 3; N-raw > N-session (k = 1) in >= 7 of 8",8.0,True,THINGS 3/3 (sub-01 +0.802 vs +0.019; sub-02 +0.829 vs +0.022; sub-03 +0.502 vs +0.029); NSD 8/8 (subj01 +0.892 vs +0.088; subj02 +0.863 vs +0.082; subj03 +0.911 vs +0.042; subj04 +0.868 vs +0.115; subj05 +0.846 vs +0.086; subj06 +0.906 vs +0.048; subj07 +0.902 vs +0.057; subj08 +0.876 vs +0.068),73c5a25219bb,4a4dc3e,
+D3,NSD N-raw k = 1 V1: two-sided partial Delta <= +0.020 and <= +0.020 in >= 6 of 8,-0.009227536336536115,True,"before +0.1165, after -0.0092; 8/8 <= +0.020; per subject subj01 -0.0104; subj02 -0.0100; subj03 -0.0092; subj04 -0.0096; subj05 -0.0057; subj06 -0.0164; subj07 -0.0125; subj08 -0.0002",73c5a25219bb,4a4dc3e,
+interpretation,amendment rule,,,"the untrained advantage under conventions that leave a common profile in both patterns is attributed to amplitude structure dominating both RDMs, with the untrained network's RDM more amplitude-dominated; not to a better match of per-image amplitude",73c5a25219bb,4a4dc3e,
+runtime,THINGS-720 seconds,20.46032190322876,,,73c5a25219bb,4a4dc3e,
+runtime,THINGS test seconds,8.614187002182007,,,73c5a25219bb,4a4dc3e,
+runtime,NSD seconds,231.62436819076538,,,73c5a25219bb,4a4dc3e,
+runtime,total seconds,260.86158871650696,,,73c5a25219bb,4a4dc3e,
