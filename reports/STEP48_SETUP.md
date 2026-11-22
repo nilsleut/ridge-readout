@@ -90,3 +90,28 @@ L–C +0.06, L–CE −0.08, C–CE +0.61, L–DD −0.99.
 | NSD RSA, 3 conventions × 8 subjects, k = 1 and 3 | step 47b preparation 62 s per subject for 2 variants at k = 3 | 0.4 h |
 | NSD multiverse N-raw | step 47b 954 s | 0.4 h |
 | Amplitude | cosines and Spearman, seconds | < 0.1 h |
+
+## 5. Gate subj01 session 1 (after the amendment commit 01e3790, 2026-11-22 11:45:46)
+
+`python scripts/nsd_raw_fetch.py gate`: download started 10:46:30 UTC (11:46:30 local), 0.49 GB,
+download 35 s, processing 7 s, 42 trials of the 515 images. z = (Q / 300 − mu) / sd from the stored
+int16 betas and session statistics equals the step 42 trials **exactly** (`np.array_equal`, Z and
+valid). **Passed.** The float32 path (R) differs by at most 4.8e-7, as expected; the runs use Q.
+The session is kept and reused by the full reload.
+
+## 6. Tests before the runs (`tests/test_step48.py`, 15/15 passed)
+
+| Test | Result |
+|---|---|
+| (i) T-global = paper cell | +0.030445938 = step 47 (1e-12) |
+| (i) N-session from raw + session statistics = step 42 | subj01 session 1, identical; pooled mean / SD formula exact |
+| (ii) common profile c·p + amplitude-modulated stimulus part | Spearman(correlation-distance RDM, b_i + b_j) −0.000, +0.717, +0.917, +0.965, +0.971 for c = 0, 0.5, 1, 2, 4; gain RDM 2 − g_i − g_j +0.085 … +0.989; after centring over trials +0.056 at every c |
+| (iii) image statistics | CE uniform 2.5e-30; CE ratio for doubled grating contrast 4.000000; C of grating = A/√2; OFF/ON/DD for halves, uniform and quarter images exact; own-mean OFF = ON; L, C = step 44 |
+| (iv) g, g^M | hand cosines to 2.2e-16 |
+
+The amplitude RDM of test (ii) is the sum type (b_i + b_j, or 2 − g_i − g_j). A difference-type RDM
+|b_i − b_j| does not follow from a common profile (simulation in Part 0: ρ ≈ 0.0–0.2).
+
+Existing suites passing: phase 2 97/97, loader 41/41, lower edge 2/2, banded 7/7, cvrsa 4/4, noise
+curve 4/4, `test_nsd --skip-gate` 7/7, `test_step44` 7/7, `test_step45 --only ii,iii` 2/2,
+`test_step47` 8/8, `test_step47c` 7/7; `config.yaml` hash 206fa875cca5.
