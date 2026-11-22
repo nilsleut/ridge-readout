@@ -1,0 +1,50 @@
+# Step 48b configuration (amendments/2026-11-22_step48b-predictions.md): amplitude dominance of the
+# RDMs. config.yaml (206fa875cca5) and the configs of steps 40-48 stay unchanged. No new downloads:
+# the step 48 data under NSD_DIR/raw48 and RIDGE_DATA_DIR/step48 are used.
+schema_version: 1
+step: 48b
+
+data:
+  things: "step48_conventions.things_data (RIDGE_DATA_DIR/step48): T-raw, T-global, T-session; THINGS-720 the 720 patterns, test images the 100 x 12 presentations"
+  nsd: "nsd_raw_fetch.conventions (NSD_DIR/raw48): N-raw, N-global, N-session; the step 42 valid voxels per ROI"
+  models: "THINGS-720 GAP NATIVE 224 (step7_multiverse.feat; Conv1 for V1, Conv3 for LOC); test images test100 g = 1 Conv1; NSD nsd_rsa.load_features (Conv1, g = 1); seeds 0-4, Random and BP"
+
+gains:
+  g: "step48_amplitude.gain of the analysed ROI patterns (THINGS-720: the 720; test images: the mean over the presentations of the draw; NSD k = 1: presentation r; NSD k = 3: the presentation mean)"
+  gM: "step48_amplitude.gain of the raw GAP features of each model"
+
+amplitude_rdm:
+  sum: "A_ij = 2 - g_i - g_j (brain), A^M_ij = 2 - g^M_i - g^M_j (model); the form of D1-D3"
+  diff: "|g_i - g_j| and |g^M_i - g^M_j|; reported without prediction, for comparison"
+
+cell: "paper cell: model units raw, correlation distance (cvrsa.model_rdm), brain pdist correlation"
+
+pair_sets:
+  things720: "cross-run pairs (step44_why.crossrun_index)"
+  things_test: "all 4950 pairs; step41_noise_curve.session_draws: k = 1 (20 draws, mean over draws) and k = 12"
+  nsd: "k = 1: per presentation r, the same-session-and-run pairs excluded (nsd_rsa.same_run_pairs), mean over r = 1-3; k = 3: all pairs of the presentation mean"
+  model_dominance: "THINGS-720 cross-run pairs; test images and NSD all pairs"
+
+statistics:
+  spearman: "scipy spearmanr for the dominance Spearman(RDM, A)"
+  rho: "Spearman of model and brain RDM as Pearson of the ranks over the pair set"
+  partial_two_sided: "step 44 rank_resid / pearson (compute_lowlevel.py, unchanged): brain RDM ranks residualised on the ranks of A, model RDM ranks on the ranks of A^M (OLS with intercept), Pearson of the residuals"
+  delta: "Random - BP: per subject mean over seeds 0-4 (and presentations at NSD k = 1), then mean over subjects"
+  group: "NSD sign-flip p (nsd_rsa.sign_flip_p), one-sided"
+  moment_ratio: "step6_common.moment_ratio of the raw GAP features per checkpoint (10 = 2 conditions x 5 seeds); Spearman with model dominance across the 10"
+
+rois:
+  things: [V1, LOC]
+  nsd: [V1, LO-obj, lateral]
+
+predictions:
+  D1: "Spearman(model RDM, A^M) larger for Random than for BP in 5 of 5 seeds (seed i vs seed i), in each of THINGS-720 (V1, Conv1), THINGS test images and NSD-515"
+  D2: "Spearman(brain RDM, A) larger under T-raw than under T-session in each THINGS-720 subject (V1), and larger under N-raw than under N-session (k = 1, V1) in at least 7 of 8 NSD subjects"
+  D3: "NSD, N-raw, k = 1, V1: the two-sided partial reduces Delta from +0.1165 to <= +0.020, with Delta <= +0.020 in at least 6 of 8 subjects"
+  interpretation: "D1, D2 and D3 met -> the untrained advantage under conventions that leave a common profile in both patterns is attributed to amplitude structure dominating both RDMs, with the untrained network's RDM more amplitude-dominated; not to a better match of per-image amplitude. Any other pattern -> not identified; all values are reported."
+
+gate:
+  values: "Delta(N-raw, k = 1, V1) = +0.1165 and Delta(T-raw, THINGS-720, V1) = +0.0996 (results/step48/conventions.csv, per subject and mean, 1e-12); g and g^M: brain_gain mean / sd, brain_model_gain and model_gain_stat of results/step48/amplitude.csv recomputed exactly"
+
+runtime: {stop_hours_per_part: 8, factor: 1.5}
+disk: {min_free_gb: 30}
