@@ -177,7 +177,7 @@ def run_summary():
     elif not met["NB1"]:
         interp = "the mechanism is not supported in NSD"
     else:
-        interp = "no statement of the rule applies (NB1 and NB2 met, G2 or G3 not met)"
+        interp = "no statement of the rule applies"
     fmt = lambda x: "; ".join(f"{k} {v:+.4f}" for k, v in x.items())  # noqa: E731
     rows = [dict(rule="NB1", quantity="NSD V1 paper cell k = 1: Delta(N-raw) > Delta(N-session) in >= 6 of 8", value=nb1,
                  passed=met["NB1"], note=f"mean N-raw {ns['N-raw'].mean():+.4f}, N-global {ns['N-global'].mean():+.4f}, "

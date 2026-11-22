@@ -1,0 +1,8 @@
+rule,quantity,value,passed,note,config_hash,git_head,seed
+NB1,NSD V1 paper cell k = 1: Delta(N-raw) > Delta(N-session) in >= 6 of 8,8.0,True,"mean N-raw +0.1165, N-global -0.0122, N-session -0.0120",159c5c78e854,830f471,
+NB2,NSD V1 paper cell k = 1: Delta(N-raw) > 0 in >= 6 of 8 and sign-flip p (positive) <= 0.05,8.0,True,"8/8 positive, p 0.0039; per subject subj01 +0.1401; subj02 +0.1427; subj03 +0.1039; subj04 +0.1247; subj05 +0.1012; subj06 +0.1329; subj07 +0.0814; subj08 +0.1052",159c5c78e854,830f471,
+NB3,THINGS-720 V1 paper cell: Delta(T-session) <= +0.010,0.0051945919069473,True,"T-raw +0.0996, T-global +0.0304, T-session +0.0052",159c5c78e854,830f471,
+G1,"THINGS-720 T-global V1: |rho(g, CE)| > |rho(g, L)| in >= 2 of 3",3.0,True,sub-01 CE +0.254 L -0.197; sub-02 CE +0.278 L -0.151; sub-03 CE +0.216 L -0.183,159c5c78e854,830f471,
+G2,"THINGS-720 T-global V1: rho(g, gM Random) > rho(g, gM BP) in 3 of 3",1.0,False,sub-01 R +0.131 BP +0.158; sub-02 R +0.156 BP +0.160; sub-03 R +0.098 BP +0.054,159c5c78e854,830f471,
+G3,"NSD N-raw k = 1 V1: rho(g, gM Random) > rho(g, gM BP) in >= 6 of 8",5.0,False,subj01 R +0.198 BP +0.183; subj02 R +0.274 BP +0.276; subj03 R +0.196 BP +0.186; subj04 R +0.209 BP +0.223; subj05 R +0.150 BP +0.146; subj06 R +0.181 BP +0.176; subj07 R +0.132 BP +0.127; subj08 R +0.169 BP +0.184,159c5c78e854,830f471,
+interpretation,amendment rule,,,no statement of the rule applies,159c5c78e854,830f471,
