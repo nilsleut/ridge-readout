@@ -36,3 +36,10 @@ values).
 
 The gate run (3 subjects, two variants plus the reproductions) took 21 s. The full run (6 variants
 × 2 ROIs, luminance of the 720 images) is estimated below 0.1 h (× 1.5), far below 8 h.
+
+## 4. Tests before the run (`tests/test_step47c.py`, 7/7 passed)
+
+| Test | Result |
+|---|---|
+| (i) synthetic session, known m and d_r | m, run means, d_r recovered (3.8e-15); d_par + d_perp = d_r, orthogonality (3.1e-15); V0-V5 = hand-built (4.4e-15); unknown run label stops |
+| (ii) gates | m + d_r = run mean 2.2e-16; Delta(V3) +0.007032171 = step 47; Delta(V0) +0.030445938 = paper cell |
