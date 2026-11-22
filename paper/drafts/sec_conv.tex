@@ -1,0 +1,114 @@
+% Section: a normalisation convention creates the untrained advantage. All numbers via macros.
+\subsection{Decomposition in THINGS}
+\label{sec:decomposition}
+Several candidate explanations of the THINGS-720 advantage were tested and excluded before the
+convention was identified (Appendix~\ref{app:why}). Sampling: subsets of 100 of the 720 images kept a
+contrast above the test-image value in \RuleWOne\% of 1000 subsets (W1 met), so the absence of the
+advantage in the test images is not sampling variation of 100 images. Measurement noise: the
+single-presentation test-image contrast was not positive either (N3 not met). Presentation order:
+partialling the position RDM changed $\Delta$ by \RuleWFive{} (W5 met). Carry-over: partialling the
+luminance of the preceding image changed it by $\RuleCoOne$ (CO1 not met). Image statistics explained
+only part: after partialling global luminance and contrast $\Delta$ was $\RuleWTwo$ (W2 not met), and
+after adding coarse luminance $\RuleWSix$ (W6 not met; \RuleWSixFraction\% of the contrast explained;
+interpretation of both steps: ``not identified''). Run centring reduced $\Delta$ to $\RuleRcOne$ (RC1
+met), but the further predictions of that step were not met (RC2, RC3, RC4), its interpretation rule
+had no case for this pattern (``no statement of the rule applies''), and an alignment of run-level drift
+with the untrained network's features was not supported (X1 not met; interpretation: ``not identified'').
+
+The decomposition of run centring (step 47c; Table~\ref{tab:decomp}) located the effect in the
+session-mean profile $m$. Removing $m$ alone reduced $\Delta$ from $\DecVoneVZero$ to $\DecVoneVOne$
+(V1), whereas removing the run deviations alone left $\DecVoneVTwo$ (V2; Z1 not met), and re-adding
+either part of the run deviations to the run-centred patterns left it small ($\DecVoneVFour$ and
+$\DecVoneVFive$; Z2 not met). The interpretation rule gave: ``mainly removal of the session mean profile
+(equivalent to voxel centring), not between-run structure; the description of step 47 as run structure is
+to be corrected in the manuscript.'' This agrees with the multiverse of version~1, in which centring the
+voxels over the 720 images (raw / correlation / center720) gave $\CenterSevenTwentyCell$
+[$\CenterSevenTwentyCellLo$, $\CenterSevenTwentyCellHi$]: the 720 images lie in one session, and
+centring over them removes nearly the same profile.
+
+\subsection{Conventions across data sets}
+\label{sec:conventions}
+\input{drafts/v2tab/conventions}
+
+Table~\ref{tab:conventions} and Fig.~\ref{fig:conv} show the paper cell under the three conventions of
+each data set (step 48). In THINGS-720 the advantage grew when the betas were not normalised
+($\CvTsevTrawVoneRawCorr$ under T-raw) and nearly vanished when they were normalised within session
+($\CvTsevTsessionVoneRawCorr$ under T-session; NB3 met). The THINGS test images, whose presentations are
+spread over 12 sessions, showed no advantage under T-global ($\CvTtestTglobalVoneRawCorrKOne$ at $k = 1$)
+but a clear one under T-raw ($\CvTtestTrawVoneRawCorrKOne$ at $k = 1$, $\CvTtestTrawVoneRawCorrKOneTwo$ at
+$k = 12$). In NSD, the pre-specified prediction that raw betas create the advantage was met: under N-raw
+the paper cell was $\CvNsdNrawVoneRawCorrKOne$ at $k = 1$, positive in \CvNsdNrawVoneRawCorrKOnePos{} of
+8 subjects (sign-flip $p = \CvNsdNrawVoneRawCorrKOneP$), against $\CvNsdNsessionVoneRawCorrKOne$ under the
+NSD standard (NB1 and NB2 met). Under N-raw the multiverse had \MvNrawAbove{} distinct analysis with an
+interval above 0, the paper cell itself; \MvNrawBelow{} were below 0 and \MvNrawIncl{} included 0
+(Fig.~\ref{fig:multi}). Standardising the model units removed most of the effect
+($\CvTsevTrawVoneZCorr$ under T-raw, $\CvNsdNrawVoneZCorrKOne$ under N-raw), and Euclidean distance was
+almost unaffected by the convention. The untrained advantage of version~1 is therefore a consequence of
+the normalisation convention: it appears when a response profile common to all trials is left in the
+voxel patterns and the model units are not centred, under correlation distance.
+
+\subsection{Response amplitude}
+\label{sec:amplitude}
+With a common profile left in, the correlation distance between two patterns depends on how strongly
+each is aligned with the profile. In THINGS-720 under T-global, this brain amplitude $g$ correlated more
+strongly with contrast energy than with luminance in every subject (G1 met; Spearman with CE
+$\AmpTsevTglobalVoneSubOneCE$, $\AmpTsevTglobalVoneSubTwoCE$, $\AmpTsevTglobalVoneSubThreeCE$; with $L$
+$\AmpTsevTglobalVoneSubOneL$, $\AmpTsevTglobalVoneSubTwoL$, $\AmpTsevTglobalVoneSubThreeL$), consistent
+with the dependence of V1 responses (Fig.~\ref{fig:amp}a) to natural images on contrast energy \citep{kay2013}. Both networks
+matched this amplitude about equally: the Spearman correlation between $g$ and the model amplitude $g^M$
+was larger for the untrained network in only \RuleGTwo{} of 3 THINGS subjects (G2 not met; mean
+$\AmpGmTsevTglobalVoneKOneRand$ against $\AmpGmTsevTglobalVoneKOneBp$) and \RuleGThree{} of 8 NSD
+subjects under N-raw (G3 not met; $\AmpGmNsdNrawVoneKOneRand$ against $\AmpGmNsdNrawVoneKOneBp$). The
+interpretation rule of step 48 has no case for this pattern (NB1 and NB2 met, G2 or G3 not met), and its
+outcome is: ``no statement of the rule applies''.
+
+Step 48b asked instead how much each RDM is dominated by amplitude structure, using the sum form
+$A_{ij} = 2 - g_i - g_j$ (Section~\ref{sec:ampmethods}). The untrained network's RDM was more
+amplitude-dominated than Backprop's in every seed in each data set (D1 met; Fig.~\ref{fig:amp}b; mean Spearman(RDM, $A^M$)
+$\DomTsevConvOneSumRand$ against $\DomTsevConvOneSumBp$ in THINGS-720, $\DomTestConvOneSumRand$ against
+$\DomTestConvOneSumBp$ in the test images, $\DomNsdConvOneSumRand$ against $\DomNsdConvOneSumBp$ in NSD).
+The brain RDM was amplitude-dominated when the profile was left in and not when it was removed (D2 met;
+THINGS-720 $\BDomTsevTrawVoneKOneSum$ under T-raw against $\BDomTsevTsessionVoneKOneSum$ under T-session;
+NSD $\BDomNsdNrawVoneKOneSum$ under N-raw against $\BDomNsdNsessionVoneKOneSum$ under N-session, larger in
+\RuleDTwoNsd{} of 8 subjects). Removing the amplitude structure from both RDMs by the two-sided partial
+reduced the NSD advantage under N-raw from $\PbNsdNrawVoneKOneNone$ to $\PbNsdNrawVoneKOneSum$, with
+$\Delta \leq +0.020$ in \RuleDThreeLe{} of 8 subjects (D3 met; Table~\ref{tab:partial48b}). The
+interpretation rule gave: ``the untrained advantage under conventions that leave a common profile in both
+patterns is attributed to amplitude structure dominating both RDMs, with the untrained network's RDM more
+amplitude-dominated; not to a better match of per-image amplitude.'' Descriptively, the model's amplitude
+dominance followed the moment ratio $m$ of version~1 across the 10 checkpoints (Spearman
+$\DomMrNsdConvOneSum$ in NSD and $\DomMrTsevConvOneSum$ in THINGS-720; $m$ $\MratioTsevConvOneRand$ for the
+untrained network against $\MratioTsevConvOneBp$ for Backprop in THINGS-720), which links the result to the
+mean-profile alignment of Section~\ref{sec:gainaxis}. With the difference form $|g_i - g_j|$ the partial
+reduced the NSD advantage only to $\PbNsdNrawVoneKOneDiff$ (Appendix~\ref{app:conv}).
+
+\subsection{Why ridge is unaffected}
+\label{sec:ridgeunaffected}
+A response profile common to all trials is a constant per voxel. A voxel-wise readout fits an intercept
+per voxel and is scored by a correlation over images per voxel, so the constant is absorbed and the score
+does not change. This is consistent with the ridge results under every normalisation that was tested
+(RD1, RD2 in NSD; Y1 to Y4 with run centring and without voxel selection). The readout and the
+correlation-distance RDM thus differ in exactly the quantity that the convention controls.
+
+\subsection{Open points}
+\label{sec:openres}
+Three observations are not explained. (1)~In THINGS-720 the untrained network was ahead under raw units
+with Euclidean distance under every convention ($\CvTsevTrawVoneRawEucl$, $\CvTsevTglobalVoneRawEucl$,
+$\CvTsevTsessionVoneRawEucl$, each in \CvTsevTglobalVoneRawEuclPos{} of 3 subjects). Euclidean distance is
+unaffected by subtracting a profile common to all patterns, so this contrast is not created by the
+convention; it is absent in NSD (Table~\ref{tab:convfull}). (2)~After removing the amplitude structure
+from both RDMs, a residual untrained advantage remains in THINGS, unlike NSD: $\PbTsevTrawVoneKOneSum$
+under T-raw (\PbTsevTrawVoneKOneSumPos{} of 3 subjects positive), $\PbTsevTglobalVoneKOneSum$ under
+T-global, and $\PbTestTrawVoneKOneTwoSum$ in the test images under T-raw at $k = 12$. (3)~The sign of the
+relation between the brain amplitude and the image statistics depends on the convention: in NSD the
+Spearman correlation of $g$ with contrast energy was $\AmpNsdNrawVoneKOneCE$ under N-raw and
+$\AmpNsdNsessionVoneKOneCE$ under N-session, and in the test images $\AmpTestTrawVoneKOneTwoCE$ under T-raw
+and $\AmpTestTglobalVoneKOneTwoCE$ under T-global (Appendix~\ref{app:conv}, Table~\ref{tab:amplitude}).
+
+\subsection{A side finding: presentation order}
+\label{sec:sidefinding}
+The V1 RDM of sub-02 correlated with the presentation-position RDM (Spearman $\OrderRhoSubTwo$; sub-01
+$\OrderRhoSubOne$, sub-03 $\OrderRhoSubThree$). sub-01 and sub-02 saw the 720 images in the same order and
+run assignment, so their RDMs share any order-related component, and the agreement between these two
+subjects in THINGS is a limited test of cross-subject consistency. Partialling the position RDM did not
+change the group contrast (W5).

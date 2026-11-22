@@ -1,0 +1,23 @@
+Partial RSA (Section~\ref{sec:gainmethods}) was used with covariate RDMs built from image statistics:
+$|L_i - L_j|$ (mean luminance), $|C_i - C_j|$ (RMS contrast), the Euclidean distance between
+coarse-luminance images (the grey image filtered to the lowest spatial-frequency band of
+\citet{evalres}, including the mean, at $28 \times 28$; LP), the predecessor-luminance RDM
+$|L_{\mathrm{prev}(i)} - L_{\mathrm{prev}(j)}|$, and the presentation-position RDM $|p_i - p_j|$
+($T$). Ranks of the model and the brain RDM are regressed on the ranks of the covariates (with
+intercept), and the residuals are correlated (Pearson).
+
+The analyses of steps 44, 45, 47, 47b and 47c in THINGS: the decomposition of run centring
+(Table~\ref{tab:decomp}), partial RSA with image-statistic, position and predecessor covariates
+(Tables~\ref{tab:partial} and~\ref{tab:partialother}), and run-level quantities per subject
+(Table~\ref{tab:runlevel}). The luminance correlation of the V1 RDM, divided by the leave-one-subject-out
+lower bound, was \LumRatioTsev{} in THINGS-720, \LumRatioTest{} in the test images and \LumRatioNsd{} in NSD
+(W4 met); for the coarse-luminance RDM the ratios were \LpRatioTsev, \LpRatioTest{} and \LpRatioNsd{} (W7
+met). With run centring, the THINGS-720 ratio fell to \LumBoundRc{} (RC2 not met), and the multiverse had
+\RuleRcFour{} distinct analyses with an interval above 0 (RC4 not met). The run-level variance of the
+run-mean luminance was at the \RunLumPctSubOneTwo{}th percentile of random assignments for sub-01/02 and at
+the \RunLumPctSubThree{}th for sub-03 (RC3 not met, reversed).
+
+\input{drafts/v2tab/why_decomp}
+\input{drafts/v2tab/why_partial}
+\input{drafts/v2tab/why_partialother}
+\input{drafts/v2tab/why_runlevel}

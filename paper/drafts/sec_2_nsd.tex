@@ -1,0 +1,37 @@
+\subsection{NSD}
+\label{sec:nsdmethods}
+
+\paragraph{Data.} The Natural Scenes Dataset \citep{allen2022} contains 7T fMRI of 8 subjects who
+viewed natural scenes. We used the 515 images that every subject saw three times; all their trials lie
+in sessions 1--30. Single-trial betas (\texttt{betas\_fithrf\_GLMdenoise\_RR}, 1.8\,mm) were divided by
+300, which gives percent signal change, and z-scored per voxel within session, the convention of the
+NSD documentation (N-session, Section~\ref{sec:convmethods}). Voxels invalid in any session were
+excluded (in one subject). The image order of the features equals that of the betas for
+every subject.
+
+\paragraph{ROIs.} V1 is the union of V1v and V1d of the population-receptive-field ROIs. NSD provides no
+object-selective ROI; we constructed LO-obj, fixed before any RSA, as the intersection of the
+\texttt{lateral} stream ROI with voxels whose \texttt{floc\_objectstval} exceeds 0, the threshold
+convention of the manual for the floc ROIs. The underlying contrast is the objects domain (car,
+instrument) against all other categories of the functional localiser (characters, bodies, faces,
+places). The \texttt{lateral} stream ROI alone was reported as a sensitivity variant. RSA used all
+voxels of the ROI (Appendix~\ref{app:nsd}, Table~\ref{tab:nsdsubjects}).
+
+\paragraph{Patterns and pairs.} For $k = 3$ each image is represented by the mean of its three
+presentations (primary); for $k = 1$ each presentation is used separately and the three RSA values
+are averaged, excluding the pairs whose chosen presentations fall in the same session and run.
+Model RDMs are computed as for THINGS (Section~\ref{sec:rsa}) from the own CNN at Conv1, 224\,px, and
+from the ImageNet models with the layers of Section~\ref{sec:data}; RSA is the Spearman correlation
+over all pairs.
+
+\paragraph{Ridge.} The pre-specified ridge analysis of Section~\ref{sec:ridge} was applied unchanged
+(nested cross-validation 8 $\times$ 5, the same $\alpha$ grid and selection, pooled out-of-fold $r$,
+median over reliable voxels, the lower-edge gate), with the $k = 3$ responses as targets and
+$g \in \{1, 4, 8\}$. A voxel is reliable if the mean $r$ of the three pairwise split correlations over
+the 515 images, Spearman--Brown corrected as $3r/(1+2r)$, exceeds 0.2.
+
+\paragraph{Inference.} Per subject, the contrast is averaged over seeds. Across subjects we used a
+one-sided sign-flip test over the 8 subject means (256 assignments) in the predicted direction, and
+a stimulus bootstrap of the 8-subject mean (1000 resamples, seed 20261002, the same image draws for
+every subject). With 8 subjects the smallest attainable one-sided $p$ is $1/256$. The noise ceiling is
+the leave-one-subject-out lower bound on the same pairs.

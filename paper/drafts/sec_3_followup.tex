@@ -1,0 +1,24 @@
+\paragraph{Banded ridge.} A banded readout with separate penalties for the luminance-and-contrast bank
+and the network (step 40) was meant to estimate the network's unique contribution beyond the bank. Its
+sanity rule B1 was not met: the joint readout lay below the bank alone by more than 0.002 in some fits
+(minimum $\BandedBOneMinGFour$ at $g = 4$), so B2 and B3 were not interpreted. A diagnosis (step 41)
+showed no implementation error at the limit of an infinite network penalty (D-A1 met, maximum
+deviation \DAOneDev), but a one-dimensional conditional search did not remove the deficit (D-A2 not met,
+minimum $\DATwoMin$); the violation was therefore not attributed to selection variance, and the
+conditional estimator was not interpreted. Descriptively, neither penalty scheme improved on the bank
+alone in MSE skill (joint minus bank at $g = 4$: $\BandedUSkillBpGFour$ and $\CondUSkillBp$ for
+Backprop, $\BandedUSkillRandGFour$ and $\CondUSkillRand$ for the untrained network), and in median $r$
+the joint readout exceeded the bank by at most $\CondUBp$ (Appendix~\ref{app:banded},
+Table~\ref{tab:banded}).
+
+\paragraph{Repeated test images.} On the 100 test images, each shown 12 times, the paper cell did not
+show the untrained advantage on presentation-averaged patterns (C1 not met: $\CvRsaVoneRawBOne$
+[$\CvRsaVoneRawBOneLo$, $\CvRsaVoneRawBOneHi$]), whereas the standardised cell resolved a Backprop
+advantage (C2 met: $\CvRsaVoneZBOne$ [$\CvRsaVoneZBOneLo$, $\CvRsaVoneZBOneHi$]); cross-validated and
+plain Euclidean distances gave the same sign (C3 met). A noise curve over the number $k$ of averaged
+presentations (step 41) showed that the contrast fell with $k$ (N1 and N2 met; Spearman of $k$ and
+$\Delta(k)$ \NTwoSpearman), but the single-presentation value was not positive either (N3 not met:
+$\Delta(1) = \NoiseVoneRawKOneFour$ [$\NoiseVoneRawKOneLo$, $\NoiseVoneRawKOneHi$]); under standardisation
+$\Delta(k) \leq 0$ at every $k$ (N4 met; Appendix~\ref{app:banded}, Table~\ref{tab:noisecurve}). The
+test images are z-scored with all trials like the 720 (T-global); their contrast under the other conventions
+is reported in Section~\ref{sec:conventions}.

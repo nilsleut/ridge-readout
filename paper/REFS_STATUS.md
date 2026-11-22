@@ -42,3 +42,13 @@ line 114 (`lillicrap2016`, `rao1999`, `bi1998`).
 
 Build: `pdflatex main`, `bibtex main`, `pdflatex main` (twice). BibTeX reports no errors or
 warnings; undefined citations: 0.
+## References added for version 2 (verified 2026-11-22)
+
+| Key | Reference | Origin | Used in |
+|---|---|---|---|
+| `allen2022` | NSD, Nature Neuroscience 25:116-126 (2022) | **new, verified 2026-11-22** against the Crossref record of doi 10.1038/s41593-021-00962-x (title, 13 authors, volume, issue, pages; online 2021-12-16) | 2, 4 |
+| `kay2013` | Two-stage cascade model of BOLD responses, PLoS Comput Biol 9(5):e1003079 | **new, verified 2026-11-22** against the Crossref record (title, authors, volume, issue, article number) | 6 |
+| `ramirez2017` | Representational confusion (demeaning), bioRxiv 195271 | **new, verified 2026-11-22** against the Crossref record (title, author, posted 2017-09-28); no journal version found (a Journal of Vision 17(10):270 item with a similar title is a conference abstract), so preprint v1 is cited | 1, 6 |
+| `taylor2025` | Framed RSA, CCN 2025 | **new, verified 2026-11-22** against the abstract PDF on 2025.ccneuro.org: title "Framed RSA: honoring representational geometry and regional-mean response preferences", authors JohnMark Taylor, Nikolaus Kriegeskorte; no DOI printed | 1, 6 |
+| `bossio2025` | When do measured representational distances reflect the neural representational geometry?, eLife reviewed preprint 106812 | **new, verified 2026-11-22** against the Crossref record of doi 10.7554/eLife.106812.1 (title, authors Bossio Botero and Kriegeskorte, posted 2025-06-27, version 1); the eLife page itself returned a browser challenge | 1, 6 |
+| `kremkow2014` | Dark dominance, PNAS 111(8):3170-3175 | **new, verified 2026-11-22** against the Crossref record (title, 9 authors, volume, issue, pages) | 6 |

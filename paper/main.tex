@@ -13,11 +13,13 @@
 \usepackage{url}
 \usepackage{placeins}
 \usepackage{float}
+\usepackage{multirow}
+\usepackage{adjustbox}
 
 \input{numbers}
-\pdfinfo{/Title <FEFF0041006E0061006C0079007300690073002000630068006F006900630065007300200064006500630069006400650020007700680065007400680065007200200075006E0074007200610069006E006500640020006E006500740077006F0072006B00730020006200650061007400200074007200610069006E006500640020006F006E00650073002000610074002000560031003A002000610020006D0075006C007400690076006500720073006500200061006E0061006C00790073006900730020006F00660020006D006F00640065006C20130062007200610069006E0020005200530041> /Author <FEFF004E0069006C00730020004C0065007500740065006E00650067006700650072>}
+\pdfinfo{/Title <FEFF005700680065007400680065007200200075006E0074007200610069006E006500640020006E006500740077006F0072006B00730020006200650061007400200074007200610069006E006500640020006F006E0065007300200061007400200056003100200064006500700065006E006400730020006F006E002000610020006E006F0072006D0061006C00690073006100740069006F006E00200063006F006E00760065006E00740069006F006E003A002000650076006900640065006E00630065002000660072006F006D002000740077006F00200066004D00520049002000640061007400610073006500740073> /Author <FEFF004E0069006C00730020004C0065007500740065006E00650067006700650072>}
 
-\title{Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model--brain RSA}
+\title{Whether untrained networks beat trained ones at V1 depends on a normalisation convention: evidence from two fMRI datasets}
 \author{Nils Leutenegger\\Independent researcher, Zug, Switzerland\\\texttt{nils.leutenegger@gmail.com}}
 \date{}
 
@@ -32,7 +34,7 @@
 \input{drafts/sec_1}
 
 \section{Methods}
-\subsection{Data}
+\subsection{THINGS data}
 \label{sec:data}
 
 We used the THINGS-fMRI data set \citep{hebart2023} of 3 subjects. Single-trial
@@ -217,8 +219,12 @@ not claims about physiological gain.
 
 
 \input{drafts/sec_2_7}
+\input{drafts/sec_2_nsd}
+\input{drafts/sec_2_conv}
+\input{drafts/sec_2_amp}
+\input{drafts/sec_2_followup}
 
-\section{Results}
+\section{Results: THINGS}
 \subsection{Sign flip between RSA and ridge (including the pre-specified primary analysis)}
 \label{sec:signflip}
 \input{drafts/sec_3_1}
@@ -251,12 +257,6 @@ not claims about physiological gain.
 \label{fig:multiverse_v1}
 \end{figure}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=3.5in]{figures/multiverse_loc.pdf}
-\caption{Backprop minus untrained at LOC (Conv3), NATIVE 224\,px, in the 36 cells of the analysis multiverse. Layout, colour scale, dots and frame as in Fig.~\ref{fig:multiverse_v1}.}
-\label{fig:multiverse_loc}
-\end{figure}
 
 \subsection{Mean-profile alignment}
 \label{sec:gainaxis}
@@ -277,19 +277,58 @@ not claims about physiological gain.
 \label{sec:gaingeometry}
 \input{drafts/sec_3_5}
 
+
+\subsection{Banded ridge and repeated test images}
+\label{sec:thingsfollowup}
+\input{drafts/sec_3_followup}
+
+\section{Results: NSD replication}
+\label{sec:nsd}
+\input{drafts/sec_nsd}
+
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/separation.pdf}
-\caption{Component RSA contrasts with $F$ = center and 95\% stimulus-bootstrap CIs, for the own CNN (vermillion) and six ImageNet models (blue). Panels from left: V1 norm component, V1 angular component, LOC angular component, and the slope of the V1 angular contrast from 224 to 448\,px for the ImageNet models (green; none for vit\_b\_16). V1: untrained minus trained; LOC: trained minus untrained.}
-\label{fig:separation}
+\includegraphics[width=\textwidth]{figures/nsd.pdf}
+\caption{NSD under its standard normalisation (N-session), per subject: untrained minus Backprop at V1 and LO-obj for raw and standardised units with correlation distance, raw units with Euclidean distance, the norm ($N$) and angular ($A$) components ($k = 3$), and the pre-specified ridge readout at $g = 4$ (median $r$). Grey: subj02--08; diamond: subj01 (the pilot); bar: mean over the 8 subjects.}
+\label{fig:nsd}
 \end{figure}
 
-\FloatBarrier
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/multi.pdf}
+\caption{The 28 distinct analyses of the V1 multiverse (one representative cell $F$/$D$/$B$ per class; ``own'' denotes the data set's own voxel normalisation, c720 centring over the images) in THINGS-720 (orange), NSD under its standard normalisation N-session (blue) and NSD with raw betas N-raw (vermillion), sorted by the THINGS value. Bars: 95\% stimulus-bootstrap intervals.}
+\label{fig:multi}
+\end{figure}
+
+\section{A normalisation convention creates the untrained advantage}
+\label{sec:convention}
+\input{drafts/sec_conv}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/conv.pdf}
+\caption{Untrained minus Backprop at V1 under the three voxel normalisation conventions of each data set (step 48). Left: paper cell (raw model units, correlation distance); right: model units standardised over the images. Small dots: subjects (THINGS: 3; NSD: 8); large dots: mean with $\pm 1$ SD over subjects. Conventions: raw betas (vermillion), z-scored over all trials (orange), z-scored within session (blue).}
+\label{fig:conv}
+\end{figure}
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/amp.pdf}
+\caption{Response amplitude. (a)~Spearman correlation of the brain amplitude $g$ at V1 (mean over subjects) and of the model amplitude $g^M$ (Conv1, mean over seeds) with luminance $L$, RMS contrast $C$ and contrast energy CE. (b)~Amplitude dominance of the model RDMs (sum form), one dot per seed (D1). (c)~$\Delta$ at V1 before and after the two-sided partial on the amplitude RDMs (sum form; D3 for NSD).}
+\label{fig:amp}
+\end{figure}
+
 \section{Discussion}
 \input{drafts/sec_4}
 
+\section{Conclusion}
+\input{drafts/sec_concl}
+
 \section*{Acknowledgements}
 We thank Kartik Pradeepan for detailed feedback on a draft of this manuscript, in particular on the distinction between sensitivity and validity and on the recommendations for benchmarking platforms.
+
+Collection of the NSD dataset was supported by NSF IIS-1822683 and NSF IIS-1822929.
 
 Claude (Anthropic), a large language model, was used as an assistant throughout this work: to suggest and refine analyses and decision rules, to write and run analysis code, and to draft most of the manuscript text. The author defined the research question, decided which analyses to run and which claims to make, checked the results with reproduction tests and gates, and takes full responsibility for the content, including any errors.
 
@@ -321,5 +360,38 @@ Claude (Anthropic), a large language model, was used as an assistant throughout 
 \section{Ablation on each side}
 \label{app:ablation2x2}
 \input{drafts/app_ablation2x2}
+\section{Additional figures}
+\label{app:figs}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=3.5in]{figures/multiverse_loc.pdf}
+\caption{Backprop minus untrained at LOC (Conv3), NATIVE 224\,px, in the 36 cells of the analysis multiverse. Layout, colour scale, dots and frame as in Fig.~\ref{fig:multiverse_v1}.}
+\label{fig:multiverse_loc}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/separation.pdf}
+\caption{Component RSA contrasts with $F$ = center and 95\% stimulus-bootstrap CIs, for the own CNN (vermillion) and six ImageNet models (blue). Panels from left: V1 norm component, V1 angular component, LOC angular component, and the slope of the V1 angular contrast from 224 to 448\,px for the ImageNet models (green; none for vit\_b\_16). V1: untrained minus trained; LOC: trained minus untrained.}
+\label{fig:separation}
+\end{figure}
+\FloatBarrier
+\section{Chronology of the follow-up analyses}
+\label{app:chronology}
+\input{drafts/v2tab/chronology}
+\FloatBarrier
+\section{Banded ridge and repeated test images}
+\label{app:banded}
+\input{drafts/app_banded}
+\section{NSD details}
+\label{app:nsd}
+\input{drafts/app_nsd}
+\section{Candidate explanations in THINGS}
+\label{app:why}
+\input{drafts/app_why}
+\section{Conventions and response amplitude}
+\label{app:conv}
+\input{drafts/app_conv}
 
 \end{document}

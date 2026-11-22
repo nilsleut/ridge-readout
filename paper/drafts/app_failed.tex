@@ -1,6 +1,10 @@
-Table~\ref{tab:failed} lists the \FailedPredictions{} pre-stated predictions of the
-exploratory analyses that were not met. Each rule was committed before the scripts of its
-step were run (Section~\ref{sec:inference}).
+Tables~\ref{tab:failed} and~\ref{tab:failedfollowup} list the \FailedPredictions{} pre-specified
+predictions that were not met: \FailedPredictionsVone{} of the \TotalPredictionsVone{} evaluated
+predictions of version~1 and \FailedPredictionsFollowup{} of the \TotalPredictionsFollowup{}
+evaluated predictions of the follow-up analyses. Each rule was committed before the scripts of its
+step were run (Section~\ref{sec:inference}). All predictions, decision rules and interpretation
+rules, with wording, amendment commit, result and source file, are in
+\texttt{paper/PREDICTIONS\_LEDGER.csv}.
 
 \begin{table}[H]
 \centering
@@ -38,7 +42,58 @@ M3 & parallel component: V1 gap at NATIVE 224\,px $> 0$ with CI above 0, and res
   & \ref{sec:ablation} \\
 \bottomrule
 \end{tabular}
-\caption{Pre-stated predictions that were not met. Intervals are 95\% stimulus-bootstrap
+\caption{Pre-specified predictions of version~1 that were not met. Intervals are 95\% stimulus-bootstrap
 percentile intervals.}
 \label{tab:failed}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{@{}p{0.11\textwidth}p{0.44\textwidth}p{0.30\textwidth}p{0.05\textwidth}@{}}
+\toprule
+Prediction (step) & Rule and threshold & Result & Section \\
+\midrule
+B1 (40) & sanity: banded joint readout not below the bank alone by more than 0.002 in any fit
+  & minimum $\BandedBOneMinGFour$ at $g = 4$ & \ref{sec:thingsfollowup} \\
+C1 (40) & test images, raw units, correlation vs presentation-averaged brain RDM: $\Delta > 0$
+  & $\CvRsaVoneRawBOne$ [$\CvRsaVoneRawBOneLo$, $\CvRsaVoneRawBOneHi$] & \ref{sec:thingsfollowup} \\
+D-A2 (41) & conditional banded search: no fit below the bank alone by more than 0.002
+  & minimum $\DATwoMin$ & \ref{sec:thingsfollowup} \\
+N3 (41) & test images, paper cell, single presentations: $\Delta(1) > 0$
+  & $\NoiseVoneRawKOneFour$ & \ref{sec:thingsfollowup} \\
+Q1 (42b) & NSD V1, raw units, Euclidean: $\Delta > 0$ in $\geq 5$ of 7 held-out subjects, $p \leq 0.05$
+  & $\NsdHeldVoneKThreeRawEuclidean$, \NsdHeldVoneKThreeRawEuclideanPos{} of 7 positive & \ref{sec:nsdcomponents} \\
+Q2 (42b) & NSD V1, norm component $N$: $\Delta > 0$ in $\geq 5$ of 7, $p \leq 0.05$
+  & $\NsdHeldVoneKThreeCenterN$, \NsdHeldVoneKThreeCenterNPos{} of 7 positive & \ref{sec:nsdcomponents} \\
+M2 (43) & NSD multiverse: interval below 0 in at least half of the distinct analyses
+  & \MvNsessionBelow{} of \MvNsessionDistinct{} & \ref{sec:nsdmultiverse} \\
+W2 (44) & THINGS-720: partialling luminance and contrast RDMs reduces $\Delta$ to $\leq +0.010$
+  & $\RuleWTwo$ & \ref{sec:decomposition} \\
+W6 (45) & THINGS-720: partialling luminance, contrast and coarse-luminance RDMs reduces $\Delta$ to $\leq +0.010$
+  & $\RuleWSix$ & \ref{sec:decomposition} \\
+RC2 (47) & with run centring, luminance correlation of the V1 RDM / LOSO bound $< 0.5$
+  & \RuleRcTwo & \ref{sec:decomposition} \\
+RC3 (47) & run-level variance of run-mean luminance larger for the sub-01/02 than for the sub-03 assignment
+  & percentile \RunLumPctSubOneTwo{} vs \RunLumPctSubThree{} (reversed) & \ref{sec:decomposition} \\
+RC4 (47) & with run centring, at most 2 of 28 distinct analyses with interval above 0
+  & \RuleRcFour & \ref{sec:decomposition} \\
+CO1 (47) & partialling the predecessor-luminance RDM changes $\Delta$ by $\geq 0.005$
+  & change $\RuleCoOne$ & \ref{sec:decomposition} \\
+X1 (47b) & alignment of the run RDMs, untrained minus Backprop, $> 0$ in sub-01 and sub-02
+  & $\MechDeltaASubOne$, $\MechDeltaASubTwo$ & \ref{sec:decomposition} \\
+Z1 (47c) & removing the run deviations alone gives $\Delta \leq +0.015$
+  & $\DecVoneVTwo$ & \ref{sec:decomposition} \\
+Z2 (47c) & $\Delta(\text{V4}) \geq +0.020$ and $\Delta(\text{V5}) \leq +0.012$
+  & $\DecVoneVFour$, $\DecVoneVFive$ & \ref{sec:decomposition} \\
+G2 (48) & THINGS-720, T-global: $\rho(g, g^M)$ larger for the untrained network in 3 of 3 subjects
+  & \RuleGTwo{} of 3 & \ref{sec:amplitude} \\
+G3 (48) & NSD, N-raw, $k = 1$: $\rho(g, g^M)$ larger for the untrained network in $\geq 6$ of 8 subjects
+  & \RuleGThree{} of 8 & \ref{sec:amplitude} \\
+\bottomrule
+\end{tabular}
+\caption{Pre-specified predictions of the follow-up analyses (steps 40--48b) that were not met. In
+addition, \NotInterpretedPredictions{} predictions were not interpreted because a sanity rule
+failed (B2, B3 after B1; the conditional estimator after D-A2).}
+\label{tab:failedfollowup}
 \end{table}

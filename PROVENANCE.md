@@ -123,3 +123,7 @@ The committer timestamp of `2fd215a` ("Add step 9 report", 2026-10-13) is the ti
 ## Step 25 motivation
 
 Step 25 (`amendments/2026-10-16_step25-predictions.md`) was prompted by criticism of an earlier draft. The motivation line of the amendment calls it an 'external critique'; the amendment file is left unchanged because its committed text is evidence of the order of events. Step 28 (`amendments/2026-10-18_step28-predictions.md`) was prompted by further criticism of the revised draft.
+
+## Step 48: seed column of the THINGS rows of amplitude.csv
+
+In `results/step48/amplitude.csv` the `seed` column is empty for all THINGS rows (360 `brain_model_gain` and 180 `model_gain_stat` rows). `scripts/step48_conventions.py` `write_part` drops the seed column of the part already in the file when it merges the next part (the NSD rows, written later, keep their seeds). The values are complete and stored in generation order, seeds 0-4 within each condition. The file is left unchanged. The gate of step 48b (`scripts/step48b_dominance.py gate`) reconstructs the seeds from the row order (cumulative count within the other key columns); `scripts/export_macros.py` (through `tables_v2.amplitude48`) and `scripts/make_figures_v2.py` read the file through the same reconstruction. The macros and figures of the manuscript use means over seeds, so they do not depend on the reconstruction.

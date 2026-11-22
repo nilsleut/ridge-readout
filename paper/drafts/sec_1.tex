@@ -1,49 +1,44 @@
 % Introduction.
-Comparisons between artificial networks and neural data have become a standard way to
-ask which models capture the computations of visual cortex. Representational similarity
-analysis (RSA) is one of the most widely used tools for this purpose: it summarises each
-system by the dissimilarities between its responses to a set of stimuli and compares
-these summaries directly, without fitting a mapping \citep{kriegeskorte2008}. A
-recurring and surprising result is that networks with random, untrained weights can
-rival trained networks as models of visual cortex, in some reports exceeding them
-\citep{truzzi2020, kazemian2025}. If true, such results bear on how much of early visual
+Comparisons between artificial networks and neural data have become a standard way to ask which
+models capture the computations of visual cortex. Representational similarity analysis (RSA) is one
+of the most widely used tools for this purpose: it summarises each system by the dissimilarities
+between its responses to a set of stimuli and compares these summaries directly, without fitting a
+mapping \citep{kriegeskorte2008}. A recurring and surprising result is that networks with random,
+untrained weights can rival trained networks as models of visual cortex, in some reports exceeding
+them \citep{truzzi2020, kazemian2025}. If true, such results bear on how much of early visual
 representation follows from architecture alone and how much from learning.
 
-We reported a result of this kind ourselves. In THINGS fMRI \citep{hebart2023},
-an untrained network with uncalibrated batch-normalisation statistics exceeded a
-backpropagation-trained network at V1 when images were evaluated at 224\,px, but not at
-32\,px, the resolution at which the networks had been trained \citep{evalres}; a related
-claim appears in \citet{leutenegger2026}. Both analyses used a single convention:
-globally pooled features, correlation distance between units, and voxel responses
-normalised over all trials of the experiment.
+We reported a result of this kind ourselves. In THINGS fMRI \citep{hebart2023}, an untrained network
+with uncalibrated batch-normalisation statistics exceeded a backpropagation-trained network at V1
+when images were evaluated at 224\,px, but not at 32\,px, the resolution at which the networks had
+been trained \citep{evalres}; a related claim appears in \citet{leutenegger2026}. Both analyses used
+a single convention: globally pooled features, correlation distance between units, and voxel
+responses z-scored over all trials of the experiment. This paper traces that claimed property of
+untrained networks to a normalisation convention.
 
-That convention has a property that is easy to overlook. Correlation distance across
-units is not invariant to constant offsets of individual units over the stimulus set:
-when units have different mean responses, the dissimilarity between two stimuli depends
-in part on how strongly each stimulus pattern is aligned with the shared profile of unit means. Euclidean distance is invariant to such offsets but not to the norm of
-each stimulus's response vector. Different distance measures and normalisations
-therefore weight a gain-like quantity and the direction of the response pattern
-differently. The role of centring is explicit in related similarity measures
-\citep{kornblith2019}, and the choice of dissimilarity measure is known to affect
-the reliability of RSA \citep{walther2016, diedrichsen2017}, but its effect on
-the ranking of candidate models has rarely been examined.
+Correlation distance across units is not invariant to constant offsets of individual units over the
+stimulus set: when units have different mean responses, the dissimilarity between two stimuli depends
+in part on how strongly each pattern is aligned with the shared profile of unit means. The same holds
+for voxels. Methodological work has shown that removing or keeping the mean of the measured patterns
+changes what RSA measures: demeaning can produce ``representational confusion''
+\citep{ramirez2017}, the regional-mean response profile carries information that standard RSA
+discards \citep{taylor2025}, and averaging over neurons within voxels amplifies activity shared by
+all sampled neurons, a distortion that mean removal largely corrects \citep{bossio2025}. Centring is
+also explicit in related similarity measures \citep{kornblith2019}, and the choice of dissimilarity
+measure affects the reliability of RSA \citep{walther2016, diedrichsen2017}. Whether such choices
+reverse the ranking of candidate models has rarely been tested.
 
-Here we test our earlier result in four ways. First, a pre-specified analysis replaces
-RSA by a fitted ridge readout on the full feature map. Second, a sequence of exploratory
-analyses, each with predictions and decision rules committed before it was run, asks
-where the discrepancy between RSA and ridge arises; among them, we test whether the
-advantage is carried by the component along the mean profile of the units. Third, a
-multiverse of 36 combinations of unit normalisation, distance measure and voxel
-normalisation \citep{steegen2016} tests which conclusions hold across defensible analysis
-choices, and six ImageNet architectures test whether they generalise beyond our networks.
-Fourth, an exact decomposition of Euclidean distances separates a norm component from an
-angular component.
-
-We find that whether the untrained network beats the trained one at V1 depends on the
-analysis. The advantage is not reproduced by the fitted readout, disappears under
-correlation distance when model units are standardised, and is absent from the angular
-component and from the component orthogonal to the mean profile, whereas raw
-correlation-distance RSA closely tracks the mean-profile alignment of model and voxels.
-The ranking at LOC favours the trained networks wherever it is resolved. A luminance-and-contrast bank scored above every network under the ridge readout at V1 (point estimates). We
-report all pre-stated predictions, including those that failed, and we revise the
-corresponding claims of our earlier work.
+We make six contributions. (i)~A pre-specified ridge readout on the full feature map, in THINGS and,
+with the same plan, in the Natural Scenes Dataset \citep[NSD;][]{allen2022}, places the trained network
+ahead at every pooling grid. (ii)~A multiverse of 36 combinations of unit normalisation, distance
+measure and voxel normalisation in THINGS \citep{steegen2016} shows that the sign of the V1 contrast
+depends on the analysis. (iii)~A replication in NSD (8 subjects) finds no analysis in which the
+untrained network is ahead under the NSD standard normalisation. (iv)~We identify the convention that
+creates the advantage: a voxel response profile common to all trials, left in the patterns by
+normalising over all trials of the experiment rather than within session; a pre-specified prediction
+that the advantage appears in NSD when this profile is left in was confirmed. (v)~We describe the
+mechanism as far as it is identified: with the profile left in, both representational dissimilarity
+matrices (RDMs) are dominated by per-image response amplitude, and the untrained network's RDM more so.
+(vi)~We give recommendations for model--brain comparisons. Every pre-specified prediction is reported,
+including the \FailedPredictions{} that were not met, and we revise the corresponding claims of our
+earlier work.

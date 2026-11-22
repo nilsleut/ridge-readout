@@ -209,7 +209,6 @@ SPECS += [
     # reference effect SEM (paper v1) from the frozen config; number of failed pre-stated predictions
     ("PreregReferenceSem", "config:config.yaml", "provenance.reference_effect.sem_at_224px", None, "rsa"),
         # all pre-stated predictions not met (every step); checked against the rows of Tab. tab:failed
-    ("FailedPredictions", "failedrules:results", "kind == 'rule' and passed == False", None, "int"),
     # secondary pre-specified contrasts (BN-cal, FA, PC, STDP minus Backprop), all g: largest mean and seeds positive
     ("PreregSecondaryMaxMean", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'", "mean", "rsa"),
     ("PreregSecondaryMaxPos", "max:prereg/signflip.csv", "kind == 'contrast' and role == 'secondary'",
@@ -423,7 +422,28 @@ for _g, _gn in GRID_NAMES.items():
                       f"grid == {_g} and label == 'control:{_c}'", "r_med_reliable", "rsa"))
 
 
+ROUNDING = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific",
+            "sci2": "2-digit scientific", "sd": "4 decimals", "s2": "2 decimals, signed", "s3": "3 decimals, signed",
+            "s4": "4 decimals, signed", "f1": "1 decimal", "f2": "2 decimals", "f3": "3 decimals", "f4": "4 decimals",
+            "p4": "4 decimals (p-value)", "pct": "percent, integer", "utc": "timestamp (UTC)"}
+
+
 def fmt(v, how):
+    if how == "utc":
+        d, t = str(v).split("+")[0].split("T")
+        return f"{d} {t} UTC"
+    if how in ("s2", "s3", "s4"):
+        nd = int(how[1])
+        t = f"{float(v):.{nd}f}"
+        if float(t) == 0:
+            return f"{0:.{nd}f}"
+        return t if t.startswith("-") else "+" + t
+    if how in ("f1", "f2", "f3", "f4", "p4"):
+        nd = 4 if how == "p4" else int(how[1])
+        t = f"{float(v):.{nd}f}"
+        return f"{0:.{nd}f}" if float(t) == 0 else t
+    if how == "pct":
+        return str(int(round(100 * float(v))))
     if how == "int":
         return str(int(round(float(v))))
     if how == "sci2":
@@ -496,8 +516,29 @@ def failed_rules(exclude=()):
 
 
 def main():
+    import tables_v2
     cache, lines, rows = {}, [], []
-    for name, src, q, col, how in SPECS:
+    names = set()
+    for name, src, q, col, how in SPECS + tables_v2.build():
+        if name in names:
+            raise SystemExit(f"duplicate macro {name}")
+        names.add(name)
+        if src.startswith("ledger:"):
+            led = pd.read_csv(REPO / src.split(":", 1)[1])
+            hit = led.query(q, engine="python")
+            val = len(hit) if col == "count" else hit.amendment_file.nunique()
+            if name == "FailedPredictions":
+                tab = (PAPER / "drafts" / "app_failed.tex").read_text(encoding="utf-8")
+                bodies = re.findall(r"\\midrule(.*?)\\bottomrule", tab, flags=re.S)
+                n_rows = sum(b.count("\\\\") for b in bodies)
+                if n_rows != val:
+                    raise SystemExit(f"FailedPredictions = {val}, but the tables of app_failed.tex have {n_rows} rows")
+            text = fmt(val, how)
+            colname = "row count" if col == "count" else "distinct amendment files"
+            lines.append(f"% {name}: {src.split(':', 1)[1]} | {q} | {colname} | integer")
+            lines.append(f"\\newcommand{{\\{name}}}{{{tex_minus(text)}}}")
+            rows.append(dict(macro=name, source=src.split(":", 1)[1], filter=q, column=colname, rounding="integer", value=text))
+            continue
         if not re.fullmatch(r"[A-Za-z]+", name):
             raise SystemExit(f"invalid macro name {name}")
         kind = src.split(":", 1)[0] if ":" in src else "value"
@@ -538,7 +579,10 @@ def main():
         if not path.exists():
             raise SystemExit(f"missing source {path}")
         if path not in cache:
-            cache[path] = pd.read_csv(path, low_memory=False)
+            if path == RES / "step48" / "amplitude.csv":
+                cache[path] = tables_v2.amplitude48()     # seeds of the THINGS rows reconstructed as in step 48b
+            else:
+                cache[path] = pd.read_csv(path, low_memory=False, float_precision="round_trip")
         if kind == "shufflewin":
             val, colname = shuffle_wins([int(x) for x in re.findall(r"\d+", q)]), "subjects (derived)"
             text = fmt(val, how)
@@ -583,6 +627,16 @@ def main():
             m = hit.groupby(gcol)[vcol].mean()
             val = m.max() if kind == "grpmax" else m.min()
             colname = f"{kind[3:]} over {gcol} of the mean of {vcol} ({len(m)} groups)"
+        elif kind == "avg":
+            if len(hit) == 0:
+                raise SystemExit(f"{name}: avg filter matches no row: {q}")
+            val, colname = hit[col].mean(), f"mean of {col} over {len(hit)} rows"
+        elif kind in ("expr", "exprmin", "exprmax"):
+            if len(hit) == 0 or (kind == "expr" and len(hit) != 1):
+                raise SystemExit(f"{name}: {kind} filter matches {len(hit)} rows: {q}")
+            v = hit.eval(col, engine="python")
+            val = v.iloc[0] if kind == "expr" else (v.min() if kind == "exprmin" else v.max())
+            colname = f"{kind[4:] or 'value'} of {col} over {len(hit)} rows"
         elif kind == "count":
             if len(hit) == 0:
                 raise SystemExit(f"{name}: count filter matches no row: {q}")
@@ -592,8 +646,7 @@ def main():
                 raise SystemExit(f"{name}: filter matches {len(hit)} rows, expected 1: {q}")
             val, colname = hit.iloc[0][col], col
         text = fmt(val, how)
-        rounding = {"rsa": "3 decimals", "corr": "2 decimals", "int": "integer", "sci": "1-digit scientific", "sci2": "2-digit scientific",
-                    "sd": "4 decimals"}[how]
+        rounding = ROUNDING[how]
         lines.append(f"% {name}: {path.relative_to(REPO).as_posix()} | {q} | {colname} | {rounding}")
         lines.append(f"\\newcommand{{\\{name}}}{{{tex_minus(text)}}}")
         rows.append(dict(macro=name, source=path.relative_to(REPO).as_posix(), filter=q, column=colname,

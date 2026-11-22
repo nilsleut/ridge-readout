@@ -1,0 +1,55 @@
+% Results: NSD replication. All numbers via macros.
+\subsection{Pre-specified ridge readout}
+\label{sec:nsdridge}
+Applied unchanged to NSD (step 47), the pre-specified ridge readout placed the untrained network below
+Backprop at V1 in every subject and at every grid: $\Delta = \NsdRidgeVoneGOne$, $\NsdRidgeVoneGFour$ and
+$\NsdRidgeVoneGEight$ at $g = 1$, 4 and 8 (\NsdRidgeVoneGOneNeg, \NsdRidgeVoneGFourNeg{} and
+\NsdRidgeVoneGEightNeg{} of 8 subjects negative, sign-flip $p = \NsdRidgeVoneGFourP$ each; RD1 and RD2
+met). The same held without voxel selection (Y4 met, $\YFourNsdAll$ at $g = 4$), after run centring in NSD
+(Y3 met, $\YThreeNsdRc$) and in THINGS (Y1 met, $\YOneThingsRc$ against $\YOneThingsRaw$ without), and at
+LO-obj ($\NsdRidgeLoobjGFour$ at $g = 4$, \NsdRidgeLoobjGFourNeg{} of 8). The luminance-and-contrast bank
+alone exceeded both networks at V1 at every grid (mean over subjects at $g = 4$: bank
+\NsdRidgeVoneGFourBank, Backprop \NsdRidgeVoneGFourBp, untrained \NsdRidgeVoneGFourRand;
+Appendix~\ref{app:nsd}, Table~\ref{tab:nsdsubjects}), as in THINGS; at LO-obj it was below both.
+
+\subsection{RSA under the NSD standard normalisation}
+\label{sec:nsdrsa}
+In the paper cell the untrained network was behind Backprop (Fig.~\ref{fig:nsd}; P1 met: $\Delta = \NsdAllVoneKThreeRawCorrelation$
+[$\NsdAllVoneKThreeRawCorrelationLo$, $\NsdAllVoneKThreeRawCorrelationHi$], \NsdAllVoneKThreeRawCorrelationNeg{}
+of 8 subjects negative), and more so with standardised units (P2 met: $\NsdAllVoneKThreeZCorrelation$
+[$\NsdAllVoneKThreeZCorrelationLo$, $\NsdAllVoneKThreeZCorrelationHi$], \NsdAllVoneKThreeZCorrelationNeg{} of 8,
+$p = \NsdAllVoneKThreeZCorrelationPn$) and at LO-obj (P3 met: $\NsdAllLoobjKThreeZCorrelation$,
+\NsdAllLoobjKThreeZCorrelationNeg{} of 8). Averaging the three presentations did not move the paper cell
+towards the untrained network (P4 met: $\NsdAllVoneKThreeRawCorrelation$ at $k = 3$ against
+$\NsdAllVoneKOneRawCorrelation$ at $k = 1$).
+
+\subsection{Multiverse}
+\label{sec:nsdmultiverse}
+The 36 cells of the multiverse formed \MvNsessionDistinct{} distinct analyses in NSD, as in THINGS. None
+had an interval above 0 (M1 met); \MvNsessionBelow{} had an interval below 0 and \MvNsessionIncl{}
+included 0, so M2 (at least half below 0) was not met by one analysis
+(Fig.~\ref{fig:multi}, Appendix~\ref{app:nsd}, Table~\ref{tab:multi28}). Positive point estimates
+occurred for raw units with correlation distance on voxels centred or z-scored over the images and, close
+to 0, for centred units with correlation distance.
+
+\subsection{Norm and angular components}
+\label{sec:nsdcomponents}
+In the subj01 pilot the untrained network was ahead under Euclidean distance ($\PilotVoneRawEuclidean$,
+Table~\ref{tab:nsdpilot}). The predictions written on this basis and tested on subj02--08 were not met for
+the Euclidean cell (Q1: $\NsdHeldVoneKThreeRawEuclidean$, \NsdHeldVoneKThreeRawEuclideanPos{} of 7
+positive) or for the norm component (Q2: $\NsdHeldVoneKThreeCenterN$, \NsdHeldVoneKThreeCenterNPos{} of 7),
+and were met for the angular component at V1 (Q3: $\NsdHeldVoneKThreeCenterA$,
+\NsdHeldVoneKThreeCenterANeg{} of 7 negative, $p = \NsdHeldVoneKThreeCenterAPn$) and at LO-obj (Q4:
+$\NsdHeldLoobjKThreeCenterA$, \NsdHeldLoobjKThreeCenterANeg{} of 7). The norm hypothesis motivated by subj01
+was thus not replicated.
+
+\subsection{ImageNet models, resolution and noise ceiling}
+\label{sec:nsdceiling}
+All six ImageNet architectures had trained ahead of untrained at V1 in the angular component (I1 met;
+$\Delta$ from $\ImnVoneAMin$ to $\ImnVoneAMax$) and in the paper cell (I2 met; $\ImnVoneRawCorrMin$ to
+$\ImnVoneRawCorrMax$; Table~\ref{tab:nsdimagenet}). Reported without prediction, the own CNN's paper-cell
+contrast was negative at every evaluation resolution from 32 to 224\,px (slope
+$S = \ResRawSlope$ [$\ResRawSlopeLo$, $\ResRawSlopeHi$]; Table~\ref{tab:nsdres}). The leave-one-subject-out
+lower bound of the noise ceiling at V1 was \CeilVoneKThree{} at $k = 3$ and \CeilVoneKOne{} at $k = 1$,
+against \CeilThingsLoso{} in THINGS-720; both networks reached \CeilVoneFracMin--\CeilVoneFracMax\% of the
+NSD bound (Table~\ref{tab:nsdceil}).

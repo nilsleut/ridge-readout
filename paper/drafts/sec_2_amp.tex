@@ -1,0 +1,31 @@
+\subsection{Image statistics and response amplitude}
+\label{sec:ampmethods}
+
+\paragraph{Image statistics.} Images were resized and centre-cropped to 224\,px and converted to grey
+(Rec.\,709). $L$ is the mean grey value and $C$ its SD (the definitions of Section~\ref{sec:gainmethods}
+use Rec.\,601; both correlate almost perfectly). Contrast energy CE is the mean over pixels and 16
+filters of the squared response of a zero-mean Gabor bank (4 orientations $\times$ 4 spatial
+frequencies, 0.05--0.40 cycles/px, cosine phase, $\sigma = 1/(3 f)$, $41 \times 41$ kernels, reflect
+padding). OFF and ON are the mean of $\max(0, \mathrm{ref} - x)$ and of $\max(0, x - \mathrm{ref})$
+over pixels, and DD $=$ OFF$/($OFF$+$ON$)$. With the image's own mean as reference OFF equals ON for
+every image, so the reference is the mean grey over all images of the data set; DD is then close to a
+mirror of $L$ (Spearman \ImgSpearLDD{} in THINGS-720, \ImgSpearLDDNsd{} in NSD).
+
+\paragraph{Response amplitude.} The brain gain $g_i$ is the cosine between pattern $i$ (all voxels of
+the ROI, under the given convention) and the mean over the analysed patterns; the model gain $g^M_i$
+is the cosine between the raw GAP feature vector of image $i$ and the mean feature vector. With a
+common profile left in, two patterns are similar when both have a high amplitude along the profile.
+The amplitude RDMs therefore have the sum form $A_{ij} = 2 - g_i - g_j$ and
+$A^M_{ij} = 2 - g^M_i - g^M_j$. This form follows from a simulation of the preceding step (step 48,
+test (ii): with a common profile $c\,p$ added to amplitude-modulated stimulus patterns, the Spearman
+correlation between the correlation-distance RDM and the sum-form RDM rose with $c$). A further
+simulation with synthetic patterns, run before the amendment of step 48b and without real data,
+showed that the difference form $|g_i - g_j|$ does not capture this structure and that partialling it
+does not remove a pure amplitude effect, whereas the sum form does; the difference form is reported
+for comparison only (Appendix~\ref{app:conv}). Amplitude dominance is Spearman(RDM, $A$) for the brain
+and Spearman(RDM, $A^M$) for a model. The two-sided partial residualises the ranks of the brain RDM on
+the ranks of $A$ and the ranks of the model RDM on the ranks of $A^M$ (each with intercept) and
+correlates the residuals; the amendment calls this the Spearman of the residuals, and, as in the
+partial RSA of step 44 to which it refers, it is computed as the Pearson correlation of the rank
+residuals. The moment ratio $m = \lVert \mu \rVert^2 / (\lVert \mu \rVert^2 + \sum_k \sigma_k^2)$ of the
+GAP features \citep{evalres} was computed per checkpoint.

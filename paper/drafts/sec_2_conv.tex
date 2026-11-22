@@ -1,0 +1,23 @@
+\subsection{Voxel normalisation conventions}
+\label{sec:convmethods}
+
+The THINGS betas of version~1 were z-scored per voxel over all 9{,}840 trials of a subject; the NSD
+betas are z-scored per voxel within session. We compared three conventions in each data set
+(paper cell unless stated). THINGS: T-raw, the single-trial betas as stored in the THINGS-fMRI files
+(not normalised by the data set: voxel means differ from 0 and SDs from 1, also within sessions;
+the absolute unit is not documented); T-global, z-scored per voxel over all trials of the
+subject, the convention of version~1 (reproduced exactly); T-session, z-scored per voxel over the
+trials of one session. NSD: N-raw, the betas in percent signal change; N-global, z-scored per voxel
+over all trials of sessions 1--30 (pooled from the session means and SDs); N-session, z-scored within
+session (the NSD standard, reproduced exactly from the stored raw betas in every session).
+
+For THINGS-720, whose 720 images lie in one session of 820 trials per subject, let $m$ be the voxel
+mean over the 820 trials (the session-mean profile), $\mu_r$ the mean over the 82 trials of run
+$r$, and $d_r = \mu_r - m$ the run deviation, split into its part along $\hat m = m / \lVert m \rVert$,
+$d_{r\parallel} = (d_r \cdot \hat m)\, \hat m$, and the remainder $d_{r\perp} = d_r - d_{r\parallel}$.
+Run centring subtracts $\mu_r$ from every trial of run $r$, i.e.\ it removes $m$ and $d_r$. The
+decomposition compares V0 (nothing removed, the paper cell), V1 ($m$ removed), V2 ($d_r$ removed),
+V3 (both, run centring), V4 (V3 with $d_{r\parallel}$ re-added) and V5 (V3 with $d_{r\perp}$
+re-added). Removing $m$ is equivalent to centring each voxel over the trials of the session.
+
+Partial RSA with image-statistic, position and predecessor covariates (steps 44, 45, 47) is defined in Appendix~\ref{app:why}.

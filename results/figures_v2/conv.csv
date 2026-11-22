@@ -1,0 +1,85 @@
+dataset,units,convention,subject,delta
+THINGS-720,raw,T-raw,sub-01,0.1150263494244355
+THINGS-720,raw,T-raw,sub-02,0.1111033875756106
+THINGS-720,raw,T-raw,sub-03,0.0725240594262215
+THINGS-720,raw,T-global,sub-01,0.0330142935209481
+THINGS-720,raw,T-global,sub-02,0.0509088220896536
+THINGS-720,raw,T-global,sub-03,0.0074146983392668
+THINGS-720,raw,T-session,sub-01,0.0043459489688971
+THINGS-720,raw,T-session,sub-02,0.009962405154378
+THINGS-720,raw,T-session,sub-03,0.0012754215975669
+THINGS test (k = 1),raw,T-global,sub-01,-0.0138361257481978
+THINGS test (k = 1),raw,T-global,sub-02,0.0144651754117245
+THINGS test (k = 1),raw,T-global,sub-03,-0.0011045517809873
+THINGS test (k = 1),raw,T-raw,sub-01,0.0731222035394443
+THINGS test (k = 1),raw,T-raw,sub-02,0.1290139554114274
+THINGS test (k = 1),raw,T-raw,sub-03,0.0329817377096305
+THINGS test (k = 1),raw,T-session,sub-01,-0.0152134725305637
+THINGS test (k = 1),raw,T-session,sub-02,-0.0026796764258802
+THINGS test (k = 1),raw,T-session,sub-03,-0.0019985854746464
+NSD (k = 1),raw,N-global,subj01,-0.0143855255690916
+NSD (k = 1),raw,N-global,subj02,-0.0051837949694925
+NSD (k = 1),raw,N-global,subj03,-0.0065086785237081
+NSD (k = 1),raw,N-global,subj04,-0.0209427040487736
+NSD (k = 1),raw,N-global,subj05,-0.0153875677021595
+NSD (k = 1),raw,N-global,subj06,-0.0148665614612298
+NSD (k = 1),raw,N-global,subj07,-0.0092680717533164
+NSD (k = 1),raw,N-global,subj08,-0.011092905120115
+NSD (k = 1),raw,N-raw,subj01,0.1400566564289436
+NSD (k = 1),raw,N-raw,subj02,0.1427059174467533
+NSD (k = 1),raw,N-raw,subj03,0.103856337381853
+NSD (k = 1),raw,N-raw,subj04,0.1247391676624272
+NSD (k = 1),raw,N-raw,subj05,0.1011712907931121
+NSD (k = 1),raw,N-raw,subj06,0.1328730232196574
+NSD (k = 1),raw,N-raw,subj07,0.0813697088803802
+NSD (k = 1),raw,N-raw,subj08,0.1052063862717611
+NSD (k = 1),raw,N-session,subj01,-0.0139933300317125
+NSD (k = 1),raw,N-session,subj02,-0.0073117597846998
+NSD (k = 1),raw,N-session,subj03,-0.0069514244560408
+NSD (k = 1),raw,N-session,subj04,-0.0199836363981191
+NSD (k = 1),raw,N-session,subj05,-0.0142336992644273
+NSD (k = 1),raw,N-session,subj06,-0.0138736615041886
+NSD (k = 1),raw,N-session,subj07,-0.0100750636768839
+NSD (k = 1),raw,N-session,subj08,-0.0097425166855668
+THINGS-720,z,T-raw,sub-01,0.0005805484663974
+THINGS-720,z,T-raw,sub-02,0.0058132541124047
+THINGS-720,z,T-raw,sub-03,0.0004286668449314
+THINGS-720,z,T-global,sub-01,-0.0165542773335439
+THINGS-720,z,T-global,sub-02,-0.0093691056734926
+THINGS-720,z,T-global,sub-03,-0.0061837557679563
+THINGS-720,z,T-session,sub-01,-0.0193032558894394
+THINGS-720,z,T-session,sub-02,-0.0155883583802503
+THINGS-720,z,T-session,sub-03,-0.0068130662060568
+THINGS test (k = 1),z,T-global,sub-01,-0.0207834154702243
+THINGS test (k = 1),z,T-global,sub-02,-0.0210631074858564
+THINGS test (k = 1),z,T-global,sub-03,-0.0059530607160691
+THINGS test (k = 1),z,T-raw,sub-01,-0.0067074718067068
+THINGS test (k = 1),z,T-raw,sub-02,0.0002379855194164
+THINGS test (k = 1),z,T-raw,sub-03,1.216009844546553e-05
+THINGS test (k = 1),z,T-session,sub-01,-0.0223097465990441
+THINGS test (k = 1),z,T-session,sub-02,-0.0234502468349959
+THINGS test (k = 1),z,T-session,sub-03,-0.0061778670706694
+NSD (k = 1),z,N-global,subj01,-0.0151584028071879
+NSD (k = 1),z,N-global,subj02,-0.0215071111376567
+NSD (k = 1),z,N-global,subj03,-0.0122452996198647
+NSD (k = 1),z,N-global,subj04,-0.0120270810418998
+NSD (k = 1),z,N-global,subj05,-0.0187388124279497
+NSD (k = 1),z,N-global,subj06,-0.0099539420342733
+NSD (k = 1),z,N-global,subj07,-0.0085726689227559
+NSD (k = 1),z,N-global,subj08,-0.0205882205253661
+NSD (k = 1),z,N-raw,subj01,-0.0039506645035761
+NSD (k = 1),z,N-raw,subj02,-0.0087277818331577
+NSD (k = 1),z,N-raw,subj03,-0.0040384095387664
+NSD (k = 1),z,N-raw,subj04,-0.0055293214807883
+NSD (k = 1),z,N-raw,subj05,-0.0044979933469221
+NSD (k = 1),z,N-raw,subj06,-0.002207873511588
+NSD (k = 1),z,N-raw,subj07,-0.0018569290725157
+NSD (k = 1),z,N-raw,subj08,-0.003238488249061
+NSD (k = 1),z,N-session,subj01,-0.0160086405173965
+NSD (k = 1),z,N-session,subj02,-0.0219733732223248
+NSD (k = 1),z,N-session,subj03,-0.0143548209472484
+NSD (k = 1),z,N-session,subj04,-0.0124111424149897
+NSD (k = 1),z,N-session,subj05,-0.0200625133225719
+NSD (k = 1),z,N-session,subj06,-0.0114474658143711
+NSD (k = 1),z,N-session,subj07,-0.0105127998302479
+NSD (k = 1),z,N-session,subj08,-0.0202853495682367

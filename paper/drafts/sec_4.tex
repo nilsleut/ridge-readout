@@ -1,119 +1,96 @@
 % Discussion.
 \paragraph{Strength of the evidence.}
-Table~\ref{tab:evidence} states for each main statement whether it was pre-specified, exploratory with a pre-stated rule, or descriptive, which uncertainty is reported, and the main caveat. Only the first row stems from the pre-specified analysis. All other rows are exploratory, and agreement among them is not independent confirmation, because later rules were written after earlier results were known.
+Table~\ref{tab:evidence} collects the V1 contrast under each readout and convention in the three image
+sets. Only the ridge rows stem from pre-specified primary analyses (THINGS, and its unchanged application
+to NSD). All RSA rows come from exploratory steps with rules committed before each step; the rules of
+later steps were written after earlier results were known, so agreement among them is not independent
+confirmation. The NSD rows under N-raw, however, test a prediction (NB1, NB2) that was committed before
+the raw NSD betas were loaded, on data that had not been used to form it.
 
-\begin{table}[!t]
-\centering
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.1}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.29\textwidth}@{}}
-\toprule
-Statement & Status & Uncertainty reported & Main caveat \\
-\midrule
-Untrained below Backprop under ridge at V1, also in MSE skill and per-fold $r$ (Section~\ref{sec:signflip}) & Pre-specified; verdict ``effect disappears''; robustness checks exploratory (F-R1 to F-R3 met) & 5 seeds; one-sided sign-flip test; no interval over stimuli, voxels or subjects & One layer; sub-03 near zero; low absolute scores (median $r$ \PreregCondBpGFour; MSE skill \FSkillAbsBpGFour); not blind \\
-V1 ranking depends on the analysis (Section~\ref{sec:multiverse}) & Exploratory; GEN2 met; cell counts descriptive & Stimulus-bootstrap 95\% intervals per cell, uncorrected; cells dependent & 36 chosen cells, \MultiDistinct{} distinct analyses; three subjects \\
-Advantage absent from the component orthogonal to the mean profile (Section~\ref{sec:ablation}) & Exploratory; M1, M2, M4 met; M3 not met & Stimulus-bootstrap intervals & Parallel component alone unresolved; wide interval; paired contrast of the one-sided ablations not tested; paired full-minus-orthogonal contrast resolved (X1) \\
-Raw RSA covaries with mean-profile alignment (Section~\ref{sec:gainaxis}) & Exploratory; G1, GEN1 met; G2 not met & Spearman over 70 and 64 cells, no interval; cells not independent & Correlational; the ablation tests only the orthogonal remainder \\
-Trained ahead on the unweighted angular component at V1 and LOC (Section~\ref{sec:gaingeometry}) & Exploratory; SEP3, SEP4 met; SEP2 not met & Stimulus-bootstrap intervals; model counts descriptive & Weighted term $W$ not resolved; one weight set per ImageNet model; convnext\_tiny exception \\
-Resolution slope of own CNN vanishes under centring or standardisation (Sections~\ref{sec:standardization}, \ref{sec:multiverse}) & Exploratory; R3, O2, P\_ridge met & Stimulus-bootstrap intervals; seed SD for ridge & Rests on three rules together; ImageNet slope remains (GEN4 not met) \\
-Luminance-and-contrast bank above every network at V1 under ridge (Section~\ref{sec:signflip}) & Descriptive instrument; joint readout F-R4 met & Point estimates per subject, mean over three subjects & No interval for the bank; neural gain and BOLD not separable \\
-\bottomrule
-\end{tabular}
-\caption{Strength of the evidence for the main statements. ``Exploratory'' denotes analyses with rules committed before their step was run, written after earlier results were known.}
-\label{tab:evidence}
-\end{table}
+\input{drafts/v2tab/evidence}
 
 \paragraph{What the V1 advantage measured.}
-The advantage of the untrained network at V1 that we reported earlier \citep{evalres} was
-not robust to the analysis choices examined here. Its sign changed across the multiverse:
-under correlation distance it disappeared when model units were standardised over the
-stimulus set, and a pre-specified ridge readout placed the untrained network below the
-trained one. Under Euclidean distance it persisted, without a resolved resolution slope,
-but the angular component favoured the trained networks. It was absent from the component
-orthogonal to the mean profile of the units, and removing the mean-profile component from either side alone brought the contrast close to zero, while the parallel component alone did not resolve it (M3). It was also not shared by the untrained network with calibrated
-batch-normalisation statistics. Raw correlation-distance RSA, the convention of the
-earlier work, covaried with the mean-profile alignment of model and voxels, across our
-networks and across six ImageNet architectures; removing the alignment RDM by rank
-regression left part of the resolution slope (G2, not met). We therefore read the earlier result as not reflecting angular structure and as sensitive to the mean-profile component under one convention; whether that component alone carries it remains open, and we do not claim that it is a physiological gain.
+The untrained advantage at V1 that we reported earlier \citep{evalres} was a consequence of the
+normalisation convention. It appeared, in both data sets, when a voxel response profile common to all
+trials was left in the patterns and model units were not centred, under correlation distance, it nearly
+vanished when voxels were normalised within session or model units were standardised, and it was reversed
+under a fitted readout. NSD, normalised within session as its documentation recommends, shows no analysis in which
+the untrained network is ahead; with raw betas it shows the advantage in every subject, confined to the
+paper cell. With the profile left in, both RDMs are dominated by per-image response amplitude, the
+untrained network's more so, and removing this structure from both RDMs removed the advantage in NSD;
+both networks matched the amplitude itself about equally. In V1 this amplitude tracked contrast energy
+more than luminance, as expected from the contrast-energy dependence of V1 BOLD responses to natural
+images \citep{kay2013}. The asymmetry between dark and light responses \citep{kremkow2014} is a possible
+point of contact, but our dark-dominance index is close to a mirror of luminance and adds no separate
+evidence. The amplitude structure is a property of the comparison under one convention, and we do not
+claim that it is a physiological gain.
 
-\paragraph{A luminance-and-contrast bank exceeds every network at V1 in these data.}
-Under the ridge readout, the luminance-and-contrast bank predicted V1 better than every
-network condition at every pooling grid, including the backpropagation-trained network.
-These are point estimates (mean over three subjects, five seeds per network condition)
-without an interval for the bank; in each subject the bank scored above Backprop at every
-grid (Appendix~\ref{app:persubject}). A readout of each network together with the bank
-scored below the bank alone (Section~\ref{sec:signflip}), so concatenating network features under a shared penalty did not improve prediction. We cannot say how much variance the bank and the networks share.
-This limits what V1 comparisons in these data can reveal about learning rules. Voxel
-alignment correlated with luminance and contrast, and the untrained network's alignment
-shared these signs. Whether this pattern reflects neural mechanisms such as contrast
-normalisation \citep{carandini2012} or properties of the BOLD measurement cannot be decided
-with these data; the norm of the voxel response vectors did not depend on luminance or
-contrast. Data with controlled contrast manipulations or electrophysiological recordings
-would be needed to separate the two.
+\paragraph{Relation to methodological work on demeaning.}
+That removing or keeping the mean of measured patterns changes what RSA measures has been argued with
+simulations \citep{ramirez2017}, by proposing to retain the regional-mean profile explicitly
+\citep{taylor2025}, and by showing that pooling within voxels amplifies activity shared by all sampled
+neurons, which mean removal largely corrects \citep{bossio2025}. Our data give an empirical case in which
+this choice reverses a model ranking, and in which the mechanism follows the shared-component account:
+the component common to all patterns dominates both RDMs, and the network whose RDM is more dominated by
+its own common component is favoured.
+
+\paragraph{The norm hypothesis.}
+In the subj01 pilot the untrained network was ahead under Euclidean distance and on the norm component,
+which suggested that the advantage sits in pattern norms. On the seven held-out subjects this was not
+replicated (Q1, Q2 not met), whereas the trained network was ahead on the angular component at V1 and
+LO-obj (Q3, Q4 met), as in THINGS.
 
 \paragraph{Ridge and RSA address different questions.}
-The three analyses ask different questions:
-\begin{itemize}
-\item raw RSA asks which unaltered distance structure resembles the measured one;
-\item centred angular RSA asks which direction-based structure resembles it after centring
-  over the stimuli;
-\item ridge asks which features predict the voxel responses better under this regularised
-  linear readout.
-\end{itemize}
-A different ranking under ridge therefore does not by itself show that the RSA ranking is wrong.
+Raw RSA asks which unaltered distance structure resembles the measured one, centred angular RSA asks which
+direction-based structure resembles it after centring, and ridge asks which features predict the voxel
+responses under a regularised linear readout. A different ranking under ridge therefore does not by itself
+show that an RSA ranking is invalid; here the two readouts differ in one quantity, a profile common to all
+trials, which the ridge intercept absorbs and correlation-distance RSA does not. That rankings change across
+defensible analyses shows that the metric matters, not that a single analysis is invalid: a benchmark may have
+reasons to keep the regional-mean profile \citep{taylor2025}, and which properties a comparison should
+preserve depends on what it is meant to explain \citep{cao2024}. A brain-alignment score is a measurement
+defined by the evaluation procedure, including the normalisation of the neural data, not an intrinsic
+property of a model.
 
-\paragraph{Sensitivity is not invalidity.}
-That rankings change across defensible analyses shows that the metric matters; it does not show that any single analysis is invalid. Raw, centred and standardised variants and euclidean, correlation and cosine distances may capture different aspects of a representation, and a fitted readout asks another question again. Our ablation shows that the earlier advantage depends on the component along the mean profile of the units; it does not show that this component is a biologically meaningful property of the representation, and we do not claim that it is. Which representational properties a benchmark should preserve is a question about what the comparison is meant to explain, and it cannot be settled by whether a choice yields a stable ranking (on what makes a model explanatory, see \citealt{cao2024}). Our results support the narrower point that a brain-alignment score is a measurement defined by the evaluation procedure and its assumptions, not an intrinsic measure of a model.
-
-\paragraph{Evaluation resolution.}
-In our CIFAR-trained networks, the dependence of the V1 gap on evaluation resolution
-vanished under unit centring and standardisation and was absent in the ridge readout.
-In the ImageNet models, a small dependence on resolution above the training resolution
-remained under standardisation and resided in the angular component. Evaluation
-resolution can therefore affect the angular component of model--brain similarity, but
-in our earlier work the size of the effect depended on uncentred units. The two model
-families differ in the ratio of evaluation to training resolution (up to sevenfold versus
-twofold), and we do not claim that the results transfer between these regimes.
+\paragraph{A luminance-and-contrast bank exceeds every network at V1.}
+Under the ridge readout, the two-feature-map luminance-and-contrast bank predicted V1 better than every
+network condition at every pooling grid, in THINGS and in NSD (point estimates, mean over subjects), and
+in NSD the networks reached only \CeilVoneFracMin--\CeilVoneFracMax\% of the lower bound of the noise
+ceiling under RSA. This limits what V1 comparisons in these data can reveal about learning rules.
 
 \paragraph{Recommendations.}
-Five practices follow from these results. (1) For cor\-re\-la\-tion- or cosine-based ranking claims, report the sensitivity to centring units over the evaluated stimulus set on both the model and the brain side, and justify the chosen reference; normalising voxels over a larger set of trials is not equivalent. (2) Report
-norm and angular components separately, for example with the norm and angle
-decomposition used here. (3) For ranking claims in a paper, report a small multiverse of distance measure and normalisation. For benchmark platforms, where a full multiverse for every submission may be too costly, a fixed primary procedure with a stated rationale, plus supplementary diagnostics for the leading models (for example the ranking under centring and the norm and angular components), would make the dependence visible without changing the reference score. (4) Include simple stimulus-statistic baselines
-alongside network models. (5) State how the normalisation statistics of untrained
-networks were set, since calibrated and uncalibrated variants behaved differently.
+(1)~Centre or normalise voxel responses within session (or over the evaluated stimuli), and report the
+sensitivity of RSA rankings to this choice and to the centring of model units; normalising voxels over all
+trials of an experiment is not equivalent. (2)~Replicate model rankings on a second data set with a
+different acquisition and normalisation. (3)~Report noise ceilings. (4)~Check simple image-statistic
+baselines, such as a luminance-and-contrast bank. (5)~Avoid presentation orders shared across subjects, or
+model them. (6)~Report norm and angular components separately and a small multiverse of distance measure
+and normalisation for ranking claims; for benchmark platforms, a fixed primary procedure with supplementary
+diagnostics for the leading models (the ranking under within-session normalisation and under unit centring)
+would make the dependence visible without changing the reference score. (7)~State how the normalisation
+statistics of untrained networks were set.
+
+\paragraph{Evaluation resolution.}
+The resolution dependence of the V1 gap in our CIFAR-trained networks vanished under unit centring and
+standardisation and was absent under ridge; in NSD the own CNN was behind at every resolution. In the ImageNet
+models a small dependence above the training resolution remained in THINGS (GEN4 not met).
 
 \paragraph{Consequences for our earlier work.}
-The headline of \citet{evalres}, that untrained networks exceed backpropagation at V1
-at 224\,px and that this gap depends on evaluation resolution, and the corresponding
-claim in \citet{leutenegger2026} are not robust to the analysis choices examined here. An audit
-of our earlier preprints identified the affected statements; revised versions refer to
-this work.
+The headline of \citet{evalres}, that untrained networks exceed backpropagation at V1 at 224\,px and that
+this gap depends on evaluation resolution, and the corresponding claim in \citet{leutenegger2026} are a
+consequence of the normalisation convention of those analyses. Revised versions of the earlier preprints
+refer to this work.
 
 \paragraph{Limitations.}
-The data comprise three subjects from a single data set, and the intervals reported here
-describe different sources of variation (Section~\ref{sec:inference}): stimulus resampling
-for RSA and training seeds for ridge. Neither includes variation across subjects, and for
-each ImageNet model we used one set of trained weights. Ridge scores in one subject were
-close to zero in every condition, and the primary ridge result is a mean over all three
-subjects (Appendix~\ref{app:persubject}). The absolute scale was small: each norm or angular
-component accounted for about 0.1\% of the rank variance of the fMRI RDM, and the median voxelwise correlation of the best ridge readout was \PreregCondBpGFour{} (a correlation score, not a measure of variance explained; absolute MSE skill \FSkillAbsBpGFour); no noise ceiling was estimated for ridge, and the
-pre-specified leave-one-subject-out bound for ridge was not implemented. The primary analysis
-was not blind, several pre-specified instruments were not implemented, and the exploratory
-analyses were developed sequentially, with intervals not corrected for multiple comparisons. The re-estimation of the normalisation statistics within the bootstrap covered three cells and not the ablation. Run-grouped folds and the encoding-RSA check were run for one subject. A banded ridge readout, with a separate penalty per feature group, was not fitted.
-\FailedPredictions{} pre-stated predictions failed (Appendix~\ref{app:failed}); among them,
-the LOC ranking was not resolved under Euclidean distance in the ImageNet models (GEN3), and
-the parallel component alone was not resolved (M3), so the mean-profile account remains a candidate. Whether that component reflects a property of neural representations or of the measurement is not established. The norm-weighted angular term $W$ behaved differently from the unweighted angular
-component $A$. The repeated-image test set (100 images, 12 repetitions) was used only for
-voxel reliability, and cross-validated distances were not computed. Counts of lowest-value
-selections of the regularisation varied between identical runs through near-ties under
-single-thread BLAS, while the scores agreed (Appendix~\ref{app:lowedge}). One ImageNet model,
-convnext\_tiny, showed no V1 effect in either component; its stem normalises activations
-across channels at each position \citep{liu2022}, which may remove the offset and norm
-differences studied here, but we did not test this. Our use of ``angular component'' is a
-definition, not a claim about neural coding. Layers were fixed in advance and not selected
-for fit; other layers may behave differently.
-
-\paragraph{Conclusion.}
-Whether untrained networks beat trained ones at V1 in model--brain RSA depends on the
-analysis. The advantage we reported earlier was absent from the component orthogonal to the mean profile and from centred angular structure; whether the mean-profile component alone carries it was not resolved. Reporting the sensitivity to centring over the evaluated stimuli, reporting components separately and including simple baselines make such comparisons interpretable.
+The networks are one own CNN evaluated at one layer per ROI and six ImageNet architectures with one set of
+trained weights each. NSD shows natural scenes and THINGS isolated objects, so the data sets differ in more
+than their normalisation. LO-obj is a constructed ROI. The NSD multiverse missed M2 by one analysis. All
+models are far below the noise ceiling. In THINGS, presentation positions were taken from the row order of
+the stimulus metadata, the unit of the stored betas is not documented, and sub-01 and sub-02 share order
+and run assignment; THINGS has three subjects. The intervals describe stimulus variation (RSA) and seeds
+(THINGS ridge) or subjects (NSD sign-flip tests); intervals within the multiverse are not corrected for
+multiple comparisons. The THINGS Euclidean contrast and the residual THINGS advantage after the two-sided
+partial are not explained. The banded ridge readout failed its sanity rule and was not interpreted. The
+primary analysis in THINGS was not blind, several of its pre-specified instruments were not implemented
+(Section~\ref{sec:inference}), and \FailedPredictions{} of \TotalPredictions{} evaluated pre-specified
+predictions were not met (Appendix~\ref{app:failed}).
