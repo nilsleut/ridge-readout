@@ -1,0 +1,57 @@
+# Step 48 configuration (amendments/2026-11-22_step48-predictions.md): one mechanism across both
+# datasets - normalisation convention and response amplitude. config.yaml (206fa875cca5) and the
+# configs of steps 40-47c stay unchanged. Feasibility and gates: reports/STEP48_SETUP.md.
+schema_version: 1
+step: 48
+
+things:
+  subjects: [sub-01, sub-02, sub-03]
+  rois: {V1: Conv1, LOC: Conv3}
+  h5_unit: "single-trial GLMsingle betas as stored in the THINGS-fMRI h5 files, not normalised by the dataset (per voxel over all 9840 trials: mean +0.008 to +0.021, SD 0.063 to 0.070 on average; the same within sessions); absolute unit not documented locally"
+  conventions:
+    T-raw: "h5 values (ResponseData/block0_values, ROI rows of arm_a roi_idx) as float64, no z-score"
+    T-global: "z per voxel over all 9840 trials, the arm_a expression (x - mean) / (std + 1e-8) on float32 = arm_a betas (paper)"
+    T-session: "z per voxel over the trials of one session, the same expression on float32: the 720 with the 820 trials of their session; test presentations with the 820 trials of each of the 12 sessions"
+  things720: "cross-run pairs (step44_why.crossrun_index); models step44_why model_rdm of GAP NATIVE 224 (Conv1 V1, Conv3 LOC), seeds 0-4"
+  things_test: "100 test images x 12 sessions in session order (as step47b_robustness.things_data); step41_noise_curve.session_draws, brain_for b1, k = 1 (20 draws) and k = 12; models cvrsa.model_rdm of test100 g = 1 Conv1 features; V1 and LOC; Spearman over 4950 pairs; mean over draws, subjects, seeds"
+  cells: "model units raw and z (cvrsa.model_rdm) x distance correlation and euclidean; brain RDM pdist with the same distance; paper cell = raw / correlation; standardised = z / correlation"
+
+nsd:
+  subjects: [subj01, subj02, subj03, subj04, subj05, subj06, subj07, subj08]
+  rois: [V1, LO-obj, lateral]
+  reload: "sessions 1-30, the step 42 download key and pipelined download (nsd_fetch.beta_key, nsd_common.download); voxels V1 | lateral (NSD_DIR/roi/<subject>/union.npz); per session stored under NSD_DIR/raw48/<subject>/sessionBB.npz: Q = int16 betas of the 515-image trials, R = Q / 300 as float32 (% signal change), mu and sd = per-voxel mean and SD (ddof 0) of Q / 300 (float64) over all 750 trials, valid = sd > 0; original deleted"
+  gate: "per session: z = (Q / 300 - mu) / sd in float64, cast to float32, equals the step 42 NSD_DIR/betas/<subject>/sessionBB.npz Z exactly (np.array_equal), and valid equals; STOP otherwise; the float32 path (R) reported"
+  conventions:
+    N-raw: "Q / 300 (float64), % signal change, no z-score"
+    N-global: "(Q / 300 - M) / S with M, S per voxel over all 22,500 trials of sessions 1-30 (pooled from the session statistics: M = mean of mu, S^2 = mean of (sd^2 + mu^2) - M^2)"
+    N-session: "z per voxel within session = step 42 patterns"
+  voxels: "the step 42 valid voxels (valid in every session) of each ROI, for every convention"
+  rsa: "nsd_rsa.rsa_subject with k1 = True (k = 3 presentation mean; k = 1 per presentation with the same-session-and-run pairs excluded, rho averaged over the presentations); nsd_rsa.contrasts; models nsd_rsa.load_features (GAP Conv1, g = 1)"
+  group: "mean over the 8 subjects; one-sided sign-flip p (nsd_rsa.sign_flip_p)"
+  multiverse: "N-raw, V1, the step 43 multiverse as step47b_robustness.nsd_multiverse (k = 3 mean; 1000 resamples of config_step43.yaml), if the estimate allows"
+
+predictions:
+  NB1: "NSD, V1 paper cell, k = 1: Delta(N-raw) > Delta(N-session) in at least 6 of 8 subjects"
+  NB2: "NSD, V1 paper cell, k = 1: Delta(N-raw) > 0 in at least 6 of 8 subjects and sign_flip_p(direction positive) <= 0.05"
+  NB3: "THINGS-720, V1 paper cell: Delta(T-session) <= +0.010"
+  G1: "THINGS-720, T-global, V1: |Spearman(g, CE)| > |Spearman(g, L)| in at least 2 of 3 subjects"
+  G2: "THINGS-720, T-global, V1: Spearman(g, g^M Random) > Spearman(g, g^M BP) in all 3 subjects; Spearman per seed, then mean over seeds 0-4"
+  G3: "NSD, N-raw, k = 1, V1: Spearman(g, g^M Random) > Spearman(g, g^M BP) in at least 6 of 8 subjects; per presentation r = 1-3 and seed, mean over presentations and seeds"
+  interpretation: "NB1, NB2, G2 and G3 met -> common voxel response profile left in by the normalisation, through per-image response amplitude tracked better by the untrained network, in both datasets; NB1 met and NB2 not met -> normalisation moves NSD in the predicted direction but creates no untrained advantage; NB1 not met -> mechanism not supported in NSD; any other pattern (NB1 and NB2 met, G2 or G3 not met) -> no statement of the rule applies"
+
+amplitude:
+  g: "per trial (THINGS-720: the 720 patterns; THINGS test: the k = 12 mean per image; NSD k = 1: the 515 patterns of presentation r; NSD k = 3: the presentation mean): cosine of the ROI voxel pattern with the mean over the analysed patterns of the same convention"
+  gM: "per model (condition, seed): cosine of the raw GAP feature vector of each image with the mean feature vector over the images of the dataset (Conv1; Conv3 for THINGS LOC)"
+  correlations: "Spearman (scipy) of g with L, C, CE, OFF, ON, DD per dataset, subject, ROI and convention; of g^M with the same statistics per model (mean over seeds reported)"
+
+image_stats:
+  transform: "colour_statistic_control.load_rgb(path, 224): Resize 224 + CenterCrop 224, RGB in [0, 1]; grey = Rec. 709"
+  L: "mean grey (step 44 MEANLUM)"
+  C: "SD of grey (step 44 contrast)"
+  CE: "mean over pixels and 16 filters of the squared response; filters = the existing control-bank formula (pilot_features_modal.gabor_bank: cosine phase, sigma 1 / (3 sf), orientations 0, 45, 90, 135 deg) with sf 0.05, 0.10, 0.20, 0.40 cycles / px (the existing 0.10, 0.20, 0.40 and one octave below, for 4 x 4), kernel 41 x 41, kernel mean subtracted, reflect padding, scipy fftconvolve"
+  OFF_ON: "OFF = mean over pixels of max(0, ref - x), ON = mean of max(0, x - ref); ref = mean grey over all images of the dataset (with the image's own mean OFF = ON identically)"
+  DD: "OFF / (OFF + ON)"
+  datasets: [things720, things_test, nsd515]
+
+runtime: {stop_hours_per_part: 8, factor: 1.5}
+disk: {min_free_gb: 30}
