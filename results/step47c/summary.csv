@@ -1,0 +1,7 @@
+rule,quantity,value,passed,note,config_hash,git_head,seed
+Z1,Delta(V2) <= +0.015,0.0351874757094832,False,V0 +0.0304 V1 +0.0050 V2 +0.0352 V3 +0.0070 V4 +0.0053 V5 +0.0059,ea2fd24bd0a1,a7f5b84,
+Z2,Delta(V4) >= +0.020 and Delta(V5) <= +0.012,0.005287332239861195,False,V4 +0.0053; V5 +0.0059,ea2fd24bd0a1,a7f5b84,
+Z3,across-run SD of d_r . m_hat smallest in sub-03,0.6366709708705288,True,sub-01 2.0735; sub-02 3.9427; sub-03 0.6367,ea2fd24bd0a1,a7f5b84,
+interpretation,amendment rule,,,"mainly removal of the session mean profile (equivalent to voxel centring), not between-run structure; the description of step 47 as run structure is to be corrected in the manuscript",ea2fd24bd0a1,a7f5b84,
+runtime,luminance and models seconds,99.73276233673096,,,ea2fd24bd0a1,a7f5b84,
+runtime,total seconds,142.94005298614502,,,ea2fd24bd0a1,a7f5b84,
