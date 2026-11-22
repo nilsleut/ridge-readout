@@ -1,7 +1,7 @@
-arXiv submission metadata
+arXiv submission metadata (version 2, replacement of arXiv:2611.15533)
 
 TITLE:
-Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA
+Whether untrained networks beat trained ones at V1 depends on a normalisation convention: evidence from two fMRI datasets
 
 AUTHORS:
 Nils Leutenegger
@@ -16,13 +16,15 @@ Cross-list: cs.LG
 LICENSE:
 CC BY 4.0
 
-ABSTRACT (1824 characters including spaces, limit 1920; plain text generated from
-paper/drafts/abstract.tex with macro values from paper/numbers_map.csv; citations removed;
+ABSTRACT (1867 characters including spaces, limit 1920; plain text generated from
+paper/drafts/abstract.tex with macro values from paper/numbers.tex; citations removed;
 minus signs written as ASCII hyphen-minus):
-Untrained convolutional networks have been reported to rival trained networks as models of visual cortex, and we had reported an untrained-network advantage over backpropagation at V1 in THINGS fMRI, together with a dependence on evaluation resolution. Under a pre-specified ridge readout, the untrained network scored below the trained one at every pooling grid (median r difference -0.043 at g = 4, 0 of 5 seeds positive), and also in MSE skill and per-fold r. In exploratory analyses, across 36 combinations of unit normalisation, distance measure and voxel normalisation (28 distinct analyses), the sign of the V1 contrast depended on the analysis (intervals above 0 in 5 and below 0 in 9 distinct analyses), and in our networks the resolution dependence of the original convention appeared in only one cell. Raw correlation-distance representational similarity analysis (RSA) covaried with the alignment of model and voxel patterns with the unit-mean profile (Spearman 0.97 across our networks, 0.79 across six ImageNet architectures); the advantage was absent from the component orthogonal to the mean profile, and the parallel component alone did not resolve it. On the unweighted angular component of centred patterns, trained networks were ahead at V1 (our network and 5 of 6 ImageNet models) and at LOC (all seven); the norm-weighted angular term was not resolved. A luminance-and-contrast bank scored above every network under ridge (point estimates), and adding network features under a shared penalty did not improve prediction. Intervals are stimulus-bootstrap intervals for three subjects, and 6 pre-stated predictions were not met. We recommend reporting sensitivity to centring over the evaluated stimuli on both sides, reporting components separately, and including a small multiverse and simple baselines.
+Untrained convolutional networks have been reported to rival or beat trained networks as models of primary visual cortex (V1), and we had reported such an advantage in THINGS fMRI. Under a pre-specified ridge readout, the trained network was ahead at every pooling grid in THINGS and in NSD (8 of 8 subjects), also when voxel responses were centred within runs. Representational similarity analysis (RSA) in THINGS depended on analysis choices (28 analyses: intervals above 0 in 5, below 0 in 9, including 0 in 14); in NSD with its standard normalisation, none of 28 analyses favoured the untrained network. The untrained advantage appears when a response profile common to all trials is left in the voxel patterns and model units are not centred, under correlation distance: removing the session-mean profile in THINGS reduced it from +0.030 to +0.005; with raw betas it reached +0.100 in THINGS, appeared in the THINGS test images, and appeared in NSD (+0.116, 8 of 8 subjects, a pre-specified prediction), where it was confined to this one of 28 analyses. With the profile left in, both representational dissimilarity matrices are dominated by per-image response amplitude, which in V1 tracks contrast energy, and the untrained network's matrix is more amplitude-dominated; the amplitude itself is matched equally by both networks; removing the amplitude structure from both matrices removes the advantage in NSD (+0.116 to -0.009, 8 of 8 subjects). A luminance-and-contrast baseline outperformed every network under ridge in both datasets (point estimates); the networks reached 10-15% of the NSD noise-ceiling lower bound. 24 of 88 pre-specified predictions were not met. We recommend centring or normalising voxel responses within session, reporting the sensitivity of RSA rankings to this choice and to model-unit centring, and replicating on a second dataset.
 
 COMMENTS:
-31 pages, 6 figures; code and data pipeline: https://github.com/nilsleut/ridge-readout
+v2: substantially extended. Adds a replication in NSD (8 subjects, ridge and RSA) and shows that the untrained-network advantage depends on a voxel normalisation convention, including a pre-specified prediction confirmed in NSD; title changed. 52 pages; code: https://github.com/nilsleut/ridge-readout
 
-# Note: the GitHub repository (remote origin, https://github.com/nilsleut/ridge-readout.git)
-# is made public only on the day of the arXiv upload.
+# Source archive: paper/build/arxiv_source.zip (main.tex, numbers.tex, refs.bib, main.bbl, the
+# included drafts and figures); compiled in an empty directory with pdflatex (three passes) to
+# 52 pages, text identical to the local build (pdftotext). Version 1 archive kept as
+# paper/build/arxiv_source_v1.zip. PDF: paper/build/ridge_v2_draft_2026-11-22.pdf.

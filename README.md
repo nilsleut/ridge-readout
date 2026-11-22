@@ -7,7 +7,14 @@
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Config hash](https://img.shields.io/badge/config%20hash-206fa875cca5-informational.svg)
 
-Paper: Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA arXiv:2611.15533, https://arxiv.org/abs/2611.15533
+Paper: Whether untrained networks beat trained ones at V1 depends on a normalisation convention: evidence from two fMRI datasets, arXiv:2611.15533, https://arxiv.org/abs/2611.15533
+
+Version 2 (prepared 2026-11-22, not yet uploaded) extends version 1 (title: "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA") with a
+replication in the Natural Scenes Dataset (8 subjects, ridge and RSA) and shows that the
+untrained-network advantage depends on a voxel normalisation convention, including a
+pre-specified prediction confirmed in NSD. The follow-up analyses (steps 40-48b) are in
+`amendments/`, `scripts/`, `results/` and `reports/`; every pre-specified prediction is listed in
+`paper/PREDICTIONS_LEDGER.csv`. The findings below summarise version 1.
 
 An earlier study (arXiv:2608.12408) found that an untrained convolutional network matches
 human V1 (THINGS-fMRI) better than a backpropagation-trained one. This repository re-tests

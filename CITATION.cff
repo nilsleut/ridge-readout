@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use this code or analysis record, please cite the paper and the repository."
-title: "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA"
+message: "If you use this code or analysis record, please cite the paper (version 2) and the repository."
+title: "Whether untrained networks beat trained ones at V1 depends on a normalisation convention: evidence from two fMRI datasets"
 type: software
 authors:
   - family-names: Leutenegger
@@ -12,7 +12,7 @@ license:
   - CC-BY-4.0
 preferred-citation:
   type: article
-  title: "Analysis choices decide whether untrained networks beat trained ones at V1: a multiverse analysis of model–brain RSA"
+  title: "Whether untrained networks beat trained ones at V1 depends on a normalisation convention: evidence from two fMRI datasets"
   authors:
     - family-names: Leutenegger
       given-names: Nils
