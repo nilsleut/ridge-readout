@@ -5,7 +5,7 @@ sets. Only the ridge rows stem from pre-specified primary analyses (THINGS, and 
 to NSD). All RSA rows come from exploratory steps with rules committed before each step; the rules of
 later steps were written after earlier results were known, so agreement among them is not independent
 confirmation. The NSD rows under N-raw, however, test a prediction (NB1, NB2) that was committed before
-the raw NSD betas were loaded, on data that had not been used to form it.
+the raw NSD betas were loaded, on a normalisation of the NSD data (raw betas) that had not been analysed before.
 
 \input{drafts/v2tab/evidence}
 
@@ -61,7 +61,8 @@ ceiling under RSA. This limits what V1 comparisons in these data can reveal abou
 \paragraph{Recommendations.}
 (1)~Centre or normalise voxel responses within session (or over the evaluated stimuli), and report the
 sensitivity of RSA rankings to this choice and to the centring of model units; normalising voxels over all
-trials of an experiment is not equivalent. (2)~Replicate model rankings on a second data set with a
+trials of an experiment is not equivalent: it leaves a profile common to the analysed trials whenever
+these come from one session, as in THINGS-720. (2)~Replicate model rankings on a second data set with a
 different acquisition and normalisation. (3)~Report noise ceilings. (4)~Check simple image-statistic
 baselines, such as a luminance-and-contrast bank. (5)~Avoid presentation orders shared across subjects, or
 model them. (6)~Report norm and angular components separately and a small multiverse of distance measure
@@ -90,7 +91,7 @@ the stimulus metadata, the unit of the stored betas is not documented, and sub-0
 and run assignment; THINGS has three subjects. The intervals describe stimulus variation (RSA) and seeds
 (THINGS ridge) or subjects (NSD sign-flip tests); intervals within the multiverse are not corrected for
 multiple comparisons. The THINGS Euclidean contrast and the residual THINGS advantage after the two-sided
-partial are not explained. The banded ridge readout failed its sanity rule and was not interpreted. The
+partial are not explained. The
 primary analysis in THINGS was not blind, several of its pre-specified instruments were not implemented
 (Section~\ref{sec:inference}), and \FailedPredictions{} of \TotalPredictions{} evaluated pre-specified
 predictions were not met (Appendix~\ref{app:failed}).
